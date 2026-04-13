@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -20,9 +18,7 @@ import {
   Globe,
   Shield,
   Award,
-  Users,
   Mail,
-  Play,
 } from "lucide-react";
 import {
   MotionDiv,
@@ -30,37 +26,46 @@ import {
   fadeUp,
   fadeIn,
   staggerContainer,
-  scaleIn,
 } from "@/components/motion";
 import { Counter } from "@/components/counter";
+import { ParallaxImage } from "@/components/parallax-image";
+import { BgParticles } from "@/components/bg-particles";
 import React, { useState } from "react";
-import { motion, useTransform, useScroll, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 /* ─────────────────── HERO ─────────────────── */
 
-const heroImages = [
-  {
-    src: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=1200&q=80",
-    alt: "Pneus poids lourd",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=80",
-    alt: "Mécanicien automobile",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1449965408869-ebd3fee7260d?w=800&q=80",
-    alt: "Camion sur route",
-  },
-];
+function HeroVideo() {
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+
+  React.useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.play().catch(() => {});
+  }, []);
+
+  return (
+    <video
+      ref={videoRef}
+      muted
+      loop
+      playsInline
+      preload="auto"
+      className="absolute inset-0 w-full h-full object-cover"
+    >
+      <source src="/VIDEO/animation transition.mp4" type="video/mp4" />
+    </video>
+  );
+}
 
 function FloatingParticle({ delay, x, y, size }: { delay: number; x: string; y: string; size: number }) {
   return (
     <motion.div
-      className="absolute rounded-full bg-white/20"
+      className="absolute rounded-full bg-white/30"
       style={{ left: x, top: y, width: size, height: size }}
       animate={{
         y: [0, -20, 0],
-        opacity: [0.2, 0.5, 0.2],
+        opacity: [0.15, 0.4, 0.15],
         scale: [1, 1.3, 1],
       }}
       transition={{
@@ -74,25 +79,16 @@ function FloatingParticle({ delay, x, y, size }: { delay: number; x: string; y: 
 }
 
 function HeroSection() {
-  const [activeImg, setActiveImg] = useState(0);
-
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-deep via-purple-mid to-purple-bright" />
+      {/* Video background */}
+      <HeroVideo />
 
-      {/* Animated mesh background */}
-      <div className="absolute inset-0">
-        <motion.div
-          animate={{ rotate: [0, 360] }}
-          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-          className="absolute -top-1/2 -right-1/2 w-[140%] h-[140%] opacity-[0.07]"
-          style={{
-            backgroundImage:
-              "conic-gradient(from 0deg, transparent 0%, white 2%, transparent 4%)",
-          }}
-        />
-      </div>
+      {/* Purple overlay on video */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-deep/85 via-purple-mid/75 to-purple-bright/70" />
+
+      {/* Secondary gradient for depth */}
+      <div className="absolute inset-0 bg-gradient-to-t from-purple-deep/60 via-transparent to-purple-deep/30" />
 
       {/* Floating particles */}
       <FloatingParticle delay={0} x="10%" y="20%" size={4} />
@@ -101,197 +97,102 @@ function HeroSection() {
       <FloatingParticle delay={2} x="85%" y="60%" size={5} />
       <FloatingParticle delay={1.5} x="50%" y="85%" size={4} />
       <FloatingParticle delay={0.8} x="15%" y="50%" size={3} />
-      <FloatingParticle delay={2.5} x="90%" y="30%" size={5} />
-      <FloatingParticle delay={1.2} x="40%" y="10%" size={4} />
-
-      {/* Glowing orbs */}
-      <motion.div
-        animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/4 right-1/4 w-96 h-96 bg-purple-light/20 rounded-full blur-[120px]"
-      />
-      <motion.div
-        animate={{ x: [0, -30, 0], y: [0, 40, 0] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-1/4 left-1/6 w-72 h-72 bg-purple-bright/15 rounded-full blur-[100px]"
-      />
 
       {/* Content */}
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-32 pb-20 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Left - Text */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-white/80 text-xs font-medium tracking-wider uppercase backdrop-blur-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                Depuis 1989 &mdash; Réseau national
-              </span>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
-              className="mt-8 text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-6xl font-black text-white leading-[1.1] tracking-tight"
-            >
-              Leader en maintenance de{" "}
-              <span className="relative inline-block">
-                <span className="relative z-10">pneumatiques</span>
-                <motion.span
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: 0.6, delay: 1.2, ease: "easeOut" }}
-                  className="absolute bottom-1 left-0 right-0 h-3 bg-purple-light/30 -rotate-1 origin-left"
-                />
-              </span>{" "}
-              pour flottes et particuliers
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="mt-6 text-lg text-white/60 max-w-lg leading-relaxed"
-            >
-              RECACOR vous accompagne dans l&apos;entretien et la maintenance de
-              vos pneumatiques avec un réseau de centres sur tout le territoire.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.9 }}
-              className="mt-10 flex flex-wrap gap-4"
-            >
-              <Link
-                href="/nos-centres"
-                className="group relative inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white text-purple-deep font-bold text-sm overflow-hidden transition-shadow hover:shadow-[0_8px_32px_rgba(255,255,255,0.2)]"
-              >
-                <span className="absolute inset-0 bg-gradient-to-r from-purple-glow/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <span className="relative">Découvrir nos centres</span>
-                <ArrowRight className="relative h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-white/25 text-white font-medium text-sm hover:bg-white/10 hover:border-white/40 transition-all duration-300"
-              >
-                Nous contacter
-              </Link>
-            </motion.div>
-
-            {/* Mini stats */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 1.2 }}
-              className="mt-14 flex gap-10"
-            >
-              {[
-                { value: "35+", label: "Années d'expérience" },
-                { value: "2k+", label: "Clients satisfaits" },
-                { value: "4", label: "Centres en France" },
-              ].map((s) => (
-                <div key={s.label}>
-                  <div className="text-2xl font-black text-white">{s.value}</div>
-                  <div className="text-xs text-white/40 mt-0.5">{s.label}</div>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Right - Image collage */}
+        <div className="max-w-3xl mx-auto text-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, x: 40 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-            className="relative hidden lg:block"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
-            {/* Main image */}
-            <div className="relative">
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="relative rounded-3xl overflow-hidden shadow-2xl shadow-purple-deep/50 aspect-[4/3]"
-              >
-                <Image
-                  src={heroImages[0].src}
-                  alt={heroImages[0].alt}
-                  fill
-                  unoptimized
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-purple-deep/40 to-transparent" />
-              </motion.div>
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-white/80 text-xs font-medium tracking-wider uppercase backdrop-blur-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+              Depuis 1989 &mdash; Réseau national
+            </span>
+          </motion.div>
 
-              {/* Floating small image - top right */}
-              <motion.div
-                animate={{ y: [0, -12, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="absolute -top-8 -right-8 w-36 h-36 rounded-2xl overflow-hidden shadow-xl border-4 border-white/10"
-              >
-                <Image
-                  src={heroImages[1].src}
-                  alt={heroImages[1].alt}
-                  fill
-                  unoptimized
-                  className="object-cover"
-                  sizes="144px"
-                />
-              </motion.div>
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
+            className="mt-8 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-[1.08] tracking-tight"
+          >
+            Leader en maintenance de{" "}
+            <span className="relative inline-block">
+              <span className="relative z-10">pneumatiques</span>
+              <motion.span
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.6, delay: 1.2, ease: "easeOut" }}
+                className="absolute bottom-2 left-0 right-0 h-3 sm:h-4 bg-purple-light/30 -rotate-1 origin-left"
+              />
+            </span>
+          </motion.h1>
 
-              {/* Floating small image - bottom left */}
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute -bottom-6 -left-6 w-44 h-32 rounded-2xl overflow-hidden shadow-xl border-4 border-white/10"
-              >
-                <Image
-                  src={heroImages[2].src}
-                  alt={heroImages[2].alt}
-                  fill
-                  unoptimized
-                  className="object-cover"
-                  sizes="176px"
-                />
-              </motion.div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="mt-6 text-lg sm:text-xl text-white/60 max-w-xl mx-auto leading-relaxed"
+          >
+            RECACOR vous accompagne dans l&apos;entretien et la maintenance de
+            vos pneumatiques pour flottes et particuliers.
+          </motion.p>
 
-              {/* Decorative badge */}
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.5, delay: 1.5, type: "spring" }}
-                className="absolute -bottom-4 right-8 bg-white rounded-2xl px-5 py-3 shadow-xl flex items-center gap-3"
-              >
-                <div className="w-10 h-10 rounded-full bg-purple-bright/10 flex items-center justify-center">
-                  <Shield className="w-5 h-5 text-purple-bright" />
-                </div>
-                <div>
-                  <div className="text-sm font-bold text-purple-deep">Certifié</div>
-                  <div className="text-xs text-muted-foreground">Normes EU</div>
-                </div>
-              </motion.div>
-            </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            className="mt-10 flex flex-wrap justify-center gap-4"
+          >
+            <Link
+              href="/nos-centres"
+              className="group relative inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white text-purple-deep font-bold text-sm overflow-hidden transition-shadow hover:shadow-[0_8px_32px_rgba(255,255,255,0.25)]"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-purple-glow/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <span className="relative">Découvrir nos centres</span>
+              <ArrowRight className="relative h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-white/25 text-white font-medium text-sm hover:bg-white/10 hover:border-white/40 transition-all duration-300 backdrop-blur-sm"
+            >
+              Nous contacter
+            </Link>
+          </motion.div>
 
-            {/* Background decoration */}
-            <div className="absolute -inset-4 -z-10 bg-gradient-to-br from-purple-light/10 to-purple-bright/5 rounded-[2rem] blur-sm" />
+          {/* Mini stats */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 1.2 }}
+            className="mt-16 flex justify-center gap-12 sm:gap-16"
+          >
+            {[
+              { value: "35+", label: "Années d'expérience" },
+              { value: "2k+", label: "Clients satisfaits" },
+              { value: "4", label: "Centres en France" },
+            ].map((s) => (
+              <div key={s.label} className="text-center">
+                <div className="text-2xl sm:text-3xl font-black text-white">{s.value}</div>
+                <div className="text-xs text-white/40 mt-1">{s.label}</div>
+              </div>
+            ))}
           </motion.div>
         </div>
       </div>
+
+      {/* Bottom gradient fade to white */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
 
       {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <span className="text-white/30 text-xs tracking-widest uppercase">Scroll</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
@@ -448,7 +349,7 @@ function TrajectoireSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.8 }}
-          className="mt-20 flex justify-center"
+          className="mt-20 flex justify-center relative z-10"
         >
           <Link
             href="/nos-centres"
@@ -494,6 +395,7 @@ function ServicesSection() {
 
   return (
     <section className="relative py-32 overflow-hidden bg-muted">
+      <BgParticles />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
@@ -569,7 +471,7 @@ function ServicesSection() {
             </div>
           </div>
 
-          {/* Right - Video */}
+          {/* Right - Visual */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, x: 30 }}
             whileInView={{ opacity: 1, scale: 1, x: 0 }}
@@ -577,7 +479,31 @@ function ServicesSection() {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="relative hidden lg:block sticky top-32"
           >
-            <ScrollVideo />
+            <div className="relative rounded-3xl overflow-hidden aspect-[4/5]">
+              <ParallaxImage
+                src="/Design sans titre (29)/1.webp"
+                alt="RECACOR - Pneumatiques"
+                className="absolute inset-0 w-full h-full"
+                speed={0.1}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-purple-deep/50 via-transparent to-transparent" />
+              {/* Floating badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.8, type: "spring" }}
+                className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-sm rounded-2xl px-5 py-4 shadow-xl flex items-center gap-4"
+              >
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-bright to-purple-mid flex items-center justify-center shrink-0">
+                  <Shield className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p className="font-black text-lg text-purple-deep">+35 ans</p>
+                  <p className="text-xs text-muted-foreground">d&apos;expertise pneumatique</p>
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -585,75 +511,6 @@ function ServicesSection() {
   );
 }
 
-/* Video component that plays on scroll */
-function ScrollVideo() {
-  const videoRef = React.useRef<HTMLVideoElement>(null);
-  const containerRef = React.useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  React.useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const unsubscribe = scrollYProgress.on("change", (v) => {
-      if (v > 0.1 && v < 0.9) {
-        video.play().catch(() => {});
-      } else {
-        video.pause();
-      }
-    });
-    return () => unsubscribe();
-  }, [scrollYProgress]);
-
-  const y = useTransform(scrollYProgress, [0, 1], [40, -40]);
-  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.92, 1, 1, 0.95]);
-
-  return (
-    <div ref={containerRef}>
-      <motion.div
-        style={{ y, scale }}
-        className="relative rounded-3xl overflow-hidden shadow-2xl shadow-purple-deep/20 border border-border"
-      >
-        {/* Decorative frame */}
-        <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-purple-bright/20 via-transparent to-purple-light/20 z-10 pointer-events-none" />
-
-        <video
-          ref={videoRef}
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          className="w-full aspect-[9/14] object-cover"
-        >
-          <source src="/VIDEO/animation transition.mp4" type="video/mp4" />
-        </video>
-
-        {/* Overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-purple-deep/30 via-transparent to-transparent pointer-events-none" />
-      </motion.div>
-
-      {/* Floating badge */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.8, type: "spring" }}
-        className="absolute -bottom-4 -left-4 bg-white rounded-2xl px-5 py-3 shadow-xl border border-border flex items-center gap-3 z-20"
-      >
-        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-bright to-purple-mid flex items-center justify-center">
-          <Play className="w-4 h-4 text-white ml-0.5" fill="white" />
-        </div>
-        <div>
-          <div className="text-sm font-bold">Notre savoir-faire</div>
-          <div className="text-xs text-muted-foreground">en action</div>
-        </div>
-      </motion.div>
-    </div>
-  );
-}
 
 /* ─────────────────── PROFESSIONNALISME + STATS ─────────────────── */
 function ProfessionnalismeSection() {
@@ -694,24 +551,22 @@ function ProfessionnalismeSection() {
           </MotionDiv>
 
           <MotionDiv variants={fadeUp} custom={2}>
-            <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-deep to-purple-mid p-8 min-h-[280px] flex items-center justify-center">
-              <div className="absolute inset-0 opacity-5">
-                <div
-                  className="w-full h-full"
-                  style={{
-                    backgroundImage:
-                      "repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px)",
-                  }}
-                />
-              </div>
-              <div className="relative text-center">
-                <Award className="w-16 h-16 text-purple-glow mx-auto mb-4" />
-                <p className="text-white text-xl font-semibold">
-                  Certifié & Agréé
-                </p>
-                <p className="text-white/60 text-sm mt-2">
-                  Normes européennes respectées
-                </p>
+            <div className="relative rounded-2xl overflow-hidden min-h-[320px]">
+              <ParallaxImage
+                src="/Design sans titre (29)/2.webp"
+                alt="RECACOR - Pneumatiques Hankook iON"
+                className="absolute inset-0 w-full h-full rounded-2xl"
+                speed={0.1}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-purple-deep/60 via-transparent to-transparent rounded-2xl" />
+              <div className="absolute bottom-5 left-5 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-white/90 flex items-center justify-center">
+                  <Award className="w-5 h-5 text-purple-bright" />
+                </div>
+                <div>
+                  <p className="text-white text-sm font-bold">Certifié & Agréé</p>
+                  <p className="text-white/60 text-xs">Normes européennes</p>
+                </div>
               </div>
             </div>
           </MotionDiv>
@@ -740,403 +595,808 @@ function CentresSection() {
   const centres = [
     {
       name: "Bordeaux",
+      city: "33 — Gironde",
       address: "Zone industrielle, 33000 Bordeaux",
       phone: "05 XX XX XX XX",
       hours: "Lun-Ven : 8h-18h",
+      speciality: "Flottes & PL",
+      emoji: "🍷",
     },
     {
       name: "Béziers",
+      city: "34 — Hérault",
       address: "Zone d'activité, 34500 Béziers",
       phone: "04 XX XX XX XX",
       hours: "Lun-Ven : 8h-18h",
+      speciality: "Tous véhicules",
+      emoji: "☀️",
     },
     {
       name: "Montpellier",
+      city: "34 — Hérault",
       address: "Parc d'activité, 34000 Montpellier",
       phone: "04 XX XX XX XX",
       hours: "Lun-Ven : 8h-18h",
+      speciality: "Particuliers & Pro",
+      emoji: "🏛️",
     },
   ];
 
   return (
-    <MotionSection
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      variants={staggerContainer}
-      className="py-24 bg-muted"
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <MotionDiv variants={fadeUp} className="text-center mb-4">
-          <h2 className="text-3xl sm:text-4xl font-bold">Nos centres</h2>
-        </MotionDiv>
-        <MotionDiv variants={fadeUp} custom={1} className="flex justify-center mb-12">
-          <Separator className="w-16 bg-purple-bright h-1 rounded-full" />
-        </MotionDiv>
+    <section className="relative py-32 overflow-hidden bg-muted">
+      <BgParticles />
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-bright/[0.03] rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {centres.map((c, i) => (
-            <MotionDiv
-              key={c.name}
-              variants={fadeUp}
-              custom={i}
-              className="group"
-            >
-              <div className="rounded-2xl border border-border bg-background p-6 hover:border-purple-bright/40 transition-all duration-300 hover:shadow-lg hover:shadow-purple-bright/5">
-                {/* Image placeholder */}
-                <div className="relative h-44 rounded-xl mb-5 overflow-hidden bg-gradient-to-br from-purple-deep/30 to-purple-mid/20 flex items-center justify-center">
-                  <MapPin className="w-12 h-12 text-purple-light/40" />
-                </div>
-                <h3 className="text-xl font-bold mb-3 uppercase tracking-wide">
-                  {c.name}
-                </h3>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                    <MapPin className="h-4 w-4 text-purple-bright shrink-0" />
-                    {c.address}
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+          {/* Left - intro (2 cols) */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-2"
+          >
+            <span className="text-purple-bright font-semibold text-sm tracking-wider uppercase">
+              Nos implantations
+            </span>
+            <h2 className="mt-3 text-4xl sm:text-5xl font-black tracking-tight leading-[1.1]">
+              Un réseau de{" "}
+              <span className="text-gradient-purple">proximité</span>
+            </h2>
+            <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
+              Stratégiquement implantés dans le Sud de la France, nos centres
+              vous garantissent réactivité et disponibilité.
+            </p>
+
+            {/* Image + overlay stat */}
+            <div className="mt-8 relative rounded-2xl overflow-hidden h-48">
+              <ParallaxImage
+                src="/Design sans titre (29)/3.webp"
+                alt="RECACOR - Pile de pneumatiques"
+                className="absolute inset-0 w-full h-full"
+                speed={0.08}
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-deep/80 to-purple-mid/60" />
+              <div className="absolute inset-0 flex items-center p-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center shrink-0 backdrop-blur-sm border border-white/10">
+                    <MapPin className="w-7 h-7 text-white" />
                   </div>
-                  <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                    <Phone className="h-4 w-4 text-purple-bright shrink-0" />
-                    {c.phone}
-                  </div>
-                  <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                    <Clock className="h-4 w-4 text-purple-bright shrink-0" />
-                    {c.hours}
+                  <div>
+                    <p className="text-white font-black text-2xl">3 centres</p>
+                    <p className="text-white/60 text-sm">dans le Sud de la France</p>
                   </div>
                 </div>
               </div>
-            </MotionDiv>
-          ))}
+            </div>
+
+            <Link
+              href="/nos-centres"
+              className="mt-6 inline-flex items-center gap-2 text-purple-bright hover:text-purple-mid text-sm font-semibold transition-colors group"
+            >
+              Voir tous les centres
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </motion.div>
+
+          {/* Right - cards (3 cols) */}
+          <div className="lg:col-span-3 space-y-4">
+            {centres.map((c, i) => (
+              <motion.div
+                key={c.name}
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.12, ease: "easeOut" as const }}
+                className="group"
+              >
+                <div className="relative rounded-2xl border border-border bg-white p-5 sm:p-6 hover:border-purple-bright/30 hover:shadow-xl hover:shadow-purple-bright/[0.06] transition-all duration-400 overflow-hidden">
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-transparent group-hover:bg-gradient-to-b group-hover:from-purple-bright group-hover:to-purple-light transition-all duration-300" />
+
+                  <div className="flex items-start gap-5">
+                    {/* Emoji badge */}
+                    <div className="shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-bright/10 to-purple-light/10 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
+                      {c.emoji}
+                    </div>
+
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-3 mb-1">
+                        <h3 className="text-lg font-black tracking-tight group-hover:text-purple-deep transition-colors">
+                          {c.name}
+                        </h3>
+                        <span className="text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
+                          {c.city}
+                        </span>
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 mt-2 text-sm text-muted-foreground">
+                        <span className="flex items-center gap-1.5">
+                          <MapPin className="h-3.5 w-3.5 text-purple-bright" />
+                          {c.address}
+                        </span>
+                        <span className="flex items-center gap-1.5">
+                          <Phone className="h-3.5 w-3.5 text-purple-bright" />
+                          {c.phone}
+                        </span>
+                        <span className="flex items-center gap-1.5">
+                          <Clock className="h-3.5 w-3.5 text-purple-bright" />
+                          {c.hours}
+                        </span>
+                      </div>
+
+                      <div className="mt-3">
+                        <span className="text-xs font-medium text-purple-bright bg-purple-bright/[0.06] px-2.5 py-1 rounded-full">
+                          {c.speciality}
+                        </span>
+                      </div>
+                    </div>
+
+                    <ArrowRight className="h-5 w-5 text-muted-foreground/30 group-hover:text-purple-bright group-hover:translate-x-1 transition-all shrink-0 mt-1" />
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
-    </MotionSection>
+    </section>
   );
 }
 
 /* ─────────────────── MARQUES DE CONFIANCE ─────────────────── */
-function MarquesSection() {
-  const marques = [
-    "Michelin",
-    "Bridgestone",
-    "Continental",
-    "Goodyear",
-    "Pirelli",
-    "Hankook",
-    "Dunlop",
-    "Firestone",
-  ];
+const brandLogos = [
+  { name: "Michelin", url: "/LOGO_MARQUE/Michelin_G_S_Fr_WhiteBG_RGB_0618-01.webp" },
+  { name: "Bridgestone", url: "/LOGO_MARQUE/Bridgestone-logo-730x300-2018_0_1.webp" },
+  { name: "Continental", url: "/LOGO_MARQUE/continental.webp" },
+  { name: "Goodyear", url: "/LOGO_MARQUE/Logo-goodyear.webp" },
+  { name: "Pirelli", url: "/LOGO_MARQUE/Logo-Pirelli.webp" },
+  { name: "Hankook", url: "/LOGO_MARQUE/Hankook_logo.webp" },
+  { name: "Dunlop", url: "/LOGO_MARQUE/dunlop1HEADER.webp" },
+  { name: "Firestone", url: "/LOGO_MARQUE/firestone1517239246_0.webp" },
+  { name: "Yokohama", url: "/LOGO_MARQUE/yokohama-logo.webp" },
+  { name: "BFGoodrich", url: "/LOGO_MARQUE/bfgoodrich-logo.webp" },
+];
 
+function InfiniteMarquee({ items, direction = "left", speed = 30 }: { items: typeof brandLogos; direction?: "left" | "right"; speed?: number }) {
+  const doubled = [...items, ...items];
   return (
-    <MotionSection
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      variants={staggerContainer}
-      className="py-20 bg-background"
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <MotionDiv variants={fadeUp} className="text-center mb-4">
-          <h2 className="text-3xl sm:text-4xl font-bold">
-            Marques de confiance
-          </h2>
-        </MotionDiv>
-        <MotionDiv variants={fadeUp} custom={1} className="flex justify-center mb-12">
-          <Separator className="w-16 bg-purple-bright h-1 rounded-full" />
-        </MotionDiv>
+    <div className="relative overflow-hidden">
+      {/* Fade edges */}
+      <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-          {marques.map((m, i) => (
-            <MotionDiv
-              key={m}
-              variants={fadeIn}
-              custom={i}
-              className="flex items-center justify-center h-20 rounded-xl border border-border bg-card hover:border-purple-bright/30 transition-colors"
-            >
-              <span className="text-muted-foreground font-semibold text-sm tracking-wider uppercase">
-                {m}
-              </span>
-            </MotionDiv>
-          ))}
-        </div>
+      <motion.div
+        className="flex gap-8 w-max"
+        animate={{ x: direction === "left" ? ["0%", "-50%"] : ["-50%", "0%"] }}
+        transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
+      >
+        {doubled.map((brand, i) => (
+          <div
+            key={`${brand.name}-${i}`}
+            className="flex items-center justify-center h-20 w-44 shrink-0 rounded-xl border border-border bg-white px-6 hover:border-purple-bright/30 hover:shadow-lg hover:shadow-purple-bright/[0.04] transition-all duration-300 group"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={brand.url}
+              alt={brand.name}
+              className="h-8 w-auto object-contain grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
+function MarquesSection() {
+  return (
+    <section className="py-28 bg-background overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center"
+        >
+          <span className="text-purple-bright font-semibold text-sm tracking-wider uppercase">
+            Partenaires
+          </span>
+          <h2 className="mt-3 text-4xl sm:text-5xl font-black tracking-tight">
+            Marques de{" "}
+            <span className="text-gradient-purple">confiance</span>
+          </h2>
+          <p className="mt-4 text-muted-foreground text-lg max-w-xl mx-auto">
+            Nous travaillons avec les plus grandes marques mondiales pour vous
+            garantir qualité et performance.
+          </p>
+        </motion.div>
       </div>
-    </MotionSection>
+
+      {/* Carousel */}
+      <div className="space-y-6">
+        <InfiniteMarquee items={brandLogos} direction="left" speed={35} />
+        <InfiniteMarquee items={[...brandLogos].reverse()} direction="right" speed={40} />
+      </div>
+    </section>
   );
 }
 
 /* ─────────────────── AVIS CLIENTS ─────────────────── */
+const allAvis = [
+  { name: "Jean-Pierre M.", role: "Transporteur — Bordeaux", text: "Service impeccable, les techniciens sont très professionnels. Je recommande vivement RECACOR pour la gestion de ma flotte de 40 véhicules.", rating: 5 },
+  { name: "Sophie L.", role: "Particulier — Montpellier", text: "Accueil chaleureux et travail de qualité. Mon véhicule est entre de bonnes mains. Prix très compétitifs par rapport à la concurrence.", rating: 5 },
+  { name: "Marc D.", role: "Artisan — Béziers", text: "Réactivité et expertise au rendez-vous. RECACOR comprend les contraintes des professionnels. Service rapide et fiable, même en urgence.", rating: 5 },
+  { name: "Thomas R.", role: "Directeur logistique — Toulouse", text: "Depuis que nous travaillons avec RECACOR, nos coûts de maintenance pneumatique ont baissé de 20%. Un partenaire indispensable.", rating: 5 },
+  { name: "Caroline B.", role: "Particulier — Bordeaux", text: "J'ai été bluffée par la rapidité d'intervention. En moins d'une heure mes 4 pneus étaient changés. Équipe très sympathique.", rating: 5 },
+  { name: "Youssef K.", role: "Chef de parc — Narbonne", text: "La gestion de flotte RECACOR est un vrai game-changer. Suivi digital, alertes d'usure, intervention planifiée. Tout est parfait.", rating: 5 },
+  { name: "Nathalie P.", role: "Particulier — Sète", text: "Excellent rapport qualité/prix et des conseils avisés sur le choix des pneumatiques. Je ne change plus de prestataire !", rating: 4 },
+  { name: "Fabrice G.", role: "Transporteur — Perpignan", text: "Le dépannage 24h/24 nous a sauvé plusieurs fois. Une équipe réactive qui comprend l'urgence du transport routier.", rating: 5 },
+  { name: "Isabelle V.", role: "Particulier — Montpellier", text: "Service au top ! On m'a même offert le contrôle de pression pour mes prochains passages. Fidélité récompensée.", rating: 5 },
+  { name: "Pierre-Antoine L.", role: "Agriculteur — Béziers", text: "Ils s'occupent aussi de nos engins agricoles. Difficile de trouver un prestataire aussi polyvalent et compétent dans la région.", rating: 5 },
+];
+
+function AvisMarquee({ items, direction }: { items: typeof allAvis; direction: "left" | "right" }) {
+  const doubled = [...items, ...items];
+  return (
+    <div className="relative overflow-hidden">
+      <motion.div
+        className="flex gap-5 w-max"
+        animate={{ x: direction === "left" ? ["0%", "-50%"] : ["-50%", "0%"] }}
+        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+      >
+        {doubled.map((a, i) => (
+          <div
+            key={`${a.name}-${i}`}
+            className="w-[360px] shrink-0 rounded-2xl border border-border bg-white p-6 hover:border-purple-bright/30 hover:shadow-xl hover:shadow-purple-bright/[0.06] transition-all duration-300"
+          >
+            <div className="flex gap-0.5 mb-3">
+              {Array.from({ length: a.rating }).map((_, j) => (
+                <Star key={j} className="w-4 h-4 fill-purple-bright text-purple-bright" />
+              ))}
+              {Array.from({ length: 5 - a.rating }).map((_, j) => (
+                <Star key={`e${j}`} className="w-4 h-4 text-border" />
+              ))}
+            </div>
+            <p className="text-sm text-foreground/80 leading-relaxed mb-4">
+              &ldquo;{a.text}&rdquo;
+            </p>
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-bright to-purple-mid flex items-center justify-center text-white text-xs font-bold">
+                {a.name.charAt(0)}
+              </div>
+              <div>
+                <p className="text-sm font-bold">{a.name}</p>
+                <p className="text-xs text-muted-foreground">{a.role}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
 function AvisSection() {
-  const avis = [
-    {
-      name: "Jean-Pierre M.",
-      role: "Transporteur",
-      text: "Service impeccable, les techniciens sont très professionnels. Je recommande vivement RECACOR pour la gestion de ma flotte.",
-      rating: 5,
-    },
-    {
-      name: "Sophie L.",
-      role: "Particulier",
-      text: "Accueil chaleureux et travail de qualité. Mon véhicule est entre de bonnes mains. Prix très compétitifs.",
-      rating: 5,
-    },
-    {
-      name: "Marc D.",
-      role: "Artisan",
-      text: "Réactivité et expertise au rendez-vous. RECACOR comprend les contraintes des professionnels. Service rapide et fiable.",
-      rating: 5,
-    },
-  ];
+  const topRow = allAvis.slice(0, 5);
+  const bottomRow = allAvis.slice(5);
 
   return (
-    <MotionSection
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      variants={staggerContainer}
-      className="py-24 bg-muted"
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <MotionDiv variants={fadeUp} className="text-center mb-4">
-          <h2 className="text-3xl sm:text-4xl font-bold">Avis clients</h2>
-        </MotionDiv>
-        <MotionDiv variants={fadeUp} custom={1} className="flex justify-center mb-12">
-          <Separator className="w-16 bg-purple-bright h-1 rounded-full" />
-        </MotionDiv>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {avis.map((a, i) => (
-            <MotionDiv key={a.name} variants={fadeUp} custom={i}>
-              <div className="rounded-2xl border border-border bg-background p-6 h-full flex flex-col">
-                <div className="flex gap-1 mb-4">
-                  {Array.from({ length: a.rating }).map((_, j) => (
-                    <Star
-                      key={j}
-                      className="w-4 h-4 fill-purple-bright text-purple-bright"
-                    />
-                  ))}
-                </div>
-                <p className="text-muted-foreground text-sm leading-relaxed flex-1 mb-4">
-                  &ldquo;{a.text}&rdquo;
-                </p>
-                <div>
-                  <p className="font-semibold text-sm">{a.name}</p>
-                  <p className="text-xs text-muted-foreground">{a.role}</p>
-                </div>
-              </div>
-            </MotionDiv>
-          ))}
-        </div>
+    <section className="relative py-28 bg-muted overflow-hidden">
+      <BgParticles />
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center"
+        >
+          <span className="text-purple-bright font-semibold text-sm tracking-wider uppercase">
+            Témoignages
+          </span>
+          <h2 className="mt-3 text-4xl sm:text-5xl font-black tracking-tight">
+            Ce que disent{" "}
+            <span className="text-gradient-purple">nos clients</span>
+          </h2>
+          <p className="mt-4 text-muted-foreground text-lg max-w-xl mx-auto">
+            +2 000 clients nous font confiance. Découvrez leurs retours
+            d&apos;expérience.
+          </p>
+        </motion.div>
       </div>
-    </MotionSection>
+
+      {/* Double marquee */}
+      <div className="relative space-y-5">
+        {/* Fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-muted to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-muted to-transparent z-10 pointer-events-none" />
+
+        <AvisMarquee items={topRow} direction="right" />
+        <AvisMarquee items={bottomRow} direction="left" />
+      </div>
+    </section>
   );
 }
 
 /* ─────────────────── PRESENCE INTERNATIONALE ─────────────────── */
+/* ─────────────────── PRESENCE - France Map ─────────────────── */
+const mapCities = [
+  { name: "Bordeaux", x: "30%", y: "65%", size: "lg" as const },
+  { name: "Béziers", x: "37%", y: "72%", size: "lg" as const },
+  { name: "Montpellier", x: "39%", y: "69%", size: "lg" as const },
+];
+
+function PulsingDot({ delay, size }: { delay: number; size: "lg" | "sm" }) {
+  const isLg = size === "lg";
+  return (
+    <div className="relative">
+      {isLg && (
+        <motion.div
+          animate={{ scale: [1, 2.5, 1], opacity: [0.4, 0, 0.4] }}
+          transition={{ duration: 2, delay, repeat: Infinity, ease: "easeOut" }}
+          className="absolute inset-0 rounded-full bg-purple-bright"
+        />
+      )}
+      <div
+        className={cn(
+          "relative rounded-full",
+          isLg
+            ? "w-4 h-4 bg-purple-bright shadow-lg shadow-purple-bright/40"
+            : "w-2 h-2 bg-purple-light/40"
+        )}
+      />
+    </div>
+  );
+}
+
 function PresenceSection() {
   return (
-    <MotionSection
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      variants={staggerContainer}
-      className="py-24 bg-background"
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <MotionDiv variants={fadeUp} className="text-center mb-4">
-          <h2 className="text-3xl sm:text-4xl font-bold">
-            Une présence internationale
-          </h2>
-        </MotionDiv>
-        <MotionDiv variants={fadeUp} custom={1} className="flex justify-center mb-12">
-          <Separator className="w-16 bg-purple-bright h-1 rounded-full" />
-        </MotionDiv>
+    <section className="relative py-32 bg-background overflow-hidden">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-purple-bright/[0.03] rounded-full blur-3xl" />
 
-        <MotionDiv
-          variants={fadeUp}
-          custom={2}
-          className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-purple-deep/20 to-purple-mid/10 border border-border p-8 sm:p-12 flex flex-col items-center"
-        >
-          {/* Simplified Europe Map representation */}
-          <div className="relative w-full max-w-lg aspect-[4/3] flex items-center justify-center">
-            <Globe className="w-32 h-32 text-purple-bright/30" strokeWidth={0.8} />
-            {/* Dots representing presence */}
-            <div className="absolute top-[35%] left-[42%] w-3 h-3 rounded-full bg-purple-bright glow-purple" />
-            <div className="absolute top-[40%] left-[48%] w-3 h-3 rounded-full bg-purple-bright glow-purple" />
-            <div className="absolute top-[50%] left-[45%] w-3 h-3 rounded-full bg-purple-bright glow-purple" />
-            <div className="absolute top-[32%] left-[50%] w-2 h-2 rounded-full bg-purple-light/50" />
-            <div className="absolute top-[45%] left-[55%] w-2 h-2 rounded-full bg-purple-light/50" />
-            <div className="absolute top-[55%] left-[52%] w-2 h-2 rounded-full bg-purple-light/50" />
-          </div>
-          <p className="text-muted-foreground text-center max-w-md mt-6">
-            RECACOR étend son réseau à travers l&apos;Europe pour offrir un
-            service de proximité à tous ses clients.
-          </p>
-        </MotionDiv>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Left - Map */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative"
+          >
+            <div className="relative rounded-3xl overflow-hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/carte/europe-map-CBh8PVWh.webp"
+                alt="Carte de présence RECACOR en Europe"
+                className="w-full h-auto"
+              />
+
+            </div>
+          </motion.div>
+
+          {/* Right - Text */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <span className="text-purple-bright font-semibold text-sm tracking-wider uppercase">
+              Notre couverture
+            </span>
+            <h2 className="mt-3 text-4xl sm:text-5xl font-black tracking-tight leading-[1.1]">
+              Une présence{" "}
+              <span className="text-gradient-purple">européenne</span>
+            </h2>
+            <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
+              Implantés stratégiquement dans le Sud de la France, nous étendons
+              notre réseau à travers l&apos;Europe pour être toujours plus proches de nos clients.
+            </p>
+
+            <div className="mt-8 space-y-4">
+              {[
+                { icon: MapPin, label: "3 centres actifs", desc: "Bordeaux, Béziers, Montpellier" },
+                { icon: Globe, label: "Expansion européenne", desc: "Objectif 10 centres d'ici 2027" },
+                { icon: Truck, label: "Intervention mobile", desc: "Dépannage sur tout le grand Sud" },
+              ].map((item) => (
+                <div key={item.label} className="flex items-center gap-4 p-4 rounded-xl border border-border bg-white hover:border-purple-bright/20 transition-colors">
+                  <div className="w-11 h-11 rounded-xl bg-purple-bright/[0.08] flex items-center justify-center shrink-0">
+                    <item.icon className="w-5 h-5 text-purple-bright" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-sm">{item.label}</p>
+                    <p className="text-xs text-muted-foreground">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
       </div>
-    </MotionSection>
+    </section>
   );
 }
 
 /* ─────────────────── CONTACT CTA ─────────────────── */
 function ContactSection() {
   return (
-    <MotionSection
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      variants={staggerContainer}
-      className="py-24 bg-gradient-to-br from-purple-deep via-purple-mid to-purple-bright relative overflow-hidden"
-    >
-      <div className="absolute inset-0 opacity-5">
-        <div
-          className="w-full h-full"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 30% 70%, rgba(255,255,255,0.1) 0%, transparent 50%)",
-          }}
+    <section className="relative py-32 overflow-hidden">
+      {/* Background split */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-deep via-purple-mid to-purple-bright" />
+        {/* Animated mesh */}
+        <motion.div
+          animate={{ rotate: [0, 360] }}
+          transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
+          className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] opacity-[0.04]"
+          style={{ backgroundImage: "conic-gradient(from 0deg, transparent 0%, white 1%, transparent 3%)" }}
         />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <MotionDiv variants={fadeUp}>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-              Contactez-nous
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+          {/* Left - info (2 cols) */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-2"
+          >
+            <span className="text-purple-glow font-semibold text-sm tracking-wider uppercase">
+              Contact
+            </span>
+            <h2 className="mt-3 text-4xl sm:text-5xl font-black text-white tracking-tight leading-[1.1]">
+              Parlons de{" "}
+              <span className="text-purple-glow">vos besoins</span>
             </h2>
-            <p className="text-white/70 mb-8 leading-relaxed">
-              Besoin d&apos;un devis ou d&apos;un renseignement ? Notre équipe est à
-              votre disposition pour répondre à toutes vos questions.
+            <p className="mt-4 text-white/50 text-lg leading-relaxed">
+              Devis gratuit sous 24h. Notre équipe est à votre écoute pour
+              trouver la solution adaptée.
             </p>
-            <div className="space-y-4">
-              <div className="flex items-center gap-3 text-white/80">
-                <Phone className="h-5 w-5 text-purple-glow" />
-                <span>05 XX XX XX XX</span>
-              </div>
-              <div className="flex items-center gap-3 text-white/80">
-                <Mail className="h-5 w-5 text-purple-glow" />
-                <span>contact@recacor.fr</span>
-              </div>
-              <div className="flex items-center gap-3 text-white/80">
-                <MapPin className="h-5 w-5 text-purple-glow" />
-                <span>France & Europe</span>
-              </div>
-            </div>
-          </MotionDiv>
 
-          <MotionDiv variants={fadeUp} custom={2}>
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-white/10">
-              <form className="space-y-4">
+            <div className="mt-10 space-y-5">
+              {[
+                { icon: Phone, label: "Téléphone", value: "05 XX XX XX XX", desc: "Lun-Ven, 8h-18h" },
+                { icon: Mail, label: "Email", value: "contact@recacor.fr", desc: "Réponse sous 24h" },
+                { icon: MapPin, label: "Siège", value: "Sud de la France", desc: "3 centres à votre service" },
+              ].map((item) => (
+                <div key={item.label} className="flex items-start gap-4 group">
+                  <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/15 transition-colors">
+                    <item.icon className="w-5 h-5 text-purple-glow" />
+                  </div>
+                  <div>
+                    <p className="text-white font-bold text-sm">{item.value}</p>
+                    <p className="text-white/40 text-xs mt-0.5">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Trust badges */}
+            <div className="mt-10 flex items-center gap-6">
+              {["Devis gratuit", "Réponse 24h", "Sans engagement"].map((t) => (
+                <div key={t} className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-green-400" />
+                  <span className="text-white/50 text-xs font-medium">{t}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Right - form (3 cols) */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:col-span-3"
+          >
+            <div className="bg-white rounded-3xl p-8 sm:p-10 shadow-2xl shadow-purple-deep/30">
+              <h3 className="text-xl font-black text-purple-deep mb-1">
+                Demandez votre devis
+              </h3>
+              <p className="text-sm text-muted-foreground mb-8">
+                Remplissez le formulaire, nous vous recontactons rapidement.
+              </p>
+              <form className="space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <Input
-                    placeholder="Nom"
-                    className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus-visible:ring-white/30"
-                  />
-                  <Input
-                    placeholder="Prénom"
-                    className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus-visible:ring-white/30"
+                  <div>
+                    <label className="text-xs font-semibold text-foreground/70 mb-1.5 block">Nom</label>
+                    <Input placeholder="Votre nom" className="h-11" />
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-foreground/70 mb-1.5 block">Prénom</label>
+                    <Input placeholder="Votre prénom" className="h-11" />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs font-semibold text-foreground/70 mb-1.5 block">Email</label>
+                    <Input type="email" placeholder="votre@email.fr" className="h-11" />
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-foreground/70 mb-1.5 block">Téléphone</label>
+                    <Input type="tel" placeholder="06 XX XX XX XX" className="h-11" />
+                  </div>
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-foreground/70 mb-1.5 block">Type de demande</label>
+                  <div className="flex flex-wrap gap-2">
+                    {["Devis flotte", "Devis particulier", "Dépannage", "Autre"].map((t) => (
+                      <button
+                        key={t}
+                        type="button"
+                        className="px-4 py-2 rounded-full text-xs font-medium border border-border bg-muted text-foreground/70 hover:border-purple-bright/30 hover:text-purple-bright transition-colors"
+                      >
+                        {t}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-foreground/70 mb-1.5 block">Message</label>
+                  <textarea
+                    rows={4}
+                    placeholder="Décrivez votre besoin..."
+                    className="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring resize-none"
                   />
                 </div>
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus-visible:ring-white/30"
-                />
-                <Input
-                  type="tel"
-                  placeholder="Téléphone"
-                  className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus-visible:ring-white/30"
-                />
-                <textarea
-                  rows={4}
-                  placeholder="Votre message..."
-                  className="w-full rounded-lg bg-white/10 border border-white/20 px-3 py-2 text-sm text-white placeholder:text-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
-                />
-                <Button className="w-full bg-white text-purple-deep hover:bg-white/90 font-semibold h-11">
-                  Envoyer le message
+                <Button className="w-full h-12 bg-gradient-to-r from-purple-bright to-purple-mid text-white font-bold rounded-xl text-base hover:shadow-lg hover:shadow-purple-bright/25 transition-shadow">
+                  Envoyer ma demande
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </form>
             </div>
-          </MotionDiv>
+          </motion.div>
         </div>
       </div>
-    </MotionSection>
+    </section>
   );
 }
 
 /* ─────────────────── FAQ ─────────────────── */
+const faqCategories = [
+  {
+    label: "Services",
+    icon: "🔧",
+    items: [
+      {
+        q: "Quels types de véhicules prenez-vous en charge ?",
+        a: "Nous intervenons sur tous types de véhicules : poids lourds, semi-remorques, utilitaires, véhicules de tourisme, engins agricoles et industriels. Chaque centre dispose d'équipements adaptés à toutes les dimensions de pneumatiques.",
+      },
+      {
+        q: "Proposez-vous un service de dépannage ?",
+        a: "Oui, nous proposons un service de dépannage 24h/24 et 7j/7 pour les professionnels du transport. Nos équipes mobiles interviennent directement sur site, sur autoroute ou en zone industrielle pour minimiser votre temps d'immobilisation.",
+      },
+      {
+        q: "Qu'est-ce que le recreusage de pneumatiques ?",
+        a: "Le recreusage consiste à redonner de la profondeur aux sculptures d'un pneumatique usé, prolongeant sa durée de vie de 20 à 30%. C'est une solution économique et écologique, réalisée uniquement sur des pneus conçus pour cette opération.",
+      },
+    ],
+  },
+  {
+    label: "Pratique",
+    icon: "📋",
+    items: [
+      {
+        q: "Faut-il prendre rendez-vous ?",
+        a: "Pour les particuliers, la plupart de nos centres acceptent les clients sans rendez-vous. Pour les flottes et interventions planifiées, nous recommandons de prendre rendez-vous pour garantir la disponibilité des équipements et des pneumatiques nécessaires.",
+      },
+      {
+        q: "Quelles marques de pneumatiques proposez-vous ?",
+        a: "Nous sommes partenaires de toutes les grandes marques mondiales : Michelin, Bridgestone, Continental, Goodyear, Pirelli, Hankook, Dunlop, Firestone, Yokohama, BFGoodrich et bien d'autres. Notre équipe vous conseille la marque la plus adaptée à votre usage.",
+      },
+      {
+        q: "Proposez-vous des facilités de paiement ?",
+        a: "Oui, nous proposons plusieurs options : paiement en plusieurs fois sans frais pour les particuliers, et facturation mensuelle avec délais de paiement pour les professionnels sous contrat.",
+      },
+    ],
+  },
+  {
+    label: "Flottes",
+    icon: "🚛",
+    items: [
+      {
+        q: "Comment fonctionne un contrat de gestion de flotte ?",
+        a: "Nous analysons votre parc, définissons un plan de maintenance préventive, et assurons le suivi digital complet de chaque véhicule. Vous recevez des alertes d'usure, des rapports mensuels et bénéficiez de tarifs négociés. Un interlocuteur dédié est assigné à votre compte.",
+      },
+      {
+        q: "Intervenez-vous directement sur notre site ?",
+        a: "Absolument. Nos ateliers mobiles se déplacent sur votre site (dépôt, entrepôt, chantier) pour les interventions planifiées comme pour les urgences. Cela réduit vos coûts d'immobilisation et simplifie la logistique.",
+      },
+    ],
+  },
+];
+
 function FAQSection() {
-  const faqs = [
-    {
-      q: "Quels types de véhicules prenez-vous en charge ?",
-      a: "Nous prenons en charge tous types de véhicules : poids lourds, utilitaires, véhicules de tourisme, engins agricoles et industriels.",
-    },
-    {
-      q: "Proposez-vous un service sans rendez-vous ?",
-      a: "Oui, la plupart de nos centres acceptent les clients sans rendez-vous. Nous recommandons toutefois de prendre rendez-vous pour les flottes.",
-    },
-    {
-      q: "Quelles marques de pneumatiques proposez-vous ?",
-      a: "Nous travaillons avec toutes les grandes marques : Michelin, Bridgestone, Continental, Goodyear, Pirelli, Hankook et bien d'autres.",
-    },
-    {
-      q: "Proposez-vous des contrats de maintenance pour les flottes ?",
-      a: "Oui, nous proposons des contrats sur-mesure adaptés à la taille de votre flotte et à vos besoins spécifiques.",
-    },
-  ];
+  const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
+  const [activeTab, setActiveTab] = useState(0);
 
-  return <FAQInner faqs={faqs} />;
-}
-
-function FAQInner({
-  faqs,
-}: {
-  faqs: { q: string; a: string }[];
-}) {
-  const [open, setOpen] = useState<number | null>(null);
+  const toggle = (key: string) => {
+    setOpenItems((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
 
   return (
-    <MotionSection
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      variants={staggerContainer}
-      className="py-24 bg-muted"
-    >
-      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <MotionDiv variants={fadeUp} className="text-center mb-4">
-          <h2 className="text-3xl sm:text-4xl font-bold">FAQ</h2>
-        </MotionDiv>
-        <MotionDiv variants={fadeUp} custom={1} className="flex justify-center mb-12">
-          <Separator className="w-16 bg-purple-bright h-1 rounded-full" />
-        </MotionDiv>
+    <section className="relative py-32 bg-muted overflow-hidden">
+      <BgParticles />
+      {/* Background decoration */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-purple-bright/[0.03] rounded-full blur-3xl" />
 
-        <div className="space-y-3">
-          {faqs.map((faq, i) => (
-            <MotionDiv key={i} variants={fadeUp} custom={i}>
-              <button
-                onClick={() => setOpen(open === i ? null : i)}
-                className="w-full text-left rounded-xl border border-border bg-background p-5 hover:border-purple-bright/30 transition-colors"
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <span className="font-medium text-sm">{faq.q}</span>
-                  <ChevronDown
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+          {/* Left - intro (2 cols) */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-2"
+          >
+            <span className="text-purple-bright font-semibold text-sm tracking-wider uppercase">
+              Questions fréquentes
+            </span>
+            <h2 className="mt-3 text-4xl sm:text-5xl font-black tracking-tight leading-[1.1]">
+              On répond à{" "}
+              <span className="text-gradient-purple">vos questions</span>
+            </h2>
+            <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
+              Tout ce que vous devez savoir sur nos services, nos interventions
+              et la gestion de vos pneumatiques.
+            </p>
+
+            {/* Category tabs */}
+            <div className="mt-8 flex flex-col gap-2">
+              {faqCategories.map((cat, i) => (
+                <button
+                  key={cat.label}
+                  onClick={() => setActiveTab(i)}
+                  className={cn(
+                    "flex items-center gap-3 px-5 py-3.5 rounded-xl text-left transition-all duration-300 group",
+                    activeTab === i
+                      ? "bg-gradient-to-r from-purple-bright to-purple-mid text-white shadow-lg shadow-purple-bright/20"
+                      : "bg-white border border-border hover:border-purple-bright/30 text-foreground"
+                  )}
+                >
+                  <span className="text-xl">{cat.icon}</span>
+                  <div>
+                    <span className="font-bold text-sm">{cat.label}</span>
+                    <span
+                      className={cn(
+                        "block text-xs mt-0.5",
+                        activeTab === i ? "text-white/60" : "text-muted-foreground"
+                      )}
+                    >
+                      {cat.items.length} questions
+                    </span>
+                  </div>
+                  <ArrowRight
                     className={cn(
-                      "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200",
-                      open === i && "rotate-180"
+                      "h-4 w-4 ml-auto transition-transform",
+                      activeTab === i
+                        ? "text-white/60 translate-x-0"
+                        : "text-muted-foreground/30 -translate-x-1 group-hover:translate-x-0"
                     )}
                   />
-                </div>
-                {open === i && (
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                    {faq.a}
-                  </p>
-                )}
-              </button>
-            </MotionDiv>
-          ))}
+                </button>
+              ))}
+            </div>
+
+            {/* Contact CTA */}
+            <div className="mt-8 p-5 rounded-2xl border border-border bg-white">
+              <p className="text-sm font-bold mb-1">Vous ne trouvez pas votre réponse ?</p>
+              <p className="text-xs text-muted-foreground mb-3">
+                Notre équipe est disponible pour vous aider.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-purple-bright text-white text-xs font-semibold hover:bg-purple-mid transition-colors"
+              >
+                Nous contacter
+                <ArrowRight className="h-3 w-3" />
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* Right - accordion (3 cols) */}
+          <div className="lg:col-span-3">
+            <div className="space-y-3">
+              {faqCategories[activeTab].items.map((faq, i) => {
+                const key = `${activeTab}-${i}`;
+                const isOpen = !!openItems[key];
+                return (
+                  <motion.div
+                    key={key}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: i * 0.08 }}
+                  >
+                    <button
+                      onClick={() => toggle(key)}
+                      className={cn(
+                        "w-full text-left rounded-2xl border bg-white p-6 transition-all duration-300",
+                        isOpen
+                          ? "border-purple-bright/30 shadow-lg shadow-purple-bright/[0.06]"
+                          : "border-border hover:border-purple-bright/20"
+                      )}
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex items-start gap-4">
+                          <div
+                            className={cn(
+                              "shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold transition-colors duration-300",
+                              isOpen
+                                ? "bg-purple-bright text-white"
+                                : "bg-purple-bright/[0.06] text-purple-bright"
+                            )}
+                          >
+                            {String(i + 1).padStart(2, "0")}
+                          </div>
+                          <span className="font-bold text-[15px] leading-snug pt-1">
+                            {faq.q}
+                          </span>
+                        </div>
+                        <motion.div
+                          animate={{ rotate: isOpen ? 180 : 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="shrink-0 mt-1"
+                        >
+                          <ChevronDown
+                            className={cn(
+                              "h-5 w-5 transition-colors",
+                              isOpen ? "text-purple-bright" : "text-muted-foreground/40"
+                            )}
+                          />
+                        </motion.div>
+                      </div>
+
+                      <motion.div
+                        initial={false}
+                        animate={{
+                          height: isOpen ? "auto" : 0,
+                          opacity: isOpen ? 1 : 0,
+                        }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                        className="overflow-hidden"
+                      >
+                        <p className="mt-4 ml-12 text-sm text-muted-foreground leading-relaxed">
+                          {faq.a}
+                        </p>
+                      </motion.div>
+                    </button>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
         </div>
+
+        {/* Video */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mt-20 rounded-3xl overflow-hidden border border-border shadow-xl shadow-purple-bright/[0.04]"
+        >
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className="w-full h-auto"
+          >
+            <source src="/Vidéo_d_une_roue_sur_camion.mp4" type="video/mp4" />
+          </video>
+        </motion.div>
       </div>
-    </MotionSection>
+    </section>
   );
 }
 

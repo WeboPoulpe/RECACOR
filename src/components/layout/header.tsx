@@ -10,7 +10,9 @@ const navigation = [
   { name: "Nos centres", href: "/nos-centres" },
   { name: "Poids lourd", href: "/poids-lourd" },
   { name: "Particulier", href: "/particulier" },
+  { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
+  { name: "Maquette", href: "/maquette" },
 ];
 
 export function Header() {

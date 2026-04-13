@@ -24,6 +24,7 @@ export function Footer() {
                 { name: "Nos centres", href: "/nos-centres" },
                 { name: "Poids lourd", href: "/poids-lourd" },
                 { name: "Particulier", href: "/particulier" },
+                { name: "Blog", href: "/blog" },
                 { name: "Contact", href: "/contact" },
               ].map((item) => (
                 <li key={item.name}>
@@ -91,6 +92,20 @@ export function Footer() {
               Politique de confidentialité
             </Link>
           </div>
+        </div>
+
+        <div className="mt-6 text-center">
+          <p className="text-xs text-white/30">
+            Maquette générée par{" "}
+            <a
+              href="https://webomax.fr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-purple-glow hover:text-white transition-colors font-medium"
+            >
+              WeboMax
+            </a>
+          </p>
         </div>
       </div>
     </footer>
