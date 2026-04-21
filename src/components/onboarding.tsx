@@ -7,38 +7,38 @@ import { ArrowRight, Truck, Shield, MapPin, X } from "lucide-react";
 const slides = [
   {
     badge: "Présentation maquette",
-    title: "Site vitrine RECACOR",
-    subtitle: "Proposition de maquette interactive",
+    title: "Site Recacor Le Crès",
+    subtitle: "Maquette optimisée conversion",
     description:
-      "Vous naviguez sur la maquette du futur site RECACOR. Découvrez le design, les animations et les fonctionnalités prévues.",
-    icon: "🎨",
+      "Ce site est conçu pour générer des leads : formulaires courts, CTA d'appel visibles partout, tracking GTM/Meta, SEO local Montpellier/Le Crès.",
+    icon: "🎯",
     gradient: "from-purple-deep via-purple-mid to-purple-bright",
   },
   {
-    badge: "Technologie",
-    title: "Next.js + Framer Motion",
-    subtitle: "Performance & animations premium",
+    badge: "Conversion",
+    title: "3 formulaires multi-étapes",
+    subtitle: "VL · Mécanique · PL",
     description:
-      "Construit avec les dernières technologies web : chargement ultra-rapide, animations fluides, SEO optimisé, 100% responsive.",
-    icon: "⚡",
+      "Formulaires courts (tel/email obligatoires uniquement), UTM auto-capturés, redirection vers page /merci avec CTA appel immédiat.",
+    icon: "📝",
     gradient: "from-purple-mid via-purple-bright to-purple-light",
   },
   {
-    badge: "Contenu",
-    title: "6 pages complètes",
-    subtitle: "Accueil · Centres · PL · Particulier · Blog · Contact",
+    badge: "SEO local",
+    title: "Pages villes optimisées",
+    subtitle: "Montpellier · Lattes · Lunel · Le Crès",
     description:
-      "Chaque page est pensée pour convertir les visiteurs en clients, avec des CTAs stratégiques et un parcours utilisateur optimisé.",
-    icon: "📄",
+      "Schema.org, sitemap dynamique, metadata uniques, breadcrumbs, FAQ structurées. Prêt pour le référencement local.",
+    icon: "📍",
     gradient: "from-purple-bright via-purple-mid to-purple-deep",
   },
   {
-    badge: "Détails",
-    title: "Page /maquette",
-    subtitle: "Stack technique & bénéfices détaillés",
+    badge: "Tracking",
+    title: "GTM + Consent Mode v2",
+    subtitle: "RGPD-compliant · Meta · TikTok · Snap",
     description:
-      "Retrouvez toutes les infos techniques, les fonctionnalités et les bénéfices business sur la page dédiée accessible depuis le menu.",
-    icon: "📋",
+      "Bannière cookies CNIL, capture UTM, dataLayer complet (form_start, form_submit, phone_click, devis_confirmed), compatible import conversions Google Ads.",
+    icon: "📊",
     gradient: "from-purple-deep via-purple-bright to-purple-light",
   },
 ];

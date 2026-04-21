@@ -3,6 +3,9 @@ import { Footer } from "@/components/layout/footer";
 import { CustomCursor } from "@/components/custom-cursor";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { Onboarding } from "@/components/onboarding";
+import { StickyCallButton } from "@/components/sticky-call-button";
+import { CookieBanner } from "@/components/cookie-banner";
+import { UtmCapture } from "@/components/gtm";
 
 export default function PublicLayout({
   children,
@@ -11,12 +14,15 @@ export default function PublicLayout({
 }) {
   return (
     <>
+      <UtmCapture />
       <Onboarding />
       <CustomCursor />
       <ScrollProgress />
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />
+      <StickyCallButton />
+      <CookieBanner />
     </>
   );
 }

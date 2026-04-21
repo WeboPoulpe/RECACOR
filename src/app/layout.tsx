@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { GtmConsent, GtmHead, GtmNoscript } from "@/components/gtm";
 
 const dmSans = DM_Sans({
   variable: "--font-heading",
@@ -15,9 +16,32 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "RECACOR | Maintenance de Pneumatiques",
+  metadataBase: new URL("https://recacor.fr"),
+  title: {
+    default: "Pneus Voiture Montpellier — Garage Recacor Le Crès",
+    template: "%s | Recacor Le Crès",
+  },
   description:
-    "RECACOR - Leader en maintenance de pneumatiques pour flottes et particuliers. Réseau de centres en France.",
+    "Spécialiste pneus VL et PL à Montpellier — Le Crès. Montage sans RDV, stock immédiat, prix discount. Appelez le 06 06 07 62 10.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Pneus Voiture Montpellier — Garage Recacor Le Crès",
+    description:
+      "Spécialiste pneus VL et PL à Montpellier — Le Crès. Montage sans RDV, stock immédiat, prix discount.",
+    url: "https://recacor.fr",
+    siteName: "Recacor",
+    locale: "fr_FR",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+    },
+  },
 };
 
 export default function RootLayout({
@@ -30,7 +54,12 @@ export default function RootLayout({
       lang="fr"
       className={`${dmSans.variable} ${jakarta.variable} h-full antialiased`}
     >
+      <head>
+        <GtmConsent />
+        <GtmHead />
+      </head>
       <body className="min-h-full flex flex-col font-sans">
+        <GtmNoscript />
         {children}
       </body>
     </html>

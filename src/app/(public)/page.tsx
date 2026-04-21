@@ -30,6 +30,8 @@ import {
 import { Counter } from "@/components/counter";
 import { ParallaxImage } from "@/components/parallax-image";
 import { BgParticles } from "@/components/bg-particles";
+import { PhoneLink } from "@/components/phone-link";
+import { DevisVlForm } from "@/components/forms/devis-vl";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
@@ -79,18 +81,19 @@ function FloatingParticle({ delay, x, y, size }: { delay: number; x: string; y: 
 }
 
 function HeroSection() {
+  const reassurances = [
+    { emoji: "⚡", text: "Sans rendez-vous" },
+    { emoji: "💶", text: "À partir de 45€ montés" },
+    { emoji: "📦", text: "Stock disponible maintenant" },
+    { emoji: "⭐", text: "60 ans d'expertise" },
+  ];
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Video background */}
       <HeroVideo />
-
-      {/* Purple overlay on video */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-deep/85 via-purple-mid/75 to-purple-bright/70" />
-
-      {/* Secondary gradient for depth */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-deep/90 via-purple-mid/80 to-purple-bright/75" />
       <div className="absolute inset-0 bg-gradient-to-t from-purple-deep/60 via-transparent to-purple-deep/30" />
 
-      {/* Floating particles */}
       <FloatingParticle delay={0} x="10%" y="20%" size={4} />
       <FloatingParticle delay={1} x="25%" y="70%" size={6} />
       <FloatingParticle delay={0.5} x="70%" y="15%" size={3} />
@@ -98,34 +101,32 @@ function HeroSection() {
       <FloatingParticle delay={1.5} x="50%" y="85%" size={4} />
       <FloatingParticle delay={0.8} x="15%" y="50%" size={3} />
 
-      {/* Content */}
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-32 pb-20 w-full">
-        <div className="max-w-3xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
+        <div className="max-w-3xl">
+          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-white/80 text-xs font-medium tracking-wider uppercase backdrop-blur-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-              Depuis 1989 &mdash; Réseau national
+              Ouvert aujourd&apos;hui · Sans RDV
             </span>
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
-            className="mt-8 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-[1.08] tracking-tight"
+            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+            className="mt-6 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-[1.05] tracking-tight"
           >
-            Leader en maintenance de{" "}
+            Garage Pneus{" "}
+            <span className="text-purple-glow">Montpellier</span>
+            <br />
+            Pneus VL &amp; PL au{" "}
             <span className="relative inline-block">
-              <span className="relative z-10">pneumatiques</span>
+              <span className="relative z-10">Crès</span>
               <motion.span
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
-                transition={{ duration: 0.6, delay: 1.2, ease: "easeOut" }}
-                className="absolute bottom-2 left-0 right-0 h-3 sm:h-4 bg-purple-light/30 -rotate-1 origin-left"
+                transition={{ duration: 0.6, delay: 1, ease: "easeOut" }}
+                className="absolute bottom-2 left-0 right-0 h-3 sm:h-4 bg-purple-light/40 -rotate-1 origin-left"
               />
             </span>
           </motion.h1>
@@ -133,65 +134,80 @@ function HeroSection() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-            className="mt-6 text-lg sm:text-xl text-white/60 max-w-xl mx-auto leading-relaxed"
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="mt-6 text-lg sm:text-xl text-white/70 max-w-xl leading-relaxed"
           >
-            RECACOR vous accompagne dans l&apos;entretien et la maintenance de
-            vos pneumatiques pour flottes et particuliers.
+            Les pneus les moins chers de Montpellier. Stock immédiat, montage en 15min.
           </motion.p>
 
+          {/* 4 icônes réassurance */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.9 }}
-            className="mt-10 flex flex-wrap justify-center gap-4"
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl"
           >
-            <Link
-              href="/nos-centres"
-              className="group relative inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white text-purple-deep font-bold text-sm overflow-hidden transition-shadow hover:shadow-[0_8px_32px_rgba(255,255,255,0.25)]"
-            >
-              <span className="absolute inset-0 bg-gradient-to-r from-purple-glow/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <span className="relative">Découvrir nos centres</span>
-              <ArrowRight className="relative h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-white/25 text-white font-medium text-sm hover:bg-white/10 hover:border-white/40 transition-all duration-300 backdrop-blur-sm"
-            >
-              Nous contacter
-            </Link>
+            {reassurances.map((r, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 0.8 + i * 0.08 }}
+                className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10"
+              >
+                <span className="text-xl">{r.emoji}</span>
+                <span className="text-xs sm:text-sm font-semibold text-white">{r.text}</span>
+              </motion.div>
+            ))}
           </motion.div>
 
-          {/* Mini stats */}
+          {/* CTA doubles */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1 }}
+            className="mt-10 flex flex-col sm:flex-row gap-3 max-w-2xl"
+          >
+            <PhoneLink
+              location="hero"
+              className="flex-1 inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-purple-bright text-white font-bold text-base hover:bg-purple-mid shadow-[0_8px_30px_rgba(109,40,217,0.5)] hover:shadow-[0_12px_40px_rgba(109,40,217,0.7)] transition-all"
+              showIcon
+            >
+              Appeler maintenant
+            </PhoneLink>
+            <a
+              href="#devis"
+              className="flex-1 inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border-2 border-white/30 text-white font-semibold text-base hover:bg-white/10 hover:border-white/50 transition-all backdrop-blur-sm"
+            >
+              Demander un devis
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </motion.div>
+
+          {/* Preuve sociale */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 1.2 }}
-            className="mt-16 flex justify-center gap-12 sm:gap-16"
+            className="mt-6 flex items-center gap-3 text-white/60 text-sm"
           >
-            {[
-              { value: "35+", label: "Années d'expérience" },
-              { value: "2k+", label: "Clients satisfaits" },
-              { value: "4", label: "Centres en France" },
-            ].map((s) => (
-              <div key={s.label} className="text-center">
-                <div className="text-2xl sm:text-3xl font-black text-white">{s.value}</div>
-                <div className="text-xs text-white/40 mt-1">{s.label}</div>
-              </div>
-            ))}
+            <div className="flex gap-0.5">
+              {[1, 2, 3, 4, 5].map((s) => (
+                <Star key={s} className="w-4 h-4 fill-purple-glow text-purple-glow" />
+              ))}
+            </div>
+            <span><strong className="text-white">4.8/5</strong> · 127 avis Google vérifiés</span>
           </motion.div>
         </div>
       </div>
 
-      {/* Bottom gradient fade to white */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
 
-      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        transition={{ delay: 1.8 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 hidden sm:flex"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
@@ -201,6 +217,71 @@ function HeroSection() {
           <div className="w-1 h-1.5 rounded-full bg-white/50" />
         </motion.div>
       </motion.div>
+    </section>
+  );
+}
+
+/* ─────────────────── DEVIS VL ─────────────────── */
+function DevisVlSection() {
+  return (
+    <section id="devis" className="relative py-24 bg-background overflow-hidden scroll-mt-24">
+      <BgParticles />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <span className="text-purple-bright font-semibold text-sm tracking-wider uppercase">
+              Devis en 2 minutes
+            </span>
+            <h2 className="mt-3 text-4xl sm:text-5xl font-black tracking-tight leading-[1.1]">
+              Vos pneus montés{" "}
+              <span className="text-gradient-purple">rapidement au Crès</span>
+            </h2>
+            <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
+              Remplissez ce formulaire en 2 minutes, nous vous rappelons avec un devis
+              personnalisé. Seuls le téléphone et l&apos;email sont obligatoires.
+            </p>
+
+            <div className="mt-8 space-y-3">
+              {[
+                { icon: "⚡", label: "Réponse sous 2h", desc: "En jours ouvrés" },
+                { icon: "💰", label: "Devis gratuit", desc: "Sans engagement" },
+                { icon: "📞", label: "Ou appelez directement", desc: "Lun–Ven 8h–17h" },
+              ].map((item) => (
+                <div key={item.label} className="flex items-center gap-4 rounded-xl border border-border bg-white p-4">
+                  <span className="text-2xl">{item.icon}</span>
+                  <div>
+                    <p className="font-bold text-sm">{item.label}</p>
+                    <p className="text-xs text-muted-foreground">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+
+              <PhoneLink
+                location="cta"
+                className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-gradient-to-r from-purple-deep to-purple-mid text-white font-bold text-sm hover:shadow-lg hover:shadow-purple-bright/25 transition-shadow"
+                showIcon
+              >
+                Appeler directement
+              </PhoneLink>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            <div className="rounded-3xl border border-border bg-white p-6 sm:p-8 shadow-xl shadow-purple-bright/[0.04]">
+              <DevisVlForm />
+            </div>
+          </motion.div>
+        </div>
+      </div>
     </section>
   );
 }
@@ -1405,14 +1486,14 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <TrajectoireSection />
+      <DevisVlSection />
       <ServicesSection />
       <ProfessionnalismeSection />
       <CentresSection />
       <MarquesSection />
       <AvisSection />
+      <TrajectoireSection />
       <PresenceSection />
-      <ContactSection />
       <FAQSection />
     </>
   );

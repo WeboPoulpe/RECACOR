@@ -1,0 +1,112 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { Badge } from "@/components/ui/badge";
+import { CheckCircle, ArrowRight, Droplet, Filter, Wrench } from "lucide-react";
+import { PhoneLink } from "@/components/phone-link";
+import { DevisMecaniqueForm } from "@/components/forms/devis-mecanique";
+import { BgParticles } from "@/components/bg-particles";
+import { BreadcrumbJsonLd, ServiceJsonLd, FaqJsonLd } from "@/components/schema-jsonld";
+import { PHONE_DISPLAY } from "@/lib/tracking";
+
+const inclus = [
+  { icon: Droplet, title: "Huile moteur", desc: "Huile de qualité adaptée à votre véhicule" },
+  { icon: Filter, title: "Filtre à huile", desc: "Remplacement du filtre neuf inclus" },
+  { icon: Wrench, title: "Main d'œuvre", desc: "Vidange réalisée en atelier en 30 min" },
+];
+
+const faqs = [
+  { q: "Combien coûte une vidange chez Recacor ?", a: "Nos vidanges démarrent à 79€ (huile + filtre + main d'œuvre inclus). Le prix varie selon le véhicule et le type d'huile." },
+  { q: "Faut-il prendre rendez-vous ?", a: "Non, nous acceptons les clients sans rendez-vous à Le Crès. La vidange prend environ 30 minutes." },
+  { q: "Changez-vous aussi le filtre à air / habitacle ?", a: "Oui, sur demande. Nous proposons un pack complet vidange + filtres à prix avantageux." },
+  { q: "Quelle huile utilisez-vous ?", a: "Nous utilisons des huiles de grandes marques (Total, Elf, Castrol, Shell) adaptées à la préconisation constructeur de votre véhicule." },
+];
+
+export function VidangeClient() {
+  return (
+    <>
+      <BreadcrumbJsonLd items={[
+        { name: "Accueil", url: "https://recacor.fr" },
+        { name: "Services", url: "https://recacor.fr/mecanique" },
+        { name: "Vidange", url: "https://recacor.fr/services/vidange" },
+      ]} />
+      <ServiceJsonLd name="Vidange voiture Montpellier" description="Vidange complète à partir de 79€, sans RDV" price="79" />
+      <FaqJsonLd items={faqs} id="vidange" />
+
+      <section className="relative pt-32 pb-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-deep via-purple-mid to-purple-bright" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Badge className="bg-white/10 text-white border-white/20 mb-6">🛢️ Vidange</Badge>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1] max-w-3xl">
+            Vidange Voiture Montpellier<br />
+            <span className="text-purple-glow">À partir de 79€ au Crès</span>
+          </h1>
+          <p className="mt-4 text-white/70 max-w-xl text-lg">
+            Vidange complète sans RDV. Huile + filtre inclus. Résultat en 30 minutes.
+          </p>
+          <div className="mt-8 flex flex-col sm:flex-row gap-3 max-w-xl">
+            <PhoneLink location="hero" className="flex-1 inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-purple-bright text-white font-bold shadow-[0_8px_30px_rgba(109,40,217,0.5)]" showIcon>
+              Appeler : {PHONE_DISPLAY}
+            </PhoneLink>
+            <a href="#devis" className="flex-1 inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border-2 border-white/30 text-white font-semibold hover:bg-white/10">
+              Devis gratuit <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
+      </section>
+
+      <section className="py-24 bg-background">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-4xl font-black tracking-tight text-center mb-12">
+            Ce qui est <span className="text-gradient-purple">inclus</span>
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {inclus.map((item, i) => (
+              <motion.div key={item.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="group rounded-3xl border border-border bg-white p-8">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-bright to-purple-mid flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                  <item.icon className="w-7 h-7 text-white" />
+                </div>
+                <h3 className="text-xl font-black mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="devis" className="relative py-24 bg-muted overflow-hidden scroll-mt-24">
+        <BgParticles />
+        <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-4xl font-black tracking-tight">
+              Demandez votre <span className="text-gradient-purple">devis vidange</span>
+            </h2>
+          </div>
+          <div className="rounded-3xl border border-border bg-white p-6 sm:p-8 shadow-xl">
+            <DevisMecaniqueForm defaultService="Vidange" />
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-background">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-center text-4xl font-black tracking-tight mb-12">
+            Questions <span className="text-gradient-purple">fréquentes</span>
+          </h2>
+          <div className="space-y-3">
+            {faqs.map((faq, i) => (
+              <details key={i} className="group rounded-2xl border border-border bg-white p-5 cursor-pointer">
+                <summary className="font-bold text-sm list-none flex items-center justify-between">
+                  {faq.q}
+                  <span className="text-purple-bright ml-3 group-open:rotate-45 transition-transform text-xl leading-none">+</span>
+                </summary>
+                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
