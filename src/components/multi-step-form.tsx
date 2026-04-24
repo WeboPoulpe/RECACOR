@@ -247,7 +247,11 @@ export function FormField({
 }
 
 /* Validators */
-export const isValidPhone = (v: string) =>
-  /^(?:(?:\+33|0)[67])(?:[\s.-]?\d{2}){4}$/.test(v.replace(/\s/g, ""));
-export const isValidEmail = (v: string) =>
-  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+export const isValidPhone = (v: string) => {
+  const cleaned = v.replace(/[\s.\-()]/g, "");
+  return /^(?:\+33|0033|0)[67]\d{8}$/.test(cleaned);
+};
+export const isValidEmail = (v: string) => {
+  const cleaned = v.trim();
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleaned);
+};

@@ -19,7 +19,7 @@ const centres = [
     phone: "05 XX XX XX XX",
     hours: "Lun-Ven : 8h-18h | Sam : 8h-12h",
     specialities: ["Flottes PL", "Utilitaires", "Dépannage 24/7"],
-    emoji: "🍷",
+    emoji: "",
     image: "/Design sans titre (29)/1.webp",
     description:
       "Notre centre historique, spécialisé dans la maintenance de flottes poids lourds et véhicules utilitaires sur l'axe Atlantique.",
@@ -33,7 +33,7 @@ const centres = [
     phone: "04 XX XX XX XX",
     hours: "Lun-Ven : 8h-18h | Sam : 8h-12h",
     specialities: ["Tous véhicules", "Agricole", "Recreusage"],
-    emoji: "☀️",
+    emoji: "",
     image: "/Design sans titre (29)/3.webp",
     description:
       "Centre polyvalent couvrant tous types de véhicules, y compris les engins agricoles et industriels de la région viticole.",
@@ -47,7 +47,7 @@ const centres = [
     phone: "04 XX XX XX XX",
     hours: "Lun-Ven : 8h-18h",
     specialities: ["Particuliers", "Professionnels", "Stockage"],
-    emoji: "🏛️",
+    emoji: "",
     image: "/Design sans titre (29)/2.webp",
     description:
       "Notre centre le plus récent, idéalement situé aux portes de la métropole pour servir particuliers et professionnels.",
@@ -210,7 +210,7 @@ export default function NosCentresPage() {
                       {/* Badge ville */}
                       <div className="absolute top-4 left-4">
                         <div className="flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
-                          <span className="text-lg">{c.emoji}</span>
+                          <MapPin className="h-5 w-5 text-purple-bright" />
                           <span className="font-black text-sm text-purple-deep">{c.name}</span>
                         </div>
                       </div>

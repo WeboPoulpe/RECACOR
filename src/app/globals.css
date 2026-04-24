@@ -110,16 +110,6 @@ body::before {
   background-size: 180px;
 }
 
-/* Custom cursor: hide default on desktop, except on overlays */
-@media (pointer: fine) {
-  * {
-    cursor: none !important;
-  }
-  [data-cursor-visible],
-  [data-cursor-visible] * {
-    cursor: auto !important;
-  }
-}
 
 /* Glass effect for header */
 .glass {

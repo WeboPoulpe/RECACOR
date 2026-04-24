@@ -28,7 +28,7 @@ export function ParallelismeClient() {
       <section className="relative pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-deep via-purple-mid to-purple-bright" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Badge className="bg-white/10 text-white border-white/20 mb-6">🎯 Parallélisme</Badge>
+          <Badge className="bg-white/10 text-white border-white/20 mb-6"><Target className="h-3 w-3 mr-1" /> Parallélisme</Badge>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1] max-w-3xl">
             Parallélisme Géométrie<br />
             <span className="text-purple-glow">Montpellier — Sans RDV</span>

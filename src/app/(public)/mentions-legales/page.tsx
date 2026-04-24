@@ -14,7 +14,7 @@ export default function MentionsLegalesPage() {
         <div className="prose prose-sm max-w-none space-y-4 text-muted-foreground">
           <p><strong>Éditeur :</strong> Recacor — SARL au capital de [X] €</p>
           <p><strong>Siège social :</strong> 1240 Route de Nîmes, 34920 Le Crès</p>
-          <p><strong>Téléphone :</strong> 06 06 07 62 10</p>
+          <p><strong>Téléphone :</strong> 06 07 62 10 43</p>
           <p><strong>Email :</strong> contact@recacor.fr</p>
           <p><strong>SIRET :</strong> [à compléter]</p>
           <p><strong>Directeur de publication :</strong> [à compléter]</p>

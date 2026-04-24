@@ -1,22 +1,15 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { Phone, Mail, MapPin, Clock, ArrowRight } from "lucide-react";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { PhoneLink } from "@/components/phone-link";
-import { DevisVlForm } from "@/components/forms/devis-vl";
-import { DevisPlForm } from "@/components/forms/devis-pl";
-import { DevisMecaniqueForm } from "@/components/forms/devis-mecanique";
+import { ContactSimpleForm } from "@/components/forms/contact-simple";
 import { BgParticles } from "@/components/bg-particles";
 import { BreadcrumbJsonLd } from "@/components/schema-jsonld";
 import { PHONE_DISPLAY, ADDRESS } from "@/lib/tracking";
-import { cn } from "@/lib/utils";
-
-type Tab = "vl" | "mecanique" | "pl";
 
 export function ContactClient() {
-  const [tab, setTab] = useState<Tab>("vl");
 
   return (
     <>
@@ -91,39 +84,21 @@ export function ContactClient() {
         </div>
       </section>
 
-      {/* Formulaire avec tabs */}
+      {/* Formulaire contact simple */}
       <section className="relative py-24 bg-muted overflow-hidden">
         <BgParticles />
-        <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center text-4xl font-black tracking-tight mb-8">
-            Envoyez-nous <span className="text-gradient-purple">un message</span>
-          </h2>
-          {/* Tabs */}
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
-            {[
-              { key: "vl" as const, label: "🚗 Pneus voiture" },
-              { key: "mecanique" as const, label: "🔧 Mécanique" },
-              { key: "pl" as const, label: "🚚 Professionnel (PL)" },
-            ].map((t) => (
-              <button
-                key={t.key}
-                onClick={() => setTab(t.key)}
-                className={cn(
-                  "px-5 py-2.5 rounded-full text-sm font-semibold transition-all",
-                  tab === t.key
-                    ? "bg-purple-bright text-white shadow-lg shadow-purple-bright/20"
-                    : "bg-white border border-border text-muted-foreground hover:border-purple-bright/30"
-                )}
-              >
-                {t.label}
-              </button>
-            ))}
+        <div className="relative mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-4xl font-black tracking-tight">
+              Envoyez-nous <span className="text-gradient-purple">un message</span>
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              Pour toute demande, remplissez le formulaire. Pour un devis chiffré,
+              rendez-vous sur la page du service concerné.
+            </p>
           </div>
-
           <div className="rounded-3xl border border-border bg-white p-6 sm:p-8 shadow-xl">
-            {tab === "vl" && <DevisVlForm />}
-            {tab === "mecanique" && <DevisMecaniqueForm />}
-            {tab === "pl" && <DevisPlForm />}
+            <ContactSimpleForm />
           </div>
         </div>
       </section>

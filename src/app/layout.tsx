@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s | Recacor Le Crès",
   },
   description:
-    "Spécialiste pneus VL et PL à Montpellier — Le Crès. Montage sans RDV, stock immédiat, prix discount. Appelez le 06 06 07 62 10.",
+    "Spécialiste pneus VL et PL à Montpellier — Le Crès. Montage sans RDV, stock immédiat, prix discount. Appelez le 06 07 62 10 43.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Pneus Voiture Montpellier — Garage Recacor Le Crès",

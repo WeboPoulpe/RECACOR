@@ -19,6 +19,12 @@ import {
   Shield,
   Award,
   Mail,
+  Zap,
+  Tag,
+  Package,
+  Wrench,
+  Leaf,
+  ClipboardList,
 } from "lucide-react";
 import {
   MotionDiv,
@@ -82,10 +88,10 @@ function FloatingParticle({ delay, x, y, size }: { delay: number; x: string; y: 
 
 function HeroSection() {
   const reassurances = [
-    { emoji: "⚡", text: "Sans rendez-vous" },
-    { emoji: "💶", text: "À partir de 45€ montés" },
-    { emoji: "📦", text: "Stock disponible maintenant" },
-    { emoji: "⭐", text: "60 ans d'expertise" },
+    { Icon: Zap, text: "Sans rendez-vous" },
+    { Icon: Tag, text: "À partir de 45€ montés" },
+    { Icon: Package, text: "Stock disponible maintenant" },
+    { Icon: Award, text: "60 ans d'expertise" },
   ];
 
   return (
@@ -153,9 +159,9 @@ function HeroSection() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: 0.8 + i * 0.08 }}
-                className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10"
+                className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10"
               >
-                <span className="text-xl">{r.emoji}</span>
+                <r.Icon className="h-5 w-5 text-purple-glow shrink-0" strokeWidth={1.75} />
                 <span className="text-xs sm:text-sm font-semibold text-white">{r.text}</span>
               </motion.div>
             ))}
@@ -196,7 +202,7 @@ function HeroSection() {
                 <Star key={s} className="w-4 h-4 fill-purple-glow text-purple-glow" />
               ))}
             </div>
-            <span><strong className="text-white">4.8/5</strong> · 127 avis Google vérifiés</span>
+            <span><strong className="text-white">5,0</strong> · Avis Google</span>
           </motion.div>
         </div>
       </div>
@@ -247,12 +253,14 @@ function DevisVlSection() {
 
             <div className="mt-8 space-y-3">
               {[
-                { icon: "⚡", label: "Réponse sous 2h", desc: "En jours ouvrés" },
-                { icon: "💰", label: "Devis gratuit", desc: "Sans engagement" },
-                { icon: "📞", label: "Ou appelez directement", desc: "Lun–Ven 8h–17h" },
+                { Icon: Zap, label: "Réponse sous 2h", desc: "En jours ouvrés" },
+                { Icon: Tag, label: "Devis gratuit", desc: "Sans engagement" },
+                { Icon: Phone, label: "Ou appelez directement", desc: "Lun–Ven 8h–17h · Sam 8h–12h" },
               ].map((item) => (
                 <div key={item.label} className="flex items-center gap-4 rounded-xl border border-border bg-white p-4">
-                  <span className="text-2xl">{item.icon}</span>
+                  <div className="w-10 h-10 rounded-lg bg-purple-bright/10 flex items-center justify-center shrink-0">
+                    <item.Icon className="w-5 h-5 text-purple-bright" strokeWidth={1.75} />
+                  </div>
                   <div>
                     <p className="font-bold text-sm">{item.label}</p>
                     <p className="text-xs text-muted-foreground">{item.desc}</p>
@@ -290,28 +298,28 @@ function DevisVlSection() {
 function TrajectoireSection() {
   const milestones = [
     {
-      year: "1989",
-      title: "La genèse",
-      text: "Fondation de RECACOR avec un seul atelier et une ambition : révolutionner la maintenance pneumatique sur le territoire français.",
-      icon: "🔧",
+      year: "1950",
+      title: "La fondation",
+      text: "Création de Recacor à Córdoba (Espagne). Origine artisanale : le recreusage de pneumatiques, un savoir-faire rare transmis de génération en génération.",
+      Icon: Wrench,
     },
     {
-      year: "2000",
-      title: "L'expansion",
-      text: "Ouverture de nos premiers centres multi-sites. Le réseau RECACOR prend forme et gagne la confiance de centaines de professionnels.",
-      icon: "🏗️",
+      year: "1980",
+      title: "Le réseau espagnol",
+      text: "Ouverture progressive d'ateliers à travers l'Espagne. Recacor devient une référence nationale du pneumatique PL et industriel.",
+      Icon: Truck,
     },
     {
-      year: "2015",
-      title: "Le rayonnement",
-      text: "Déploiement national et partenariats avec les plus grandes marques de pneumatiques. Notre expertise traverse les frontières.",
-      icon: "🚀",
+      year: "2010",
+      title: "L'expansion européenne",
+      text: "Plus de 60 ateliers en Espagne. Début du rayonnement en Europe et en Afrique du Nord, avec une expertise reconnue sur le pneu lourd.",
+      Icon: Globe,
     },
     {
       year: "2024",
-      title: "Le leadership",
-      text: "Reconnu comme leader du secteur avec +2 000 clients fidèles, 4 centres stratégiques et une présence internationale en construction.",
-      icon: "👑",
+      title: "L'arrivée en France",
+      text: "Implantation à Montpellier — Le Crès avec notre premier garage français. VL, PL, agricole et industriel : tout Recacor au service du Sud.",
+      Icon: MapPin,
     },
   ];
 
@@ -394,7 +402,7 @@ function TrajectoireSection() {
                     />
                     {/* Inner circle */}
                     <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-purple-bright to-purple-mid flex flex-col items-center justify-center shadow-lg shadow-purple-bright/20 group-hover:shadow-purple-bright/40 transition-shadow duration-500">
-                      <span className="text-2xl leading-none mb-0.5">{m.icon}</span>
+                      <m.Icon className="w-5 h-5 text-white mb-0.5" strokeWidth={1.75} />
                       <span className="text-xs font-bold text-white/90">{m.year}</span>
                     </div>
                   </motion.div>
@@ -596,10 +604,9 @@ function ServicesSection() {
 /* ─────────────────── PROFESSIONNALISME + STATS ─────────────────── */
 function ProfessionnalismeSection() {
   const stats = [
-    { value: 4, suffix: "", label: "Centres en France" },
+    { value: 1, suffix: "", label: "Centre en France" },
     { value: 8, suffix: "+", label: "Marques partenaires" },
-    { value: 2282, suffix: "+", label: "Clients satisfaits" },
-    { value: 11, suffix: "+", label: "Années d'expérience" },
+    { value: 60, suffix: "+", label: "Années d'expérience" },
   ];
 
   return (
@@ -1245,7 +1252,7 @@ function ContactSection() {
 const faqCategories = [
   {
     label: "Services",
-    icon: "🔧",
+    Icon: Wrench,
     items: [
       {
         q: "Quels types de véhicules prenez-vous en charge ?",
@@ -1263,7 +1270,7 @@ const faqCategories = [
   },
   {
     label: "Pratique",
-    icon: "📋",
+    Icon: ClipboardList,
     items: [
       {
         q: "Faut-il prendre rendez-vous ?",
@@ -1281,7 +1288,7 @@ const faqCategories = [
   },
   {
     label: "Flottes",
-    icon: "🚛",
+    Icon: Truck,
     items: [
       {
         q: "Comment fonctionne un contrat de gestion de flotte ?",
@@ -1344,7 +1351,7 @@ function FAQSection() {
                       : "bg-white border border-border hover:border-purple-bright/30 text-foreground"
                   )}
                 >
-                  <span className="text-xl">{cat.icon}</span>
+                  <cat.Icon className="h-5 w-5" strokeWidth={1.75} />
                   <div>
                     <span className="font-bold text-sm">{cat.label}</span>
                     <span
@@ -1481,6 +1488,187 @@ function FAQSection() {
   );
 }
 
+/* ─────────────────── ZONE D'INTERVENTION ─────────────────── */
+function ZoneInterventionSection() {
+  return (
+    <section className="relative py-24 bg-muted overflow-hidden">
+      <BgParticles />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12 text-center">
+          <span className="text-purple-bright font-semibold text-sm tracking-wider uppercase">Où nous trouver</span>
+          <h2 className="mt-3 text-4xl sm:text-5xl font-black tracking-tight">
+            Zone{" "}
+            <span className="text-gradient-purple">d&apos;intervention</span>
+          </h2>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Bloc 1 : Garage Le Crès */}
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-3xl border border-border bg-white overflow-hidden flex flex-col">
+            <div className="aspect-[16/10] bg-muted relative">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2886.5!2d3.9!3d43.65!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sLe+Cr%C3%A8s!5e0!3m2!1sfr!2sfr!4v1"
+                className="w-full h-full"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Garage Recacor Le Crès"
+              />
+            </div>
+            <div className="p-8 flex-1 flex flex-col">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-bright/10 text-purple-bright text-xs font-bold uppercase tracking-wider w-fit mb-3">
+                <MapPin className="h-3.5 w-3.5" /> Notre garage
+              </div>
+              <h3 className="text-2xl font-black tracking-tight mb-3">Garage Le Crès</h3>
+              <div className="space-y-2 text-sm text-muted-foreground mb-6">
+                <div className="flex items-start gap-2.5">
+                  <MapPin className="h-4 w-4 text-purple-bright shrink-0 mt-0.5" />
+                  <span>1240 Route de Nîmes, 34920 Le Crès</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <Clock className="h-4 w-4 text-purple-bright shrink-0" />
+                  <span>Lun–Ven : 8h–17h · Sam : 8h–12h</span>
+                </div>
+              </div>
+              <div className="mt-auto flex flex-col sm:flex-row gap-3">
+                <a
+                  href="https://maps.google.com/?q=1240+Route+de+Nîmes+34920+Le+Crès"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-purple-bright text-white font-bold text-sm hover:bg-purple-mid transition-colors"
+                >
+                  <MapPin className="h-4 w-4" /> Itinéraire
+                </a>
+                <PhoneLink location="cta" className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-border text-sm font-semibold hover:border-purple-bright/30 transition-colors" showIcon>
+                  Appeler
+                </PhoneLink>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Bloc 2 : Assistance PL */}
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }} className="rounded-3xl bg-gradient-to-br from-purple-deep via-purple-mid to-purple-bright text-white overflow-hidden flex flex-col">
+            <div className="aspect-[16/10] relative flex items-center justify-center p-8">
+              <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 70% 30%, white 0%, transparent 50%)" }} />
+              <div className="relative text-center">
+                <Truck className="w-20 h-20 text-purple-glow mx-auto mb-4" strokeWidth={1.25} />
+                <p className="text-5xl font-black">Hérault</p>
+                <p className="text-white/50 uppercase tracking-widest text-sm mt-2">Zone couverte (34)</p>
+              </div>
+            </div>
+            <div className="p-8 flex-1 flex flex-col">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs font-bold uppercase tracking-wider w-fit mb-3">
+                <Truck className="h-3.5 w-3.5 text-purple-glow" /> Professionnels
+              </div>
+              <h3 className="text-2xl font-black tracking-tight mb-3">Assistance PL Hérault</h3>
+              <p className="text-sm text-white/60 leading-relaxed mb-6">
+                Nos ateliers mobiles interviennent directement sur votre site, dépôt ou sur autoroute
+                pour les crevaisons et remplacements de pneumatiques poids lourd. Uniquement pneus.
+              </p>
+              <div className="mt-auto flex flex-col sm:flex-row gap-3">
+                <Link
+                  href="/pneus-utilitaires-pl#assistance"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-white text-purple-deep font-bold text-sm hover:shadow-lg transition-shadow"
+                >
+                  Devis pro <ArrowRight className="h-4 w-4" />
+                </Link>
+                <PhoneLink location="cta" serviceType="pl" className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-white/25 text-white text-sm font-semibold hover:bg-white/10 transition-colors" showIcon>
+                  Appeler
+                </PhoneLink>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────── PARTICULIERS VS PROS ─────────────────── */
+function ParticuliersProsSection() {
+  return (
+    <section className="py-24 bg-background">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12 text-center">
+          <span className="text-purple-bright font-semibold text-sm tracking-wider uppercase">Pour qui</span>
+          <h2 className="mt-3 text-4xl sm:text-5xl font-black tracking-tight">
+            Particuliers ou{" "}
+            <span className="text-gradient-purple">professionnels</span>
+          </h2>
+          <p className="mt-4 text-muted-foreground text-lg max-w-xl mx-auto">
+            Un service sur-mesure selon votre profil.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Particuliers */}
+          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="group rounded-3xl border border-border bg-white p-8 hover:border-purple-bright/30 hover:shadow-xl hover:shadow-purple-bright/[0.06] transition-all">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-bright to-purple-mid flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+              <Car className="w-7 h-7 text-white" strokeWidth={1.75} />
+            </div>
+            <h3 className="text-2xl font-black tracking-tight mb-2">Particuliers</h3>
+            <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
+              Pneus toutes marques et mécanique légère à Montpellier — Le Crès. Sans rendez-vous.
+            </p>
+            <ul className="space-y-2 mb-6">
+              {["Pneus été, hiver, 4 saisons", "Vidange, parallélisme, freinage", "Montage en 15 minutes"].map((i) => (
+                <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Shield className="h-4 w-4 text-purple-bright shrink-0" />
+                  {i}
+                </li>
+              ))}
+            </ul>
+            <div className="flex items-center justify-between gap-4 pt-5 border-t border-border">
+              <div>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">À partir de</p>
+                <p className="text-2xl font-black text-purple-bright">45€<span className="text-xs font-medium text-muted-foreground ml-1">monté</span></p>
+              </div>
+              <Link href="/pneus-voiture" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-purple-bright text-white text-sm font-bold hover:bg-purple-mid transition-colors">
+                Devis VL <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* Pros */}
+          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="group rounded-3xl bg-gradient-to-br from-purple-deep via-purple-mid to-purple-bright text-white p-8 overflow-hidden relative">
+            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 80% 20%, white 0%, transparent 50%)" }} />
+            <div className="relative">
+              <div className="w-14 h-14 rounded-2xl bg-white/10 border border-white/10 backdrop-blur-sm flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                <Truck className="w-7 h-7 text-purple-glow" strokeWidth={1.75} />
+              </div>
+              <h3 className="text-2xl font-black tracking-tight mb-2">Professionnels</h3>
+              <p className="text-sm text-white/60 mb-5 leading-relaxed">
+                PL, agricole, industriel, recreusage : des solutions pour optimiser le coût au kilomètre.
+              </p>
+              <ul className="space-y-2 mb-6">
+                {[
+                  "Pneus PL, agricoles, industriels",
+                  "Recreusage haute qualité",
+                  "Assistance sur site en Hérault",
+                ].map((i) => (
+                  <li key={i} className="flex items-center gap-2 text-sm text-white/70">
+                    <Shield className="h-4 w-4 text-purple-glow shrink-0" />
+                    {i}
+                  </li>
+                ))}
+              </ul>
+              <div className="flex items-center justify-between gap-4 pt-5 border-t border-white/10">
+                <div>
+                  <p className="text-xs text-white/40 uppercase tracking-wider">Rappel sous</p>
+                  <p className="text-2xl font-black text-purple-glow">2h<span className="text-xs font-medium text-white/40 ml-1">jours ouvrés</span></p>
+                </div>
+                <Link href="/pneus-utilitaires-pl#devis" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-purple-deep text-sm font-bold hover:shadow-lg transition-shadow">
+                  Devis PL <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ─────────────────── PAGE ─────────────────── */
 export default function HomePage() {
   return (
@@ -1488,12 +1676,12 @@ export default function HomePage() {
       <HeroSection />
       <DevisVlSection />
       <ServicesSection />
+      <ParticuliersProsSection />
       <ProfessionnalismeSection />
-      <CentresSection />
       <MarquesSection />
       <AvisSection />
       <TrajectoireSection />
-      <PresenceSection />
+      <ZoneInterventionSection />
       <FAQSection />
     </>
   );

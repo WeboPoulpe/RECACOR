@@ -38,7 +38,7 @@ const localBusinessSchema = {
   description:
     "Spécialiste pneus VL et PL à Montpellier — Le Crès. Montage sans rendez-vous, stock immédiat.",
   url: "https://recacor.fr",
-  telephone: "+33606076210",
+  telephone: "+33607621043",
   address: {
     "@type": "PostalAddress",
     streetAddress: "1240 Route de Nîmes",
@@ -174,7 +174,7 @@ export function Footer() {
             </div>
 
             <a
-              href="https://g.page/r/recacor-review"
+              href="https://g.page/r/CQgYeWa3dlAPEAE/review"
               target="_blank"
               rel="noopener noreferrer"
               className="block rounded-xl border border-white/10 bg-white/5 p-4 hover:bg-white/10 transition-colors"
@@ -205,8 +205,7 @@ export function Footer() {
             <span>&copy; {new Date().getFullYear()} RECACOR. Tous droits réservés.</span>
             <span className="hidden sm:inline-flex items-center gap-1">
               <Star className="w-3 h-3 fill-purple-glow text-purple-glow" />
-              <span className="font-semibold text-white/60">4.8/5</span>
-              <span>— 127 avis Google</span>
+              <span className="font-semibold text-white/60">5,0</span>
             </span>
           </div>
           <p className="text-xs text-white/30">

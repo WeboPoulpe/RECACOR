@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { Truck, CheckCircle, ArrowRight, AlertTriangle, Leaf, MapPin, Clock } from "lucide-react";
+import { Truck, CheckCircle, ArrowRight, AlertTriangle, Leaf, MapPin, Clock, TrendingUp, Gauge, Shield, Calculator } from "lucide-react";
 import { PhoneLink } from "@/components/phone-link";
 import { DevisPlForm } from "@/components/forms/devis-pl";
 import { BgParticles } from "@/components/bg-particles";
@@ -11,34 +11,57 @@ import { PHONE_DISPLAY } from "@/lib/tracking";
 
 const pneuTypes = [
   {
-    emoji: "🚚",
+    Icon: Truck,
     title: "Pneus PL — Transport & Logistique",
     items: [
       "Pneus neufs toutes dimensions (toutes marques)",
+      "Rendement kilométrique optimisé",
       "Recreusage — solution économique et durable",
-      "Stock immédiat pour urgences",
       "Contrats flottes sur-mesure",
     ],
   },
   {
-    emoji: "🚜",
+    Icon: Leaf,
     title: "Pneus agricoles — Tracteurs & Engins",
     items: [
       "Pneus tracteurs toutes marques",
-      "Pneus engins agricoles et forestiers",
       "Pneus radiaux et diagonaux",
+      "Résistance à l'usure en conditions agricoles",
       "Intervention en exploitation",
     ],
   },
   {
-    emoji: "🏗️",
+    Icon: Shield,
     title: "Pneus industriels — Ports, Mines, Carrières",
     items: [
       "Solutions pour environnements difficiles",
       "Pneus chariots élévateurs & engins manut.",
-      "Stock disponible et livraison rapide",
+      "Durée de vie pneu maximisée",
       "Intervention sur site",
     ],
+  },
+];
+
+const criteres = [
+  {
+    Icon: TrendingUp,
+    title: "Rendement kilométrique",
+    desc: "Choisissez des pneumatiques conçus pour parcourir plus de kilomètres avant remplacement. Un bon rendement km = moins d'immobilisations.",
+  },
+  {
+    Icon: Gauge,
+    title: "Résistance à l'usure",
+    desc: "Composition du mélange, dessin de la bande de roulement : chaque détail compte pour résister aux charges et aux kilomètres intensifs.",
+  },
+  {
+    Icon: Calculator,
+    title: "Coût au kilomètre",
+    desc: "Le vrai indicateur pour un professionnel : €/km. Un pneu premium bien choisi coûte moins cher à l'usage qu'un low-cost changé 2 fois plus souvent.",
+  },
+  {
+    Icon: Leaf,
+    title: "Durée de vie pneu",
+    desc: "Recreusage possible sur pneus adaptés = +25% de durée de vie. Économie et écologie, sans compromis sur la sécurité.",
   },
 ];
 
@@ -95,7 +118,9 @@ export function PlClient() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {pneuTypes.map((t, i) => (
               <motion.div key={t.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} id={t.title.toLowerCase().includes("agricole") ? "agricoles" : undefined} className="rounded-3xl border border-border bg-white p-8">
-                <div className="text-4xl mb-4">{t.emoji}</div>
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-bright to-purple-mid flex items-center justify-center mb-5">
+                  <t.Icon className="w-7 h-7 text-white" strokeWidth={1.75} />
+                </div>
                 <h3 className="text-lg font-black tracking-tight mb-4">{t.title}</h3>
                 <ul className="space-y-2">
                   {t.items.map((item) => (
@@ -105,6 +130,44 @@ export function PlClient() {
                     </li>
                   ))}
                 </ul>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Critères B2B — métier */}
+      <section className="py-24 bg-background">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12 text-center">
+            <span className="text-purple-bright font-semibold text-sm tracking-wider uppercase">
+              Critères de choix professionnels
+            </span>
+            <h2 className="mt-3 text-4xl sm:text-5xl font-black tracking-tight">
+              Choisir ses pneus en{" "}
+              <span className="text-gradient-purple">pro</span>
+            </h2>
+            <p className="mt-4 text-muted-foreground text-lg max-w-2xl mx-auto">
+              Pour un transporteur, un agriculteur ou un industriel, le pneumatique est un poste
+              de coût stratégique. Voici les 4 critères qui font la différence sur votre TCO.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {criteres.map((c, i) => (
+              <motion.div
+                key={c.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="group rounded-2xl border border-border bg-white p-6 hover:border-purple-bright/30 hover:shadow-xl hover:shadow-purple-bright/[0.06] transition-all"
+              >
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-bright to-purple-mid flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <c.Icon className="w-6 h-6 text-white" strokeWidth={1.75} />
+                </div>
+                <h3 className="font-black text-sm tracking-tight mb-2">{c.title}</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">{c.desc}</p>
               </motion.div>
             ))}
           </div>

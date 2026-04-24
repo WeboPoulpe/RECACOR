@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, Phone, ArrowRight, Sun, Snowflake, Cloud } from "lucide-react";
+import { CheckCircle, ArrowRight, Sun, Snowflake, Cloud, Car } from "lucide-react";
 import { PhoneLink } from "@/components/phone-link";
 import { DevisVlForm } from "@/components/forms/devis-vl";
 import { BgParticles } from "@/components/bg-particles";
@@ -81,7 +81,7 @@ export function PneusVoitureClient() {
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <Badge className="bg-white/10 text-white border-white/20 mb-6">🚗 Pneus voiture</Badge>
+            <Badge className="bg-white/10 text-white border-white/20 mb-6"><Car className="h-3 w-3 mr-1" /> Pneus voiture</Badge>
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}

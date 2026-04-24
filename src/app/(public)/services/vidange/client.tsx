@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, ArrowRight, Droplet, Filter, Wrench } from "lucide-react";
+import { ArrowRight, Droplet, Filter, Wrench } from "lucide-react";
 import { PhoneLink } from "@/components/phone-link";
 import { DevisMecaniqueForm } from "@/components/forms/devis-mecanique";
 import { BgParticles } from "@/components/bg-particles";
@@ -36,7 +36,7 @@ export function VidangeClient() {
       <section className="relative pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-deep via-purple-mid to-purple-bright" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Badge className="bg-white/10 text-white border-white/20 mb-6">🛢️ Vidange</Badge>
+          <Badge className="bg-white/10 text-white border-white/20 mb-6"><Droplet className="h-3 w-3 mr-1" /> Vidange</Badge>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1] max-w-3xl">
             Vidange Voiture Montpellier<br />
             <span className="text-purple-glow">À partir de 79€ au Crès</span>
