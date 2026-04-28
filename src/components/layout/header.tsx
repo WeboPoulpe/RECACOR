@@ -2,14 +2,15 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+import { SITE_CONFIG } from "@/lib/config";
 
 const navigation = [
-  { name: "Nos centres", href: "/nos-centres" },
-  { name: "Poids lourd", href: "/poids-lourd" },
-  { name: "Particulier", href: "/particulier" },
+  { name: "Notre garage", href: "/contact" },
+  { name: "Pneus VL & mécanique", href: "/particulier" },
+  { name: "Pneus PL", href: "/pneus-utilitaires-pl" },
   { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
   { name: "Maquette", href: "/maquette" },
@@ -115,16 +116,16 @@ export function Header() {
                 ))}
               </div>
 
-              {/* CTA button */}
+              {/* Phone CTA */}
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="ml-4">
-                <Link
-                  href="/contact"
-                  className="group relative inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-purple-bright text-white text-sm font-semibold overflow-hidden transition-shadow hover:shadow-[0_4px_24px_rgba(109,40,217,0.4)]"
+                <a
+                  href={SITE_CONFIG.phone.href}
+                  className="phone-link group relative inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-purple-bright text-white text-sm font-semibold overflow-hidden transition-shadow hover:shadow-[0_4px_24px_rgba(109,40,217,0.4)]"
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-purple-light to-purple-bright opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <span className="relative">Nous contacter</span>
-                  <ArrowRight className="relative h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
-                </Link>
+                  <Phone className="relative h-4 w-4" />
+                  <span className="relative">{SITE_CONFIG.phone.display}</span>
+                </a>
               </motion.div>
             </nav>
 
@@ -229,14 +230,14 @@ export function Header() {
                 }}
                 className="mt-8"
               >
-                <Link
-                  href="/contact"
+                <a
+                  href={SITE_CONFIG.phone.href}
                   onClick={() => setOpen(false)}
-                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-purple-deep font-bold text-lg"
+                  className="phone-link inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-purple-deep font-bold text-lg"
                 >
-                  Nous contacter
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
+                  <Phone className="h-5 w-5" />
+                  {SITE_CONFIG.phone.display}
+                </a>
               </motion.div>
             </nav>
           </motion.div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Star } from "lucide-react";
+import { SITE_CONFIG } from "@/lib/config";
 
 export function Footer() {
   return (
@@ -9,9 +10,15 @@ export function Footer() {
           <div className="md:col-span-1">
             <h3 className="text-xl font-bold text-white mb-4">RECACOR</h3>
             <p className="text-sm text-white/50 leading-relaxed">
-              Leader en maintenance de pneumatiques pour flottes et particuliers
-              depuis 1989.
+              Spécialiste pneumatiques VL, poids lourd, agricole et recreusage à
+              Montpellier — Le Crès. 60 ans d&apos;expertise.
             </p>
+            <div className="mt-4 flex items-center gap-1.5">
+              {Array.from({ length: SITE_CONFIG.rating.stars }).map((_, i) => (
+                <Star key={i} className="h-4 w-4 fill-purple-glow text-purple-glow" />
+              ))}
+              <span className="ml-2 text-sm font-bold text-white">{SITE_CONFIG.rating.value}</span>
+            </div>
           </div>
 
           <div>
@@ -21,9 +28,9 @@ export function Footer() {
             <ul className="space-y-3">
               {[
                 { name: "Accueil", href: "/" },
-                { name: "Nos centres", href: "/nos-centres" },
-                { name: "Poids lourd", href: "/poids-lourd" },
-                { name: "Particulier", href: "/particulier" },
+                { name: "Notre garage", href: "/contact" },
+                { name: "Pneus VL & mécanique", href: "/particulier" },
+                { name: "Pneus PL", href: "/pneus-utilitaires-pl" },
                 { name: "Blog", href: "/blog" },
                 { name: "Contact", href: "/contact" },
               ].map((item) => (
@@ -44,10 +51,10 @@ export function Footer() {
               Services
             </h4>
             <ul className="space-y-3">
-              <li className="text-sm text-white/50">Maintenance pneumatiques</li>
-              <li className="text-sm text-white/50">Gestion de flottes</li>
-              <li className="text-sm text-white/50">Dépannage sur site</li>
-              <li className="text-sm text-white/50">Contrôle & expertise</li>
+              <li className="text-sm text-white/50">Pneus VL & mécanique</li>
+              <li className="text-sm text-white/50">Pneus PL, agricole & industriel</li>
+              <li className="text-sm text-white/50">Recreusage</li>
+              <li className="text-sm text-white/50">Assistance PL Hérault</li>
             </ul>
           </div>
 
@@ -56,17 +63,28 @@ export function Footer() {
               Contact
             </h4>
             <div className="space-y-3">
-              <div className="flex items-center gap-3 text-sm text-white/50">
+              <a
+                href={SITE_CONFIG.phone.href}
+                className="phone-link flex items-center gap-3 text-sm text-white/50 hover:text-white transition-colors"
+              >
                 <Phone className="h-4 w-4 text-purple-glow shrink-0" />
-                05 XX XX XX XX
-              </div>
+                {SITE_CONFIG.phone.display}
+              </a>
               <div className="flex items-center gap-3 text-sm text-white/50">
                 <Mail className="h-4 w-4 text-purple-glow shrink-0" />
-                contact@recacor.fr
+                {SITE_CONFIG.email}
               </div>
               <div className="flex items-center gap-3 text-sm text-white/50">
                 <MapPin className="h-4 w-4 text-purple-glow shrink-0" />
-                France & Europe
+                {SITE_CONFIG.garage.city}
+              </div>
+              <div className="flex items-start gap-3 text-sm text-white/50">
+                <Clock className="h-4 w-4 text-purple-glow shrink-0 mt-0.5" />
+                <span>
+                  {SITE_CONFIG.hours.weekday}
+                  <br />
+                  {SITE_CONFIG.hours.saturday}
+                </span>
               </div>
             </div>
           </div>
