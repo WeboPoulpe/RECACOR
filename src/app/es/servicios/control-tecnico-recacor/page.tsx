@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { ControlTecnicoEsClient } from "./client";
 
 export const metadata: Metadata = {
-  title: "Control técnico en Le Crès cerca de Montpellier | Recacor",
+  title: "ITV / control técnico en Le Crès cerca de Montpellier | Recacor",
   description:
-    "Precontrol gratuito, presupuesto y gestión del paso por el control técnico desde el taller Recacor de Le Crès.",
+    "La ITV (Inspección Técnica de Vehículos) es el equivalente español del control técnico. Recacor prepara y gestiona el paso por el control técnico en Francia desde Le Crès.",
   alternates: { canonical: "/es/servicios/control-tecnico-recacor" },
   robots: {
     index: false,
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Control técnico en Le Crès cerca de Montpellier | Recacor",
+    title: "ITV / control técnico en Le Crès cerca de Montpellier | Recacor",
     description:
-      "Precontrol gratuito, presupuesto y gestión del paso por el control técnico desde el taller Recacor de Le Crès.",
+      "La ITV (Inspección Técnica de Vehículos) es el equivalente español del control técnico. Recacor prepara y gestiona el paso por el control técnico en Francia desde Le Crès.",
     url: "https://www.recacor.fr/es/servicios/control-tecnico-recacor",
     siteName: "Recacor",
     locale: "es_ES",

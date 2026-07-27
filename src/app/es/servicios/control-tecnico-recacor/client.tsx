@@ -18,12 +18,12 @@ import {
 
 const pricingCards = [
   {
-    title: "Control técnico turismo",
+    title: "Pack ITV turismo",
     price: "87,22€",
-    desc: "Precontrol gratuito, gestión del paso por el control técnico y devolución del vehículo.",
+    desc: "Precontrol gratuito, gestión del paso por el control técnico en Francia y devolución del vehículo.",
   },
   {
-    title: "Control técnico utilitario",
+    title: "Pack ITV utilitario",
     price: "97,02€",
     desc: "La misma gestión con precontrol gratuito para utilitarios ligeros.",
   },
@@ -39,24 +39,24 @@ const correctiveItems = [
 
 const faqs = [
   {
-    q: "¿Qué incluye el precontrol de Recacor?",
-    a: "El taller revisa los puntos que más suelen bloquear antes de un control técnico: neumáticos, frenado, iluminación, comportamiento en carretera y mantenimiento corriente. Este precontrol no sustituye al control técnico reglamentario realizado en un centro autorizado.",
+    q: "¿Qué incluye el precontrol de la ITV?",
+    a: "El taller revisa los puntos que más suelen bloquear antes del control técnico, equivalente a la ITV española: neumáticos, frenado, iluminación, comportamiento en carretera y mantenimiento corriente. Este precontrol no sustituye al control técnico reglamentario realizado en un centro autorizado.",
   },
   {
-    q: "¿Puede Recacor reparar antes del control técnico?",
+    q: "¿Puede Recacor reparar antes de la ITV?",
     a: "Sí. Si hay un punto bloqueante, el taller puede proponer un presupuesto sobre los servicios realmente realizados en Le Crès: neumáticos, frenado, cambio de aceite, alineación y pequeña mecánica. No se realiza ninguna reparación sin la validación del cliente.",
   },
   {
-    q: "¿Está incluido el precio del control técnico?",
+    q: "¿Está incluido el precio de la ITV?",
     a: "Sí. El servicio incluye el precontrol gratuito, la organización del paso por el centro colaborador y la devolución del vehículo. Las reparaciones eventuales siempre van aparte y solo se realizan tras validación.",
   },
   {
-    q: "¿Qué ocurre si el vehículo no está listo?",
+    q: "¿Qué ocurre si el vehículo no está listo para la ITV?",
     a: "El taller te llama antes de cualquier intervención. Recibes un presupuesto y después decides si quieres reparar o no el vehículo antes del paso al control técnico.",
   },
   {
-    q: "¿Hay que pedir cita?",
-    a: "Es preferible contactar antes para organizar la gestión del vehículo, sobre todo si la fecha del control técnico está cerca. El taller confirmará después el mejor hueco según su carga de trabajo.",
+    q: "¿Hay que pedir cita para la ITV?",
+    a: "Es preferible contactar antes para organizar la gestión del vehículo, sobre todo si la fecha de la ITV está cerca. El taller confirmará después el mejor hueco según su carga de trabajo.",
   },
 ];
 
@@ -77,7 +77,7 @@ const processSteps = [
     icon: Wrench,
   },
   {
-    title: "Paso al control técnico y devolución",
+    title: "Paso por la ITV y devolución",
     desc: "Después, el vehículo puede presentarse en el centro colaborador y devolverse con su informe.",
     icon: ShieldCheck,
   },
@@ -89,7 +89,7 @@ export function ControlTecnicoEsClient() {
       <section className="relative overflow-hidden pt-32 pb-20 text-white">
         <Image
           src="/illustrations/services/controle-technique-passage-hero-20260723.png"
-          alt="Vehiculo en un centro de control tecnico"
+          alt="Vehículo en un centro de control técnico, equivalente a la ITV"
           fill
           priority
           sizes="100vw"
@@ -108,7 +108,7 @@ export function ControlTecnicoEsClient() {
               <div className="mt-2.5 flex items-end justify-center gap-2">
                 <span className="mb-1 text-[0.82rem] font-black xl:text-[0.92rem]">01/08/2028</span>
                 <ShieldCheck className="mb-1 h-5 w-5 text-emerald-700 xl:h-6 xl:w-6" />
-                <div className="text-[1.95rem] font-black leading-none xl:text-[2.2rem]">CT</div>
+                <div className="text-[1.95rem] font-black leading-none xl:text-[2.2rem]">ITV</div>
                 <span className="mb-1 rounded-[4px] bg-emerald-200 px-2 py-1 text-[0.62rem] font-black uppercase text-emerald-900 xl:text-[0.68rem]">
                   VÁLIDO
                 </span>
@@ -126,7 +126,7 @@ export function ControlTecnicoEsClient() {
                 <span>Gratuito</span>
                 <span>Servicio:</span>
                 <span>Turismo o utilitario</span>
-                <span>Paso CT:</span>
+                <span>Paso ITV:</span>
                 <span>Gestionado por Recacor</span>
               </div>
             </div>
@@ -135,15 +135,15 @@ export function ControlTecnicoEsClient() {
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl xl:max-w-4xl">
             <Badge className="mb-6 border-white/20 bg-white/10 text-white">
-              <CarFront className="mr-1 h-3 w-3" /> Control técnico
+              <CarFront className="mr-1 h-3 w-3" /> ITV / control técnico
             </Badge>
             <h1 className="max-w-4xl text-4xl font-black leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Control técnico
+              ITV / control técnico
               <br />
               <span className="text-purple-glow">en Le Crès cerca de Montpellier</span>
             </h1>
             <p className="mt-4 max-w-2xl text-lg text-white/75">
-              Precontrol, presupuesto y gestión del paso por el control técnico desde el taller Recacor de Le Crès.
+              La ITV (Inspección Técnica de Vehículos) es el equivalente español del control técnico. Recacor prepara y gestiona el paso por el control técnico en Francia desde Le Crès.
             </p>
             <div className="mt-6 grid max-w-2xl grid-cols-1 gap-2 sm:grid-cols-3">
               {["Precontrol gratuito", "Turismo desde 87,22€", "Utilitario desde 97,02€"].map(
@@ -187,11 +187,11 @@ export function ControlTecnicoEsClient() {
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div>
                 <h2 className="text-3xl font-black tracking-tight sm:text-4xl">
-                  Control técnico <span className="text-gradient-purple">con taller en el mismo sitio</span>
+                  ITV / control técnico <span className="text-gradient-purple">con taller en el mismo sitio</span>
                 </h2>
                 <div className="mt-5 space-y-4 text-muted-foreground leading-relaxed">
                   <p>
-                    En Le Crès, Recacor puede revisar el vehículo antes del control técnico e identificar los puntos que suelen bloquear el paso.
+                    En Le Crès, Recacor puede revisar el vehículo antes del control técnico francés, equivalente a la ITV española, e identificar los puntos que suelen bloquear el paso.
                   </p>
                   <p>
                     Si detectamos un problema, el taller puede preparar un presupuesto y realizar en el mismo sitio las intervenciones habituales para turismos y utilitarios ligeros: neumáticos, frenos, cambio de aceite, alineación y pequeña mecánica según el diagnóstico del taller.
@@ -201,7 +201,7 @@ export function ControlTecnicoEsClient() {
               <div className="overflow-hidden rounded-[4px] border border-border bg-muted/30">
                 <Image
                   src="/illustrations/services/controle-technique-hero-20260723.png"
-                  alt="Cliente y tecnico delante de un vehiculo antes del control tecnico"
+                  alt="Cliente y técnico delante de un vehículo antes del control técnico"
                   width={1400}
                   height={875}
                   sizes="(min-width: 1024px) 32rem, 100vw"
@@ -212,7 +212,7 @@ export function ControlTecnicoEsClient() {
             <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
               <div className="rounded-[4px] border border-border bg-muted/40 p-4">
                 <p className="text-xs font-bold uppercase tracking-wider text-purple-bright">Lo que el cliente entiende rápido</p>
-                <p className="mt-2 text-sm font-semibold text-foreground">El vehículo se revisa primero en el taller y, si todo está listo, se organiza después el paso por el control técnico.</p>
+                <p className="mt-2 text-sm font-semibold text-foreground">El vehículo se revisa primero en el taller y, si todo está listo, se organiza después el paso por la ITV.</p>
               </div>
               <div className="rounded-[4px] border border-border bg-muted/40 p-4">
                 <p className="text-xs font-bold uppercase tracking-wider text-purple-bright">Lo que queda claro</p>
@@ -225,7 +225,7 @@ export function ControlTecnicoEsClient() {
 
       <section className="bg-muted py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-12 text-center text-4xl font-black tracking-tight">Tarifas <span className="text-gradient-purple">del control técnico</span></h2>
+          <h2 className="mb-12 text-center text-4xl font-black tracking-tight">Tarifas <span className="text-gradient-purple">de la ITV</span></h2>
           <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
             {pricingCards.map((card) => (
               <div key={card.title} className="rounded-[4px] border border-border bg-white p-8 text-center">
@@ -236,7 +236,7 @@ export function ControlTecnicoEsClient() {
             ))}
           </div>
           <div className="mx-auto mt-8 max-w-4xl rounded-[4px] border border-border bg-white p-6 text-center text-sm text-muted-foreground">
-            El precontrol está incluido en el servicio. Si es necesaria una reparación antes del paso al control técnico, se envía un presupuesto para validación antes de cualquier intervención.
+            El precontrol está incluido en el servicio. Si es necesaria una reparación antes del paso por la ITV, se envía un presupuesto para validación antes de cualquier intervención.
           </div>
         </div>
       </section>
@@ -271,7 +271,7 @@ export function ControlTecnicoEsClient() {
               </ul>
               <div className="mt-8 rounded-[4px] border border-border bg-muted/40 p-5">
                 <p className="text-xs font-bold uppercase tracking-wider text-purple-bright">Importante</p>
-                <p className="mt-2 text-sm text-muted-foreground">Si un punto impide el paso al control técnico, el taller te llama y envía un presupuesto antes de cualquier intervención.</p>
+                <p className="mt-2 text-sm text-muted-foreground">Si un punto impide el paso a la ITV, el taller te llama y envía un presupuesto antes de cualquier intervención.</p>
               </div>
             </div>
           </div>
@@ -282,7 +282,7 @@ export function ControlTecnicoEsClient() {
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="mb-10 text-center">
             <h2 className="text-4xl font-black tracking-tight">Solicitar la <span className="text-gradient-purple">gestión del vehículo</span></h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">Indica el vehículo, la fecha límite del control técnico y los puntos ya conocidos antes de la llamada del taller.</p>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">Indica el vehículo, la fecha límite de la ITV y los puntos ya conocidos antes de la llamada del taller.</p>
           </div>
           <div className="rounded-[4px] border border-border bg-white p-6 shadow-xl sm:p-8"><DevisControleTechniqueFormEs /></div>
         </div>

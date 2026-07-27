@@ -6,8 +6,8 @@ import { MultiStepForm, FormField, isValidEmail, isValidPhone } from "../multi-s
 import { Input } from "@/components/ui/input";
 
 const REQUEST_OPTIONS = [
-  "Control técnico turismo",
-  "Control técnico utilitario",
+  "ITV turismo",
+  "ITV utilitario",
   "Necesito que me llamen",
 ] as const;
 
@@ -41,7 +41,7 @@ type ControlTecnicoEsData = {
 };
 
 const initial: ControlTecnicoEsData = {
-  tipoSolicitud: "Control técnico turismo",
+  tipoSolicitud: "ITV turismo",
   matricula: "",
   modelo: "",
   fechaLimiteCt: "",
@@ -89,7 +89,7 @@ export function DevisControleTechniqueFormEs() {
       successHref="/es/gracias-control-tecnico"
       data={{
         ...data,
-        service: "Control técnico",
+        service: "ITV / control técnico",
         source_detail: "controle_technique_es",
       }}
       isValid={isValid}
@@ -147,7 +147,7 @@ export function DevisControleTechniqueFormEs() {
                 </FormField>
               </div>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <FormField label="Fecha límite del control técnico">
+                <FormField label="Fecha límite de la ITV / control técnico">
                   <Input
                     type="date"
                     value={data.fechaLimiteCt}
@@ -252,7 +252,7 @@ export function DevisControleTechniqueFormEs() {
                   maxLength={700}
                   value={data.mensaje}
                   onChange={(e) => update("mensaje", e.target.value)}
-                  placeholder="Indica si la fecha del control técnico está cerca o si hay algún punto que te preocupa."
+                  placeholder="Indica si la fecha de la ITV está cerca o si hay algún punto que te preocupa."
                   className="w-full resize-none rounded-xl border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-bright"
                 />
               </FormField>
@@ -281,7 +281,7 @@ export function DevisControleTechniqueFormEs() {
           )}
           {data.fechaLimiteCt && (
             <div className="flex justify-between gap-4">
-              <dt className="text-muted-foreground">Fecha límite CT</dt>
+              <dt className="text-muted-foreground">Fecha límite ITV</dt>
               <dd className="font-semibold">{data.fechaLimiteCt}</dd>
             </div>
           )}
