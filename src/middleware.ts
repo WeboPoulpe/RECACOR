@@ -17,12 +17,22 @@ const PL_ALIASES = new Set([
   "/pneus—utilitaires—pl",
 ]);
 
+const SPANISH_PREFIX = "/es/";
+
 function applyBriefingHeaders(response: NextResponse) {
   response.headers.set(
     "X-Robots-Tag",
     "noindex, nofollow, noarchive, nosnippet, noimageindex, max-snippet:0, max-image-preview:none, max-video-preview:0",
   );
   response.headers.set("Referrer-Policy", "no-referrer");
+  return response;
+}
+
+function applySpanishShareHeaders(response: NextResponse) {
+  response.headers.set(
+    "X-Robots-Tag",
+    "noindex, nofollow, noarchive, nosnippet, noimageindex, max-snippet:0, max-image-preview:none, max-video-preview:0",
+  );
   return response;
 }
 
@@ -51,6 +61,7 @@ export async function middleware(req: NextRequest) {
 
   if (!path.startsWith("/admin") && !path.startsWith("/api/admin")) {
     const response = NextResponse.next();
+    if (path.startsWith(SPANISH_PREFIX)) return applySpanishShareHeaders(response);
     return path.startsWith(BRIEFING_PREFIX) ? applyBriefingHeaders(response) : response;
   }
 

@@ -13,12 +13,21 @@ export function StickyCallButton() {
 
   const isControleTechniquePage =
     pathname === "/services/prise-en-charge-controle-technique" ||
-    pathname === "/formulaire/controle-technique";
+    pathname === "/formulaire/controle-technique" ||
+    pathname === "/es/servicios/control-tecnico-recacor";
 
-  const quoteHref = isControleTechniquePage
-    ? "/formulaire/controle-technique"
+  const isSpanishControlPage = pathname === "/es/servicios/control-tecnico-recacor";
+
+  const quoteHref = isSpanishControlPage
+    ? "/es/servicios/control-tecnico-recacor#devis"
+    : isControleTechniquePage
+      ? "/formulaire/controle-technique"
     : "/formulaire";
-  const quoteLabel = isControleTechniquePage ? "Devis CT" : "Devis gratuit";
+  const quoteLabel = isSpanishControlPage
+    ? "Presupuesto CT"
+    : isControleTechniquePage
+      ? "Devis CT"
+      : "Devis gratuit";
 
   useEffect(() => {
     const onScroll = () => {

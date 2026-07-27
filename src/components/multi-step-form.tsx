@@ -27,6 +27,15 @@ interface MultiStepFormProps {
   submitLabel?: string;
   extraMention?: string;
   rgpdText?: ReactNode;
+  successHref?: string;
+  labels?: {
+    step: (current: number, total: number) => string;
+    summary: string;
+    previous: string;
+    next: string;
+    sending: string;
+    submitError: string;
+  };
 }
 
 export function MultiStepForm({
@@ -39,6 +48,8 @@ export function MultiStepForm({
   submitLabel = "Envoyer ma demande",
   extraMention,
   rgpdText,
+  successHref = "/merci",
+  labels,
 }: MultiStepFormProps) {
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
@@ -47,6 +58,16 @@ export function MultiStepForm({
   const [rgpd, setRgpd] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+
+  const copy = {
+    step: (current: number, total: number) => `Étape ${current} / ${total}`,
+    summary: "Récapitulatif",
+    previous: "Retour",
+    next: "Continuer",
+    sending: "Envoi...",
+    submitError: "Votre demande n'a pas pu être confirmée. Réessayez ou appelez-nous directement.",
+    ...labels,
+  };
 
   const totalSteps = steps.length;
 
@@ -102,12 +123,12 @@ export function MultiStepForm({
       }
 
       await pushFormSubmit(serviceType, id, result.tracking_id, result.accepted_by || []);
-      router.push("/merci");
+      router.push(successHref);
     } catch (err) {
       console.error("[lead submit]", err);
       setSubmitting(false);
       setSubmitError(
-        "Votre demande n'a pas pu être confirmée. Réessayez ou appelez-nous directement.",
+        copy.submitError,
       );
     }
   };
@@ -136,7 +157,7 @@ export function MultiStepForm({
       <div className="mb-6">
         <div className="flex items-center justify-between mb-3">
           <span className="text-xs font-bold text-purple-bright uppercase tracking-wider">
-            Étape {step + 1} / {totalSteps}
+            {copy.step(step + 1, totalSteps)}
           </span>
           <span className="text-xs text-muted-foreground">
             {steps[step].title}
@@ -176,7 +197,7 @@ export function MultiStepForm({
             <div className="space-y-5">
               <div className="rounded-[4px] border border-border bg-muted p-5">
                 <p className="text-xs font-bold text-blue-700 uppercase mb-3">
-                  Récapitulatif
+                  {copy.summary}
                 </p>
                 {summary}
               </div>
@@ -226,7 +247,7 @@ export function MultiStepForm({
             className="inline-flex items-center gap-2 rounded-[4px] border border-border px-5 py-3 text-sm font-bold hover:border-blue-700/40 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
-            Retour
+            {copy.previous}
           </button>
         )}
 
@@ -237,7 +258,7 @@ export function MultiStepForm({
             disabled={!isValid(step)}
             className="flex-1 inline-flex items-center justify-center gap-2 rounded-[4px] bg-yellow-400 px-6 py-3 text-sm font-black uppercase text-slate-950 transition-all hover:bg-yellow-300 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Continuer
+            {copy.next}
             <ArrowRight className="h-4 w-4" />
           </button>
         ) : (
@@ -246,7 +267,7 @@ export function MultiStepForm({
             disabled={!rgpd || submitting}
             className="flex-1 inline-flex items-center justify-center gap-2 rounded-[4px] bg-yellow-400 px-6 py-3 text-sm font-black uppercase text-slate-950 transition-all hover:bg-yellow-300 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {submitting ? "Envoi..." : submitLabel}
+            {submitting ? copy.sending : submitLabel}
             <CheckCircle className="h-4 w-4" />
           </button>
         )}
