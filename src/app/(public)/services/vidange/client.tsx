@@ -34,7 +34,13 @@ export function VidangeClient() {
         { name: "Services", url: "https://www.recacor.fr/mecanique" },
         { name: "Vidange", url: "https://www.recacor.fr/services/vidange" },
       ]} />
-      <ServiceJsonLd name="Vidange voiture Montpellier" description="Vidange complète à partir de 79€, sans RDV" price="79" />
+      <ServiceJsonLd
+        name="Vidange voiture Montpellier"
+        serviceType="Vidange voiture au Cres"
+        description="Vidange complete a partir de 79 EUR au Cres, avec huile et filtre inclus selon le vehicule."
+        price="79"
+        url="https://www.recacor.fr/services/vidange"
+      />
       <FaqJsonLd items={faqs} id="vidange" />
 
       <section className="relative pt-32 pb-20 overflow-hidden">

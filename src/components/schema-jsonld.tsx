@@ -29,23 +29,48 @@ export function ServiceJsonLd({
   name,
   description,
   price,
+  url,
+  serviceType,
 }: {
   name: string;
   description: string;
   price?: string;
+  url?: string;
+  serviceType?: string;
 }) {
   const data = {
     "@context": "https://schema.org",
     "@type": "Service",
     name,
+    serviceType: serviceType || name,
     description,
-    provider: { "@type": "AutoRepair", name: "Recacor" },
-    areaServed: "Montpellier, Hérault",
+    url,
+    provider: {
+      "@type": "AutoRepair",
+      name: "Recacor Le Cres",
+      url: "https://www.recacor.fr",
+      telephone: "+33499533390",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "1240 Route de Nimes",
+        addressLocality: "Le Cres",
+        postalCode: "34920",
+        addressRegion: "Herault",
+        addressCountry: "FR",
+      },
+    },
+    areaServed: [
+      { "@type": "City", name: "Le Cres" },
+      { "@type": "City", name: "Montpellier" },
+      { "@type": "AdministrativeArea", name: "Herault" },
+    ],
     ...(price && {
       offers: {
         "@type": "Offer",
         price,
         priceCurrency: "EUR",
+        availability: "https://schema.org/InStock",
+        url,
       },
     }),
   };

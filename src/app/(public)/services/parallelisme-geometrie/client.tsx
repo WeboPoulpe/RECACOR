@@ -26,7 +26,13 @@ export function ParallelismeClient() {
         { name: "Accueil", url: "https://www.recacor.fr" },
         { name: "Parallélisme & Géométrie", url: "https://www.recacor.fr/services/parallelisme-geometrie" },
       ]} />
-      <ServiceJsonLd name="Parallélisme Géométrie Montpellier" description="Parallélisme et géométrie voiture sans RDV" price="65" />
+      <ServiceJsonLd
+        name="Parallélisme géométrie Montpellier"
+        serviceType="Parallélisme voiture au Cres"
+        description="Controle de parallellisme et geometrie voiture au Cres pres de Montpellier, avec reglage a partir de 65 EUR selon le vehicule."
+        price="65"
+        url="https://www.recacor.fr/services/parallelisme-geometrie"
+      />
       <FaqJsonLd items={faqs} id="parallelisme" />
 
       <section className="relative pt-32 pb-20 overflow-hidden">

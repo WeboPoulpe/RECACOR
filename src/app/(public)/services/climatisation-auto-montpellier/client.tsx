@@ -79,8 +79,10 @@ export function ClimatisationClient({ heroImage }: { heroImage?: string }) {
       ]} />
       <ServiceJsonLd
         name="Recharge clim voiture Montpellier"
-        description="Recharge clim voiture dès 59€, contrôle du fonctionnement avant recharge, avec ou sans rendez-vous au Crès près de Montpellier."
+        serviceType="Recharge clim voiture au Cres"
+        description="Recharge clim voiture des 59 EUR au Cres pres de Montpellier, avec controle du fonctionnement avant recharge."
         price="59"
+        url="https://www.recacor.fr/services/climatisation-auto-montpellier"
       />
       <FaqJsonLd items={faqs} id="climatisation-auto" />
 

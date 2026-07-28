@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Phone, MapPin, Clock, CheckCircle, Star, Car, Wrench, Timer } from "lucide-react";
@@ -156,6 +157,44 @@ function ContenuBlock({ contenu, ville, imageUrl }: { contenu?: ContenuItem[]; v
   );
 }
 
+function ServicesBlock({ ville }: { ville: Ville }) {
+  const localCityPage = isLocalCityPage(ville);
+
+  return (
+    <section className="py-16 bg-muted/60">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="rounded-[4px] border border-border bg-white p-8 sm:p-10">
+          <h2 className="text-3xl font-black tracking-tight">
+            Services atelier <span className="text-gradient-purple">souvent demandés</span>
+          </h2>
+          <p className="mt-4 text-muted-foreground leading-relaxed">
+            {localCityPage
+              ? "Au garage du Crès, les demandes tournent souvent autour de la vidange, du parallélisme, de la clim auto et de l'entretien courant. Ces pages donnent le détail avant de venir."
+              : `Depuis ${ville.nom}, certains clients viennent aussi pour une vidange, un parallélisme ou une recharge clim au Crès. Ces pages donnent le détail avant de se déplacer.`}
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3 text-sm font-bold">
+            <Link href="/services/vidange" className="text-purple-bright hover:underline">
+              Vidange voiture
+            </Link>
+            <Link href="/services/parallelisme-geometrie" className="text-purple-bright hover:underline">
+              Parallélisme et géométrie
+            </Link>
+            <Link href="/services/climatisation-auto-montpellier" className="text-purple-bright hover:underline">
+              Recharge clim auto
+            </Link>
+            <Link href="/mecanique" className="text-purple-bright hover:underline">
+              Atelier mecanique
+            </Link>
+            <Link href="/services/prise-en-charge-controle-technique" className="text-purple-bright hover:underline">
+              Controle technique
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ── Bloc FAQ ── */
 function FaqBlock({ faqs, ville }: { faqs: { q: string; a: string }[]; ville: string }) {
   return (
@@ -274,6 +313,7 @@ function Variant1({ ville, seo, heroImage }: { ville: Ville; seo: ReturnType<typ
       </div>
 
       <ContenuBlock contenu={seo?.contenu} ville={ville.nom} imageUrl={ville.image_url} />
+      <ServicesBlock ville={ville} />
 
       {/* Marques */}
       <section className="relative py-16 bg-muted overflow-hidden">

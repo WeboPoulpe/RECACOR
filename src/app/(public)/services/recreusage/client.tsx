@@ -54,7 +54,12 @@ export function RecreusageClient() {
         { name: "Accueil", url: "https://www.recacor.fr" },
         { name: "Recreusage", url: "https://www.recacor.fr/services/recreusage" },
       ]} />
-      <ServiceJsonLd name="Recreusage pneus poids lourd" description="Recreusage haute qualité pour pneus PL en Hérault" />
+      <ServiceJsonLd
+        name="Recreusage pneus poids lourd"
+        serviceType="Recreusage poids lourd depuis Le Cres"
+        description="Recreusage pneus poids lourd pour transporteurs et flottes, avec controle de carcasse et devis B2B depuis Le Cres pres de Montpellier."
+        url="https://www.recacor.fr/services/recreusage"
+      />
       <FaqJsonLd items={faqs} id="recreusage" />
 
       <section className="relative pt-32 pb-20 overflow-hidden">

@@ -145,6 +145,38 @@ export function NosCentresClient({ heroImage }: { heroImage?: string }) {
         </div>
       </section>
 
+      <section className="py-16 bg-background">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-[4px] border border-border bg-white p-8 sm:p-10">
+            <h2 className="text-3xl font-black tracking-tight">
+              Services atelier <span className="text-gradient-purple">les plus demandés au Crès</span>
+            </h2>
+            <p className="mt-4 text-muted-foreground leading-relaxed">
+              Le centre du Crès ne sert pas seulement au montage pneus. Les demandes reviennent
+              surtout autour de la vidange, du parallélisme, de la clim auto et du recreusage
+              poids lourd. Les pages ci-dessous donnent le detail avant de venir ou d&apos;appeler.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3 text-sm font-bold">
+              <Link href="/services/vidange" className="text-purple-bright hover:underline">
+                Vidange voiture
+              </Link>
+              <Link href="/services/parallelisme-geometrie" className="text-purple-bright hover:underline">
+                Parallélisme et géométrie
+              </Link>
+              <Link href="/services/climatisation-auto-montpellier" className="text-purple-bright hover:underline">
+                Recharge clim auto
+              </Link>
+              <Link href="/services/recreusage" className="text-purple-bright hover:underline">
+                Recreusage poids lourd
+              </Link>
+              <Link href="/mecanique" className="text-purple-bright hover:underline">
+                Atelier mecanique
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Centres détaillés */}
       <section className="relative py-20 bg-muted overflow-hidden">
         <BgParticles />
