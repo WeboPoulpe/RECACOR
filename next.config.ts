@@ -15,6 +15,22 @@ const nextConfig: NextConfig = {
         destination: "/pneus-utilitaires-pl",
         permanent: true,
       },
+      // Anciens slugs blog PL encore suivis historiquement
+      {
+        source: "/blog/pneus-pl-nimes",
+        destination: "/blog/pneus-nimes",
+        permanent: true,
+      },
+      {
+        source: "/blog/pneus-pl-sete",
+        destination: "/blog/pneus-sete",
+        permanent: true,
+      },
+      {
+        source: "/blog/pneus-pl-lunel",
+        destination: "/blog/pneus-lunel",
+        permanent: true,
+      },
     ];
   },
   images: {
