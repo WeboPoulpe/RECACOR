@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AvisSection } from "@/components/avis-section";
+import { AugustVlNotice } from "@/components/august-vl-notice";
 import { DevisCtaLink } from "@/components/devis-cta-link";
 import { DevisVlForm } from "@/components/forms/devis-vl";
 import { HomeBlogPreviewClient } from "@/components/home-blog-preview-client";
@@ -900,6 +901,11 @@ export default function HomePage() {
       <LocalBusinessJsonLd />
       <FaqJsonLd items={ALL_FAQ_ITEMS} id="home" />
       <HeroSection />
+      <section className="bg-background py-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AugustVlNotice />
+        </div>
+      </section>
       <DevisVlSection />
       <ServicesSection />
       <TarifsSection />

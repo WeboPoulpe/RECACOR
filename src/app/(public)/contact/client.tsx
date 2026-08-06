@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { ArrowRight, Phone, Mail, MapPin, Clock } from "lucide-react";
+import { AugustVlNotice } from "@/components/august-vl-notice";
 import { PhoneLink } from "@/components/phone-link";
 import { ContactSimpleForm } from "@/components/forms/contact-simple";
 import { BgParticles } from "@/components/bg-particles";
@@ -45,6 +46,12 @@ export function ContactClient({ heroImage }: { heroImage?: string }) {
           </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-muted to-transparent" />
+      </section>
+
+      <section className="bg-background py-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AugustVlNotice />
+        </div>
       </section>
 
       {/* Coordonnées */}
