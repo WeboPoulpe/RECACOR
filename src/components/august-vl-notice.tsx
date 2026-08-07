@@ -26,7 +26,7 @@ export function AugustVlNotice({
             </span>
             <span>
               <strong>Pause fraîcheur d&apos;août :</strong> l&apos;atelier VL ferme de{" "}
-              <strong>12h à 14h</strong> et le <strong>samedi</strong> pendant le mois
+              <strong>12h à 14h</strong> et le <strong>samedi</strong>{" "}pendant le mois
               d&apos;août. Pour le poids lourd, appeler le garage avant déplacement.
             </span>
           </p>
