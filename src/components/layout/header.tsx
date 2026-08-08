@@ -23,12 +23,14 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const logoUrl = useAssetUrl("site_logo", "/logo-recacor.webp");
+  const scrollThreshold = 132;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > scrollThreshold);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [scrollThreshold]);
 
   return (
     <>

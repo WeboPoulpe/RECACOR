@@ -18,7 +18,9 @@ export default function PublicLayout({
       <ScrollProgress />
       <Header />
       <div className="pt-16 lg:pt-24">
-        <AugustVlNotice compact />
+        <div className="recacor-shell pt-2 lg:pt-3">
+          <AugustVlNotice compact className="rounded-[4px]" />
+        </div>
       </div>
       <main className="flex-1">{children}</main>
       <Footer />

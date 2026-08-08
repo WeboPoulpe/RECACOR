@@ -15,24 +15,24 @@ export function AugustVlNotice({
     return (
       <div
         className={cn(
-          "border-y border-amber-200 bg-gradient-to-r from-amber-50 via-white to-cyan-50 text-slate-900",
+          "border border-amber-200/80 bg-[linear-gradient(105deg,rgba(255,248,230,0.96)_0%,rgba(255,255,255,0.98)_42%,rgba(239,249,255,0.98)_100%)] text-slate-900 shadow-[0_20px_48px_rgba(7,27,51,0.08)] backdrop-blur-sm",
           className,
         )}
       >
-        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-3 text-sm sm:px-6 lg:px-8 lg:flex-row lg:items-center lg:justify-between">
-          <p className="flex items-start gap-2 leading-6">
-            <span className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-700">
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 text-sm sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+          <p className="flex items-start gap-3 leading-6">
+            <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-700 shadow-[inset_0_0_0_1px_rgba(251,191,36,0.25)]">
               <SunMedium className="h-4 w-4" />
             </span>
-            <span>
-              <strong>Pause fraîcheur d&apos;août :</strong> l&apos;atelier VL ferme de{" "}
-              <strong>12h à 14h</strong> et le <strong>samedi</strong>{" "}pendant le mois
-              d&apos;août. Pour le poids lourd, appeler le garage avant déplacement.
+            <span className="max-w-4xl">
+              <span className="font-black text-[var(--recacor-night)]">Pause fraîcheur d&apos;août :</span>{" "}
+              l&apos;atelier VL ferme de <strong>12h à 14h</strong> et le <strong>samedi</strong>{" "}
+              pendant le mois d&apos;août. Pour le poids lourd, appeler le garage avant déplacement.
             </span>
           </p>
           <Link
             href="/pause-fraicheur-aout"
-            className="inline-flex shrink-0 items-center gap-2 font-bold text-blue-800 underline underline-offset-4 hover:text-blue-900"
+            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-[4px] border border-blue-200 bg-white/80 px-4 py-2 font-black text-blue-800 transition hover:border-blue-300 hover:bg-white hover:text-blue-900"
           >
             Voir le détail
             <Snowflake className="h-4 w-4" />
