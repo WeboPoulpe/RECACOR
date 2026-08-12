@@ -1,6 +1,6 @@
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { AugustVlNotice } from "@/components/august-vl-notice";
+import { AugustVlNoticePopover } from "@/components/august-vl-notice";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { StickyCallButton } from "@/components/sticky-call-button";
 import { CookieBanner } from "@/components/cookie-banner";
@@ -17,14 +17,11 @@ export default function PublicLayout({
       <UtmCapture />
       <ScrollProgress />
       <Header />
-      <div className="pt-16 lg:pt-24">
-        <div className="recacor-shell pt-2 lg:pt-3">
-          <AugustVlNotice compact className="rounded-[4px]" />
-        </div>
-      </div>
+      <div className="pt-16 lg:pt-24" />
       <main className="flex-1">{children}</main>
       <Footer />
       <StickyCallButton />
+      <AugustVlNoticePopover />
       <CookieBanner />
     </AssetsProvider>
   );

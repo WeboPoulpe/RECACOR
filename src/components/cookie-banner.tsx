@@ -52,8 +52,15 @@ export function CookieBanner() {
     impressionTrackedRef.current = true;
   }, [variant, visible]);
 
-  const accept = () => { grantConsent(variant); setVisible(false); };
-  const deny = () => { denyConsent(variant); setVisible(false); };
+  const closeBanner = () => {
+    setVisible(false);
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("recacor:cookie:closed"));
+    }
+  };
+
+  const accept = () => { grantConsent(variant); closeBanner(); };
+  const deny = () => { denyConsent(variant); closeBanner(); };
   const isCentered = variant === "center";
 
   return (
