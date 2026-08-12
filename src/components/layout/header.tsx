@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Menu, X, Phone, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+import { AugustVlNoticeHeaderLink } from "@/components/august-vl-notice";
 import { PhoneLink } from "@/components/phone-link";
 import { PHONE_DISPLAY } from "@/lib/tracking";
 import { useAssetUrl } from "@/components/dynamic-media";
@@ -94,6 +95,12 @@ export function Header() {
                   {item.name}
                 </Link>
               ))}
+              <AugustVlNoticeHeaderLink
+                className={cn(
+                  "ml-1",
+                  scrolled ? "" : "border-white/30 bg-white/10 text-white hover:border-white/50 hover:bg-white/15 hover:text-white",
+                )}
+              />
               <PhoneLink
                 location="header"
                 className="inline-flex items-center gap-2 rounded-[4px] bg-yellow-400 px-5 py-2.5 text-sm font-black uppercase text-slate-950 transition hover:bg-yellow-300 ml-2"
@@ -156,6 +163,14 @@ export function Header() {
                   </Link>
                 </motion.div>
               ))}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: navigation.length * 0.08 }}
+                className="mt-3"
+              >
+                <AugustVlNoticeHeaderLink className="border-white/20 bg-white/10 text-white hover:border-white/35 hover:bg-white/15 hover:text-white" />
+              </motion.div>
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: navigation.length * 0.08 }} className="mt-8">
                 <PhoneLink
                   location="header"
