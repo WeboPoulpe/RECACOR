@@ -4,6 +4,7 @@ import { getSiteConfig } from "@/lib/site-config";
 import { subscribeContact } from "@/lib/mailchimp";
 import { leadNotificationEmail, leadConfirmationEmail } from "@/lib/email-templates";
 import { sendEmail } from "@/lib/mailer";
+import { sendTikTokLeadEvent } from "@/lib/tiktok-events";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -25,8 +26,11 @@ interface LeadPayload {
   utm_term?: string;
   gclid?: string;
   fbclid?: string;
+  ttclid?: string;
   page_source?: string;
   referrer?: string;
+  ttp?: string;
+  consent_status?: "granted" | "denied" | null;
   submission_id?: string;
   [k: string]: unknown;
 }
@@ -61,7 +65,7 @@ export async function POST(req: Request) {
           form_id, service_type, nom, prenom, entreprise,
           telephone, email, cp, message, payload,
           utm_source, utm_medium, utm_campaign, utm_content, utm_term,
-          gclid, fbclid, page_source, referrer
+          gclid, fbclid, ttclid, page_source, referrer
         ) VALUES (
           ${data.form_id}, ${data.service_type},
           ${data.nom || null}, ${data.prenom || null}, ${data.entreprise || null},
@@ -69,7 +73,7 @@ export async function POST(req: Request) {
           ${JSON.stringify(data)}::jsonb,
           ${data.utm_source || null}, ${data.utm_medium || null},
           ${data.utm_campaign || null}, ${data.utm_content || null}, ${data.utm_term || null},
-          ${data.gclid || null}, ${data.fbclid || null},
+          ${data.gclid || null}, ${data.fbclid || null}, ${data.ttclid || null},
           ${data.page_source || null}, ${data.referrer || null}
         )
         RETURNING id;
@@ -136,6 +140,13 @@ export async function POST(req: Request) {
         { error: "Le lead n'a été accepté par aucun système." },
         { status: 503 },
       );
+    }
+
+    try {
+      await sendTikTokLeadEvent(data, req, leadId);
+    } catch (err) {
+      // TikTok measurement must never turn an accepted lead into an error.
+      console.error("[tiktok events api]", err);
     }
 
     return NextResponse.json({

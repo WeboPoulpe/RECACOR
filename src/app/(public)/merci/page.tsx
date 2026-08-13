@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { CheckCircle, Phone, Calendar, ArrowRight } from "lucide-react";
-import { PHONE_DISPLAY, PHONE_MOBILE } from "@/lib/tracking";
+import { PHONE_DISPLAY, PHONE_MOBILE, trackTikTokStandardEvent } from "@/lib/tracking";
 import { PhoneLink } from "@/components/phone-link";
 import { BgParticles } from "@/components/bg-particles";
 
@@ -130,6 +130,7 @@ export default function MerciPage() {
                 href={CALENDAR_URL}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackTikTokStandardEvent("Schedule", "contact")}
                 className="mt-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-gradient-to-r from-purple-bright to-purple-mid text-white font-bold text-sm hover:shadow-lg hover:shadow-purple-bright/25 transition-all"
               >
                 <Calendar className="w-4 h-4" />

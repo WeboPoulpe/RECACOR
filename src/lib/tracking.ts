@@ -10,6 +10,7 @@ const UTM_KEYS = [
   "utm_term",
   "gclid",
   "fbclid",
+  "ttclid",
 ] as const;
 
 declare global {
@@ -58,6 +59,7 @@ export function getUtmData() {
       utm_term: "",
       gclid: "",
       fbclid: "",
+      ttclid: "",
       referrer: "",
       page_source: "",
     };
@@ -70,9 +72,16 @@ export function getUtmData() {
     utm_term: sessionStorage.getItem("utm_term") || "",
     gclid: sessionStorage.getItem("gclid") || "",
     fbclid: sessionStorage.getItem("fbclid") || "",
+    ttclid: sessionStorage.getItem("ttclid") || "",
     referrer: sessionStorage.getItem("referrer") || "",
     page_source: window.location.pathname,
   };
+}
+
+export function getCookieValue(name: string): string {
+  if (typeof document === "undefined") return "";
+  const match = document.cookie.match(new RegExp(`(?:^|;\\s*)${name}=([^;]+)`));
+  return match?.[1] ? decodeURIComponent(match[1]) : "";
 }
 
 export type ServiceType = "vl" | "pl" | "mecanique" | "contact";
@@ -171,13 +180,46 @@ export async function pushFormSubmit(
 
 export function pushPhoneClick(location: string, serviceType?: ServiceType) {
   if (typeof window === "undefined") return;
+  const resolvedServiceType = serviceType || inferServiceType();
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
     event: "phone_click",
     phone_location: location,
-    service_type: serviceType || inferServiceType(),
+    service_type: resolvedServiceType,
     page_url: window.location.pathname,
   });
+
+  void trackTikTokStandardEvent("Contact", resolvedServiceType, location);
+}
+
+export function trackTikTokStandardEvent(
+  event: "Contact" | "Schedule",
+  serviceType: ServiceType,
+  phoneLocation?: string,
+) {
+  if (typeof window === "undefined" || hasConsent() !== "granted") return;
+
+  const utm = getUtmData();
+  const eventId =
+    typeof window.crypto?.randomUUID === "function"
+      ? window.crypto.randomUUID()
+      : `${event.toLowerCase()}_${Date.now()}`;
+
+  fetch("/api/tiktok/events", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    keepalive: true,
+    body: JSON.stringify({
+      event,
+      service_type: serviceType,
+      phone_location: phoneLocation,
+      page_source: utm.page_source,
+      ttclid: utm.ttclid,
+      ttp: getCookieValue("ttp") || getCookieValue("_ttp"),
+      consent_status: "granted",
+      event_id: eventId,
+    }),
+  }).catch(() => {});
 }
 
 export function pushWhatsAppClick(serviceType?: ServiceType) {
