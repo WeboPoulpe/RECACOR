@@ -102,6 +102,7 @@ async function runSchemaMigrations(): Promise<void> {
       utm_term      TEXT,
       gclid         TEXT,
       fbclid        TEXT,
+      ttclid        TEXT,
       page_source   TEXT,
       referrer      TEXT,
       status        TEXT NOT NULL DEFAULT 'new',
@@ -109,6 +110,7 @@ async function runSchemaMigrations(): Promise<void> {
     );
   `;
   await sql`ALTER TABLE leads ADD COLUMN IF NOT EXISTS utm_term TEXT;`;
+  await sql`ALTER TABLE leads ADD COLUMN IF NOT EXISTS ttclid TEXT;`;
   await sql`CREATE INDEX IF NOT EXISTS idx_leads_created ON leads (created_at DESC);`;
   await sql`CREATE INDEX IF NOT EXISTS idx_leads_status ON leads (status);`;
 

@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight, CheckCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { pushFormStart, pushFormSubmit, getUtmData } from "@/lib/tracking";
+import { pushFormStart, pushFormSubmit, getCookieValue, getUtmData, hasConsent } from "@/lib/tracking";
 
 type ServiceType = "vl" | "pl" | "mecanique";
 
@@ -102,6 +102,8 @@ export function MultiStepForm({
     const payload = {
       ...data,
       ...getUtmData(),
+      consent_status: hasConsent(),
+      ttp: getCookieValue("ttp"),
       form_id: id,
       service_type: serviceType,
       submission_id: submissionId,
@@ -149,6 +151,7 @@ export function MultiStepForm({
       <input type="hidden" name="utm_term" />
       <input type="hidden" name="gclid" />
       <input type="hidden" name="fbclid" />
+      <input type="hidden" name="ttclid" />
       <input type="hidden" name="page_source" />
       <input type="hidden" name="referrer" />
       <input type="hidden" name="service_type" value={serviceType} />
