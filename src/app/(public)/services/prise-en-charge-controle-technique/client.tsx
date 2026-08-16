@@ -14,6 +14,8 @@ import {
   CarFront,
   CircleAlert,
   ClipboardList,
+  FileText,
+  Gauge,
   ShieldCheck,
   Wrench,
 } from "lucide-react";
@@ -39,6 +41,35 @@ const correctiveItems = [
   "Petite mécanique selon diagnostic atelier",
 ];
 
+const officialMarkers = [
+  {
+    title: "Quand le faire",
+    text: "Le premier contrôle doit être fait dans les 6 mois avant le 4e anniversaire de la première mise en circulation.",
+    icon: Gauge,
+  },
+  {
+    title: "Document à prévoir",
+    text: "La carte grise originale est demandée pour le contrôle. En contre-visite, il faut aussi le procès-verbal défavorable.",
+    icon: FileText,
+  },
+  {
+    title: "Ce qui est regardé",
+    text: "Freinage, direction, pneus, suspension, éclairage, visibilité, pollution, châssis et équipements de sécurité. Le contrôle officiel porte sur 133 points pour les VP et utilitaires légers.",
+    icon: ClipboardList,
+  },
+  {
+    title: "Résultat et délai",
+    text: "Le résultat peut être favorable, défavorable majeur ou défavorable critique. En cas de contre-visite, le délai maximum reste de 2 mois.",
+    icon: ShieldCheck,
+  },
+];
+
+const officialNotes = [
+  "Sur un utilitaire léger, un contrôle complémentaire pollution s'ajoute après le contrôle périodique.",
+  "Depuis le 1er janvier 2026, les campagnes de rappel graves sont aussi vérifiées au contrôle technique, notamment les cas airbag Takata.",
+  "Le pré-contrôle Recacor aide à repérer les points sensibles avant passage, mais il ne remplace pas le contrôle réglementaire fait dans un centre agréé.",
+];
+
 const faqs = [
   {
     q: "Que comprend le pré-contrôle Recacor ?",
@@ -59,6 +90,18 @@ const faqs = [
   {
     q: "Faut-il prendre rendez-vous ?",
     a: "Il est préférable de prendre contact pour organiser la prise en charge, surtout si la date du contrôle technique est proche. Le garage peut ensuite confirmer le bon créneau selon la charge atelier.",
+  },
+  {
+    q: "Que faut-il apporter pour une contre-visite ?",
+    a: "Le plus simple est de venir avec la carte grise originale et le procès-verbal défavorable. Sans le procès-verbal, le centre peut demander un nouveau contrôle périodique si les données ne sont pas consultables.",
+  },
+  {
+    q: "Un utilitaire léger a-t-il un contrôle pollution en plus ?",
+    a: "Oui. Sur une camionnette ou un utilitaire léger de catégorie N1 concerné, un contrôle complémentaire pollution s'ajoute entre deux contrôles périodiques. C'est un point à anticiper si le véhicule roule toute l'année.",
+  },
+  {
+    q: "Le contrôle technique vérifie-t-il aussi les rappels Takata ?",
+    a: "Oui, depuis le 1er janvier 2026 les campagnes de rappel graves sont aussi regardées au contrôle technique. Si le véhicule est classé en stop drive et qu'il n'est pas réparé, cela peut faire ressortir une défaillance critique.",
   },
 ];
 
@@ -274,6 +317,48 @@ export function ControleTechniqueClient() {
             Le pré-contrôle est inclus dans le pack. Si une réparation est nécessaire avant le
             passage au contrôle technique, un devis est transmis pour validation avant toute
             intervention.
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-background py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-5xl">
+            <div className="text-center">
+              <h2 className="text-4xl font-black tracking-tight">
+                Repères utiles <span className="text-gradient-purple">avant le contrôle</span>
+              </h2>
+              <p className="mx-auto mt-4 max-w-3xl text-lg text-muted-foreground">
+                Ce sont les points officiels qui reviennent le plus souvent avant un passage au
+                contrôle technique, surtout quand la date approche ou qu&apos;une contre-visite est en jeu.
+              </p>
+            </div>
+
+            <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+              {officialMarkers.map((item) => (
+                <div key={item.title} className="rounded-[4px] border border-border bg-white p-7 shadow-sm">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[4px] bg-gradient-to-br from-purple-bright to-purple-mid">
+                    <item.icon className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-black">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 rounded-[4px] border border-border bg-muted/35 p-6">
+              <p className="text-xs font-bold uppercase tracking-wider text-purple-bright">
+                À garder en tête
+              </p>
+              <ul className="mt-4 space-y-3 text-sm leading-relaxed text-muted-foreground">
+                {officialNotes.map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <BadgeCheck className="mt-0.5 h-4 w-4 shrink-0 text-purple-bright" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>

@@ -20,6 +20,7 @@ const URGENCES = ["Dès que possible", "Sous 48h", "Pas urgent"];
 type PlData = {
   service: string;
   vehicule: string;
+  dimension: string;
   quantite: string;
   urgence: string;
   nom: string;
@@ -34,6 +35,7 @@ type PlData = {
 const initial: PlData = {
   service: "",
   vehicule: "",
+  dimension: "",
   quantite: "",
   urgence: "",
   nom: "",
@@ -95,6 +97,14 @@ export function DevisPlForm() {
               <FormField label="Type de véhicule / engin">
                 <Input placeholder="ex. Semi-remorque, tracteur John Deere, chariot élévateur" value={data.vehicule} onChange={(e) => update("vehicule", e.target.value)} className="h-11" />
               </FormField>
+              <FormField label="Dimension / taille de pneu">
+                <Input
+                  placeholder="ex. 315/80 R22.5, 650/65 R38, 18.00-25"
+                  value={data.dimension}
+                  onChange={(e) => update("dimension", e.target.value)}
+                  className="h-11"
+                />
+              </FormField>
               <div className="grid grid-cols-2 gap-3">
                 <FormField label="Quantité estimée">
                   <select value={data.quantite} onChange={(e) => update("quantite", e.target.value)} className={select}>
@@ -148,6 +158,7 @@ export function DevisPlForm() {
       summary={
         <dl className="space-y-1.5 text-sm">
           {data.service && <div className="flex justify-between"><dt className="text-muted-foreground">Service</dt><dd className="font-semibold">{SERVICES.find(s => s.value === data.service)?.label}</dd></div>}
+          {data.dimension && <div className="flex justify-between gap-3"><dt className="text-muted-foreground">Dimension</dt><dd className="text-right font-semibold">{data.dimension}</dd></div>}
           {data.quantite && <div className="flex justify-between"><dt className="text-muted-foreground">Quantité</dt><dd className="font-semibold">{data.quantite}</dd></div>}
           {data.urgence && <div className="flex justify-between"><dt className="text-muted-foreground">Urgence</dt><dd className="font-semibold">{data.urgence}</dd></div>}
           {data.entreprise && <div className="flex justify-between"><dt className="text-muted-foreground">Entreprise</dt><dd className="font-semibold">{data.entreprise}</dd></div>}
