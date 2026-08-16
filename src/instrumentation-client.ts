@@ -13,6 +13,8 @@ if (dsn) {
       const errorMessage = exception?.value ?? event.message ?? "";
       const embeddedBrowserBridgeErrors = [
         "Error invoking postMessage: Java object is gone",
+        "Error invoking postMessage: Java exception was raised during method invocation",
+        "Error invoking postMessage: Java bridge method invocation error",
         "Error invoking enableDidUserTypeOnKeyboardLogging: Java object is gone",
         "undefined is not an object (evaluating 'window.webkit.messageHandlers')",
       ];
