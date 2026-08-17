@@ -226,6 +226,82 @@ body::before {
   letter-spacing: 0 !important;
 }
 
+@keyframes recacor-header-in {
+  from { opacity: 0; transform: translateY(-24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes recacor-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes recacor-cookie-bottom-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes recacor-cookie-centered-in {
+  from { opacity: 0; transform: translate(-50%, -48%) scale(0.98); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes recacor-notice-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes recacor-sticky-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes recacor-reveal {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes recacor-marquee-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes recacor-marquee-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+.recacor-header-in { animation: recacor-header-in 600ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.recacor-fade-in { animation: recacor-fade-in 240ms ease-out both; }
+.recacor-cookie-bottom { animation: recacor-cookie-bottom-in 350ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.recacor-cookie-centered { animation: recacor-cookie-centered-in 350ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.recacor-notice-in { animation: recacor-notice-in 240ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.recacor-sticky-in { animation: recacor-sticky-in 300ms ease-out both; }
+.recacor-reveal { animation: recacor-reveal 600ms ease-out both; }
+.recacor-marquee-track[data-direction="left"] { animation: recacor-marquee-left linear infinite; }
+.recacor-marquee-track[data-direction="right"] { animation: recacor-marquee-right linear infinite; }
+
+.recacor-mobile-menu { animation: recacor-fade-in 220ms ease-out both; }
+.recacor-mobile-menu-item { animation: recacor-reveal 360ms ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .recacor-header-in,
+  .recacor-fade-in,
+  .recacor-cookie-bottom,
+  .recacor-cookie-centered,
+  .recacor-notice-in,
+  .recacor-sticky-in,
+  .recacor-reveal,
+  .recacor-mobile-menu,
+  .recacor-mobile-menu-item {
+    animation: none;
+  }
+
+  .recacor-marquee-track {
+    animation-play-state: paused;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

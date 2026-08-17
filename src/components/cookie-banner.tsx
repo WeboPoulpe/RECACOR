@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
   grantConsent,
@@ -64,25 +63,14 @@ export function CookieBanner() {
   const isCentered = variant === "center";
 
   return (
-    <AnimatePresence>
-      {visible && (
+    visible && (
         <>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[109] bg-black/60"
-          />
-          <motion.div
-            initial={isCentered ? { scale: 0.96, opacity: 0 } : { y: 100, opacity: 0 }}
-            animate={isCentered ? { scale: 1, opacity: 1 } : { y: 0, opacity: 1 }}
-            exit={isCentered ? { scale: 0.96, opacity: 0 } : { y: 100, opacity: 0 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          <div className="recacor-fade-in fixed inset-0 z-[109] bg-black/60" />
+          <div
             className={
               isCentered
-                ? "fixed left-1/2 top-1/2 z-[110] w-[min(92vw,760px)] -translate-x-1/2 -translate-y-1/2 border-t-4 border-yellow-400 bg-[var(--recacor-night)] shadow-[0_20px_60px_rgba(0,0,0,0.45)]"
-                : "fixed inset-x-0 bottom-0 z-[110] border-t-4 border-yellow-400 bg-[var(--recacor-night)] shadow-[0_-12px_40px_rgba(0,0,0,0.35)]"
+                ? "recacor-cookie-in recacor-cookie-centered fixed left-1/2 top-1/2 z-[110] w-[min(92vw,760px)] -translate-x-1/2 -translate-y-1/2 border-t-4 border-yellow-400 bg-[var(--recacor-night)] shadow-[0_20px_60px_rgba(0,0,0,0.45)]"
+                : "recacor-cookie-in recacor-cookie-bottom fixed inset-x-0 bottom-0 z-[110] border-t-4 border-yellow-400 bg-[var(--recacor-night)] shadow-[0_-12px_40px_rgba(0,0,0,0.35)]"
             }
           >
           <div className={isCentered ? "flex flex-col gap-5 p-6 sm:p-8" : "recacor-shell flex flex-col gap-5 py-6 lg:flex-row lg:items-center lg:justify-between"}>
@@ -141,9 +129,8 @@ export function CookieBanner() {
               </button>
             </div>
           </div>
-          </motion.div>
+          </div>
         </>
-      )}
-    </AnimatePresence>
+    )
   );
 }

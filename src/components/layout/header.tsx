@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Menu, X, Phone, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { motion, AnimatePresence } from "framer-motion";
 import { AugustVlNoticeHeaderLink } from "@/components/august-vl-notice";
 import { PhoneLink } from "@/components/phone-link";
 import { PHONE_DISPLAY } from "@/lib/tracking";
@@ -53,12 +52,9 @@ export function Header() {
         </div>
       </div>
 
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      <header
         className={cn(
-          "fixed left-0 right-0 z-50 transition-all duration-500",
+          "recacor-header-in fixed left-0 right-0 z-50 transition-all duration-500",
           scrolled
             ? "top-0 bg-white shadow-[0_1px_30px_rgba(7,27,51,0.08)] border-b border-slate-200"
             : "top-8 bg-transparent"
@@ -110,8 +106,7 @@ export function Header() {
               </PhoneLink>
             </nav>
 
-            <motion.button
-              whileTap={{ scale: 0.9 }}
+            <button
               onClick={() => setOpen(!open)}
               className={cn(
                 "lg:hidden relative z-50 rounded-[4px] p-2 transition-colors",
@@ -119,40 +114,21 @@ export function Header() {
               )}
               aria-label="Menu"
             >
-              <AnimatePresence mode="wait">
-                {open ? (
-                  <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
-                    <X className="h-6 w-6" />
-                  </motion.div>
-                ) : (
-                  <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
-                    <Menu className="h-6 w-6" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.button>
+              {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
           </div>
         </div>
-      </motion.header>
+      </header>
 
       {/* Mobile overlay */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-[var(--recacor-night)] overflow-y-auto"
-          >
+      {open && (
+          <div className="recacor-mobile-menu fixed inset-0 z-40 overflow-y-auto bg-[var(--recacor-night)]">
             <nav className="min-h-full flex flex-col items-center justify-center gap-2 py-32">
               {navigation.map((item, i) => (
-                <motion.div
+                <div
                   key={item.name}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ delay: i * 0.08, duration: 0.4 }}
+                  style={{ animationDelay: `${i * 40}ms` }}
+                  className="recacor-mobile-menu-item"
                 >
                   <Link
                     href={item.href}
@@ -161,17 +137,12 @@ export function Header() {
                   >
                     {item.name}
                   </Link>
-                </motion.div>
+                </div>
               ))}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: navigation.length * 0.08 }}
-                className="mt-3"
-              >
+              <div className="recacor-mobile-menu-item mt-3" style={{ animationDelay: `${navigation.length * 40}ms` }}>
                 <AugustVlNoticeHeaderLink className="border-white/20 bg-white/10 text-white hover:border-white/35 hover:bg-white/15 hover:text-white" />
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: navigation.length * 0.08 }} className="mt-8">
+              </div>
+              <div className="recacor-mobile-menu-item mt-8" style={{ animationDelay: `${navigation.length * 40}ms` }}>
                 <PhoneLink
                   location="header"
                   className="inline-flex items-center gap-3 rounded-[4px] bg-yellow-400 px-8 py-4 text-lg font-black uppercase text-slate-950"
@@ -179,11 +150,10 @@ export function Header() {
                 >
                   {PHONE_DISPLAY}
                 </PhoneLink>
-              </motion.div>
+              </div>
             </nav>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
     </>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Phone, ClipboardList } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -38,15 +37,8 @@ export function StickyCallButton() {
   }, []);
 
   return (
-    <AnimatePresence>
-      {visible && (
-        <motion.div
-          className="lg:hidden fixed bottom-4 left-4 right-4 z-[100] flex gap-3"
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 100, opacity: 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-        >
+    visible && (
+        <div className="recacor-sticky-in lg:hidden fixed bottom-4 left-4 right-4 z-[100] flex gap-3">
           <a
             id="sticky-call-btn"
             href={`tel:${PHONE_NUMBER}`}
@@ -63,8 +55,7 @@ export function StickyCallButton() {
             <ClipboardList className="h-5 w-5" />
             {quoteLabel}
           </Link>
-        </motion.div>
-      )}
-    </AnimatePresence>
+        </div>
+    )
   );
 }

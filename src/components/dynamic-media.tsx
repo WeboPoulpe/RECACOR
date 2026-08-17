@@ -10,10 +10,33 @@ const AssetsContext = createContext<AssetsMap>({});
 export function AssetsProvider({ children }: { children: ReactNode }) {
   const [assets, setAssets] = useState<AssetsMap>({});
   useEffect(() => {
-    fetch("/api/public/assets")
-      .then((r) => r.json())
-      .then((j) => setAssets(j.assets || {}))
-      .catch(() => {});
+    let cancelled = false;
+    let timeoutId: number | undefined;
+    let idleId: number | undefined;
+    const load = () => {
+      fetch("/api/public/assets", { cache: "force-cache" })
+        .then((r) => r.json())
+        .then((j) => {
+          if (!cancelled) setAssets(j.assets || {});
+        })
+        .catch(() => {});
+    };
+    const requestIdle = (window as Window & {
+      requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
+    }).requestIdleCallback;
+    if (requestIdle) {
+      idleId = requestIdle(load, { timeout: 2500 });
+    } else {
+      timeoutId = window.setTimeout(load, 1500);
+    }
+    return () => {
+      cancelled = true;
+      if (timeoutId) window.clearTimeout(timeoutId);
+      if (idleId) {
+        const cancelIdle = (window as Window & { cancelIdleCallback?: (id: number) => void }).cancelIdleCallback;
+        cancelIdle?.(idleId);
+      }
+    };
   }, []);
   return <AssetsContext.Provider value={assets}>{children}</AssetsContext.Provider>;
 }

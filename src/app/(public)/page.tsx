@@ -1,19 +1,14 @@
-"use client";
-
 import Link from "next/link";
-import { useState } from "react";
-import { motion } from "framer-motion";
+import Image from "next/image";
 import {
   ArrowRight,
   Award,
   Car,
   CheckCircle,
-  ChevronDown,
   Clock,
   Globe,
   MapPin,
   PackageCheck,
-  Phone,
   ShieldCheck,
   Snowflake,
   Star,
@@ -22,14 +17,14 @@ import {
   Wrench,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { AvisSection } from "@/components/avis-section";
 import { AugustVlNotice } from "@/components/august-vl-notice";
+import { DeferredAvisSection, DeferredDevisVlForm, DeferredHomeBlogPreview } from "@/components/deferred-public-sections";
 import { DevisCtaLink } from "@/components/devis-cta-link";
-import { DevisVlForm } from "@/components/forms/devis-vl";
-import { HomeBlogPreviewClient } from "@/components/home-blog-preview-client";
+import { HomeFaqSection } from "@/components/home-faq-section";
 import { OpenStatus } from "@/components/open-status";
 import { PhoneLink } from "@/components/phone-link";
 import { FaqJsonLd, LocalBusinessJsonLd } from "@/components/schema-jsonld";
+import { HOME_FAQ_CATEGORIES } from "@/data/home-faq";
 
 const HERO_IMAGE = "/refonte/facade-recacor-clean-20260719.webp";
 
@@ -126,92 +121,19 @@ const commitments = [
   { icon: Award, value: "1950", label: "savoir-faire Recacor" },
 ];
 
-const faqCategories = [
-  {
-    label: "Pneus voiture",
-    icon: Car,
-    items: [
-      {
-        q: "Quel est le prix d'un pneu monté à Montpellier ?",
-        a: "Chez Recacor Le Crès, le pneu voiture monté commence à partir de 45€. Le prix exact dépend de la dimension, de la marque et de la disponibilité du stock.",
-      },
-      {
-        q: "Faut-il prendre rendez-vous pour changer ses pneus ?",
-        a: "Vous pouvez passer sans rendez-vous selon l'affluence atelier. Pour une dimension précise ou un jeu complet, il est conseillé d'appeler avant de venir.",
-      },
-      {
-        q: "Quelles marques de pneus sont disponibles ?",
-        a: "Recacor travaille avec Michelin, Bridgestone, Continental, Goodyear, Pirelli, Hankook, Yokohama, BFGoodrich et des marques budget selon les dimensions.",
-      },
-    ],
-  },
-  {
-    label: "Mécanique",
-    icon: Wrench,
-    items: [
-      {
-        q: "Quel est le tarif d'une vidange au Crès ?",
-        a: "La vidange commence à partir de 79€, selon le véhicule, l'huile utilisée et le filtre. Un devis peut être demandé en ligne ou par téléphone.",
-      },
-      {
-        q: "Combien coûte un parallélisme ?",
-        a: "Le réglage du parallélisme commence à partir de 65€. Le contrôle est offert afin de confirmer si un réglage est vraiment nécessaire.",
-      },
-      {
-        q: "Peut-on grouper pneus, vidange et parallélisme ?",
-        a: "Oui. Beaucoup de clients profitent du passage pneus pour contrôler la géométrie, faire la vidange ou vérifier le freinage.",
-      },
-    ],
-  },
-  {
-    label: "Clim voiture",
-    icon: Snowflake,
-    items: [
-      {
-        q: "Où se fait la recharge clim pour une voiture ?",
-        a: "Pour les voitures et véhicules légers, la climatisation se fait à l'atelier Recacor du Crès : contrôle, tirage au vide et recharge avec le gaz adapté.",
-      },
-      {
-        q: "Peut-on faire contrôler une clim qui refroidit moins qu'avant ?",
-        a: "Oui. Si la clim souffle tiède, met du temps à refroidir ou dégage une mauvaise odeur, le garage peut vérifier le besoin avant recharge.",
-      },
-      {
-        q: "Quelle est l'adresse pour la clim voiture ?",
-        a: "Recacor Le Crès se trouve au 1240 Route de Nîmes, 34920 Le Crès, à proximité de Montpellier et des axes RN113/A9.",
-      },
-    ],
-  },
-  {
-    label: "Clim poids lourd",
-    icon: Truck,
-    items: [
-      {
-        q: "Recacor fait-il la climatisation sur camion et poids lourd ?",
-        a: "Oui. Recacor traite les demandes de clim pour poids lourds, utilitaires professionnels, camping-cars, engins TP et véhicules agricoles selon configuration.",
-      },
-      {
-        q: "La clim poids lourd peut-elle se faire en déplacement ?",
-        a: "Oui, selon le véhicule et le planning, l'équipe peut intervenir au Crès ou en déplacement autour de Montpellier et de son agglomération.",
-      },
-      {
-        q: "Quels véhicules professionnels sont concernés ?",
-        a: "La demande peut concerner camion, tracteur routier, utilitaire, camping-car, engin de chantier ou agricole, avec validation selon l'accès au véhicule et le type de gaz.",
-      },
-    ],
-  },
-];
-
-const ALL_FAQ_ITEMS = faqCategories.flatMap((cat) => cat.items);
+const ALL_FAQ_ITEMS = HOME_FAQ_CATEGORIES.flatMap((cat) => cat.items);
 
 function HeroSection() {
   return (
     <section className="relative overflow-hidden bg-[var(--recacor-night)] text-white">
       <div className="absolute inset-0 opacity-40 lg:inset-y-0 lg:right-0 lg:left-auto lg:w-[54%] lg:opacity-100">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={HERO_IMAGE}
           alt="Façade du garage Recacor Le Crès"
-          className="h-full w-full object-cover object-center"
+          fill
+          priority
+          sizes="(max-width: 1023px) 100vw, 54vw"
+          className="object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[var(--recacor-night)] via-[rgba(6,26,49,0.55)] to-[rgba(6,26,49,0.12)] lg:via-[rgba(6,26,49,0.42)] lg:to-transparent" />
       </div>
@@ -316,7 +238,7 @@ function DevisVlSection() {
           </div>
 
           <div className="recacor-card p-5 sm:p-7">
-            <DevisVlForm />
+            <DeferredDevisVlForm />
           </div>
         </div>
       </div>
@@ -343,11 +265,12 @@ function ServicesSection() {
           {serviceCards.map((service) => (
             <Link key={service.title} href={service.href} className="group recacor-card flex min-h-full flex-col overflow-hidden">
               <div className="relative h-48 overflow-hidden bg-slate-900">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={service.image}
                   alt={service.title}
-                  className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                  fill
+                  sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 20vw"
+                  className="object-cover transition duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--recacor-night)]/70 to-transparent" />
@@ -518,26 +441,28 @@ function BrandMarquee({ direction = "left", speed = 32 }: { direction?: "left" |
     <div className="relative overflow-hidden">
       <div className="absolute left-0 top-0 bottom-0 z-10 w-20 bg-gradient-to-r from-white to-transparent" />
       <div className="absolute right-0 top-0 bottom-0 z-10 w-20 bg-gradient-to-l from-white to-transparent" />
-      <motion.div
-        className="flex w-max gap-4"
-        animate={{ x: direction === "left" ? ["0%", "-50%"] : ["-50%", "0%"] }}
-        transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
+      <div
+        className="recacor-marquee-track flex w-max gap-4"
+        data-direction={direction}
+        style={{ animationDuration: `${speed}s` }}
       >
         {items.map((brand, i) => (
           <div
             key={`${brand.name}-${i}`}
             className="group flex h-20 w-40 shrink-0 items-center justify-center border border-border bg-white px-5 transition hover:border-blue-700/40"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={brand.url}
               alt={brand.name}
+              width={160}
+              height={36}
+              sizes="160px"
               className="h-9 w-auto object-contain opacity-60 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0"
               loading="lazy"
             />
           </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }
@@ -592,11 +517,12 @@ function StorySection() {
       <div className="recacor-shell">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div className="relative min-h-[430px] overflow-hidden border border-border bg-slate-900">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/refonte/clim-pl.jpg"
               alt="Atelier Recacor et machine clim"
-              className="h-full w-full object-cover"
+              fill
+              sizes="(max-width: 1023px) 100vw, 45vw"
+              className="object-cover"
               loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[var(--recacor-night)]/74 via-transparent to-transparent" />
@@ -641,7 +567,7 @@ function ZoneInterventionSection() {
       <div className="recacor-shell">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Bloc 1 : Garage Le Crès */}
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-3xl border border-border bg-white overflow-hidden flex flex-col">
+          <div className="recacor-reveal rounded-3xl border border-border bg-white overflow-hidden flex flex-col">
             <div className="aspect-[16/10] bg-muted relative">
               <iframe
                 src="https://maps.google.com/maps?q=Recacor+1240+Route+de+Nimes+34920+Le+Cres&output=embed&z=17"
@@ -681,10 +607,10 @@ function ZoneInterventionSection() {
                 </PhoneLink>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Bloc 2 : Assistance PL */}
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }} className="rounded-3xl bg-gradient-to-br from-purple-deep via-purple-mid to-purple-bright text-white overflow-hidden flex flex-col">
+          <div className="recacor-reveal rounded-3xl bg-gradient-to-br from-purple-deep via-purple-mid to-purple-bright text-white overflow-hidden flex flex-col" style={{ animationDelay: "150ms" }}>
             <div className="aspect-[16/10] relative flex items-center justify-center p-8">
               <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 70% 30%, white 0%, transparent 50%)" }} />
               <div className="relative text-center">
@@ -735,72 +661,6 @@ function ZoneInterventionSection() {
                 </PhoneLink>
               </div>
             </div>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function FAQSection() {
-  const [activeTab, setActiveTab] = useState(0);
-  const [openItems, setOpenItems] = useState<Record<string, boolean>>({ "0-0": true });
-
-  return (
-    <section className="bg-[var(--recacor-paper)] py-20">
-      <div className="recacor-shell">
-        <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr]">
-          <div>
-            <p className="recacor-eyebrow">Questions fréquentes</p>
-            <h2 className="recacor-title mt-4">Les réponses utiles avant d&apos;appeler.</h2>
-            <div className="mt-8 grid gap-2">
-              {faqCategories.map((cat, index) => (
-                <button
-                  key={cat.label}
-                  type="button"
-                  onClick={() => setActiveTab(index)}
-                  className={cn(
-                    "flex items-center justify-between border p-4 text-left transition",
-                    activeTab === index
-                      ? "border-[var(--recacor-night)] bg-[var(--recacor-night)] text-white"
-                      : "border-border bg-white text-[var(--recacor-ink)] hover:border-blue-700"
-                  )}
-                >
-                  <span className="flex items-center gap-3 text-sm font-black uppercase">
-                    <cat.icon className={cn("h-5 w-5", activeTab === index ? "text-yellow-400" : "text-blue-700")} />
-                    {cat.label}
-                  </span>
-                  <ArrowRight className="h-4 w-4" />
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-3">
-            {faqCategories[activeTab].items.map((item, index) => {
-              const key = `${activeTab}-${index}`;
-              const isOpen = !!openItems[key];
-              return (
-                <button
-                  key={item.q}
-                  type="button"
-                  onClick={() => setOpenItems((prev) => ({ ...prev, [key]: !isOpen }))}
-                  className="w-full border border-border bg-white p-5 text-left transition hover:border-blue-700"
-                >
-                  <span className="flex items-start justify-between gap-4">
-                    <span className="font-black leading-snug text-[var(--recacor-ink)]">
-                      {item.q}
-                    </span>
-                    <ChevronDown className={cn("mt-0.5 h-5 w-5 shrink-0 text-blue-700 transition", isOpen && "rotate-180")} />
-                  </span>
-                  {isOpen && (
-                    <span className="mt-4 block text-sm leading-7 text-muted-foreground">
-                      {item.a}
-                    </span>
-                  )}
-                </button>
-              );
-            })}
           </div>
         </div>
       </div>
@@ -911,11 +771,11 @@ export default function HomePage() {
       <TarifsSection />
       <ProsParticuliersSection />
       <MarquesSection />
-      <AvisSection />
+      <DeferredAvisSection />
       <StorySection />
       <ZoneInterventionSection />
-      <FAQSection />
-      <HomeBlogPreviewClient />
+      <HomeFaqSection />
+      <DeferredHomeBlogPreview />
       <VillesSeoSection />
     </>
   );

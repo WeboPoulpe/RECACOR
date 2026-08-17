@@ -1,6 +1,5 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Snowflake, SunMedium } from "lucide-react";
@@ -80,14 +79,9 @@ export function AugustVlNoticePopover() {
   }, []);
 
   return (
-    <AnimatePresence>
-      {open && (
-        <motion.aside
-          initial={{ opacity: 0, y: 18, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 12, scale: 0.98 }}
-          transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-x-4 bottom-24 z-[108] rounded-[4px] border border-amber-200 bg-[linear-gradient(140deg,rgba(255,252,244,0.98)_0%,rgba(255,255,255,0.98)_48%,rgba(239,249,255,0.98)_100%)] p-4 text-slate-900 shadow-[0_24px_70px_rgba(15,23,42,0.18)] sm:right-6 sm:left-auto sm:w-[min(420px,calc(100vw-3rem))] sm:bottom-6"
+    open && (
+        <aside
+          className="recacor-notice-in fixed inset-x-4 bottom-24 z-[108] rounded-[4px] border border-amber-200 bg-[linear-gradient(140deg,rgba(255,252,244,0.98)_0%,rgba(255,255,255,0.98)_48%,rgba(239,249,255,0.98)_100%)] p-4 text-slate-900 shadow-[0_24px_70px_rgba(15,23,42,0.18)] sm:right-6 sm:left-auto sm:w-[min(420px,calc(100vw-3rem))] sm:bottom-6"
         >
           <div className="flex items-start gap-3">
             <span className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-700 shadow-[inset_0_0_0_1px_rgba(251,191,36,0.25)]">
@@ -130,9 +124,8 @@ export function AugustVlNoticePopover() {
               </div>
             </div>
           </div>
-        </motion.aside>
-      )}
-    </AnimatePresence>
+        </aside>
+    )
   );
 }
 
