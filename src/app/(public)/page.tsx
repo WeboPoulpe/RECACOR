@@ -26,7 +26,7 @@ import { PhoneLink } from "@/components/phone-link";
 import { FaqJsonLd, LocalBusinessJsonLd } from "@/components/schema-jsonld";
 import { HOME_FAQ_CATEGORIES } from "@/data/home-faq";
 
-const HERO_IMAGE = "/refonte/facade-recacor-clean-20260719.webp";
+const HERO_IMAGE = "/refonte/facade-recacor-clean-20260719-optimized.webp";
 
 const serviceCards = [
   {
