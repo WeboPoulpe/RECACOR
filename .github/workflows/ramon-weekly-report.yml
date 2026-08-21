@@ -1,8 +1,6 @@
 name: Ramon Weekly Report
 
 on:
-  schedule:
-    - cron: "30 5 * * 1" # Lundi 05:30 UTC
   workflow_dispatch:
 
 permissions:
