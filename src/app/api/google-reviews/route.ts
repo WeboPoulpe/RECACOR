@@ -31,6 +31,24 @@ async function findPlaceId(): Promise<string | null> {
   return json.candidates?.[0]?.place_id ?? null;
 }
 
+async function fetchReviews(placeId: string, sort: "most_relevant" | "newest") {
+  const url = new URL("https://maps.googleapis.com/maps/api/place/details/json");
+  url.searchParams.set("place_id", placeId);
+  url.searchParams.set("fields", "rating,user_ratings_total,reviews");
+  url.searchParams.set("language", "fr");
+  url.searchParams.set("reviews_sort", sort);
+  url.searchParams.set("key", API_KEY!);
+
+  const res = await fetch(url.toString(), { next: { revalidate: 86400 } });
+  const json = await res.json();
+
+  if (json.status !== "OK") {
+    throw new Error(`${json.status}: ${json.error_message ?? "Google Places error"}`);
+  }
+
+  return json.result;
+}
+
 export async function GET() {
   if (!API_KEY) {
     return NextResponse.json({ error: "GOOGLE_PLACES_API_KEY manquant" }, { status: 500 });
@@ -42,24 +60,27 @@ export async function GET() {
       return NextResponse.json({ error: "Place introuvable" }, { status: 502 });
     }
 
-    const url = new URL("https://maps.googleapis.com/maps/api/place/details/json");
-    url.searchParams.set("place_id", placeId);
-    url.searchParams.set("fields", "rating,user_ratings_total,reviews");
-    url.searchParams.set("language", "fr");
-    url.searchParams.set("key", API_KEY);
+    const [relevant, newest] = await Promise.all([
+      fetchReviews(placeId, "most_relevant"),
+      fetchReviews(placeId, "newest"),
+    ]);
 
-    const res = await fetch(url.toString(), { next: { revalidate: 86400 } });
-    const json = await res.json();
-
-    if (json.status !== "OK") {
-      console.error("[google-reviews]", json.status, json.error_message);
-      return NextResponse.json({ error: json.status }, { status: 502 });
-    }
+    const relevantReviews = (relevant.reviews ?? []).filter((r: GoogleReview) => r.text?.trim());
+    const newestReviews = (newest.reviews ?? []).filter((r: GoogleReview) => r.text?.trim());
+    const seen = new Set<string>();
+    const reviews = [...relevantReviews.slice(0, 3), ...newestReviews]
+      .filter((review: GoogleReview) => {
+        const key = `${review.author_name}:${review.text}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
+      .slice(0, 5);
 
     const data: PlaceData = {
-      rating: json.result.rating,
-      user_ratings_total: json.result.user_ratings_total,
-      reviews: (json.result.reviews ?? []).filter((r: GoogleReview) => r.text?.trim()),
+      rating: relevant.rating,
+      user_ratings_total: relevant.user_ratings_total,
+      reviews,
     };
 
     return NextResponse.json(data, {
