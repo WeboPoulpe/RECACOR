@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { Snowflake, SunMedium } from "lucide-react";
 import { hasConsent } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
+import { isAugust2026 } from "@/lib/seasonal";
 
 const AUGUST_NOTICE_STORAGE_KEY = "recacor_august_notice_seen_at";
 const AUGUST_NOTICE_COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000;
@@ -12,6 +13,7 @@ const AUGUST_NOTICE_DELAY_MS = 4000;
 
 function shouldSuppressAugustNotice() {
   if (typeof window === "undefined") return true;
+  if (!isAugust2026()) return true;
   if (window.location.pathname === "/pause-fraicheur-aout") return true;
 
   const stored = window.localStorage.getItem(AUGUST_NOTICE_STORAGE_KEY);
@@ -29,6 +31,8 @@ function markAugustNoticeSeen() {
 }
 
 export function AugustVlNoticeHeaderLink({ className }: { className?: string }) {
+  if (!isAugust2026()) return null;
+
   return (
     <Link
       href="/pause-fraicheur-aout"
@@ -77,6 +81,8 @@ export function AugustVlNoticePopover() {
       if (timerRef.current) window.clearTimeout(timerRef.current);
     };
   }, []);
+
+  if (!isAugust2026()) return null;
 
   return (
     open && (
@@ -136,6 +142,8 @@ export function AugustVlNotice({
   compact?: boolean;
   className?: string;
 }) {
+  if (!isAugust2026()) return null;
+
   if (compact) {
     return (
       <div

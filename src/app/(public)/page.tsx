@@ -25,8 +25,10 @@ import { OpenStatus } from "@/components/open-status";
 import { PhoneLink } from "@/components/phone-link";
 import { FaqJsonLd, LocalBusinessJsonLd } from "@/components/schema-jsonld";
 import { HOME_FAQ_CATEGORIES } from "@/data/home-faq";
+import { isAugust2026 } from "@/lib/seasonal";
 
 const HERO_IMAGE = "/refonte/facade-recacor-clean-20260719-optimized.webp";
+const IS_AUGUST_2026 = isAugust2026();
 
 const serviceCards = [
   {
@@ -590,7 +592,11 @@ function ZoneInterventionSection() {
                 </div>
                 <div className="flex items-center gap-2.5">
                   <Clock className="h-4 w-4 text-purple-bright shrink-0" />
-                  <span>Lun–Ven : 8h–17h · Sam : 8h–12h</span>
+                  <span>
+                    {IS_AUGUST_2026
+                      ? "Lun–Ven : 8h–12h · 14h–17h · Sam : fermé"
+                      : "Lun–Ven : 8h–17h · Sam : 8h–12h"}
+                  </span>
                 </div>
               </div>
               <div className="mt-auto flex flex-col sm:flex-row gap-3">
