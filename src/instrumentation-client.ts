@@ -23,7 +23,19 @@ if (dsn) {
         errorMessage.includes(message),
       );
 
-      if (isEmbeddedBrowserBridgeNoise) return null;
+      const browserName = String(
+        event.contexts?.browser?.name ?? event.tags?.browser ?? event.tags?.["browser.name"] ?? "",
+      );
+      const isTikTokWebview = /^TikTok$/i.test(browserName);
+      const isInstagramWebview = /^Instagram$/i.test(browserName);
+      const isTikTokInjectedAppendChildError =
+        isTikTokWebview &&
+        errorMessage.includes("Failed to execute 'appendChild' on 'Node': Identifier 'c' has already been declared");
+      const isInstagramConnectionClosed = isInstagramWebview && /^Connection closed\.?$/i.test(errorMessage.trim());
+
+      if (isEmbeddedBrowserBridgeNoise || isTikTokInjectedAppendChildError || isInstagramConnectionClosed) {
+        return null;
+      }
 
       delete event.user;
       if (event.request) {
