@@ -52,39 +52,50 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "telephone requis" }, { status: 400 });
     }
 
+    const skipNeonLeadWrite = process.env.SKIP_NEON_LEAD_WRITE === "true";
+
     // AdsFlow CRM — la réponse est contrôlée pour ne compter que les leads acceptés.
     const adsFlowResult = await forwardLeadToAdsFlow(data);
     const adsFlowAccepted = adsFlowResult.accepted;
 
-    // Insertion DB Neon — si quota dépassé, on continue quand même
+    // Mode temporaire de protection du quota : AdsFlow devient le stockage durable.
     let leadId: number | undefined;
-    try {
-      await ensureSchema();
-      const inserted = (await sql`
-        INSERT INTO leads (
-          form_id, service_type, nom, prenom, entreprise,
-          telephone, email, cp, message, payload,
-          utm_source, utm_medium, utm_campaign, utm_content, utm_term,
-          gclid, fbclid, ttclid, page_source, referrer
-        ) VALUES (
-          ${data.form_id}, ${data.service_type},
-          ${data.nom || null}, ${data.prenom || null}, ${data.entreprise || null},
-          ${data.telephone}, ${data.email}, ${data.cp || null}, ${data.message || null},
-          ${JSON.stringify(data)}::jsonb,
-          ${data.utm_source || null}, ${data.utm_medium || null},
-          ${data.utm_campaign || null}, ${data.utm_content || null}, ${data.utm_term || null},
-          ${data.gclid || null}, ${data.fbclid || null}, ${data.ttclid || null},
-          ${data.page_source || null}, ${data.referrer || null}
-        )
-        RETURNING id;
-      `) as { id: number }[];
-      leadId = inserted[0]?.id;
-    } catch (dbErr) {
-      console.error("[lead DB indisponible]", dbErr);
-      // La DB est KO (quota Neon dépassé) — le lead est déjà dans AdsFlow
+    if (skipNeonLeadWrite) {
+      console.info("[lead] SKIP_NEON_LEAD_WRITE actif; AdsFlow est la source durable");
+    } else {
+      try {
+        await ensureSchema();
+        const inserted = (await sql`
+          INSERT INTO leads (
+            form_id, service_type, nom, prenom, entreprise,
+            telephone, email, cp, message, payload,
+            utm_source, utm_medium, utm_campaign, utm_content, utm_term,
+            gclid, fbclid, ttclid, page_source, referrer
+          ) VALUES (
+            ${data.form_id}, ${data.service_type},
+            ${data.nom || null}, ${data.prenom || null}, ${data.entreprise || null},
+            ${data.telephone}, ${data.email}, ${data.cp || null}, ${data.message || null},
+            ${JSON.stringify(data)}::jsonb,
+            ${data.utm_source || null}, ${data.utm_medium || null},
+            ${data.utm_campaign || null}, ${data.utm_content || null}, ${data.utm_term || null},
+            ${data.gclid || null}, ${data.fbclid || null}, ${data.ttclid || null},
+            ${data.page_source || null}, ${data.referrer || null}
+          )
+          RETURNING id;
+        `) as { id: number }[];
+        leadId = inserted[0]?.id;
+      } catch (dbErr) {
+        console.error("[lead DB indisponible]", dbErr);
+        // La DB est KO (quota Neon dépassé) — le lead est déjà dans AdsFlow
+      }
     }
 
-    const config = await getSiteConfig().catch(() => ({ leadsWebhookUrl: null, leadsEmailTo: null }));
+    const config = skipNeonLeadWrite
+      ? {
+          leadsWebhookUrl: process.env.LEADS_WEBHOOK_URL || null,
+          leadsEmailTo: process.env.LEADS_EMAIL_TO || "recacor.fr+leads@gmail.com",
+        }
+      : await getSiteConfig().catch(() => ({ leadsWebhookUrl: null, leadsEmailTo: null }));
 
     if (config.leadsWebhookUrl) {
       fetch(config.leadsWebhookUrl, {
@@ -100,7 +111,9 @@ export async function POST(req: Request) {
       await sendLeadEmail(config.leadsEmailTo, data, leadId ?? 0);
     }
 
-    const sendConfirm = await getSetting("leads_send_confirmation", "").catch(() => "");
+    const sendConfirm = skipNeonLeadWrite
+      ? process.env.LEADS_SEND_CONFIRMATION || ""
+      : await getSetting("leads_send_confirmation", "").catch(() => "");
     if (sendConfirm === "1" && data.email && hasMailer) {
       sendConfirmationEmail(data).catch((err) =>
         console.error("[lead confirmation]", err)
@@ -108,7 +121,9 @@ export async function POST(req: Request) {
     }
 
     if (process.env.MAILCHIMP_API_KEY && data.email) {
-      const audienceId = await getSetting("mailchimp_audience_id").catch(() => null);
+      const audienceId = skipNeonLeadWrite
+        ? process.env.MAILCHIMP_AUDIENCE_ID || null
+        : await getSetting("mailchimp_audience_id").catch(() => null);
       if (audienceId) {
         subscribeContact(audienceId, {
           email: data.email,
