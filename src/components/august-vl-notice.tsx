@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Snowflake, SunMedium } from "lucide-react";
-import { hasConsent } from "@/lib/tracking";
+import { getSafeLocalStorage, hasConsent } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
 import { isAugust2026 } from "@/lib/seasonal";
 
@@ -16,7 +16,7 @@ function shouldSuppressAugustNotice() {
   if (!isAugust2026()) return true;
   if (window.location.pathname === "/pause-fraicheur-aout") return true;
 
-  const stored = window.localStorage.getItem(AUGUST_NOTICE_STORAGE_KEY);
+  const stored = getSafeLocalStorage()?.getItem(AUGUST_NOTICE_STORAGE_KEY);
   if (!stored) return false;
 
   const shownAt = Number(stored);
@@ -27,7 +27,7 @@ function shouldSuppressAugustNotice() {
 
 function markAugustNoticeSeen() {
   if (typeof window === "undefined") return;
-  window.localStorage.setItem(AUGUST_NOTICE_STORAGE_KEY, String(Date.now()));
+  getSafeLocalStorage()?.setItem(AUGUST_NOTICE_STORAGE_KEY, String(Date.now()));
 }
 
 export function AugustVlNoticeHeaderLink({ className }: { className?: string }) {

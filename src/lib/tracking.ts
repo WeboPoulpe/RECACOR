@@ -35,6 +35,15 @@ type ConsentEventName =
 
 const COOKIE_BANNER_VARIANT_STORAGE_KEY = "recacor_cookie_banner_variant";
 
+export function getSafeLocalStorage(): Storage | null {
+  if (typeof window === "undefined") return null;
+  try {
+    return window.localStorage;
+  } catch {
+    return null;
+  }
+}
+
 export function captureUtmParams() {
   if (typeof window === "undefined") return;
   const params = new URLSearchParams(window.location.search);
@@ -257,13 +266,14 @@ function chooseCookieBannerVariant(): CookieBannerVariant {
 export function getOrCreateCookieBannerVariant(): CookieBannerVariant {
   if (typeof window === "undefined") return "bottom";
 
-  const stored = window.localStorage.getItem(COOKIE_BANNER_VARIANT_STORAGE_KEY);
+  const storage = getSafeLocalStorage();
+  const stored = storage?.getItem(COOKIE_BANNER_VARIANT_STORAGE_KEY);
   if (stored === "bottom" || stored === "center") {
     return stored;
   }
 
   const variant = chooseCookieBannerVariant();
-  window.localStorage.setItem(COOKIE_BANNER_VARIANT_STORAGE_KEY, variant);
+  storage?.setItem(COOKIE_BANNER_VARIANT_STORAGE_KEY, variant);
   return variant;
 }
 
