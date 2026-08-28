@@ -38,6 +38,9 @@ async function fetchReviews(placeId: string, sort: "most_relevant" | "newest") {
   url.searchParams.set("language", "fr");
   url.searchParams.set("reviews_sort", sort);
   url.searchParams.set("key", API_KEY!);
+  // Param ignoré par Google : sa seule fonction est de renouveler la clé du
+  // Data Cache Vercel (qui survit aux redéploiements) après suppression d'un avis.
+  url.searchParams.set("cb", "20260827");
 
   const res = await fetch(url.toString(), { next: { revalidate: 86400 } });
   const json = await res.json();
