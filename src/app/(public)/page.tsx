@@ -302,6 +302,34 @@ function ServicesSection() {
             </Link>
           ))}
         </div>
+
+        <div className="mt-10 rounded-[4px] border border-border bg-[var(--recacor-paper)] p-6 sm:p-8">
+          <p className="text-xs font-black uppercase tracking-wider text-blue-700">
+            Prestations atelier au Crès
+          </p>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">
+            Quand le besoin est déjà clair, le plus simple est d&apos;ouvrir directement la bonne
+            page avant d&apos;appeler ou de venir. Vous retrouvez ci-dessous les quatre prestations
+            qui reviennent le plus souvent au garage.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-3 text-sm font-bold">
+            <Link href="/services/vidange" className="text-blue-700 hover:underline">
+              Vidange voiture au Crès
+            </Link>
+            <Link href="/services/parallelisme-geometrie" className="text-blue-700 hover:underline">
+              Parallélisme et géométrie
+            </Link>
+            <Link href="/services/climatisation-auto-montpellier" className="text-blue-700 hover:underline">
+              Recharge clim auto
+            </Link>
+            <Link href="/services/recreusage" className="text-blue-700 hover:underline">
+              Recreusage poids lourd
+            </Link>
+            <Link href="/mecanique" className="text-blue-700 hover:underline">
+              Voir tout l&apos;atelier mécanique
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );

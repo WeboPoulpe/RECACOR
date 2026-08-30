@@ -188,6 +188,11 @@ function ServicesBlock({ ville }: { ville: Ville }) {
             <Link href="/services/prise-en-charge-controle-technique" className="text-purple-bright hover:underline">
               Controle technique
             </Link>
+            {localCityPage ? (
+              <Link href="/services/recreusage" className="text-purple-bright hover:underline">
+                Recreusage poids lourd
+              </Link>
+            ) : null}
           </div>
         </div>
       </div>

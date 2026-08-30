@@ -324,12 +324,12 @@ export async function Footer() {
               <h5 className="text-xs font-bold text-white/40 uppercase tracking-widest mb-3">Services & villes</h5>
               <ul className="flex flex-wrap gap-x-3 gap-y-1.5">
                 {[
-                  { label: "Parallélisme Montpellier", href: "/services/parallelisme-geometrie" },
-                  { label: "Géométrie voiture", href: "/services/parallelisme-geometrie" },
-                  { label: "Montage pneus Le Crès", href: "/pneus-voiture" },
-                  { label: "Vidange Montpellier", href: "/services/vidange" },
-                  { label: "Pneus Mauguio", href: "/mauguio" },
-                  { label: "Pneus Lattes", href: "/lattes" },
+                  { label: "Vidange au Crès", href: "/services/vidange" },
+                  { label: "Parallélisme au Crès", href: "/services/parallelisme-geometrie" },
+                  { label: "Clim auto Montpellier", href: "/services/climatisation-auto-montpellier" },
+                  { label: "Recreusage poids lourd", href: "/services/recreusage" },
+                  { label: "Garage auto Le Crès", href: "/le-cres" },
+                  { label: "Atelier mécanique", href: "/mecanique" },
                   { label: "Pneus Lunel", href: "/lunel" },
                   { label: "Pneus Vendargues", href: "/vendargues" },
                 ].map((s) => (

@@ -172,6 +172,12 @@ export function NosCentresClient({ heroImage }: { heroImage?: string }) {
               <Link href="/mecanique" className="text-purple-bright hover:underline">
                 Atelier mecanique
               </Link>
+              <Link href="/le-cres" className="text-purple-bright hover:underline">
+                Garage auto au Crès
+              </Link>
+              <Link href="/blog" className="text-purple-bright hover:underline">
+                Conseils et articles du garage
+              </Link>
             </div>
           </div>
         </div>

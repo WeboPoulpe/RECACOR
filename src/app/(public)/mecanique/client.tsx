@@ -203,7 +203,12 @@ export function MecaniqueClient({ heroImage }: { heroImage?: string }) {
               <Link href="/services/climatisation-auto-montpellier" className="font-bold text-purple-bright hover:underline">
                 recharge climatisation voiture
               </Link>{" "}
-              est traitée comme une prestation atelier avec contrôle avant intervention.
+              est traitée comme une prestation atelier avec contrôle avant intervention. Si vous
+              gérez aussi un utilitaire ou un poids lourd, le{" "}
+              <Link href="/services/recreusage" className="font-bold text-purple-bright hover:underline">
+                recreusage Recacor
+              </Link>{" "}
+              renvoie vers la partie atelier dédiée.
             </p>
             <div className="mt-4 flex flex-wrap gap-3 text-sm font-bold">
               <Link href="/services/vidange" className="text-purple-bright hover:underline">
@@ -214,6 +219,12 @@ export function MecaniqueClient({ heroImage }: { heroImage?: string }) {
               </Link>
               <Link href="/services/prise-en-charge-controle-technique" className="text-purple-bright hover:underline">
                 Voir l&apos;offre contrôle technique
+              </Link>
+              <Link href="/services/climatisation-auto-montpellier" className="text-purple-bright hover:underline">
+                Voir le détail de la clim voiture
+              </Link>
+              <Link href="/services/recreusage" className="text-purple-bright hover:underline">
+                Voir le recreusage poids lourd
               </Link>
             </div>
             <div className="mt-3 flex flex-wrap gap-3 text-sm font-bold">
