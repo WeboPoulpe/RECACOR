@@ -155,7 +155,7 @@ export default function AProposPage() {
             vidange, freinage, parallélisme et amortisseurs.
           </p>
           <p className="text-muted-foreground text-lg leading-relaxed">
-            Avec ou sans rendez-vous, du lundi au vendredi de 8h à 17h et le samedi
+            Avec ou sans rendez-vous, du lundi au vendredi de 8h à 12h et de 14h à 18h, et le samedi
             de 8h à 12h. Tél. : 04 99 53 33 90 — WhatsApp : 07 56 33 63 11
           </p>
         </div>

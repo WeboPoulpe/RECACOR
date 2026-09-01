@@ -66,7 +66,7 @@ export function ContactClient({ heroImage }: { heroImage?: string }) {
               { icon: Phone, label: "Téléphone", value: PHONE_DISPLAY, link: true },
               { icon: Mail, label: "Email", value: "contact@recacor.fr" },
               { icon: MapPin, label: "Adresse", value: ADDRESS, mapHref: "https://maps.google.com/?q=1240+Route+de+Nîmes+34920+Le+Crès" },
-              { icon: Clock, label: "Horaires", value: "Lun–Ven 8h–17h · Sam 8h–12h" },
+              { icon: Clock, label: "Horaires", value: "Lun–Ven 8h–12h · 14h–18h · Sam 8h–12h" },
             ].map((item) => (
               <div key={item.label} className="rounded-[4px] border border-border bg-white p-6">
                 <div className="w-11 h-11 rounded-[4px] bg-purple-bright/[0.08] flex items-center justify-center mb-4">

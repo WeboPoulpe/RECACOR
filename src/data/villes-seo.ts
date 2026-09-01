@@ -28,7 +28,7 @@ export const VILLES_SEO: VilleSeo[] = [
     angle_text: "Situé au Crès, Recacor dessert quotidiennement les habitants de Montpellier qui veulent un service rapide et des prix discount, sans les embouteillages du centre-ville.",
     faqs: [
       { q: "Recacor est-il facilement accessible depuis Montpellier ?", a: "Oui, depuis Montpellier centre, Recacor au Crès est à 5 km via la RN113 (Route de Nîmes). Comptez 10 minutes en voiture, avec parking gratuit sur place." },
-      { q: "Faut-il un rendez-vous pour changer ses pneus ?", a: "Non. Recacor accepte les clients sans rendez-vous du lundi au vendredi 8h–17h et le samedi 8h–12h. Venez directement." },
+      { q: "Faut-il un rendez-vous pour changer ses pneus ?", a: "Non. Recacor accepte les clients sans rendez-vous du lundi au vendredi de 8h à 12h et de 14h à 18h, et le samedi de 8h à 12h. Venez directement." },
       { q: "Quel est le tarif pour 4 pneus VL montés ?", a: "À partir de 45€ le pneu monté (180€ pour 4 pneus). Le prix exact dépend de la dimension et de la marque choisie — demandez un devis gratuit en ligne." },
       { q: "Proposez-vous des pneus Michelin à Montpellier ?", a: "Oui, Michelin, Bridgestone, Continental, Goodyear, Pirelli, Hankook et bien d'autres sont disponibles en stock au Crès. Toutes les marques, tous les budgets." },
     ],
@@ -36,7 +36,7 @@ export const VILLES_SEO: VilleSeo[] = [
       { h3: "Recacor vs grandes enseignes à Montpellier : pourquoi les prix diffèrent", p: "Avec plus de 300 000 habitants, Montpellier concentre une forte demande en pneus voiture. Les grandes enseignes franchisées (Feu Vert, Norauto, Euromaster) y pratiquent des tarifs qui reflètent leurs loyers et leur structure de coûts. Recacor, implanté au Crès sur la <strong>RN113 à 5 km du centre</strong>, fonctionne différemment : achat direct auprès des fournisseurs, structure allégée, <strong>prix discount</strong> sur toutes les marques sans compromis sur la qualité du service." },
       { h3: "Dimensions pneus les plus demandées à Montpellier", p: "Les recherches les plus fréquentes de nos clients montpelliérains : <em>pneus Montpellier pas cher</em>, <em>garage pneu sans rendez-vous</em>, <em>montage rapide</em>. Sur ces trois points, Recacor répond : <strong>à partir de 45€ le pneu monté équilibré</strong>, accueil sans rendez-vous, montage en <strong>15 minutes</strong>. Les dimensions les plus courantes — <strong>205/55R16</strong>, 225/45R17, 195/65R15, 205/60R16 — sont systématiquement en stock." },
       { h3: "Trajet Montpellier → Recacor : 10 min via RN113, parking gratuit", p: "Le trajet depuis Montpellier est simple : Route de Nîmes / RN113 direction Le Crès. Pas de péage, pas de passage par le centre-ville saturé. <strong>Dix minutes de route</strong> pour un service professionnel, une note Google de <strong>5,0/5</strong> et un prix annoncé identique au prix facturé — <strong>équilibrage et valves neuves inclus</strong>. Nos clients Montpellier viennent souvent grouper plusieurs interventions : pneus, contrôle parallélisme offert et vidange à <strong>partir de 79€</strong>, le tout en une seule visite." },
-      { h3: "Pas de rendez-vous, pas de file d'attente", p: "Un avantage souvent mentionné par nos clients Montpellier : l'absence de file d'attente. Pas de créneau à réserver dix jours à l'avance, pas d'attente de deux heures un samedi matin. Venez directement du <strong>lundi au vendredi 8h–17h</strong> ou le <strong>samedi 8h–12h</strong>, parking gratuit sur place. C'est ce que beaucoup appellent un \"service garage professionnel sans les contraintes de la ville\"." },
+      { h3: "Pas de rendez-vous, pas de file d'attente", p: "Un avantage souvent mentionné par nos clients Montpellier : l'absence de file d'attente. Pas de créneau à réserver dix jours à l'avance, pas d'attente de deux heures un samedi matin. Venez directement du <strong>lundi au vendredi de 8h à 12h et de 14h à 18h</strong> ou le <strong>samedi de 8h à 12h</strong>, parking gratuit sur place. C'est ce que beaucoup appellent un \"service garage professionnel sans les contraintes de la ville\"." },
     ],
     published: true,
   },
@@ -55,7 +55,7 @@ export const VILLES_SEO: VilleSeo[] = [
       { q: "Où est situé Recacor par rapport à Castelnau-le-Lez ?", a: "Recacor est à 3 km de Castelnau-le-Lez, au 1240 Route de Nîmes, au Crès. C'est littéralement la commune voisine, à 5 minutes en voiture." },
       { q: "Puis-je faire contrôler mon parallélisme en même temps que mes pneus ?", a: "Oui, et c'est fortement recommandé après un changement de pneus. Le contrôle parallélisme est offert avec chaque changement de pneus chez Recacor." },
       { q: "Avez-vous des pneus pour SUV et crossover ?", a: "Oui. Nous avons en stock les dimensions courantes pour SUV (215/65R16, 225/65R17, 235/55R18, etc.). Votre dimension absente ? Livraison 24-48h." },
-      { q: "Quels horaires pour venir de Castelnau ?", a: "Lundi–Vendredi 8h–17h, Samedi 8h–12h. Pas besoin de rendez-vous, vous pouvez arriver directement." },
+      { q: "Quels horaires pour venir de Castelnau ?", a: "Du lundi au vendredi, Recacor est ouvert de 8h à 12h et de 14h à 18h, puis le samedi de 8h à 12h. Pas besoin de rendez-vous, vous pouvez arriver directement." },
     ],
     contenu: [
       { h3: "Castelnau-le-Lez et Le Crès : communes limitrophes, garage à 3 km", p: "Castelnau-le-Lez et Le Crès sont communes limitrophes — la frontière passe parfois au milieu d'une rue. Pour les Castelnaudards qui cherchent un garage pneus fiable, Recacor est littéralement à côté : <strong>3 km, 5 minutes en voiture</strong>, sans sortir de l'agglomération. Pas besoin de prendre l'autoroute ni de traverser Montpellier." },
@@ -203,7 +203,7 @@ export const VILLES_SEO: VilleSeo[] = [
     angle_text: "Zone côtière, route salée, usure des pneus accélérée : à Pérols et Palavas, nos clients savent que renouveler ses pneus régulièrement est essentiel. Venez sans RDV.",
     faqs: [
       { q: "Comment venir de Pérols chez Recacor ?", a: "Depuis Pérols, prenez la N113 direction Montpellier, puis continuez vers Le Crès. Environ 9 km, 12-15 minutes. Adresse : 1240 Route de Nîmes, 34920 Le Crès." },
-      { q: "Faut-il un rendez-vous ?", a: "Non, Recacor accepte les clients sans rendez-vous. Venez directement du lundi au vendredi 8h–17h et le samedi 8h–12h." },
+      { q: "Faut-il un rendez-vous ?", a: "Non, Recacor accepte les clients sans rendez-vous. Venez directement du lundi au vendredi de 8h à 12h et de 14h à 18h, ou le samedi de 8h à 12h." },
       { q: "Avez-vous des pneus résistants au sel et à l'humidité côtière ?", a: "Tous nos pneus sont conçus pour les conditions routières françaises, y compris les zones côtières. Le plus important est de vérifier l'état de vos pneus régulièrement, surtout en été avec le trafic côtier." },
       { q: "Combien coûte un jeu de 4 pneus monté ?", a: "À partir de 180€ pour 4 pneus montés et équilibrés (45€/pneu). Le prix varie selon la dimension et la marque. Demandez un devis gratuit." },
     ],
@@ -330,7 +330,7 @@ export const VILLES_SEO: VilleSeo[] = [
       { q: "Recacor fait-il autre chose que les pneus au Crès ?", a: "Oui. Recacor est un garage multi-services : vidange huile moteur (à partir de 79€), freinage (plaquettes, disques), parallélisme laser 3D (contrôle offert, réglage à 65€), et bien sûr pneus toutes marques. Tout sans rendez-vous." },
       { q: "Combien coûte une vidange au Crès chez Recacor ?", a: "La vidange voiture est à partir de 79€ tout compris (huile moteur + filtre à huile). Le tarif exact dépend du type d'huile et de la cylindrée. Venez directement ou appelez pour un devis rapide." },
       { q: "Peut-on grouper vidange et changement de pneus en une seule visite ?", a: "Oui, c'est même recommandé pour optimiser votre temps. Pneus + vidange + contrôle parallélisme offert : tout peut se faire en une matinée. Comptez 45 min à 1h pour l'ensemble." },
-      { q: "Faut-il un rendez-vous pour une vidange ou un freinage au Crès ?", a: "Non, Recacor accepte les clients sans rendez-vous du lundi au vendredi 8h–17h et le samedi 8h–12h. Pour les interventions mécaniques, un appel préalable permet d'estimer le temps d'attente." },
+      { q: "Faut-il un rendez-vous pour une vidange ou un freinage au Crès ?", a: "Non, Recacor accepte les clients sans rendez-vous du lundi au vendredi de 8h à 12h et de 14h à 18h, et le samedi de 8h à 12h. Pour les interventions mécaniques, un appel préalable permet d'estimer le temps d'attente." },
     ],
     contenu: [
       { h3: "Garagiste Le Crès : le seul garage complet sur la RN113", p: "Au Crès, les garages indépendants de proximité sont rares. Recacor au <strong>1240 Route de Nîmes</strong> est le seul point de service complet de la commune sur la RN113 : <strong>pneus, vidange, freinage, parallélisme</strong> — tout sans rendez-vous, tout sans se déplacer hors de votre commune. C'est l'avantage concret que les habitants du Crès utilisent depuis des années." },
@@ -429,7 +429,7 @@ export const VILLES_SEO: VilleSeo[] = [
     faqs: [
       { q: "Comment venir de Gigean chez Recacor ?", a: "Depuis Gigean, prenez la N113 direction Montpellier jusqu'au Crès. Environ 25 km, 25 minutes. GPS : 1240 Route de Nîmes, 34920 Le Crès." },
       { q: "Avez-vous des pneus en stock pour les voitures allemandes (BMW, Audi, Mercedes) ?", a: "Oui, nous avons les dimensions courantes pour les marques allemandes (225/45R17, 235/45R18, 255/40R19, etc.). Pour les pneus spécifiques runflat, contactez-nous pour vérifier le stock." },
-      { q: "Faut-il prendre rendez-vous ?", a: "Non. Recacor accepte les clients sans rendez-vous du lundi au vendredi 8h–17h et le samedi 8h–12h. Venez directement avec votre véhicule." },
+      { q: "Faut-il prendre rendez-vous ?", a: "Non. Recacor accepte les clients sans rendez-vous du lundi au vendredi de 8h à 12h et de 14h à 18h, et le samedi de 8h à 12h. Venez directement avec votre véhicule." },
       { q: "Proposez-vous une garantie sur les pneus montés ?", a: "Tous les pneus que nous vendons bénéficient de la garantie constructeur. En cas de défaut de fabrication, nous gérons le retour fournisseur pour vous." },
     ],
     contenu: [

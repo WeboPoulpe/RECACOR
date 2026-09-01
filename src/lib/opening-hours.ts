@@ -1,4 +1,4 @@
-// Horaires : Lun-Ven 8h-17h · Sam 8h-12h · Dim fermé
+// Horaires : Lun-Ven 8h-12h et 14h-18h · Sam 8h-12h · Dim fermé
 export interface OpeningStatus {
   isOpen: boolean;
   label: string; // ex: "OUVERT MAINTENANT — Sans rendez-vous"
@@ -15,9 +15,9 @@ export function getOpeningStatus(now: Date = new Date()): OpeningStatus {
   const minute = parisDate.getMinutes();
   const time = hour + minute / 60;
 
-  // Lundi à vendredi (1-5)
+  // Lundi à vendredi (1-5), avec fermeture méridienne.
   if (day >= 1 && day <= 5) {
-    if (time >= 8 && time < 17) {
+    if ((time >= 8 && time < 12) || (time >= 14 && time < 18)) {
       return {
         isOpen: true,
         label: "Ouvert maintenant — Sans rendez-vous",
@@ -31,7 +31,14 @@ export function getOpeningStatus(now: Date = new Date()): OpeningStatus {
         short: "Ouvre à 8h",
       };
     }
-    // après 17h
+    if (time < 14) {
+      return {
+        isOpen: false,
+        label: "Réouverture aujourd'hui à 14h",
+        short: "Réouvre à 14h",
+      };
+    }
+    // après 18h
     if (day === 5) {
       return {
         isOpen: false,

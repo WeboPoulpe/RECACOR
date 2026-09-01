@@ -372,7 +372,7 @@ export function leadConfirmationEmail(data: LeadEmailData): { subject: string; h
                   📞 04 99 53 33 90
                 </a>
                 <div style="margin-top:12px;font-size:12px;color:#64748b">
-                  Lun–Ven : 8h–17h · Sam : 8h–12h
+                  Lun–Ven : 8h–12h · 14h–18h · Sam : 8h–12h
                 </div>
               </div>
             </td>
@@ -423,7 +423,7 @@ export function leadConfirmationEmail(data: LeadEmailData): { subject: string; h
     `Notre équipe vous recontacte sous 24h en jours ouvrés.`,
     ``,
     `Pour nous appeler directement : 04 99 53 33 90`,
-    `Lun-Ven : 8h-17h · Sam : 8h-12h`,
+    `Lun-Ven : 8h-12h · 14h-18h · Sam : 8h-12h`,
     ``,
     `Recacor — 1240 Route de Nîmes, 34920 Le Crès`,
   ].join("\n");

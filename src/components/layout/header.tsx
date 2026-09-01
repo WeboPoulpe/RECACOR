@@ -43,7 +43,7 @@ export function Header() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between">
             <div className="flex items-center gap-5">
               <span className="flex items-center gap-1.5"><MapPin className="h-3 w-3 text-yellow-400" /> 1240 Route de Nîmes, 34920 Le Crès</span>
-              <span className="text-white/50">Lun–Ven 8h–17h · Sam 8h–12h</span>
+              <span className="text-white/50">Lun–Ven 8h–12h · 14h–18h · Sam 8h–12h</span>
             </div>
             <PhoneLink location="header" className="flex items-center gap-1.5 font-semibold hover:text-yellow-400 transition-colors">
               <Phone className="h-3 w-3" /> {PHONE_DISPLAY}

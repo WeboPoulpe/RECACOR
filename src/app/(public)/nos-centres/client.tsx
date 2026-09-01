@@ -18,7 +18,7 @@ const centres = [
     city: "34 — Hérault",
     address: "1240 Route de Nîmes, 34920 Le Crès",
     phone: "04 99 53 33 90",
-    hours: "Lun-Ven : 8h–17h | Sam : 8h–12h",
+    hours: "Lun-Ven : 8h–12h | 14h–18h | Sam : 8h–12h",
     specialities: ["Pneus VL", "Poids Lourd", "Agricole & Industriel"],
     emoji: "",
     image: "/Design sans titre (29)/2.webp",

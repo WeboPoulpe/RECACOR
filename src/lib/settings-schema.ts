@@ -36,7 +36,7 @@ export const SETTINGS_GROUPS: SettingsGroup[] = [
     title: "Horaires",
     description: "Affichés sur le site et utilisés pour le badge dynamique 'Ouvert maintenant'.",
     fields: [
-      { key: "hours_weekdays", label: "Lundi à vendredi", type: "text", defaultValue: "8h-17h" },
+      { key: "hours_weekdays", label: "Lundi à vendredi", type: "text", defaultValue: "8h-12h · 14h-18h" },
       { key: "hours_saturday", label: "Samedi", type: "text", defaultValue: "8h-12h" },
       { key: "hours_sunday", label: "Dimanche", type: "text", defaultValue: "Fermé" },
     ],

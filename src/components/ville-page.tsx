@@ -28,7 +28,7 @@ function AdresseBlock() {
         <div className="w-10 h-10 rounded-lg bg-purple-bright/10 flex items-center justify-center shrink-0">
           <Clock className="h-4 w-4 text-purple-bright" />
         </div>
-        <span>Lun–Ven : 8h–17h · Sam : 8h–12h</span>
+        <span>Lun–Ven : 8h–12h · 14h–18h · Sam : 8h–12h</span>
       </div>
       <div className="flex items-center gap-3 text-sm">
         <div className="w-10 h-10 rounded-lg bg-purple-bright/10 flex items-center justify-center shrink-0">
@@ -535,7 +535,7 @@ function Variant3({ ville, seo, heroImage }: { ville: Ville; seo: ReturnType<typ
               { icon: Car, title: "Pneus VL", desc: "Été, hiver, 4 saisons. Toutes marques en stock." },
               { icon: Wrench, title: "Montage inclus", desc: "Démontage, montage, équilibrage, valves neuves." },
               { icon: CheckCircle, title: "Parallélisme offert", desc: "Contrôle géométrie laser 3D offert avec chaque changement." },
-              { icon: Timer, title: "Sans rendez-vous", desc: "Lun–Ven 8h–17h · Sam 8h–12h. Venez directement." },
+              { icon: Timer, title: "Sans rendez-vous", desc: "Lun–Ven 8h–12h · 14h–18h · Sam 8h–12h. Venez directement." },
             ].map((s, i) => (
               <motion.div key={s.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
                 className="rounded-2xl border-l-4 border-purple-bright bg-white p-5 shadow-sm">

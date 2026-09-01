@@ -90,7 +90,7 @@ export default function FormulaireControleTechniquePage() {
           </div>
 
           <p className="text-xs text-white/65">
-            Tél. Lun–Ven 8h–17h · Sam 8h–12h · WhatsApp {PHONE_MOBILE_DISPLAY}
+            Tél. Lun–Ven 8h–12h · 14h–18h · Sam 8h–12h · WhatsApp {PHONE_MOBILE_DISPLAY}
           </p>
         </div>
       </div>

@@ -90,7 +90,7 @@ export default function MerciPage() {
                 >
                   💬 WhatsApp
                 </a>
-                <p className="text-xs text-white/40 mt-3">Lun–Ven 8h–17h · Sam 8h–12h</p>
+                <p className="text-xs text-white/40 mt-3">Lun–Ven 8h–12h · 14h–18h · Sam 8h–12h</p>
               </div>
             </motion.div>
 
@@ -117,7 +117,7 @@ export default function MerciPage() {
                 {[
                   "Créneau confirmé instantanément",
                   "Rappel email automatique",
-                  "Disponible Lun–Ven 8h–17h · Sam 8h–12h",
+                  "Disponible Lun–Ven 8h–12h · 14h–18h · Sam 8h–12h",
                 ].map((item) => (
                   <div key={item} className="flex items-center gap-2.5 text-sm">
                     <CheckCircle className="w-4 h-4 text-purple-bright shrink-0" />

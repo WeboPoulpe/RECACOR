@@ -60,7 +60,7 @@ export default function FormulaireClimCamionPage() {
           </div>
 
           <p className="text-xs text-muted-foreground">
-            Tél. Lun-Ven 8h-17h · Sam 8h-12h · WhatsApp {PHONE_WHATSAPP_PL_DISPLAY}
+            Tél. Lun-Ven 8h-12h · 14h-18h · Sam 8h-12h · WhatsApp {PHONE_WHATSAPP_PL_DISPLAY}
           </p>
         </div>
       </div>

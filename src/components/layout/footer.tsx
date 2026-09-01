@@ -93,7 +93,8 @@ export async function Footer() {
       longitude: 3.9412,
     },
     openingHoursSpecification: [
-      { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "08:00", closes: "17:00" },
+      { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "08:00", closes: "12:00" },
+      { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "14:00", closes: "18:00" },
       { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "08:00", closes: "12:00" },
     ],
     priceRange: "€€",
@@ -222,7 +223,7 @@ export async function Footer() {
               <div className="flex items-start gap-2.5 text-sm text-white/60">
                 <Clock className="h-4 w-4 text-purple-glow shrink-0 mt-0.5" />
                 <div>
-                  <div>Lun–Ven : 8h–17h</div>
+                  <div>Lun–Ven : 8h–12h · 14h–18h</div>
                   <div>Sam : 8h–12h</div>
                 </div>
               </div>

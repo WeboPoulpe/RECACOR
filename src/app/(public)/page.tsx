@@ -623,7 +623,7 @@ function ZoneInterventionSection() {
                   <span>
                     {IS_AUGUST_2026
                       ? "Lun–Ven : 8h–12h · 14h–17h · Sam : fermé"
-                      : "Lun–Ven : 8h–17h · Sam : 8h–12h"}
+                      : "Lun–Ven : 8h–12h · 14h–18h · Sam : 8h–12h"}
                   </span>
                 </div>
               </div>

@@ -183,7 +183,7 @@ export default async function ArticlePage({
                     <Clock className="h-4 w-4 text-purple-bright shrink-0" />
                     <div>
                       <p className="text-[10px] text-muted-foreground">Horaires</p>
-                      <p className="text-sm font-semibold text-foreground">Lun–Ven 8h–17h · Sam 8h–12h</p>
+                      <p className="text-sm font-semibold text-foreground">Lun–Ven 8h–12h · 14h–18h · Sam 8h–12h</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3 p-3 rounded-xl bg-white border border-border sm:col-span-2">
