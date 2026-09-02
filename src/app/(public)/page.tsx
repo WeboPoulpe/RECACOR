@@ -330,8 +330,8 @@ function ServicesSection() {
             </Link>
           </div>
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
   );
 }
 

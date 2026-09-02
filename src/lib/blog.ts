@@ -29,6 +29,11 @@ export interface Article {
   headings: ArticleHeading[];
 }
 
+export const REDIRECTED_ARTICLE_SLUGS = new Set([
+  "vidange-voiture-montpellier",
+  "parallelisme-montpellier",
+]);
+
 const CATEGORY_LABELS: Record<Categorie, string> = {
   "pneus-voiture": "Pneus voiture",
   mecanique: "Mécanique",
@@ -255,6 +260,10 @@ function mergeArticles(primary: Article[], secondary: Article[]): Article[] {
   });
 }
 
+function filterRedirectedArticles<T extends { frontmatter: { slug: string } }>(articles: T[]): T[] {
+  return articles.filter((article) => !REDIRECTED_ARTICLE_SLUGS.has(article.frontmatter.slug));
+}
+
 // Filtre runtime : un article est public dès que `status='published'`,
 // OU s'il est `status='scheduled'` ET que sa `publish_at` est passée.
 // Plus besoin de cron pour flipper le status — la lecture matche les dates dynamiquement.
@@ -262,7 +271,7 @@ function mergeArticles(primary: Article[], secondary: Article[]): Article[] {
 export async function getAllSlugs(): Promise<string[]> {
   if (!process.env.DATABASE_URL) {
     const local = await getLocalArticles();
-    return local.map((article) => article.frontmatter.slug);
+    return filterRedirectedArticles(local).map((article) => article.frontmatter.slug);
   }
   try {
     const rows = (await sql`
@@ -271,10 +280,15 @@ export async function getAllSlugs(): Promise<string[]> {
          OR (status = 'scheduled' AND publish_at IS NOT NULL AND publish_at <= NOW())
     `) as { slug: string }[];
     const local = await getLocalArticles();
-    return Array.from(new Set([...rows.map((r) => r.slug), ...local.map((article) => article.frontmatter.slug)]));
+    return Array.from(
+      new Set(
+        [...rows.map((r) => r.slug), ...local.map((article) => article.frontmatter.slug)]
+          .filter((slug) => !REDIRECTED_ARTICLE_SLUGS.has(slug)),
+      ),
+    );
   } catch {
     const local = await getLocalArticles();
-    return local.map((article) => article.frontmatter.slug);
+    return filterRedirectedArticles(local).map((article) => article.frontmatter.slug);
   }
 }
 
@@ -293,7 +307,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
 }
 
 export async function getAllArticles(): Promise<Article[]> {
-  if (!process.env.DATABASE_URL) return getLocalArticles();
+  if (!process.env.DATABASE_URL) return filterRedirectedArticles(await getLocalArticles());
   try {
     const rows = (await sql`
       SELECT * FROM articles
@@ -303,16 +317,16 @@ export async function getAllArticles(): Promise<Article[]> {
     `) as ArticleRow[];
     const dbArticles = await Promise.all(rows.map(rowToArticle));
     const localArticles = await getLocalArticles();
-    return mergeArticles(dbArticles, localArticles);
+    return filterRedirectedArticles(mergeArticles(dbArticles, localArticles));
   } catch {
-    return getLocalArticles();
+    return filterRedirectedArticles(await getLocalArticles());
   }
 }
 
 export async function getArticlesByCategory(cat: Categorie): Promise<Article[]> {
   if (!process.env.DATABASE_URL) {
     const local = await getLocalArticles();
-    return local.filter((article) => article.frontmatter.categorie === cat);
+    return filterRedirectedArticles(local).filter((article) => article.frontmatter.categorie === cat);
   }
   try {
     const rows = (await sql`
@@ -324,10 +338,10 @@ export async function getArticlesByCategory(cat: Categorie): Promise<Article[]> 
     `) as ArticleRow[];
     const dbArticles = await Promise.all(rows.map(rowToArticle));
     const localArticles = (await getLocalArticles()).filter((article) => article.frontmatter.categorie === cat);
-    return mergeArticles(dbArticles, localArticles);
+    return filterRedirectedArticles(mergeArticles(dbArticles, localArticles));
   } catch {
     const local = await getLocalArticles();
-    return local.filter((article) => article.frontmatter.categorie === cat);
+    return filterRedirectedArticles(local).filter((article) => article.frontmatter.categorie === cat);
   }
 }
 

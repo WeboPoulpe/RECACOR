@@ -18,6 +18,10 @@ const PL_ALIASES = new Set([
 ]);
 
 const SPANISH_PREFIX = "/es/";
+const BLOG_REDIRECTS: Record<string, string> = {
+  "/blog/vidange-voiture-montpellier": "/services/vidange",
+  "/blog/parallelisme-montpellier": "/services/parallelisme-geometrie",
+};
 
 function applyBriefingHeaders(response: NextResponse) {
   response.headers.set(
@@ -50,6 +54,14 @@ export async function middleware(req: NextRequest) {
   if (PL_ALIASES.has(normalizedPath) && normalizedPath !== PL_ALIAS_DESTINATION) {
     const url = req.nextUrl.clone();
     url.pathname = PL_ALIAS_DESTINATION;
+    url.search = "";
+    return NextResponse.redirect(url, { status: 301 });
+  }
+
+  const blogRedirectTarget = BLOG_REDIRECTS[normalizedPath];
+  if (blogRedirectTarget) {
+    const url = req.nextUrl.clone();
+    url.pathname = blogRedirectTarget;
     url.search = "";
     return NextResponse.redirect(url, { status: 301 });
   }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getArticleBySlug, getAllArticles, CTA_PER_CATEGORY, categoryLabel } from "@/lib/blog";
+import { getArticleBySlug, getAllArticles, getAllSlugs, CTA_PER_CATEGORY, categoryLabel } from "@/lib/blog";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Clock, User, MapPin, Phone, Calendar, BookOpen } from "lucide-react";
 import { PhoneLink } from "@/components/phone-link";
@@ -16,8 +16,8 @@ export const revalidate = 604800;
 // Pré-construit tous les articles au build : la DB n'est touchée qu'une
 // seule fois à la construction plutôt qu'à chaque régénération ISR.
 export async function generateStaticParams() {
-  const articles = await getAllArticles();
-  return articles.map((a) => ({ slug: a.frontmatter.slug }));
+  const slugs = await getAllSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 function getArticleSeoTitle(title: string): string {
