@@ -412,45 +412,21 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
         </div>
       </section>
 
-      {/* Recreusage */}
-      <section className="relative py-24 bg-muted overflow-hidden">
-        <BgParticles />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-[4px] bg-gradient-to-br from-purple-deep to-purple-mid p-10 sm:p-14 text-white">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-[4px] bg-white/10 border border-white/20 text-xs font-medium mb-4">
-                  <Leaf className="h-3.5 w-3.5 text-purple-glow" /> Écologique &amp; économique
-                </div>
-                <h2 className="text-3xl sm:text-4xl font-black mb-4">
-                  Recreusage — solution durable
-                </h2>
-                <p className="text-white/70 mb-6">
-                  Le recreusage Recacor : des pneus haute qualité conçus pour durer plus
-                  longtemps, à moindre coût et avec moins d&apos;impact environnemental.
-                </p>
-                <p className="text-sm text-white/70 mb-6 leading-relaxed">
-                  Si vous cherchez avant tout à prolonger la durée de vie de vos enveloppes, notre page{" "}
-                  <Link href="/services/recreusage" className="font-bold text-purple-glow hover:underline">
-                    recreusage poids lourd
-                  </Link>{" "}
-                  détaille le service, les gains et le fonctionnement atelier.
-                </p>
-                <ul className="space-y-2 mb-6">
-                  {["-40% vs pneu neuf", "+25% de durée de vie", "Qualité équivalente au neuf", "Réduction empreinte carbone"].map((i) => (
-                    <li key={i} className="flex items-center gap-2.5 text-sm text-white/80">
-                      <CheckCircle className="h-4 w-4 text-purple-glow shrink-0" /> {i}
-                    </li>
-                  ))}
-                </ul>
-                <Link href="/services/recreusage" className="recacor-btn-secondary">
-                  En savoir plus sur le recreusage <ArrowRight className="h-4 w-4" />
-                </Link>
+      <section className="bg-muted py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-[4px] border border-border bg-white p-8 sm:p-10">
+            <div className="max-w-3xl">
+              <div className="inline-flex items-center gap-2 text-sm font-bold text-purple-bright">
+                <Leaf className="h-4 w-4" /> Pneus poids lourd
               </div>
-              <div className="text-center">
-                <div className="text-7xl sm:text-8xl font-black text-purple-glow">-40%</div>
-                <p className="text-white/60 mt-2 uppercase tracking-widest text-sm">Économies vs pneu neuf</p>
-              </div>
+              <h2 className="mt-3 text-3xl font-black tracking-tight sm:text-4xl">Recreusage de pneus poids lourd</h2>
+              <p className="mt-4 leading-relaxed text-muted-foreground">
+                Certaines enveloppes adaptées peuvent être recreusées. L&apos;atelier contrôle d&apos;abord leur état,
+                puis indique si cette solution convient à votre flotte.
+              </p>
+              <Link href="/services/recreusage" className="mt-6 inline-flex items-center gap-2 font-bold text-purple-bright hover:underline">
+                Voir le service recreusage <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
           </div>
           <div className="mt-6 rounded-[4px] border border-border bg-white p-5">

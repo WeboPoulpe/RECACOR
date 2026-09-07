@@ -206,12 +206,19 @@ export function ClimCamionClient({ heroImage }: { heroImage?: string }) {
                 </h2>
               </div>
               <div className="space-y-4 leading-relaxed text-muted-foreground">
-                <p>
-                  Le coeur de l&apos;offre concerne la clim camion et poids lourd autour de Montpellier. Recacor peut
-                  aussi intervenir sur certains engins TP et véhicules agricoles selon la configuration du véhicule
-                  et les conditions d&apos;accès.
-                </p>
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <p>
+                Le coeur de l&apos;offre concerne la clim camion et poids lourd autour de Montpellier. Recacor peut
+                aussi intervenir sur certains engins TP et véhicules agricoles selon la configuration du véhicule
+                et les conditions d&apos;accès.
+              </p>
+              <p>
+                Pour une voiture ou un utilitaire léger, consulter la page{" "}
+                <Link href="/services/climatisation-auto-montpellier" className="font-bold text-purple-bright hover:underline">
+                  climatisation auto au Crès
+                </Link>
+                .
+              </p>
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                   {vehicleTypes.map((item) => (
                     <div key={item} className="flex items-center gap-2 rounded-[4px] bg-muted px-4 py-3 text-sm font-bold text-foreground">
                       <CheckCircle className="h-4 w-4 shrink-0 text-purple-bright" />
