@@ -32,6 +32,13 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [scrollThreshold]);
 
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
     <>
       {/* Top info bar */}
@@ -57,7 +64,7 @@ export function Header() {
           "recacor-header-in fixed left-0 right-0 z-50 transition-all duration-500",
           scrolled
             ? "top-0 bg-white shadow-[0_1px_30px_rgba(7,27,51,0.08)] border-b border-slate-200"
-            : "top-8 bg-transparent"
+            : "top-0 border-b border-white/10 bg-[var(--recacor-night)] shadow-[0_8px_24px_rgba(7,27,51,0.16)] lg:top-8"
         )}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -122,8 +129,8 @@ export function Header() {
 
       {/* Mobile overlay */}
       {open && (
-          <div className="recacor-mobile-menu fixed inset-0 z-40 overflow-y-auto bg-[var(--recacor-night)]">
-            <nav className="min-h-full flex flex-col items-center justify-center gap-2 py-32">
+          <div className="recacor-mobile-menu fixed inset-x-0 top-0 z-40 h-[100dvh] overscroll-contain overflow-y-auto bg-[var(--recacor-night)]">
+            <nav className="flex min-h-full flex-col items-center justify-start gap-1 px-6 pb-28 pt-24">
               {navigation.map((item, i) => (
                 <div
                   key={item.name}
@@ -133,7 +140,7 @@ export function Header() {
                   <Link
                     href={item.href}
                     onClick={() => setOpen(false)}
-                  className="block py-2 font-heading text-4xl font-black uppercase text-white/70 transition-colors hover:text-white"
+                  className="block py-2 font-heading text-3xl font-black uppercase text-white/70 transition-colors hover:text-white sm:text-4xl"
                   >
                     {item.name}
                   </Link>

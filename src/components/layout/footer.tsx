@@ -22,6 +22,7 @@ const servicesLinks = [
   { name: "Pneus agricoles", href: "/pneus-utilitaires-pl#agricoles" },
   { name: "Vidange", href: "/services/vidange" },
   { name: "Parallélisme & Géométrie", href: "/services/parallelisme-geometrie" },
+  { name: "Contrôle atelier 40 points", href: "/services/controle-atelier-40-points" },
   { name: "Contrôle technique", href: "/services/prise-en-charge-controle-technique" },
   { name: "Recharge clim", href: "/services/climatisation-auto-montpellier" },
   { name: "Clim camion & poids lourd", href: "/services/clim-camion-poids-lourd-montpellier" },

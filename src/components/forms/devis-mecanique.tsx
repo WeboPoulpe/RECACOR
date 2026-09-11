@@ -25,7 +25,7 @@ const SERVICE_GROUPS: { label: string; options: string[] }[] = [
   },
   {
     label: "Autre",
-    options: ["Révision complète", "Autre (préciser dans le message)"],
+    options: ["Contrôle atelier 40 points", "Révision complète", "Autre (préciser dans le message)"],
   },
 ];
 

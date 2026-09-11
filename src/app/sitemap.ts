@@ -36,6 +36,7 @@ const CONTENT_UPDATED: Record<string, string> = {
   "/services/climatisation-auto-montpellier": "2026-07-24",
   "/services/clim-camion-poids-lourd-montpellier": "2026-07-18",
   "/services/recreusage": "2026-07-24",
+  "/services/controle-atelier-40-points": "2026-09-12",
   "/nos-centres": "2026-06-06",
   "/blog": "2026-06-17",
   "/contact": "2026-06-15",
@@ -46,8 +47,12 @@ const CONTENT_UPDATED: Record<string, string> = {
   "/confidentialite": "2026-05-28",
 };
 
-// Dernière vague de modification réelle des pages villes (villes-seo.ts / table villes).
+// Dernière vague historique de modification des pages villes sans date dédiée.
 const VILLES_UPDATED = "2026-07-14";
+const VILLE_CONTENT_UPDATED: Record<string, string> = {
+  "/nimes": "2026-09-12",
+  "/beziers": "2026-09-12",
+};
 
 // Filet de sécurité pour un article sans date exploitable.
 const BLOG_FALLBACK_UPDATED = "2026-07-17";
@@ -75,7 +80,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
     ...villes.map((v) => ({
       url: `${base}/${v.slug}`,
-      lastModified: new Date(VILLES_UPDATED),
+      lastModified: new Date(VILLE_CONTENT_UPDATED[`/${v.slug}`] ?? VILLES_UPDATED),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),

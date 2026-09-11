@@ -48,6 +48,40 @@ export async function generateMetadata({
       },
     };
   }
+  if (slug === "nimes") {
+    const title = "Pneus Nîmes | Livraison ou montage partenaire — Recacor";
+    const description = "Pneus à Nîmes : demandez votre devis Recacor. Livraison ou montage au Crès et chez un garage partenaire selon la dimension et la zone.";
+    return {
+      title: { absolute: title },
+      description,
+      alternates: { canonical: "/nimes" },
+      openGraph: {
+        title,
+        description,
+        url: "https://www.recacor.fr/nimes",
+        siteName: "Recacor",
+        locale: "fr_FR",
+        type: "website",
+      },
+    };
+  }
+  if (slug === "beziers") {
+    const title = "Pneus Béziers | Livraison et montage partenaire — Recacor";
+    const description = "Pneus à Béziers : demandez votre devis Recacor avant de vous déplacer. Livraison, montage partenaire ou orientation vers Servian selon votre besoin.";
+    return {
+      title: { absolute: title },
+      description,
+      alternates: { canonical: "/beziers" },
+      openGraph: {
+        title,
+        description,
+        url: "https://www.recacor.fr/beziers",
+        siteName: "Recacor",
+        locale: "fr_FR",
+        type: "website",
+      },
+    };
+  }
   const seo = findVilleSeo(slug);
   const distance = seo?.distance || v.distance;
   return {
