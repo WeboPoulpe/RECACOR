@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Plus, ExternalLink, Pencil } from "lucide-react";
+import { Plus, ExternalLink, Pencil, Pause, Loader2 } from "lucide-react";
 import type { AdminArticleListItem } from "@/lib/blog-admin";
 import { useEffect, useState } from "react";
 
@@ -36,6 +36,8 @@ export default function AdminBlogList() {
   const [search, setSearch] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
   const [loading, setLoading] = useState(true);
+  const [pausing, setPausing] = useState(false);
+  const [pauseMessage, setPauseMessage] = useState("");
 
   useEffect(() => {
     fetch("/api/admin/articles")
@@ -49,6 +51,35 @@ export default function AdminBlogList() {
     const matchStatus = filterStatus === "all" || a.status === filterStatus;
     return matchSearch && matchStatus;
   });
+  const scheduledCount = articles.filter((a) => a.status === "scheduled").length;
+
+  const pauseScheduled = async () => {
+    if (scheduledCount === 0 || pausing) return;
+    if (!window.confirm(`Passer les ${scheduledCount} articles programmés en brouillon et supprimer leurs dates de publication ? Les articles déjà publiés ne seront pas modifiés.`)) return;
+
+    setPausing(true);
+    setPauseMessage("");
+    try {
+      const response = await fetch("/api/admin/articles", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "pause-scheduled" }),
+      });
+      const data = await response.json() as { ok?: boolean; paused?: number; error?: string };
+      if (!response.ok || !data.ok) throw new Error(data.error || "Impossible de mettre les articles en brouillon");
+
+      setArticles((current) => current.map((article) => (
+        article.status === "scheduled"
+          ? { ...article, status: "draft", publish_at: null }
+          : article
+      )));
+      setPauseMessage(`${data.paused ?? scheduledCount} article${(data.paused ?? scheduledCount) > 1 ? "s" : ""} mis en brouillon.`);
+    } catch (error) {
+      setPauseMessage(error instanceof Error ? error.message : "Impossible de mettre les articles en brouillon");
+    } finally {
+      setPausing(false);
+    }
+  };
 
   return (
     <div>
@@ -87,7 +118,22 @@ export default function AdminBlogList() {
           <option value="draft">Brouillons</option>
         </select>
         <span className="text-xs text-muted-foreground">{filtered.length} résultat{filtered.length !== 1 ? "s" : ""}</span>
+        {filterStatus === "scheduled" && scheduledCount > 0 && (
+          <button
+            type="button"
+            onClick={pauseScheduled}
+            disabled={pausing}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-orange-300 bg-orange-50 text-sm font-bold text-orange-800 hover:bg-orange-100 disabled:opacity-60"
+          >
+            {pausing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Pause className="h-4 w-4" />}
+            {pausing ? "Mise en brouillon…" : `Mettre les ${scheduledCount} programmés en brouillon`}
+          </button>
+        )}
       </div>
+
+      {pauseMessage && (
+        <p className="mb-5 text-sm font-medium text-foreground" role="status">{pauseMessage}</p>
+      )}
 
       {loading ? (
         <div className="rounded-2xl border border-border bg-white p-12 text-center text-muted-foreground text-sm">
