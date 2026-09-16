@@ -113,6 +113,9 @@ const faqs = [
   { q: "Pourquoi surveiller la pression d'un pneu PL régulièrement ?", a: "Un sous-gonflage, même léger, augmente la chaleur interne, accélère l'usure et allonge la distance de freinage. Sur un parc qui roule beaucoup, un contrôle mensuel à froid est l'un des leviers les plus simples pour allonger la durée de vie des enveloppes et réduire le coût d'exploitation." },
   { q: "Recacor accompagne-t-il aussi le TP, l'agricole et les parcs industriels ?", a: "Oui. Au-delà du transport routier, Recacor accompagne les bennes, engins de chantier, parcs agricoles et environnements industriels — avec une recommandation adaptée à l'usage, la charge et le rythme d'exploitation." },
   { q: "Que faire après un choc important ou une crevaison sévère ?", a: "Faire contrôler le pneu par un professionnel avant toute remise en service. Certains dommages restent internes et ne sont pas visibles à l'œil nu — une enveloppe fragilisée peut provoquer un éclatement ultérieur dans des conditions normales d'usage." },
+  { q: "Faites-vous le parallélisme sur camion et sur remorque ?", a: "Oui. L'atelier du Crès règle le parallélisme et la géométrie des camions, des remorques et des engins de chantier. Le temps d'immobilisation dépend de la configuration du véhicule : le plus simple est d'appeler avant de venir pour caler le passage." },
+  { q: "Peut-on acheter des pneus poids lourd directement au garage ?", a: "Oui. Les pneus poids lourd sont disponibles au comptoir de l'atelier du Crès, avec devis donné sur place. Selon la dimension, le pneu est en stock ou commandé avec un délai annoncé avant validation." },
+  { q: "Combien de temps faut-il prévoir pour une géométrie poids lourd ?", a: "Cela dépend du véhicule : porteur, tracteur, remorque ou engin de chantier n'immobilisent pas l'atelier de la même façon. Un appel avant de venir permet de réserver le créneau et de limiter l'arrêt du véhicule." },
 ];
 
 export function PlClient({ heroImage }: { heroImage?: string }) {
@@ -164,6 +167,40 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
           </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
+      </section>
+
+      {/* Préventes Hankook */}
+      <section id="preventes" className="py-14 bg-background scroll-mt-24">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-[4px] border border-purple-bright/30 bg-white p-8 sm:p-10 shadow-sm">
+            <p className="text-xs font-bold uppercase tracking-wider text-purple-bright">Prévente en cours</p>
+            <h2 className="mt-3 text-3xl sm:text-4xl font-black tracking-tight">
+              Préventes pneus poids lourd <span className="text-gradient-purple">Hankook</span>
+            </h2>
+            <p className="mt-3 text-lg font-semibold text-foreground">
+              Arrivage en cours. Réservez vos dimensions avant la mise en stock.
+            </p>
+            <div className="mt-4 space-y-4 text-muted-foreground leading-relaxed">
+              <p>
+                Un arrivage Hankook poids lourd est en cours chez Recacor : gammes
+                directionnelles, motrices et remorque. Les préventes sont ouvertes pour
+                réserver vos dimensions avant la mise en stock.
+              </p>
+              <p>
+                Dites-nous vos dimensions et le nombre de pneus, un commercial vous rappelle
+                avec les conditions et les délais.
+              </p>
+            </div>
+            <div className="mt-6 flex flex-col sm:flex-row gap-3 max-w-xl">
+              <a href="#devis" className="flex-1 recacor-btn-primary whitespace-nowrap">
+                Réserver mes dimensions <ArrowRight className="h-4 w-4" />
+              </a>
+              <PhoneLink location="cta" serviceType="pl" className="flex-1 recacor-btn-secondary whitespace-nowrap" showIcon>
+                Appeler : {PHONE_DISPLAY}
+              </PhoneLink>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="py-14 bg-background">
@@ -407,6 +444,40 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
                 restent internes et ne se voient pas toujours immédiatement. Un contrôle sérieux
                 évite de remettre en service une enveloppe déjà fragilisée.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Atelier du Crès */}
+      <section id="atelier" className="py-24 bg-background scroll-mt-24">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-[4px] border border-border bg-white p-8 sm:p-10 shadow-sm">
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight">
+              Garage poids lourd <span className="text-gradient-purple">au Crès</span>
+            </h2>
+            <p className="mt-3 text-lg font-semibold text-foreground">
+              Parallélisme, montage et pneus au comptoir, sur place près de Montpellier.
+            </p>
+            <div className="mt-4 space-y-4 text-muted-foreground leading-relaxed">
+              <p>
+                L&apos;atelier du Crès prend en charge les camions, les remorques et les engins
+                de chantier. Parallélisme et géométrie, montage et démontage, réparation,
+                recreusage quand la carcasse le permet, recharge de climatisation.
+              </p>
+              <p>
+                Les pneus poids lourd sont disponibles au comptoir, avec devis donné sur place.
+                Pour un parallélisme, le plus simple est d&apos;appeler avant de venir : le temps
+                d&apos;immobilisation dépend de la configuration du véhicule.
+              </p>
+            </div>
+            <div className="mt-6 flex flex-col sm:flex-row gap-3 max-w-xl">
+              <PhoneLink location="cta" serviceType="pl" className="flex-1 recacor-btn-primary whitespace-nowrap" showIcon>
+                Appeler : {PHONE_DISPLAY}
+              </PhoneLink>
+              <a href="#devis" className="flex-1 recacor-btn-secondary whitespace-nowrap">
+                Devis pneus PL <ArrowRight className="h-4 w-4" />
+              </a>
             </div>
           </div>
         </div>

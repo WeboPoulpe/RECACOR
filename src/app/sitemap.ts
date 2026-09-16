@@ -22,7 +22,7 @@ const CONTENT_UPDATED: Record<string, string> = {
   "/pneus-voiture/nissan": "2026-07-24",
   "/pneus-voiture/ford": "2026-07-24",
   "/mecanique": "2026-07-18",
-  "/pneus-utilitaires-pl": "2026-07-19",
+  "/pneus-utilitaires-pl": "2026-09-16",
   "/pneus-utilitaires-pl/moselle": "2026-08-21",
   "/pneus-utilitaires-pl/ardennes": "2026-08-24",
   "/pneus-utilitaires-pl/haute-marne": "2026-08-24",
