@@ -155,7 +155,8 @@ function HeroSection() {
 
           <p className="mt-6 max-w-xl text-base leading-7 text-white/74 sm:text-lg">
             Pneus voiture, vidange, parallélisme, climatisation et solutions poids lourd au
-            Crès. Un atelier local, du stock réel, une équipe terrain et un devis rapide.
+            Crès, à quelques minutes de Castelnau-le-Lez, Vendargues et Jacou. Un atelier
+            local, du stock réel, une équipe terrain et un devis rapide.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">

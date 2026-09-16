@@ -22,12 +22,12 @@ export const metadata: Metadata = {
     template: "%s | Recacor Le Crès",
   },
   description:
-    "Spécialiste pneus VL et PL à Montpellier — Le Crès. Montage sans RDV, stock immédiat, prix discount. Appelez le 04 99 53 33 90.",
+    "Pneus montés dès 45 € au Crès, près de Montpellier, Castelnau-le-Lez et Vendargues. Mécanique, poids lourd, montage sans RDV — 04 99 53 33 90.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Garage auto Montpellier — pneus VL, mécanique et poids lourd | Recacor",
     description:
-      "Spécialiste pneus VL et PL à Montpellier — Le Crès. Montage sans RDV, stock immédiat, prix discount.",
+      "Pneus montés dès 45 € au Crès, près de Montpellier, Castelnau-le-Lez et Vendargues. Mécanique, poids lourd, montage sans RDV.",
     url: "https://www.recacor.fr",
     siteName: "Recacor",
     locale: "fr_FR",

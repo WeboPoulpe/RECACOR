@@ -7,7 +7,7 @@ import { getAllArticles } from "@/lib/blog";
 // Un lastmod identique sur tout le sitemap à chaque déploiement fait perdre
 // à Google toute confiance dans ce signal (il l'ignore alors complètement).
 const CONTENT_UPDATED: Record<string, string> = {
-  "": "2026-07-14",
+  "": "2026-09-16",
   "/pneus-voiture": "2026-07-24",
   "/pneus-voiture/peugeot": "2026-07-24",
   "/pneus-voiture/renault": "2026-07-24",
