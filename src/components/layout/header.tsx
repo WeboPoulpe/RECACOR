@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X, Phone, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -15,6 +16,7 @@ const navigation = [
   { name: "Contrôle technique", href: "/services/prise-en-charge-controle-technique" },
   { name: "Clim", href: "/services/climatisation-auto-montpellier" },
   { name: "Pneus PL", href: "/pneus-utilitaires-pl" },
+  { name: "Dépannage PL", href: "/depannage-poids-lourd-urgence" },
   { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ];
@@ -24,6 +26,8 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const logoUrl = useAssetUrl("site_logo", "/logo-recacor.webp");
   const scrollThreshold = 132;
+  const pathname = usePathname();
+  const isAssistancePL = pathname?.includes("/depannage-poids-lourd-urgence");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > scrollThreshold);
@@ -50,7 +54,11 @@ export function Header() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between">
             <div className="flex items-center gap-5">
               <span className="flex items-center gap-1.5"><MapPin className="h-3 w-3 text-yellow-400" /> 1240 Route de Nîmes, 34920 Le Crès</span>
-              <span className="text-white/50">Lun–Ven 8h–12h · 14h–18h · Sam 8h–12h</span>
+              {isAssistancePL ? (
+                <span className="text-yellow-400 font-semibold">Astreinte PL 24h/24, 7j/7 · Atelier : Lun–Ven 8h–12h · 14h–18h · Sam 8h–12h</span>
+              ) : (
+                <span className="text-white/50">Lun–Ven 8h–12h · 14h–18h · Sam 8h–12h</span>
+              )}
             </div>
             <PhoneLink location="header" className="flex items-center gap-1.5 font-semibold hover:text-yellow-400 transition-colors">
               <Phone className="h-3 w-3" /> {PHONE_DISPLAY}

@@ -27,7 +27,7 @@ const servicesLinks = [
   { name: "Recharge clim", href: "/services/climatisation-auto-montpellier" },
   { name: "Clim camion & poids lourd", href: "/services/clim-camion-poids-lourd-montpellier" },
   { name: "Recreusage", href: "/services/recreusage" },
-  { name: "Assistance PL Hérault", href: "/pneus-utilitaires-pl#assistance" },
+  { name: "Dépannage PL sur route", href: "/depannage-poids-lourd-urgence" },
 ];
 
 const navLinks = [
@@ -67,6 +67,7 @@ const villesLinks = [
 const plZoneLinks = [
   { name: "Zone Sud & Corse", href: "/pneus-utilitaires-pl/zone-sud-corse" },
   { name: "Zone Nord-Est & Centre", href: "/pneus-utilitaires-pl/zone-nord-est-centre" },
+  { name: "Dordogne & Gironde", href: "/pneus-utilitaires-pl/dordogne" },
 ];
 
 export async function Footer() {

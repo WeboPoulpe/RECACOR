@@ -20,58 +20,58 @@ const villesCorridor = [
   "Millau",
 ];
 
-const casCourants = [
-  { icon: AlertTriangle, title: "Crevaison sur autoroute", desc: "Pneu percé ou éclaté sur A9, A75 ou une aire de repos : on vient monter une roue de secours ou réparer sur place selon l'état du pneu." },
-  { icon: Clock, title: "Panne de nuit ou de week-end", desc: "Une astreinte tourne midi, soir, nuit et week-end, y compris pour un chauffeur qu'on n'a jamais vu avant." },
-  { icon: MapPin, title: "Camion immobilisé loin de l'atelier", desc: "Un monteur-dépanneur équipé se déplace directement jusqu'à vous, sans attendre que le camion rentre à l'atelier." },
+const casCourante = [
+  { icon: AlertTriangle, title: "Cauciuc spart pe autostradă", desc: "Pneu spart sau găurit pe A9, A75 sau pe o parcare de odihnă: venim să montăm roata de rezervă sau reparăm pe loc, dacă starea cauciucului permite." },
+  { icon: Clock, title: "Pană noaptea sau în weekend", desc: "Echipa de gardă lucrează la prânz, seara, noaptea și în weekend, inclusiv pentru un șofer pe care nu l-am mai văzut niciodată." },
+  { icon: MapPin, title: "Camion blocat departe de atelier", desc: "Un mecanic vulcanizator vine direct la dumneavoastră, fără să așteptați ca vehiculul să ajungă la un atelier." },
 ];
 
-const etapesIntervention = [
-  { title: "Vous appelez", desc: "Un numéro unique, décroché directement par l'équipe. Donnez votre position (borne kilométrique, aire, nom de la sortie) et le type de véhicule." },
-  { title: "On confirme la marche à suivre", desc: "Selon l'heure et la panne, on vous dit qui part, avec quel matériel, et ce que ça va coûter avant de démarrer." },
-  { title: "L'équipe intervient sur place", desc: "Montage, réparation ou dépannage roue selon ce qui est possible sur site. Si le pneu doit être recreusé ou remplacé en atelier, on vous l'explique clairement." },
-  { title: "Vous repartez", desc: "Facture et prestation claires, sans mauvaise surprise sur le prix annoncé au téléphone." },
+const etapeInterventie = [
+  { title: "Sunați", desc: "Un singur număr, la care răspunde direct echipa. Spuneți poziția (kilometrul, parcarea, numele ieșirii) și tipul de vehicul." },
+  { title: "Confirmăm intervenția", desc: "În funcție de oră și de tipul de pană, vă spunem cine pleacă, cu ce echipament și cât va costa, înainte de a începe." },
+  { title: "Echipa intervine la fața locului", desc: "Montaj, reparație sau schimb de roată, în funcție de ce este posibil pe loc. Dacă anvelopa trebuie recanelată sau înlocuită în atelier, vă explicăm clar." },
+  { title: "Plecați la drum", desc: "Factură și prestație clare, fără surprize față de prețul anunțat la telefon." },
 ];
 
-const tarifsInterventions = [
-  { label: "Sortie atelier 1-30 km", prix: "30 € HT" },
-  { label: "Sortie atelier 30-60 km", prix: "50 € HT" },
-  { label: "Sortie atelier 61-100 km", prix: "85 € HT" },
-  { label: "Au-delà de 100 km", prix: "85 € HT + 1,80 €/km" },
+const tarifeDeplasare = [
+  { label: "Deplasare atelier 1-30 km", prix: "30 € fără TVA" },
+  { label: "Deplasare atelier 30-60 km", prix: "50 € fără TVA" },
+  { label: "Deplasare atelier 61-100 km", prix: "85 € fără TVA" },
+  { label: "Peste 100 km", prix: "85 € + 1,80 €/km fără TVA" },
 ];
 
-const astreintes = [
-  { label: "Astreinte midi (12h-14h)", prix: "90 € HT" },
-  { label: "Astreinte soir (19h-22h)", prix: "180 € HT" },
-  { label: "Astreinte nuit (22h-6h)", prix: "380 € HT" },
-  { label: "Astreinte week-end", prix: "650 € HT" },
+const gardaTarife = [
+  { label: "Gardă prânz (12h-14h)", prix: "90 € fără TVA" },
+  { label: "Gardă seara (19h-22h)", prix: "180 € fără TVA" },
+  { label: "Gardă noaptea (22h-6h)", prix: "380 € fără TVA" },
+  { label: "Gardă weekend", prix: "650 € fără TVA" },
 ];
 
 const faqs = [
-  { q: "Vous intervenez vraiment la nuit et le week-end ?", a: "Oui. Une astreinte est organisée midi, soir, nuit et week-end pour les pannes poids lourd sur route. Le tarif d'astreinte dépend du créneau horaire et vous est annoncé avant qu'on ne se déplace." },
-  { q: "Do you speak English?", a: "Yes. Our team can take your call in English, Italian, Polish, Romanian or Portuguese to organise roadside tyre assistance on the Perpignan-Marseille-Millau corridor." },
-  { q: "Je suis loin d'un atelier Recacor, vous pouvez quand même venir ?", a: "L'équipe se déplace sur l'axe Perpignan-Narbonne-Béziers-Montpellier-Nîmes-Marseille, ainsi que vers Millau. Le tarif de déplacement dépend de la distance réelle depuis l'atelier le plus proche ; on vous le confirme au téléphone selon votre position exacte." },
-  { q: "Combien coûte une intervention ?", a: "Le prix se décompose en deux parties : le déplacement (30 à 85 € HT selon la distance, plus 1,80 €/km au-delà de 100 km) et l'astreinte si vous appelez en dehors des heures normales (de 90 € à 650 € HT selon le créneau). La prestation elle-même (montage, réparation) s'ajoute selon le pneu." },
-  { q: "Le pneu peut-il être réparé sur place ou faut-il le remplacer ?", a: "Ça dépend de l'endroit et de la taille de la crevaison, ainsi que de l'état de la carcasse. L'équipe vérifie sur place ce qui est possible : réparation, montage d'une roue de secours, ou remplacement si le pneu est trop abîmé." },
-  { q: "Je ne connais pas ma position exacte sur l'autoroute, comment faire ?", a: "Donnez la borne kilométrique la plus proche, le nom de la dernière sortie ou de l'aire de repos passée, et le sens de circulation. C'est suffisant pour organiser l'intervention." },
-  { q: "Faites-vous aussi le recreusage sur route ?", a: "Le recreusage se fait en atelier, pas sur le bord de l'autoroute. Sur place, l'équipe pose une roue ou répare pour vous remettre en route ; le recreusage peut être proposé ensuite si le pneu est éligible." },
-  { q: "Que dois-je faire en attendant l'arrivée de l'équipe ?", a: "Mettez les feux de détresse, sortez le triangle et le gilet si vous le pouvez en sécurité, et éloignez-vous de la circulation. Gardez votre téléphone à portée : on vous rappelle pour confirmer l'heure d'arrivée." },
+  { q: "Interveniți și noaptea sau în weekend?", a: "Da. O echipă de gardă este organizată la prânz, seara, noaptea și în weekend pentru pene de cauciuc la camioane pe traseu. Tariful de gardă depinde de intervalul orar și vă este comunicat înainte de deplasare." },
+  { q: "Echipa vorbește și alte limbi în afară de română?", a: "Da. Putem prelua apelul și în franceză, engleză, italiană, poloneză sau portugheză, pentru a organiza asistența rutieră pe axa Perpignan-Montpellier-Marseille." },
+  { q: "Sunt departe de un atelier Recacor, veniți totuși?", a: "Echipa se deplasează pe axa Perpignan-Narbonne-Béziers-Montpellier-Nîmes-Marseille, precum și spre Millau. Tariful de deplasare depinde de distanța reală față de atelierul cel mai apropiat; îl confirmăm la telefon după poziția dumneavoastră exactă." },
+  { q: "Cât costă o intervenție?", a: "Prețul are două componente: deplasarea (30 până la 85 € fără TVA, în funcție de distanță, plus 1,80 €/km peste 100 km) și garda, dacă sunați în afara orelor normale (90 până la 650 € fără TVA, în funcție de interval). Prestația în sine (montaj, reparație) se adaugă separat, în funcție de cauciuc." },
+  { q: "Anvelopa poate fi reparată pe loc sau trebuie înlocuită?", a: "Depinde de locul și mărimea găurii, precum și de starea carcasei. Echipa verifică pe loc ce este posibil: reparație, montarea roții de rezervă sau înlocuire, dacă anvelopa este prea deteriorată." },
+  { q: "Nu știu exact unde mă aflu pe autostradă, ce fac?", a: "Spuneți cel mai apropiat kilometru, numele ultimei ieșiri sau parcări pe care ați trecut-o, și sensul de mers. Este suficient pentru a organiza intervenția." },
+  { q: "Faceți și recanelare direct pe traseu?", a: "Recanelarea se face în atelier, nu pe marginea autostrăzii. Pe loc, echipa montează o roată sau repară pentru a vă repune în mișcare; recanelarea poate fi propusă ulterior, dacă anvelopa este eligibilă." },
+  { q: "Ce trebuie să fac până sosește echipa?", a: "Porniți avariile, scoateți triunghiul și vesta dacă puteți în siguranță, și îndepărtați-vă de trafic. Țineți telefonul aproape: vă sunăm înapoi pentru a confirma ora sosirii." },
 ];
 
-export function DepannageClient() {
+export function DepannageRoClient() {
   return (
     <>
       <BreadcrumbJsonLd items={[
-        { name: "Accueil", url: "https://www.recacor.fr" },
-        { name: "Dépannage poids lourd urgence", url: "https://www.recacor.fr/depannage-poids-lourd-urgence" },
+        { name: "Acasă", url: "https://www.recacor.fr" },
+        { name: "Vulcanizare camion, asistență rutieră", url: "https://www.recacor.fr/ro/depannage-poids-lourd-urgence" },
       ]} />
       <ServiceJsonLd
-        name="Dépannage poids lourd sur route"
-        serviceType="Assistance pneu poids lourd sur route"
-        description="Assistance pneu poids lourd 24h/24 7j/7 sur l'axe Perpignan-Marseille-Millau : crevaison, éclatement, intervention sur site."
-        url="https://www.recacor.fr/depannage-poids-lourd-urgence"
+        name="Vulcanizare camion pe traseu și asistență rutieră"
+        serviceType="Asistență cauciucuri camion pe traseu"
+        description="Vulcanizare camion și asistență rutieră 24/7 pe axa Perpignan-Montpellier-Marseille: cauciuc spart, pană, intervenție la fața locului."
+        url="https://www.recacor.fr/ro/depannage-poids-lourd-urgence"
       />
-      <FaqJsonLd items={faqs} id="depannage-urgence" />
+      <FaqJsonLd items={faqs} id="depannage-urgence-ro" />
 
       <section className="relative pt-20 sm:pt-28 lg:pt-32 pb-20 overflow-hidden">
         <img
@@ -83,15 +83,15 @@ export function DepannageClient() {
         <div className="absolute inset-0 hero-overlay-image-strong" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Badge className="bg-white/10 text-white border-white/20 mb-4 sm:mb-6">
-            <AlertTriangle className="h-3 w-3 mr-1" /> Assistance sur route
+            <AlertTriangle className="h-3 w-3 mr-1" /> Asistență pe traseu
           </Badge>
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.15] sm:leading-[1.1] max-w-3xl">
-            Dépannage poids lourd{" "}
-            <span className="text-purple-glow">24h/24, 7j/7</span>
+            Vulcanizare camion{" "}
+            <span className="text-purple-glow">24h/24, 7/7</span>
           </h1>
           <p className="mt-3 sm:mt-4 text-white/90 max-w-xl text-base sm:text-lg drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
-            Une équipe vient sur place pour une crevaison ou un pneu hors service,
-            entre Perpignan, Marseille et Millau.
+            O echipă vine direct la dumneavoastră pentru un cauciuc spart sau
+            defect, între Perpignan, Marseille și Millau.
           </p>
           <div className="mt-5 flex flex-col sm:flex-row gap-2.5 sm:gap-3 max-w-2xl">
             <a
@@ -104,11 +104,11 @@ export function DepannageClient() {
               WhatsApp
             </a>
             <PhoneLink location="hero" serviceType="pl" className="flex-1 recacor-btn-primary whitespace-nowrap py-2.5 sm:py-3" showIcon>
-              Appeler maintenant
+              Sunați acum
             </PhoneLink>
           </div>
           <p className="mt-2.5 text-xs sm:text-sm text-white/60">
-            Ligne tenue par Patrick, joignable par appel ou WhatsApp.
+            Linie preluată de Patrick, disponibil la telefon sau pe WhatsApp.
           </p>
           <div className="mt-6 flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wider text-white/80">
             {villesCorridor.map((ville) => (
@@ -119,10 +119,10 @@ export function DepannageClient() {
           </div>
           <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-white/80">
             <Globe className="h-4 w-4 text-purple-glow" />
-            English · Italiano · Polski · Română · Português
+            Română · Français · English · Italiano · Polski · Português
           </div>
           <a href="#devis" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white/70 hover:text-white">
-            Demande non urgente <ArrowRight className="h-4 w-4" />
+            Cerere neurgentă <ArrowRight className="h-4 w-4" />
           </a>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
@@ -131,15 +131,15 @@ export function DepannageClient() {
       <section className="py-24 bg-background">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-black tracking-tight text-center mb-4">
-            Les pannes qu&apos;on traite <span className="text-gradient-purple">le plus souvent</span>
+            Penele pe care le rezolvăm <span className="text-gradient-purple">cel mai des</span>
           </h2>
           <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-12">
-            Un camion qui perd un pneu bloque une tournée entière. L&apos;idée est simple :
-            plusieurs monteurs-dépanneurs interviennent directement sur place, chacun avec
-            son camion équipé.
+            Un camion care pierde o cauciuc blochează toată cursa. Ideea este simplă:
+            mai mulți mecanici vulcanizatori intervin direct la fața locului, fiecare
+            cu camionul lui echipat.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {casCourants.map((c) => (
+            {casCourante.map((c) => (
               <div key={c.title} className="rounded-[4px] border border-border bg-white p-8">
                 <div className="w-14 h-14 rounded-[4px] bg-gradient-to-br from-purple-bright to-purple-mid flex items-center justify-center mb-5">
                   <c.icon className="w-7 h-7 text-white" />
@@ -155,14 +155,14 @@ export function DepannageClient() {
       <section className="py-24 bg-muted">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-black tracking-tight mb-4">
-            Ce qui se passe <span className="text-gradient-purple">quand vous appelez</span>
+            Ce se întâmplă <span className="text-gradient-purple">când sunați</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mb-10">
-            Pas de standard, pas d&apos;attente : la personne qui décroche organise
-            directement l&apos;intervention.
+            Fără centrală telefonică, fără așteptare: persoana care răspunde
+            organizează direct intervenția.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {etapesIntervention.map((e, i) => (
+            {etapeInterventie.map((e, i) => (
               <div key={e.title} className="rounded-[4px] border border-border bg-white p-7">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[4px] bg-purple-bright text-white font-black text-sm">{i + 1}</span>
@@ -179,37 +179,39 @@ export function DepannageClient() {
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <h2 className="text-4xl font-black tracking-tight">
-              Une équipe organisée pour <span className="text-gradient-purple">l&apos;axe Perpignan-Marseille</span>
+              O echipă organizată pentru <span className="text-gradient-purple">axa Perpignan-Marseille</span>
             </h2>
             <p className="mt-5 text-muted-foreground leading-relaxed">
-              Recacor s&apos;appuie sur ses sites du Crès, de Servian et de Vergèze pour
-              couvrir l&apos;autoroute entre Perpignan et Marseille, ainsi que la liaison
-              vers Millau. Plusieurs monteurs-dépanneurs sont répartis sur cet axe, chacun
-              avec son camion-atelier équipé, prêts à intervenir sans qu&apos;un seul
-              véhicule ait à couvrir tout le trajet. C&apos;est un des passages les plus
-              chargés en poids lourds vers l&apos;Espagne, et une panne de pneu là-bas ne
-              peut pas attendre le lendemain.
+              Recacor se bazează pe atelierele din Le Crès, Servian și Vergèze
+              pentru a acoperi autostrada dintre Perpignan și Marseille, precum
+              și legătura spre Millau. Mai mulți mecanici vulcanizatori sunt
+              repartizați pe acest traseu, fiecare cu camionul lui echipat,
+              gata să intervină fără ca un singur vehicul să facă tot drumul.
+              Este unul dintre cele mai circulate puncte de trecere pentru
+              camioane spre Spania, iar o pană de cauciuc acolo nu poate
+              aștepta până a doua zi.
             </p>
             <p className="mt-4 text-muted-foreground leading-relaxed">
-              Selon votre position au moment de l&apos;appel, l&apos;équipe la plus proche
-              se déplace directement. Donnez simplement la ville la plus proche ou la
-              borne kilométrique pour qu&apos;on organise l&apos;intervention.
+              În funcție de poziția dumneavoastră în momentul apelului, echipa
+              cea mai apropiată se deplasează direct. Spuneți pur și simplu
+              orașul cel mai apropiat sau kilometrul pentru a organiza
+              intervenția.
             </p>
           </div>
 
           <div className="mt-10 rounded-[4px] border border-border bg-white p-8 sm:p-10">
             <div className="flex items-center gap-2 mb-5">
               <ShieldCheck className="h-5 w-5 text-purple-bright" />
-              <h2 className="text-2xl font-black tracking-tight">Tarifs de déplacement</h2>
+              <h2 className="text-2xl font-black tracking-tight">Tarife de deplasare</h2>
             </div>
             <p className="text-sm text-muted-foreground mb-6">
-              Prix hors taxes, en heures normales, calculés depuis l&apos;atelier le plus
-              proche de votre position. TVA applicable en sus au taux en vigueur. Le tarif
-              exact vous est confirmé au téléphone avant l&apos;intervention, selon votre
-              position réelle.
+              Prețuri fără TVA, la ore normale, calculate de la atelierul cel
+              mai apropiat de poziția dumneavoastră. TVA se adaugă la cota în
+              vigoare. Tariful exact vă este confirmat la telefon înainte de
+              intervenție, după poziția reală.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {tarifsInterventions.map((t) => (
+              {tarifeDeplasare.map((t) => (
                 <div key={t.label} className="flex items-center justify-between rounded-[4px] border border-border bg-muted/30 px-4 py-3">
                   <span className="text-sm font-semibold">{t.label}</span>
                   <span className="text-sm font-black text-purple-bright">{t.prix}</span>
@@ -217,10 +219,10 @@ export function DepannageClient() {
               ))}
             </div>
             <p className="mt-6 text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              Astreintes en dehors des heures normales (hors km et prix des pneus)
+              Gardă în afara orelor normale (fără km și prețul cauciucurilor)
             </p>
             <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {astreintes.map((t) => (
+              {gardaTarife.map((t) => (
                 <div key={t.label} className="flex items-center justify-between rounded-[4px] border border-border bg-muted/30 px-4 py-3">
                   <span className="text-sm font-semibold">{t.label}</span>
                   <span className="text-sm font-black text-purple-bright">{t.prix}</span>
@@ -233,34 +235,34 @@ export function DepannageClient() {
             <div className="rounded-[4px] border border-border bg-white p-8">
               <div className="flex items-center gap-2 mb-4">
                 <Globe className="h-5 w-5 text-purple-bright" />
-                <h2 className="text-xl font-black tracking-tight">Plusieurs langues au téléphone</h2>
+                <h2 className="text-xl font-black tracking-tight">Vorbim mai multe limbi</h2>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Beaucoup de chauffeurs qui passent par cet axe viennent de l&apos;étranger.
-                Notre équipe peut échanger en anglais, italien, polonais, roumain ou
-                portugais pour organiser une intervention, sans que ça ralentisse la
-                prise en charge.
+                Mulți șoferi care trec pe acest traseu vin din străinătate.
+                Echipa noastră poate vorbi română, franceză, engleză, italiană,
+                poloneză sau portugheză pentru a organiza o intervenție, fără
+                să întârzie preluarea.
               </p>
             </div>
             <div className="rounded-[4px] border border-border bg-white p-8">
-              <h2 className="text-xl font-black tracking-tight mb-4">Après le dépannage</h2>
+              <h2 className="text-xl font-black tracking-tight mb-4">După intervenție</h2>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Si le pneu dépanné sur route peut encore être recreusé plutôt que
-                remplacé neuf, l&apos;équipe vous le propose lors du passage suivant à
-                l&apos;atelier. Le recreusage se décide toujours en atelier, jamais sur
-                le bord de l&apos;autoroute.
+                Dacă anvelopa reparată pe traseu mai poate fi recanelată în loc
+                să fie înlocuită cu una nouă, echipa vă propune asta la
+                următoarea trecere prin atelier. Recanelarea se decide
+                întotdeauna în atelier, niciodată pe marginea autostrăzii.
               </p>
               <Link href="/services/recreusage" className="mt-4 inline-flex text-sm font-bold text-purple-bright hover:underline">
-                Voir le service recreusage
+                Vezi serviciul de recanelare
               </Link>
             </div>
           </div>
 
           <div className="mt-10 flex flex-wrap gap-3 text-sm font-bold">
-            <Link href="/pneus-utilitaires-pl" className="text-purple-bright hover:underline">Pneus poids lourd</Link>
-            <Link href="/services/recreusage" className="text-purple-bright hover:underline">Recreusage</Link>
-            <Link href="/ro/depannage-poids-lourd-urgence" className="text-purple-bright hover:underline">Pagină în română</Link>
-            <Link href="/contact" className="text-purple-bright hover:underline">Contacter Recacor</Link>
+            <Link href="/pneus-utilitaires-pl" className="text-purple-bright hover:underline">Cauciucuri camion</Link>
+            <Link href="/services/recreusage" className="text-purple-bright hover:underline">Recanelare</Link>
+            <Link href="/depannage-poids-lourd-urgence" className="text-purple-bright hover:underline">Page en français</Link>
+            <Link href="/contact" className="text-purple-bright hover:underline">Contact Recacor</Link>
           </div>
         </div>
       </section>
@@ -271,12 +273,12 @@ export function DepannageClient() {
           <div className="text-center mb-10">
             <div className="inline-flex items-center gap-2 rounded-[4px] border border-purple-bright/30 bg-purple-bright/10 px-4 py-2 text-sm font-bold text-purple-deep mb-4">
               <PhoneCall className="h-4 w-4" />
-              Panne en cours ? Appelez directement
+              Pană în curs? Sunați direct
             </div>
             <h2 className="text-4xl font-black tracking-tight">
-              Demande <span className="text-gradient-purple">non urgente</span>
+              Cerere <span className="text-gradient-purple">neurgentă</span>
             </h2>
-            <p className="mt-4 text-muted-foreground">Un expert vous rappelle sous 2h en jours ouvrés</p>
+            <p className="mt-4 text-muted-foreground">Un expert vă recontactează în 2h, în zilele lucrătoare</p>
           </div>
           <div className="rounded-[4px] border border-border bg-white p-6 sm:p-8 shadow-xl">
             <DevisPlForm />
@@ -288,7 +290,7 @@ export function DepannageClient() {
 
       <section className="py-24 bg-background">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center text-4xl font-black tracking-tight mb-12">FAQ</h2>
+          <h2 className="text-center text-4xl font-black tracking-tight mb-12">Întrebări frecvente</h2>
           <div className="space-y-3">
             {faqs.map((faq, i) => (
               <details key={i} className="group rounded-[4px] border border-border bg-white p-5 cursor-pointer">

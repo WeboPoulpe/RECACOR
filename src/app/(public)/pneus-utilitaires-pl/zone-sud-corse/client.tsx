@@ -280,6 +280,10 @@ export function PlZoneSudCorseClient({ heroImage }: { heroImage?: string }) {
                   <span>Pneus poids lourd</span>
                   <ArrowRight className="h-4 w-4" />
                 </Link>
+                <Link href="/depannage-poids-lourd-urgence" className="flex items-center justify-between rounded-2xl border border-white/15 bg-white/10 px-5 py-4 text-sm font-bold hover:bg-white/15">
+                  <span>Dépannage sur route Perpignan-Marseille-Millau</span>
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
                 <Link href="/blog/pneus-nimes" className="flex items-center justify-between rounded-2xl border border-white/15 bg-white/10 px-5 py-4 text-sm font-bold hover:bg-white/15">
                   <span>Pneus poids lourd à Nîmes</span>
                   <ArrowRight className="h-4 w-4" />

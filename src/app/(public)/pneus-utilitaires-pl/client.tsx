@@ -505,6 +505,7 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
             <div className="mt-3 flex flex-wrap gap-3 text-sm font-bold">
               <Link href="/pneus-utilitaires-pl/zone-sud-corse" className="text-purple-bright hover:underline">Zone Sud &amp; Corse</Link>
               <Link href="/pneus-utilitaires-pl/zone-nord-est-centre" className="text-purple-bright hover:underline">Zone Nord-Est &amp; Centre</Link>
+              <Link href="/pneus-utilitaires-pl/dordogne" className="text-purple-bright hover:underline">Dordogne &amp; Gironde</Link>
               <Link href="/blog/pneus-nimes" className="text-purple-bright hover:underline">Pneus poids lourd Nîmes</Link>
               <Link href="/blog/pneus-sete" className="text-purple-bright hover:underline">Pneus poids lourd Sète</Link>
             </div>
@@ -531,7 +532,7 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
               <div className="space-y-3">
                 {[
                   { icon: MapPin, label: "Zone d'intervention", value: "Hérault (34) et départements limitrophes" },
-                  { icon: Clock, label: "Délai moyen", value: "Moins d'1h sur zone urbaine" },
+                  { icon: Clock, label: "Réactivité", value: "Prise en charge dès l'appel, 24h/24" },
                   { icon: AlertTriangle, label: "Service", value: "Uniquement interventions pneus (pas de mécanique)" },
                 ].map((item) => (
                   <div key={item.label} className="flex items-start gap-4 rounded-[4px] border border-border bg-white p-4">
@@ -561,14 +562,20 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
             </div>
             <div className="rounded-[4px] bg-gradient-to-br from-purple-deep via-purple-mid to-purple-bright p-10 text-white text-center">
               <AlertTriangle className="w-16 h-16 text-purple-glow mx-auto mb-4" />
-              <p className="text-5xl font-black mb-2">1h</p>
-              <p className="text-white/60 uppercase tracking-widest text-sm mb-6">Délai moyen d&apos;intervention</p>
+              <p className="text-5xl font-black mb-2">24/7</p>
+              <p className="text-white/60 uppercase tracking-widest text-sm mb-6">Disponibilité assistance PL</p>
               <div className="pt-6 border-t border-white/10">
                 <p className="text-xs text-white/40 uppercase tracking-wider mb-1">Assistance PL 24/7</p>
                 <p className="text-2xl font-black">{PHONE_DISPLAY}</p>
               </div>
             </div>
           </div>
+          <p className="mt-6 text-sm text-muted-foreground">
+            Besoin d&apos;une intervention plus loin, entre Perpignan et Marseille ?{" "}
+            <Link href="/depannage-poids-lourd-urgence" className="font-bold text-purple-bright hover:underline">
+              Voir la couverture élargie sur route
+            </Link>
+          </p>
         </div>
       </section>
 
