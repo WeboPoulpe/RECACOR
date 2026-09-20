@@ -230,7 +230,7 @@ export function ControleAtelier40Client() {
           <div className="mt-8 flex flex-wrap gap-4 text-sm font-bold">
             <Link href="/pneus-voiture" className="text-purple-bright hover:underline">Pneus voiture</Link>
             <Link href="/mecanique" className="text-purple-bright hover:underline">Mécanique au Crès</Link>
-            <Link href="/services/parallelisme-geometrie" className="text-purple-bright hover:underline">Parallélisme</Link>
+            <Link href="/mecanique#parallelisme" className="text-purple-bright hover:underline">Parallélisme</Link>
             <Link href="/services/prise-en-charge-controle-technique" className="text-purple-bright hover:underline">Préparer le contrôle technique</Link>
           </div>
         </div>

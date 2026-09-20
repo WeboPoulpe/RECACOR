@@ -18,9 +18,12 @@ const PL_ALIASES = new Set([
 ]);
 
 const SPANISH_PREFIX = "/es/";
-const BLOG_REDIRECTS: Record<string, string> = {
-  "/blog/vidange-voiture-montpellier": "/services/vidange",
-  "/blog/parallelisme-montpellier": "/services/parallelisme-geometrie",
+// Pages consolidées dans /mecanique le 2026-09-21 (sections ancrées).
+const PATH_REDIRECTS: Record<string, { pathname: string; hash?: string }> = {
+  "/blog/vidange-voiture-montpellier": { pathname: "/mecanique", hash: "vidange" },
+  "/blog/parallelisme-montpellier": { pathname: "/mecanique", hash: "parallelisme" },
+  "/services/vidange": { pathname: "/mecanique", hash: "vidange" },
+  "/services/parallelisme-geometrie": { pathname: "/mecanique", hash: "parallelisme" },
 };
 
 function applyBriefingHeaders(response: NextResponse) {
@@ -58,11 +61,12 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(url, { status: 301 });
   }
 
-  const blogRedirectTarget = BLOG_REDIRECTS[normalizedPath];
-  if (blogRedirectTarget) {
+  const pathRedirectTarget = PATH_REDIRECTS[normalizedPath];
+  if (pathRedirectTarget) {
     const url = req.nextUrl.clone();
-    url.pathname = blogRedirectTarget;
+    url.pathname = pathRedirectTarget.pathname;
     url.search = "";
+    url.hash = pathRedirectTarget.hash ? `#${pathRedirectTarget.hash}` : "";
     return NextResponse.redirect(url, { status: 301 });
   }
 

@@ -173,10 +173,10 @@ function ServicesBlock({ ville }: { ville: Ville }) {
               : `Depuis ${ville.nom}, certains clients viennent aussi pour une vidange, un parallélisme ou une recharge clim au Crès. Ces pages donnent le détail avant de se déplacer.`}
           </p>
           <div className="mt-6 flex flex-wrap gap-3 text-sm font-bold">
-            <Link href="/services/vidange" className="text-purple-bright hover:underline">
+            <Link href="/mecanique#vidange" className="text-purple-bright hover:underline">
               Vidange voiture
             </Link>
-            <Link href="/services/parallelisme-geometrie" className="text-purple-bright hover:underline">
+            <Link href="/mecanique#parallelisme" className="text-purple-bright hover:underline">
               Parallélisme et géométrie
             </Link>
             <Link href="/services/climatisation-auto-montpellier" className="text-purple-bright hover:underline">

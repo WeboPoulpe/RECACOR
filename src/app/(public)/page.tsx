@@ -91,14 +91,14 @@ const priceCards = [
     price: "79€",
     detail: "à partir de",
     note: "Tarif indicatif selon huile, filtre et véhicule.",
-    href: "/services/vidange",
+    href: "/mecanique#vidange",
   },
   {
     label: "Parallélisme",
     price: "65€",
     detail: "à partir de",
     note: "Contrôle offert avant réglage si nécessaire.",
-    href: "/services/parallelisme-geometrie",
+    href: "/mecanique#parallelisme",
   },
   {
     label: "Clim auto",
@@ -314,10 +314,10 @@ function ServicesSection() {
             qui reviennent le plus souvent au garage.
           </p>
           <div className="mt-5 flex flex-wrap gap-3 text-sm font-bold">
-            <Link href="/services/vidange" className="text-blue-700 hover:underline">
+            <Link href="/mecanique#vidange" className="text-blue-700 hover:underline">
               Vidange voiture au Crès
             </Link>
-            <Link href="/services/parallelisme-geometrie" className="text-blue-700 hover:underline">
+            <Link href="/mecanique#parallelisme" className="text-blue-700 hover:underline">
               Parallélisme et géométrie
             </Link>
             <Link href="/services/climatisation-auto-montpellier" className="text-blue-700 hover:underline">
@@ -736,8 +736,8 @@ function VillesSeoSection() {
 
   const services = [
     { label: "Pneus voiture", href: "/pneus-voiture" },
-    { label: "Vidange voiture", href: "/services/vidange" },
-    { label: "Parallélisme Montpellier", href: "/services/parallelisme-geometrie" },
+    { label: "Vidange voiture", href: "/mecanique#vidange" },
+    { label: "Parallélisme Montpellier", href: "/mecanique#parallelisme" },
     { label: "Contrôle technique", href: "/services/prise-en-charge-controle-technique" },
     { label: "Recharge clim auto", href: "/services/climatisation-auto-montpellier" },
     { label: "Clim camion", href: "/services/clim-camion-poids-lourd-montpellier" },

@@ -312,7 +312,7 @@ export function ClimatisationClient({ heroImage }: { heroImage?: string }) {
           </div>
           <div className="mt-8 flex flex-wrap gap-3 text-sm font-bold">
             <Link href="/mecanique" className="text-purple-bright hover:underline">Voir la mécanique légère</Link>
-            <Link href="/services/vidange" className="text-purple-bright hover:underline">Vidange voiture</Link>
+            <Link href="/mecanique#vidange" className="text-purple-bright hover:underline">Vidange voiture</Link>
             <Link href="/pneus-voiture" className="text-purple-bright hover:underline">Pneus voiture</Link>
           </div>
 
@@ -327,8 +327,8 @@ export function ClimatisationClient({ heroImage }: { heroImage?: string }) {
             </p>
             <div className="mt-6 flex flex-wrap gap-3 text-sm font-bold">
               <Link href="/mecanique" className="text-purple-bright hover:underline">Voir l&apos;atelier mécanique</Link>
-              <Link href="/services/vidange" className="text-purple-bright hover:underline">Vidange voiture</Link>
-              <Link href="/services/parallelisme-geometrie" className="text-purple-bright hover:underline">Parallélisme voiture</Link>
+              <Link href="/mecanique#vidange" className="text-purple-bright hover:underline">Vidange voiture</Link>
+              <Link href="/mecanique#parallelisme" className="text-purple-bright hover:underline">Parallélisme voiture</Link>
               <Link href="/pneus-voiture" className="text-purple-bright hover:underline">Pneus voiture</Link>
               <Link href="/le-cres" className="text-purple-bright hover:underline">Garage auto au Crès</Link>
             </div>

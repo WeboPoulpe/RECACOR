@@ -157,10 +157,10 @@ export function NosCentresClient({ heroImage }: { heroImage?: string }) {
               poids lourd. Les pages ci-dessous donnent le detail avant de venir ou d&apos;appeler.
             </p>
             <div className="mt-6 flex flex-wrap gap-3 text-sm font-bold">
-              <Link href="/services/vidange" className="text-purple-bright hover:underline">
+              <Link href="/mecanique#vidange" className="text-purple-bright hover:underline">
                 Vidange voiture
               </Link>
-              <Link href="/services/parallelisme-geometrie" className="text-purple-bright hover:underline">
+              <Link href="/mecanique#parallelisme" className="text-purple-bright hover:underline">
                 Parallélisme et géométrie
               </Link>
               <Link href="/services/climatisation-auto-montpellier" className="text-purple-bright hover:underline">

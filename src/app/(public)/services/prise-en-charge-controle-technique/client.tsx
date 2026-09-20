@@ -395,11 +395,11 @@ export function ControleTechniqueClient() {
                 l&apos;atelier du Crès traite déjà au quotidien.
               </p>
               <div className="mt-6 flex flex-wrap gap-3 text-sm font-bold">
-                <Link href="/services/vidange" className="text-purple-bright hover:underline">
+                <Link href="/mecanique#vidange" className="text-purple-bright hover:underline">
                   Voir la page vidange
                 </Link>
                 <Link
-                  href="/services/parallelisme-geometrie"
+                  href="/mecanique#parallelisme"
                   className="text-purple-bright hover:underline"
                 >
                   Voir la page parallélisme

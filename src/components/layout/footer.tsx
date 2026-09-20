@@ -20,8 +20,8 @@ const servicesLinks = [
   { name: "Pneus voiture (VL)", href: "/pneus-voiture" },
   { name: "Pneus poids lourd", href: "/pneus-utilitaires-pl" },
   { name: "Pneus agricoles", href: "/pneus-utilitaires-pl#agricoles" },
-  { name: "Vidange", href: "/services/vidange" },
-  { name: "Parallélisme & Géométrie", href: "/services/parallelisme-geometrie" },
+  { name: "Vidange", href: "/mecanique#vidange" },
+  { name: "Parallélisme & Géométrie", href: "/mecanique#parallelisme" },
   { name: "Contrôle atelier 40 points", href: "/services/controle-atelier-40-points" },
   { name: "Contrôle technique", href: "/services/prise-en-charge-controle-technique" },
   { name: "Recharge clim", href: "/services/climatisation-auto-montpellier" },
@@ -327,8 +327,8 @@ export async function Footer() {
               <h5 className="text-xs font-bold text-white/40 uppercase tracking-widest mb-3">Services & villes</h5>
               <ul className="flex flex-wrap gap-x-3 gap-y-1.5">
                 {[
-                  { label: "Vidange au Crès", href: "/services/vidange" },
-                  { label: "Parallélisme au Crès", href: "/services/parallelisme-geometrie" },
+                  { label: "Vidange au Crès", href: "/mecanique#vidange" },
+                  { label: "Parallélisme au Crès", href: "/mecanique#parallelisme" },
                   { label: "Clim auto Montpellier", href: "/services/climatisation-auto-montpellier" },
                   { label: "Recreusage poids lourd", href: "/services/recreusage" },
                   { label: "Garage auto Le Crès", href: "/le-cres" },

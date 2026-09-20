@@ -85,8 +85,8 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     ],
     tireBrands: ["Michelin", "Continental", "Bridgestone", "Goodyear", "Hankook"],
     serviceLinks: [
-      { href: "/services/parallelisme-geometrie", label: "Controler le parallellisme" },
-      { href: "/services/vidange", label: "Voir la vidange voiture" },
+      { href: "/mecanique#parallelisme", label: "Controler le parallellisme" },
+      { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
       { href: "/services/climatisation-auto-montpellier", label: "Voir la recharge clim auto" },
     ],
     cityLinks: [
@@ -169,8 +169,8 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     ],
     tireBrands: ["Michelin", "Goodyear", "Continental", "Bridgestone", "Hankook"],
     serviceLinks: [
-      { href: "/services/parallelisme-geometrie", label: "Verifier la geometrie" },
-      { href: "/services/vidange", label: "Voir le service vidange" },
+      { href: "/mecanique#parallelisme", label: "Verifier la geometrie" },
+      { href: "/mecanique#vidange", label: "Voir le service vidange" },
       { href: "/services/climatisation-auto-montpellier", label: "Voir la clim auto" },
     ],
     cityLinks: [
@@ -253,8 +253,8 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     ],
     tireBrands: ["Michelin", "Continental", "Goodyear", "Hankook", "Pirelli"],
     serviceLinks: [
-      { href: "/services/parallelisme-geometrie", label: "Voir le parallellisme" },
-      { href: "/services/vidange", label: "Voir la vidange" },
+      { href: "/mecanique#parallelisme", label: "Voir le parallellisme" },
+      { href: "/mecanique#vidange", label: "Voir la vidange" },
       { href: "/services/climatisation-auto-montpellier", label: "Voir la climatisation auto" },
     ],
     cityLinks: [
@@ -337,8 +337,8 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     ],
     tireBrands: ["Michelin", "Continental", "Bridgestone", "Goodyear", "Pirelli"],
     serviceLinks: [
-      { href: "/services/parallelisme-geometrie", label: "Verifier le parallellisme" },
-      { href: "/services/vidange", label: "Voir l'entretien courant" },
+      { href: "/mecanique#parallelisme", label: "Verifier le parallellisme" },
+      { href: "/mecanique#vidange", label: "Voir l'entretien courant" },
       { href: "/services/climatisation-auto-montpellier", label: "Voir la clim auto" },
     ],
     cityLinks: [
@@ -423,8 +423,8 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     ],
     tireBrands: ["Michelin", "Continental", "Goodyear", "Bridgestone", "Pirelli"],
     serviceLinks: [
-      { href: "/services/parallelisme-geometrie", label: "Voir le service parallellisme" },
-      { href: "/services/vidange", label: "Voir la vidange voiture" },
+      { href: "/mecanique#parallelisme", label: "Voir le service parallellisme" },
+      { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
       { href: "/services/climatisation-auto-montpellier", label: "Voir la clim auto" },
     ],
     cityLinks: [
@@ -507,8 +507,8 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     ],
     tireBrands: ["Michelin", "Continental", "Goodyear", "Bridgestone", "Pirelli"],
     serviceLinks: [
-      { href: "/services/parallelisme-geometrie", label: "Verifier la geometrie" },
-      { href: "/services/vidange", label: "Voir la vidange voiture" },
+      { href: "/mecanique#parallelisme", label: "Verifier la geometrie" },
+      { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
       { href: "/services/climatisation-auto-montpellier", label: "Voir la clim auto" },
     ],
     cityLinks: [
@@ -591,8 +591,8 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     ],
     tireBrands: ["Michelin", "Continental", "Goodyear", "Pirelli", "Bridgestone"],
     serviceLinks: [
-      { href: "/services/parallelisme-geometrie", label: "Voir le parallellisme" },
-      { href: "/services/vidange", label: "Voir la vidange voiture" },
+      { href: "/mecanique#parallelisme", label: "Voir le parallellisme" },
+      { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
       { href: "/services/climatisation-auto-montpellier", label: "Voir la clim auto" },
     ],
     cityLinks: [
@@ -675,8 +675,8 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     ],
     tireBrands: ["Michelin", "Continental", "Goodyear", "Hankook", "Bridgestone"],
     serviceLinks: [
-      { href: "/services/parallelisme-geometrie", label: "Voir le parallellisme" },
-      { href: "/services/vidange", label: "Voir la vidange voiture" },
+      { href: "/mecanique#parallelisme", label: "Voir le parallellisme" },
+      { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
       { href: "/services/climatisation-auto-montpellier", label: "Voir la clim auto" },
     ],
     cityLinks: [
@@ -759,8 +759,8 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     ],
     tireBrands: ["Michelin", "Continental", "Goodyear", "Bridgestone", "Hankook"],
     serviceLinks: [
-      { href: "/services/parallelisme-geometrie", label: "Voir le parallellisme" },
-      { href: "/services/vidange", label: "Voir la vidange voiture" },
+      { href: "/mecanique#parallelisme", label: "Voir le parallellisme" },
+      { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
       { href: "/services/climatisation-auto-montpellier", label: "Voir la clim auto" },
     ],
     cityLinks: [
@@ -843,8 +843,8 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     ],
     tireBrands: ["Michelin", "Goodyear", "Continental", "Hankook", "Firestone"],
     serviceLinks: [
-      { href: "/services/parallelisme-geometrie", label: "Voir le parallellisme" },
-      { href: "/services/vidange", label: "Voir la vidange voiture" },
+      { href: "/mecanique#parallelisme", label: "Voir le parallellisme" },
+      { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
       { href: "/services/climatisation-auto-montpellier", label: "Voir la clim auto" },
     ],
     cityLinks: [
@@ -927,8 +927,8 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     ],
     tireBrands: ["Michelin", "Goodyear", "Continental", "Bridgestone", "Hankook"],
     serviceLinks: [
-      { href: "/services/parallelisme-geometrie", label: "Voir le parallellisme" },
-      { href: "/services/vidange", label: "Voir la vidange voiture" },
+      { href: "/mecanique#parallelisme", label: "Voir le parallellisme" },
+      { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
       { href: "/services/climatisation-auto-montpellier", label: "Voir la clim auto" },
     ],
     cityLinks: [
@@ -1011,8 +1011,8 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     ],
     tireBrands: ["Michelin", "Goodyear", "Continental", "Bridgestone", "Hankook"],
     serviceLinks: [
-      { href: "/services/parallelisme-geometrie", label: "Voir le parallellisme" },
-      { href: "/services/vidange", label: "Voir la vidange voiture" },
+      { href: "/mecanique#parallelisme", label: "Voir le parallellisme" },
+      { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
       { href: "/services/climatisation-auto-montpellier", label: "Voir la clim auto" },
     ],
     cityLinks: [

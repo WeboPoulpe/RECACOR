@@ -9,7 +9,7 @@ export const revalidate = 86400;
 export const metadata: Metadata = {
   title: "Garage mécanique Montpellier — entretien auto sans RDV",
   description:
-    "Garage mécanique à Montpellier — Le Crès : vidange, freinage, révision et parallélisme sans rendez-vous. Devis gratuit et intervention rapide.",
+    "Garage mécanique à Montpellier — Le Crès : vidange dès 79€, parallélisme dès 65€ avec contrôle offert, freinage et révision, avec ou sans rendez-vous. Devis gratuit.",
   alternates: { canonical: "/mecanique" },
   openGraph: {
     title: "Garage mécanique Montpellier — entretien auto sans RDV",
