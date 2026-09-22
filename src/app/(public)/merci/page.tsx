@@ -3,13 +3,27 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { CheckCircle, Phone, Calendar, ArrowRight } from "lucide-react";
-import { PHONE_DISPLAY, PHONE_MOBILE, trackTikTokStandardEvent } from "@/lib/tracking";
+import { useSyncExternalStore } from "react";
+import { PHONE_DISPLAY, PHONE_MOBILE, PHONE_WHATSAPP_PL, trackTikTokStandardEvent } from "@/lib/tracking";
 import { PhoneLink } from "@/components/phone-link";
 import { BgParticles } from "@/components/bg-particles";
 
 const CALENDAR_URL = "https://calendar.app.google/hHtajz9kMDfbozaUA";
 
+const subscribeNoop = () => () => {};
+const readIsPlFromUrl = () => {
+  try {
+    return new URLSearchParams(window.location.search).get("segment") === "pl";
+  } catch {
+    return false;
+  }
+};
+
 export default function MerciPage() {
+  // WhatsApp : Yassine pour le VL / mécanique, Patrick quand on arrive d'un formulaire poids lourd (?segment=pl).
+  // useSyncExternalStore lit l'URL côté navigateur sans décalage d'hydratation (valeur serveur : false).
+  const isPl = useSyncExternalStore(subscribeNoop, readIsPlFromUrl, () => false);
+  const whatsappNumber = isPl ? PHONE_WHATSAPP_PL : PHONE_MOBILE;
   return (
     <>
       {/* Hero success */}
@@ -83,7 +97,7 @@ export default function MerciPage() {
                   {PHONE_DISPLAY}
                 </PhoneLink>
                 <a
-                  href={`https://wa.me/${PHONE_MOBILE.replace("+", "")}`}
+                  href={`https://wa.me/${whatsappNumber.replace("+", "")}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#25D366] text-white font-bold text-sm hover:opacity-90 transition-opacity mt-3"

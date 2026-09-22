@@ -106,6 +106,7 @@ export function DevisClimPlForm() {
   return (
     <MultiStepForm
       id="devis-clim-pl-form"
+      successHref="/merci?segment=pl"
       serviceType="pl"
       data={{ ...data, service: "Clim camion / poids lourd" }}
       isValid={isValid}

@@ -413,9 +413,11 @@ export function hasConsent(): "granted" | "denied" | null {
 
 export const PHONE_NUMBER = "+33499533390";
 export const PHONE_DISPLAY = "04 99 53 33 90";
-export const PHONE_MOBILE = "+33756336311";
-export const PHONE_MOBILE_DISPLAY = "07 56 33 63 11";
-export const PHONE_WHATSAPP_PL = "+33607621043";
+export const PHONE_MOBILE = "+33687601575"; // WhatsApp VL / mécanique : Yassine (nouveau numéro pro depuis le 22/09/2026)
+export const PHONE_MOBILE_DISPLAY = "06 87 60 15 75";
+export const PHONE_WHATSAPP_PL = "+33607621043"; // WhatsApp PL France : Patrick
 export const PHONE_WHATSAPP_PL_DISPLAY = "06 07 62 10 43";
+export const PHONE_WHATSAPP_PL_ETRANGER = "+33689504543"; // WhatsApp PL chauffeurs étrangers (page roumaine) : Rubén
+export const PHONE_WHATSAPP_PL_ETRANGER_DISPLAY = "06 89 50 45 43";
 export const ADDRESS = "1240 Route de Nîmes, 34920 Le Crès";
 export const BUSINESS_NAME = "Recacor Montpellier — Le Crès";

@@ -7,7 +7,7 @@ import { DevisPlForm } from "@/components/forms/devis-pl";
 import { BgParticles } from "@/components/bg-particles";
 import { AvisSection } from "@/components/avis-section";
 import { BreadcrumbJsonLd, ServiceJsonLd, FaqJsonLd } from "@/components/schema-jsonld";
-import { PHONE_WHATSAPP_PL } from "@/lib/tracking";
+import { PHONE_WHATSAPP_PL_ETRANGER } from "@/lib/tracking";
 import Link from "next/link";
 
 const villesCorridor = [
@@ -95,7 +95,7 @@ export function DepannageRoClient() {
           </p>
           <div className="mt-5 flex flex-col sm:flex-row gap-2.5 sm:gap-3 max-w-2xl">
             <a
-              href={`https://wa.me/${PHONE_WHATSAPP_PL.replace("+", "")}`}
+              href={`https://wa.me/${PHONE_WHATSAPP_PL_ETRANGER.replace("+", "")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 inline-flex items-center justify-center gap-2 rounded-2xl bg-[#25D366] px-4 py-2.5 sm:py-3 text-sm font-bold text-white transition-colors hover:bg-[#1ebe5d] whitespace-nowrap"
@@ -108,7 +108,7 @@ export function DepannageRoClient() {
             </PhoneLink>
           </div>
           <p className="mt-2.5 text-xs sm:text-sm text-white/60">
-            Linie preluată de Patrick, disponibil la telefon sau pe WhatsApp.
+            Pe WhatsApp vă răspunde Rubén; la telefon, atelierul Recacor din Le Crès.
           </p>
           <div className="mt-6 flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wider text-white/80">
             {villesCorridor.map((ville) => (

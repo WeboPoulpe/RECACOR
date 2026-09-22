@@ -69,6 +69,7 @@ export function DevisPlForm() {
   return (
     <MultiStepForm
       id="devis-pl-form"
+      successHref="/merci?segment=pl"
       serviceType="pl"
       data={data}
       isValid={isValid}
