@@ -283,14 +283,11 @@ function chooseCookieBannerVariant(): CookieBannerVariant {
 export function getOrCreateCookieBannerVariant(): CookieBannerVariant {
   if (typeof window === "undefined") return "bottom";
 
-  const storage = getSafeLocalStorage();
-  const stored = storage?.getItem(COOKIE_BANNER_VARIANT_STORAGE_KEY);
-  if (stored === "bottom" || stored === "center") {
-    return stored;
-  }
-
+  // Test clos : on ignore volontairement une ancienne valeur "center" stockée avant la clôture,
+  // sinon les visiteurs déjà tirés dans ce lot la garderaient indéfiniment (le stockage local ne
+  // s'efface pas tout seul). On réécrit systématiquement "bottom" pour migrer ces navigateurs.
   const variant = chooseCookieBannerVariant();
-  storage?.setItem(COOKIE_BANNER_VARIANT_STORAGE_KEY, variant);
+  getSafeLocalStorage()?.setItem(COOKIE_BANNER_VARIANT_STORAGE_KEY, variant);
   return variant;
 }
 
