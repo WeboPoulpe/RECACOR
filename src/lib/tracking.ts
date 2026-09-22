@@ -267,16 +267,17 @@ export function pushDirectionsClick(serviceType?: ServiceType) {
   });
 }
 
+/**
+ * A/B test bannière cookies (bottom vs center) clos le 2026-09-22 : la variante "bottom" est actée.
+ * Mesure réelle du 26/07 au 08/08/2026 (avant le bug ci-dessous) : bottom 6,25 % acceptation / 1,07 % refus,
+ * center 6,02 % acceptation / 1,84 % refus — center ne fait pas mieux et refuse plus, d'où le choix de bottom.
+ * La variante "center" a ensuite eu un bug de centrage (double translation CSS, transform d'animation +
+ * classes Tailwind translate-) introduit par erreur le 16/08/2026 (commit 06062c8, refactor performance) et
+ * corrigé le 22/09/2026 (commit b944a2c), sans donnée de mesure sur cette période (journalisation coupée
+ * le 16/08 pour raisons de quota Neon, le jour même où le bug est apparu).
+ */
 function chooseCookieBannerVariant(): CookieBannerVariant {
-  if (typeof window === "undefined") return "bottom";
-
-  if (typeof window.crypto?.getRandomValues === "function") {
-    const bucket = new Uint32Array(1);
-    window.crypto.getRandomValues(bucket);
-    return bucket[0] % 2 === 0 ? "bottom" : "center";
-  }
-
-  return Math.random() < 0.5 ? "bottom" : "center";
+  return "bottom";
 }
 
 export function getOrCreateCookieBannerVariant(): CookieBannerVariant {
