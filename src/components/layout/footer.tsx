@@ -43,7 +43,7 @@ const navLinks = [
 ];
 
 const villesLinks = [
-  { name: "Pneus Montpellier", href: "/montpellier" },
+  { name: "Pneus Montpellier", href: "/pneus-voiture" },
   { name: "Pneus Castelnau-le-Lez", href: "/castelnau-le-lez" },
   { name: "Pneus Vendargues", href: "/vendargues" },
   { name: "Pneus Mauguio", href: "/mauguio" },
