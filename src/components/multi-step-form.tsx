@@ -39,6 +39,8 @@ interface MultiStepFormProps {
     next: string;
     sending: string;
     submitError: string;
+    invalidStep?: string;
+    consent?: string;
   };
 }
 

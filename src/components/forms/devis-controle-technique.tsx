@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MultiStepForm, FormField, isValidEmail, isValidPhone } from "../multi-step-form";
+import { MultiStepForm, FormField, isValidPhone, isValidOptionalEmail, PHONE_ERROR, EMAIL_ERROR } from "../multi-step-form";
 import { Input } from "@/components/ui/input";
 
 const REQUEST_OPTIONS = [
@@ -63,6 +63,11 @@ export function DevisControleTechniqueForm() {
     value: ControleTechniqueData[K],
   ) => setData((prev) => ({ ...prev, [key]: value }));
 
+  const [touched, setTouched] = useState<{ telephone: boolean; email: boolean }>({ telephone: false, email: false });
+  const markTouched = (field: "telephone" | "email") => setTouched((t) => ({ ...t, [field]: true }));
+  const phoneError = touched.telephone && !isValidPhone(data.telephone) ? PHONE_ERROR : undefined;
+  const emailError = touched.email && !isValidOptionalEmail(data.email) ? EMAIL_ERROR : undefined;
+
   const toggleKnownIssue = (value: string) => {
     setData((prev) => ({
       ...prev,
@@ -77,7 +82,7 @@ export function DevisControleTechniqueForm() {
 
   const isValid = (step: number) => {
     if (step === 0) return true;
-    if (step === 1) return isValidPhone(data.telephone) && isValidEmail(data.email);
+    if (step === 1) return isValidPhone(data.telephone) && isValidOptionalEmail(data.email);
     return true;
   };
 
@@ -91,6 +96,8 @@ export function DevisControleTechniqueForm() {
         source_detail: "controle_technique_prise_en_charge",
       }}
       isValid={isValid}
+      invalidStepMessage={() => (!isValidPhone(data.telephone) ? PHONE_ERROR : EMAIL_ERROR)}
+      onInvalidAttempt={() => setTouched({ telephone: true, email: true })}
       extraMention="Le pré-contrôle est offert. Si un point empêche le passage au contrôle technique, un devis est communiqué avant toute réparation."
       steps={[
         {
@@ -181,7 +188,7 @@ export function DevisControleTechniqueForm() {
         },
         {
           title: "Vos coordonnées",
-          subtitle: "Téléphone et email sont requis pour vous recontacter",
+          subtitle: "Un numéro de téléphone suffit pour vous rappeler, l'e-mail est facultatif",
           content: (
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
@@ -200,22 +207,30 @@ export function DevisControleTechniqueForm() {
                   />
                 </FormField>
               </div>
-              <FormField label="Téléphone" required>
+              <FormField label="Téléphone" required error={phoneError}>
                 <Input
                   type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
                   placeholder="06 00 00 00 00"
                   value={data.telephone}
                   onChange={(e) => update("telephone", e.target.value)}
-                  className="h-11"
+                  onBlur={() => markTouched("telephone")}
+                  aria-invalid={phoneError ? true : undefined}
+                  className={phoneError ? "h-11 border-red-500 focus-visible:ring-red-500" : "h-11"}
                 />
               </FormField>
-              <FormField label="Email" required>
+              <FormField label="Email (facultatif)" error={emailError}>
                 <Input
                   type="email"
+                  inputMode="email"
+                  autoComplete="email"
                   placeholder="vous@email.fr"
                   value={data.email}
                   onChange={(e) => update("email", e.target.value)}
-                  className="h-11"
+                  onBlur={() => markTouched("email")}
+                  aria-invalid={emailError ? true : undefined}
+                  className={emailError ? "h-11 border-red-500 focus-visible:ring-red-500" : "h-11"}
                 />
               </FormField>
               <FormField label="Code postal">
@@ -270,10 +285,12 @@ export function DevisControleTechniqueForm() {
             <dt className="text-muted-foreground">Contact</dt>
             <dd className="font-semibold">{data.telephone}</dd>
           </div>
-          <div className="flex justify-between gap-4">
-            <dt className="text-muted-foreground">Email</dt>
-            <dd className="max-w-[60%] truncate text-right font-semibold">{data.email}</dd>
-          </div>
+          {data.email && (
+            <div className="flex justify-between gap-4">
+              <dt className="text-muted-foreground">Email</dt>
+              <dd className="max-w-[60%] truncate text-right font-semibold">{data.email}</dd>
+            </div>
+          )}
         </dl>
       }
     />

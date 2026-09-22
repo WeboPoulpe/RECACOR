@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MultiStepForm, FormField, isValidPhone, isValidEmail } from "../multi-step-form";
+import { MultiStepForm, FormField, isValidPhone, isValidOptionalEmail, PHONE_ERROR, EMAIL_ERROR } from "../multi-step-form";
 import { Input } from "@/components/ui/input";
 
 type ClimPlData = {
@@ -62,6 +62,11 @@ export function DevisClimPlForm() {
   const update = <K extends keyof ClimPlData>(key: K, value: ClimPlData[K]) =>
     setData((current) => ({ ...current, [key]: value }));
 
+  const [touched, setTouched] = useState<{ telephone: boolean; email: boolean }>({ telephone: false, email: false });
+  const markTouched = (field: "telephone" | "email") => setTouched((t) => ({ ...t, [field]: true }));
+  const phoneError = touched.telephone && !isValidPhone(data.telephone) ? PHONE_ERROR : undefined;
+  const emailError = touched.email && !isValidOptionalEmail(data.email) ? EMAIL_ERROR : undefined;
+
   const optionButton = (active: boolean) =>
     `w-full min-h-12 rounded-xl border px-4 py-3 text-left text-sm font-semibold transition-colors ${
       active
@@ -94,7 +99,7 @@ export function DevisClimPlForm() {
   const isValid = (step: number) => {
     if (step === 0) return Boolean(data.typeVehicule && data.besoinClim && data.lieuIntervention);
     if (step === 1) return true;
-    if (step === 2) return isValidPhone(data.telephone) && (!data.email || isValidEmail(data.email));
+    if (step === 2) return isValidPhone(data.telephone) && isValidOptionalEmail(data.email);
     return true;
   };
 
@@ -104,6 +109,8 @@ export function DevisClimPlForm() {
       serviceType="pl"
       data={{ ...data, service: "Clim camion / poids lourd" }}
       isValid={isValid}
+      invalidStepMessage={() => (!isValidPhone(data.telephone) ? PHONE_ERROR : EMAIL_ERROR)}
+      onInvalidAttempt={() => setTouched({ telephone: true, email: true })}
       submitLabel="Envoyer ma demande clim pro"
       extraMention="Offre réservée aux poids lourds, TP et agricoles · Dès 149€"
       steps={[
@@ -179,22 +186,30 @@ export function DevisClimPlForm() {
                   <Input value={data.prenom} onChange={(e) => update("prenom", e.target.value)} className="h-11" />
                 </FormField>
               </div>
-              <FormField label="Téléphone" required>
+              <FormField label="Téléphone" required error={phoneError}>
                 <Input
                   type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
                   placeholder="06 00 00 00 00"
                   value={data.telephone}
                   onChange={(e) => update("telephone", e.target.value)}
-                  className="h-11"
+                  onBlur={() => markTouched("telephone")}
+                  aria-invalid={phoneError ? true : undefined}
+                  className={phoneError ? "h-11 border-red-500 focus-visible:ring-red-500" : "h-11"}
                 />
               </FormField>
-              <FormField label="Email">
+              <FormField label="Email (facultatif)" error={emailError}>
                 <Input
                   type="email"
+                  inputMode="email"
+                  autoComplete="email"
                   placeholder="vous@email.fr"
                   value={data.email}
                   onChange={(e) => update("email", e.target.value)}
-                  className="h-11"
+                  onBlur={() => markTouched("email")}
+                  aria-invalid={emailError ? true : undefined}
+                  className={emailError ? "h-11 border-red-500 focus-visible:ring-red-500" : "h-11"}
                 />
               </FormField>
               <FormField label="Code postal">

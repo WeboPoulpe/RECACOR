@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { MultiStepForm, FormField, isValidEmail, isValidPhone } from "../multi-step-form";
+import { MultiStepForm, FormField, isValidOptionalEmail, isValidPhone } from "../multi-step-form";
 import { Input } from "@/components/ui/input";
+
+const PHONE_ERROR_ES = "Número no válido. Ejemplo: +34 612 345 678 o 06 12 34 56 78.";
+const EMAIL_ERROR_ES = "Email no válido. Ejemplo: nombre@dominio.es";
 
 const REQUEST_OPTIONS = [
   "ITV turismo",
@@ -64,6 +67,11 @@ export function DevisControleTechniqueFormEs() {
     value: ControlTecnicoEsData[K],
   ) => setData((prev) => ({ ...prev, [key]: value }));
 
+  const [touched, setTouched] = useState<{ telefono: boolean; email: boolean }>({ telefono: false, email: false });
+  const markTouched = (field: "telefono" | "email") => setTouched((t) => ({ ...t, [field]: true }));
+  const phoneError = touched.telefono && !isValidPhone(data.telefono) ? PHONE_ERROR_ES : undefined;
+  const emailError = touched.email && !isValidOptionalEmail(data.email) ? EMAIL_ERROR_ES : undefined;
+
   const toggleKnownIssue = (value: string) => {
     setData((prev) => ({
       ...prev,
@@ -78,7 +86,7 @@ export function DevisControleTechniqueFormEs() {
 
   const isValid = (step: number) => {
     if (step === 0) return true;
-    if (step === 1) return isValidPhone(data.telefono) && isValidEmail(data.email);
+    if (step === 1) return isValidPhone(data.telefono) && isValidOptionalEmail(data.email);
     return true;
   };
 
@@ -93,6 +101,8 @@ export function DevisControleTechniqueFormEs() {
         source_detail: "controle_technique_es",
       }}
       isValid={isValid}
+      invalidStepMessage={() => (!isValidPhone(data.telefono) ? PHONE_ERROR_ES : EMAIL_ERROR_ES)}
+      onInvalidAttempt={() => setTouched({ telefono: true, email: true })}
       submitLabel="Enviar mi solicitud"
       extraMention="El precontrol es gratuito. Si hay un punto bloqueante, recibirás un presupuesto antes de cualquier reparación."
       rgpdText={
@@ -110,6 +120,8 @@ export function DevisControleTechniqueFormEs() {
         next: "Continuar",
         sending: "Enviando...",
         submitError: "No se ha podido confirmar la solicitud. Vuelve a intentarlo o llamanos directamente.",
+        invalidStep: "Revisa el teléfono y el email antes de continuar.",
+        consent: "Marca la casilla de consentimiento para enviar tu solicitud.",
       }}
       steps={[
         {
@@ -200,7 +212,7 @@ export function DevisControleTechniqueFormEs() {
         },
         {
           title: "Tus datos de contacto",
-          subtitle: "Necesitamos tu teléfono y tu email para llamarte",
+          subtitle: "Con tu teléfono es suficiente para llamarte, el email es opcional",
           content: (
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
@@ -219,22 +231,30 @@ export function DevisControleTechniqueFormEs() {
                   />
                 </FormField>
               </div>
-              <FormField label="Teléfono" required>
+              <FormField label="Teléfono" required error={phoneError}>
                 <Input
                   type="tel"
-                  placeholder="06 00 00 00 00"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  placeholder="+34 600 000 000"
                   value={data.telefono}
                   onChange={(e) => update("telefono", e.target.value)}
-                  className="h-11"
+                  onBlur={() => markTouched("telefono")}
+                  aria-invalid={phoneError ? true : undefined}
+                  className={phoneError ? "h-11 border-red-500 focus-visible:ring-red-500" : "h-11"}
                 />
               </FormField>
-              <FormField label="Email" required>
+              <FormField label="Email (opcional)" error={emailError}>
                 <Input
                   type="email"
+                  inputMode="email"
+                  autoComplete="email"
                   placeholder="tu@email.com"
                   value={data.email}
                   onChange={(e) => update("email", e.target.value)}
-                  className="h-11"
+                  onBlur={() => markTouched("email")}
+                  aria-invalid={emailError ? true : undefined}
+                  className={emailError ? "h-11 border-red-500 focus-visible:ring-red-500" : "h-11"}
                 />
               </FormField>
               <FormField label="Código postal">
@@ -289,10 +309,12 @@ export function DevisControleTechniqueFormEs() {
             <dt className="text-muted-foreground">Teléfono</dt>
             <dd className="font-semibold">{data.telefono}</dd>
           </div>
-          <div className="flex justify-between gap-4">
-            <dt className="text-muted-foreground">Email</dt>
-            <dd className="max-w-[60%] truncate text-right font-semibold">{data.email}</dd>
-          </div>
+          {data.email && (
+            <div className="flex justify-between gap-4">
+              <dt className="text-muted-foreground">Email</dt>
+              <dd className="max-w-[60%] truncate text-right font-semibold">{data.email}</dd>
+            </div>
+          )}
         </dl>
       }
     />

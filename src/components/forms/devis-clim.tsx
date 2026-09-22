@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MultiStepForm, FormField, isValidPhone, isValidEmail } from "../multi-step-form";
+import { MultiStepForm, FormField, isValidPhone, isValidOptionalEmail, PHONE_ERROR, EMAIL_ERROR } from "../multi-step-form";
 import { Input } from "@/components/ui/input";
 
 type ClimData = {
@@ -70,6 +70,11 @@ export function DevisClimForm() {
   const update = <K extends keyof ClimData>(key: K, value: ClimData[K]) =>
     setData((d) => ({ ...d, [key]: value }));
 
+  const [touched, setTouched] = useState<{ telephone: boolean; email: boolean }>({ telephone: false, email: false });
+  const markTouched = (field: "telephone" | "email") => setTouched((t) => ({ ...t, [field]: true }));
+  const phoneError = touched.telephone && !isValidPhone(data.telephone) ? PHONE_ERROR : undefined;
+  const emailError = touched.email && !isValidOptionalEmail(data.email) ? EMAIL_ERROR : undefined;
+
   const optionButton = (active: boolean) =>
     `w-full min-h-12 rounded-xl border px-4 py-3 text-left text-sm font-semibold transition-colors ${
       active
@@ -102,7 +107,7 @@ export function DevisClimForm() {
   const isValid = (step: number) => {
     if (step === 0) return Boolean(data.serviceClim && data.etatClim);
     if (step === 1) return true;
-    if (step === 2) return isValidPhone(data.telephone) && isValidEmail(data.email);
+    if (step === 2) return isValidPhone(data.telephone) && isValidOptionalEmail(data.email);
     return true;
   };
 
@@ -112,6 +117,8 @@ export function DevisClimForm() {
       serviceType="mecanique"
       data={{ ...data, service: "Climatisation auto" }}
       isValid={isValid}
+      invalidStepMessage={() => (!isValidPhone(data.telephone) ? PHONE_ERROR : EMAIL_ERROR)}
+      onInvalidAttempt={() => setTouched({ telephone: true, email: true })}
       submitLabel="Envoyer ma demande clim"
       extraMention="Contrôle avant recharge · Recharge à partir de 59€ · Avec ou sans rendez-vous"
       steps={[
@@ -151,7 +158,7 @@ export function DevisClimForm() {
         },
         {
           title: "Vos coordonnées",
-          subtitle: "Téléphone et email sont requis pour vous recontacter",
+          subtitle: "Un numéro de téléphone suffit pour vous rappeler, l'e-mail est facultatif",
           content: (
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
@@ -162,11 +169,11 @@ export function DevisClimForm() {
                   <Input value={data.prenom} onChange={(e) => update("prenom", e.target.value)} className="h-11" />
                 </FormField>
               </div>
-              <FormField label="Téléphone" required>
-                <Input type="tel" placeholder="06 00 00 00 00" value={data.telephone} onChange={(e) => update("telephone", e.target.value)} className="h-11" />
+              <FormField label="Téléphone" required error={phoneError}>
+                <Input type="tel" inputMode="tel" autoComplete="tel" placeholder="06 00 00 00 00" value={data.telephone} onChange={(e) => update("telephone", e.target.value)} onBlur={() => markTouched("telephone")} aria-invalid={phoneError ? true : undefined} className={phoneError ? "h-11 border-red-500 focus-visible:ring-red-500" : "h-11"} />
               </FormField>
-              <FormField label="Email" required>
-                <Input type="email" placeholder="vous@email.fr" value={data.email} onChange={(e) => update("email", e.target.value)} className="h-11" />
+              <FormField label="Email (facultatif)" error={emailError}>
+                <Input type="email" inputMode="email" autoComplete="email" placeholder="vous@email.fr" value={data.email} onChange={(e) => update("email", e.target.value)} onBlur={() => markTouched("email")} aria-invalid={emailError ? true : undefined} className={emailError ? "h-11 border-red-500 focus-visible:ring-red-500" : "h-11"} />
               </FormField>
               <FormField label="Code postal">
                 <Input placeholder="34920" maxLength={5} value={data.cp} onChange={(e) => update("cp", e.target.value)} className="h-11" />
@@ -194,7 +201,7 @@ export function DevisClimForm() {
           {data.serviceComplementaire && <div className="flex justify-between gap-4"><dt className="text-muted-foreground">Service complémentaire</dt><dd className="font-semibold text-right">{data.serviceComplementaire}</dd></div>}
           {data.modele && <div className="flex justify-between gap-4"><dt className="text-muted-foreground">Véhicule</dt><dd className="font-semibold text-right">{data.modele}</dd></div>}
           <div className="flex justify-between gap-4"><dt className="text-muted-foreground">Contact</dt><dd className="font-semibold text-right">{data.telephone}</dd></div>
-          <div className="flex justify-between gap-4"><dt className="text-muted-foreground">Email</dt><dd className="font-semibold text-right truncate max-w-[60%]">{data.email}</dd></div>
+          {data.email && <div className="flex justify-between gap-4"><dt className="text-muted-foreground">Email</dt><dd className="font-semibold text-right truncate max-w-[60%]">{data.email}</dd></div>}
         </dl>
       }
     />
