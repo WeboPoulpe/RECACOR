@@ -228,7 +228,7 @@ function DevisVlSection() {
             <div className="mt-8 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
               {[
                 ["Réponse sous 2h", "En jours ouvrés selon affluence atelier."],
-                ["Téléphone + email requis", "Le reste peut être complété plus tard."],
+                ["Un téléphone suffit", "L'e-mail est facultatif, le reste peut être complété plus tard."],
                 ["Rappel direct", "Un interlocuteur du garage vous recontacte, pas un centre d'appel."],
               ].map(([title, text]) => (
                 <div key={title} className="recacor-card p-5">
@@ -241,7 +241,32 @@ function DevisVlSection() {
           </div>
 
           <div className="recacor-card p-5 sm:p-7">
-            <DeferredDevisVlForm />
+            {/* Mobile : un seul formulaire, sur sa page dédiée (sans barre fixe par-dessus) */}
+            <div className="lg:hidden">
+              <p className="text-xs font-black uppercase text-blue-700">Devis pneus en 2 minutes</p>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                Dimension, quantité, téléphone : trois étapes courtes, sans e-mail obligatoire.
+                Un interlocuteur du garage vous rappelle.
+              </p>
+              <Link
+                href="/formulaire"
+                className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-[4px] bg-yellow-400 px-6 py-3 text-sm font-black uppercase text-slate-950 transition-all hover:bg-yellow-300"
+              >
+                Remplir le formulaire
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <PhoneLink
+                location="cta"
+                className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-[4px] border border-border px-5 py-3 text-sm font-bold transition-colors hover:border-blue-700/40"
+                showIcon
+              >
+                Appeler le garage
+              </PhoneLink>
+            </div>
+            {/* Desktop : formulaire intégré */}
+            <div className="hidden lg:block">
+              <DeferredDevisVlForm />
+            </div>
           </div>
         </div>
       </div>

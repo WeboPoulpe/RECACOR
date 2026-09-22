@@ -116,6 +116,22 @@ export function pushFormStart(serviceType: ServiceType) {
   window.dataLayer.push({ event: "form_start_devis", service_type: serviceType });
 }
 
+/** Étape atteinte dans un formulaire multi-étapes (1 = première étape). Envoyé à GA4 en direct. */
+export function pushFormStep(serviceType: ServiceType, formId: string, step: number, stepName: string) {
+  if (typeof window === "undefined") return;
+  const payload = { service_type: serviceType, form_id: formId, form_step: String(step), step_name: stepName };
+  pushDataLayerEvent("form_step_devis", payload);
+  if (typeof window.gtag === "function") window.gtag("event", "form_step", payload);
+}
+
+/** Tentative de passage à l'étape suivante bloquée par la validation. */
+export function pushFormError(serviceType: ServiceType, formId: string, step: number, reason: string) {
+  if (typeof window === "undefined") return;
+  const payload = { service_type: serviceType, form_id: formId, form_step: String(step), error_reason: reason };
+  pushDataLayerEvent("form_error_devis", payload);
+  if (typeof window.gtag === "function") window.gtag("event", "form_error", payload);
+}
+
 function pushDataLayerEvent(event: string, payload: Record<string, string>) {
   if (typeof window === "undefined") return;
   window.dataLayer = window.dataLayer || [];

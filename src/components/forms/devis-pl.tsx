@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MultiStepForm, FormField, isValidPhone, isValidEmail } from "../multi-step-form";
+import { MultiStepForm, FormField, isValidPhone, isValidOptionalEmail, PHONE_ERROR, EMAIL_ERROR } from "../multi-step-form";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { Truck, Leaf, Shield, RefreshCw, Zap } from "lucide-react";
@@ -52,12 +52,17 @@ export function DevisPlForm() {
   const update = <K extends keyof PlData>(key: K, value: PlData[K]) =>
     setData((d) => ({ ...d, [key]: value }));
 
+  const [touched, setTouched] = useState<{ telephone: boolean; email: boolean }>({ telephone: false, email: false });
+  const markTouched = (field: "telephone" | "email") => setTouched((t) => ({ ...t, [field]: true }));
+  const phoneError = touched.telephone && !isValidPhone(data.telephone) ? PHONE_ERROR : undefined;
+  const emailError = touched.email && !isValidOptionalEmail(data.email) ? EMAIL_ERROR : undefined;
+
   const select =
     "w-full h-11 rounded-xl border border-input bg-background px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-bright";
 
   const isValid = (step: number) => {
     if (step === 0) return true;
-    if (step === 1) return isValidPhone(data.telephone) && isValidEmail(data.email);
+    if (step === 1) return isValidPhone(data.telephone) && isValidOptionalEmail(data.email);
     return true;
   };
 
@@ -67,6 +72,8 @@ export function DevisPlForm() {
       serviceType="pl"
       data={data}
       isValid={isValid}
+      invalidStepMessage={() => (!isValidPhone(data.telephone) ? PHONE_ERROR : EMAIL_ERROR)}
+      onInvalidAttempt={() => setTouched({ telephone: true, email: true })}
       submitLabel="Envoyer ma demande professionnelle"
       extraMention="Un expert Recacor vous rappelle sous 2h en jours ouvrés."
       steps={[
@@ -124,7 +131,7 @@ export function DevisPlForm() {
         },
         {
           title: "Vos coordonnées professionnelles",
-          subtitle: "Téléphone et email sont requis pour vous recontacter",
+          subtitle: "Un numéro de téléphone suffit pour vous rappeler, l'e-mail est facultatif",
           content: (
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
@@ -138,11 +145,11 @@ export function DevisPlForm() {
               <FormField label="Entreprise / Raison sociale">
                 <Input value={data.entreprise} onChange={(e) => update("entreprise", e.target.value)} className="h-11" />
               </FormField>
-              <FormField label="Téléphone" required>
-                <Input type="tel" placeholder="06 00 00 00 00" value={data.telephone} onChange={(e) => update("telephone", e.target.value)} className="h-11" />
+              <FormField label="Téléphone" required error={phoneError}>
+                <Input type="tel" inputMode="tel" autoComplete="tel" placeholder="06 00 00 00 00" value={data.telephone} onChange={(e) => update("telephone", e.target.value)} onBlur={() => markTouched("telephone")} aria-invalid={phoneError ? true : undefined} className={phoneError ? "h-11 border-red-500 focus-visible:ring-red-500" : "h-11"} />
               </FormField>
-              <FormField label="Email" required>
-                <Input type="email" placeholder="vous@entreprise.fr" value={data.email} onChange={(e) => update("email", e.target.value)} className="h-11" />
+              <FormField label="Email (facultatif)" error={emailError}>
+                <Input type="email" inputMode="email" autoComplete="email" placeholder="vous@entreprise.fr" value={data.email} onChange={(e) => update("email", e.target.value)} onBlur={() => markTouched("email")} aria-invalid={emailError ? true : undefined} className={emailError ? "h-11 border-red-500 focus-visible:ring-red-500" : "h-11"} />
               </FormField>
               <FormField label="Code postal">
                 <Input placeholder="34920" maxLength={5} value={data.cp} onChange={(e) => update("cp", e.target.value)} className="h-11" />

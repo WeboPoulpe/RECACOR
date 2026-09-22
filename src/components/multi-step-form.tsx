@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight, CheckCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { pushFormStart, pushFormSubmit, getCookieValue, getUtmData, hasConsent } from "@/lib/tracking";
+import { pushFormStart, pushFormSubmit, pushFormStep, pushFormError, getCookieValue, getUtmData, hasConsent } from "@/lib/tracking";
 
 type ServiceType = "vl" | "pl" | "mecanique";
 
@@ -23,6 +23,10 @@ interface MultiStepFormProps {
   data: Record<string, unknown>;
   onFieldFocusOnce?: () => void;
   isValid: (stepIndex: number) => boolean;
+  /** Message affiché quand le visiteur tente de continuer avec une étape invalide. */
+  invalidStepMessage?: (stepIndex: number) => string;
+  /** Appelé lors d'une tentative invalide, pour marquer les champs en erreur côté formulaire. */
+  onInvalidAttempt?: (stepIndex: number) => void;
   summary: ReactNode;
   submitLabel?: string;
   extraMention?: string;
@@ -44,6 +48,8 @@ export function MultiStepForm({
   steps,
   data,
   isValid,
+  invalidStepMessage,
+  onInvalidAttempt,
   summary,
   submitLabel = "Envoyer ma demande",
   extraMention,
@@ -58,6 +64,7 @@ export function MultiStepForm({
   const [rgpd, setRgpd] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [attemptedStep, setAttemptedStep] = useState<number | null>(null);
 
   const copy = {
     step: (current: number, total: number) => `Étape ${current} / ${total}`,
@@ -66,6 +73,8 @@ export function MultiStepForm({
     next: "Continuer",
     sending: "Envoi...",
     submitError: "Votre demande n'a pas pu être confirmée. Réessayez ou appelez-nous directement.",
+    invalidStep: "Vérifiez le numéro de téléphone et l'adresse e-mail avant de continuer.",
+    consent: "Merci de cocher la case de consentement pour envoyer votre demande.",
     ...labels,
   };
 
@@ -84,17 +93,33 @@ export function MultiStepForm({
 
   const next = () => {
     triggerStart();
-    if (!isValid(step)) return;
-    if (step < totalSteps - 1) { setStep(step + 1); scrollToForm(); }
+    if (!isValid(step)) {
+      setAttemptedStep(step);
+      onInvalidAttempt?.(step);
+      pushFormError(serviceType, id, step + 1, "validation");
+      return;
+    }
+    setAttemptedStep(null);
+    if (step < totalSteps - 1) {
+      const target = step + 1;
+      setStep(target);
+      pushFormStep(serviceType, id, target + 1, steps[target].title);
+      scrollToForm();
+    }
   };
 
   const prev = () => {
+    setAttemptedStep(null);
     if (step > 0) { setStep(step - 1); scrollToForm(); }
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!rgpd) return;
+    if (!rgpd) {
+      setSubmitError(copy.consent);
+      pushFormError(serviceType, id, totalSteps, "consent");
+      return;
+    }
     setSubmitting(true);
     setSubmitError("");
 
@@ -141,6 +166,7 @@ export function MultiStepForm({
       id={id}
       onSubmit={handleSubmit}
       onFocusCapture={triggerStart}
+      data-recacor-form="true"
       className="relative"
     >
       {/* Hidden UTM inputs — populated at submit */}
@@ -258,7 +284,6 @@ export function MultiStepForm({
           <button
             type="button"
             onClick={next}
-            disabled={!isValid(step)}
             className="flex-1 inline-flex items-center justify-center gap-2 rounded-[4px] bg-yellow-400 px-6 py-3 text-sm font-black uppercase text-slate-950 transition-all hover:bg-yellow-300 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {copy.next}
@@ -267,7 +292,7 @@ export function MultiStepForm({
         ) : (
           <button
             type="submit"
-            disabled={!rgpd || submitting}
+            disabled={submitting}
             className="flex-1 inline-flex items-center justify-center gap-2 rounded-[4px] bg-yellow-400 px-6 py-3 text-sm font-black uppercase text-slate-950 transition-all hover:bg-yellow-300 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {submitting ? copy.sending : submitLabel}
@@ -275,6 +300,11 @@ export function MultiStepForm({
           </button>
         )}
       </div>
+      {attemptedStep === step && !isValid(step) && (
+        <p role="alert" className="mt-3 text-sm font-medium text-red-600">
+          {invalidStepMessage ? invalidStepMessage(step) : copy.invalidStep}
+        </p>
+      )}
       {submitError && (
         <p role="alert" className="mt-3 text-sm font-medium text-red-600">
           {submitError}
@@ -287,10 +317,12 @@ export function MultiStepForm({
 export function FormField({
   label,
   required,
+  error,
   children,
 }: {
   label: string;
   required?: boolean;
+  error?: string;
   children: ReactNode;
 }) {
   return (
@@ -300,6 +332,11 @@ export function FormField({
         {required && <span className="text-blue-700 ml-1">*</span>}
       </label>
       {children}
+      {error && (
+        <p role="alert" className="mt-1 text-xs font-medium text-red-600">
+          {error}
+        </p>
+      )}
     </div>
   );
 }
@@ -307,9 +344,15 @@ export function FormField({
 /* Validators */
 export const isValidPhone = (v: string) => {
   const cleaned = v.replace(/[\s.\-()]/g, "");
-  return /^(?:\+33|0033|0)[67]\d{8}$/.test(cleaned);
+  if (/^(?:\+33|0033)[1-9]\d{8}$/.test(cleaned)) return true; // France au format international
+  if (/^0[1-9]\d{8}$/.test(cleaned)) return true; // France, fixe ou mobile (01 à 09)
+  return /^(?:\+|00)[1-9]\d{7,14}$/.test(cleaned); // étranger (Espagne, Belgique, Suisse…)
 };
 export const isValidEmail = (v: string) => {
   const cleaned = v.trim();
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleaned);
 };
+/** E-mail facultatif : vide accepté, sinon doit être valide. */
+export const isValidOptionalEmail = (v: string) => v.trim() === "" || isValidEmail(v);
+export const PHONE_ERROR = "Numéro invalide. Exemple : 06 12 34 56 78, 04 99 53 33 90 ou +34 612 345 678.";
+export const EMAIL_ERROR = "Adresse e-mail invalide. Exemple : prenom@domaine.fr";

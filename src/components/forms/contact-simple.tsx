@@ -5,8 +5,8 @@ import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { pushFormSubmit, getUtmData } from "@/lib/tracking";
-import { isValidPhone, isValidEmail, FormField } from "@/components/multi-step-form";
+import { pushFormSubmit, pushFormError, getUtmData } from "@/lib/tracking";
+import { isValidPhone, isValidOptionalEmail, PHONE_ERROR, EMAIL_ERROR, FormField } from "@/components/multi-step-form";
 
 export function ContactSimpleForm() {
   const router = useRouter();
@@ -15,11 +15,25 @@ export function ContactSimpleForm() {
   const [rgpd, setRgpd] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
-  const isValid = isValidPhone(data.telephone) && isValidEmail(data.email) && rgpd;
+  const [touched, setTouched] = useState({ telephone: false, email: false });
+  const phoneError = touched.telephone && !isValidPhone(data.telephone) ? PHONE_ERROR : undefined;
+  const emailError = touched.email && !isValidOptionalEmail(data.email) ? EMAIL_ERROR : undefined;
+  const isValid = isValidPhone(data.telephone) && isValidOptionalEmail(data.email) && rgpd;
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!isValid) return;
+    if (!isValid) {
+      setTouched({ telephone: true, email: true });
+      setSubmitError(
+        !isValidPhone(data.telephone)
+          ? PHONE_ERROR
+          : !isValidOptionalEmail(data.email)
+            ? EMAIL_ERROR
+            : "Merci de cocher la case de consentement pour envoyer votre message.",
+      );
+      pushFormError("contact", "contact-form", 1, rgpd ? "validation" : "consent");
+      return;
+    }
     setSubmitting(true);
     setSubmitError("");
     const submissionId = crypto.randomUUID();
@@ -61,7 +75,7 @@ export function ContactSimpleForm() {
     setData((d) => ({ ...d, [key]: e.target.value }));
 
   return (
-    <form id="contact-form" onSubmit={handleSubmit} className="space-y-4">
+    <form id="contact-form" onSubmit={handleSubmit} data-recacor-form="true" className="space-y-4">
       <input type="hidden" name="utm_source" />
       <input type="hidden" name="utm_medium" />
       <input type="hidden" name="utm_campaign" />
@@ -74,11 +88,11 @@ export function ContactSimpleForm() {
       <FormField label="Nom">
         <Input value={data.nom} onChange={update("nom")} className="h-11" placeholder="Votre nom" />
       </FormField>
-      <FormField label="Téléphone" required>
-        <Input type="tel" value={data.telephone} onChange={update("telephone")} className="h-11" placeholder="06 00 00 00 00" />
+      <FormField label="Téléphone" required error={phoneError}>
+        <Input type="tel" inputMode="tel" autoComplete="tel" value={data.telephone} onChange={update("telephone")} onBlur={() => setTouched((t) => ({ ...t, telephone: true }))} aria-invalid={phoneError ? true : undefined} className={phoneError ? "h-11 border-red-500 focus-visible:ring-red-500" : "h-11"} placeholder="06 00 00 00 00" />
       </FormField>
-      <FormField label="Email" required>
-        <Input type="email" value={data.email} onChange={update("email")} className="h-11" placeholder="vous@email.fr" />
+      <FormField label="Email (facultatif)" error={emailError}>
+        <Input type="email" inputMode="email" autoComplete="email" value={data.email} onChange={update("email")} onBlur={() => setTouched((t) => ({ ...t, email: true }))} aria-invalid={emailError ? true : undefined} className={emailError ? "h-11 border-red-500 focus-visible:ring-red-500" : "h-11"} placeholder="vous@email.fr" />
       </FormField>
       <FormField label="Message">
         <textarea
@@ -109,7 +123,7 @@ export function ContactSimpleForm() {
 
       <button
         type="submit"
-        disabled={!isValid || submitting}
+        disabled={submitting}
         className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-purple-bright to-purple-mid text-white font-bold text-sm hover:shadow-lg hover:shadow-purple-bright/25 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
       >
         {submitting ? "Envoi..." : "Envoyer mon message"}

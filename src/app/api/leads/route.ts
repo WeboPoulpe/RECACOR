@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { sql, ensureSchema, getSetting } from "@/lib/db";
 import { getSiteConfig } from "@/lib/site-config";
 import { subscribeContact } from "@/lib/mailchimp";
@@ -107,42 +107,46 @@ export async function POST(req: Request) {
 
     const hasMailer = !!(process.env.BREVO_API_KEY || process.env.RESEND_API_KEY);
 
-    if (config.leadsEmailTo && hasMailer) {
-      await sendLeadEmail(config.leadsEmailTo, data, leadId ?? 0);
-    }
-
-    const sendConfirm = skipNeonLeadWrite
-      ? process.env.LEADS_SEND_CONFIRMATION || ""
-      : await getSetting("leads_send_confirmation", "").catch(() => "");
-    if (sendConfirm === "1" && data.email && hasMailer) {
-      sendConfirmationEmail(data).catch((err) =>
-        console.error("[lead confirmation]", err)
-      );
-    }
-
-    if (process.env.MAILCHIMP_API_KEY && data.email) {
-      const audienceId = skipNeonLeadWrite
-        ? process.env.MAILCHIMP_AUDIENCE_ID || null
-        : await getSetting("mailchimp_audience_id").catch(() => null);
-      if (audienceId) {
-        subscribeContact(audienceId, {
-          email: data.email,
-          firstName: data.prenom,
-          lastName: data.nom,
-          phone: data.telephone,
-          tags: [data.service_type, data.form_id, data.utm_source || "direct"].filter(Boolean) as string[],
-        }).catch((err) => console.error("[mailchimp]", err));
+    // Notifications et intégrations non bloquantes : exécutées après la réponse au visiteur.
+    const leadsEmailTo = config.leadsEmailTo;
+    after(async () => {
+      if (leadsEmailTo && hasMailer) {
+        await sendLeadEmail(leadsEmailTo, data, leadId ?? 0).catch((err) => console.error("[lead email]", err));
       }
-    }
+
+      const sendConfirm = skipNeonLeadWrite
+        ? process.env.LEADS_SEND_CONFIRMATION || ""
+        : await getSetting("leads_send_confirmation", "").catch(() => "");
+      if (sendConfirm === "1" && data.email && hasMailer) {
+        await sendConfirmationEmail(data).catch((err) => console.error("[lead confirmation]", err));
+      }
+
+      if (process.env.MAILCHIMP_API_KEY && data.email) {
+        const audienceId = skipNeonLeadWrite
+          ? process.env.MAILCHIMP_AUDIENCE_ID || null
+          : await getSetting("mailchimp_audience_id").catch(() => null);
+        if (audienceId) {
+          await subscribeContact(audienceId, {
+            email: data.email,
+            firstName: data.prenom,
+            lastName: data.nom,
+            phone: data.telephone,
+            tags: [data.service_type, data.form_id, data.utm_source || "direct"].filter(Boolean) as string[],
+          }).catch((err) => console.error("[mailchimp]", err));
+        }
+      }
+    });
 
     const databaseAccepted = typeof leadId === "number";
 
     if (!adsFlowAccepted && adsFlowResult.shouldAlert) {
-      sendAdsFlowFailureAlert(
-        data,
-        adsFlowResult.detail || "Échec AdsFlow non détaillé",
-        databaseAccepted,
-      ).catch((e) => console.error("[adsflow alert]", e));
+      after(() =>
+        sendAdsFlowFailureAlert(
+          data,
+          adsFlowResult.detail || "Échec AdsFlow non détaillé",
+          databaseAccepted,
+        ).catch((e) => console.error("[adsflow alert]", e)),
+      );
     }
 
     const acceptedBy = [
@@ -157,12 +161,14 @@ export async function POST(req: Request) {
       );
     }
 
-    try {
-      await sendTikTokLeadEvent(data, req, leadId);
-    } catch (err) {
-      // TikTok measurement must never turn an accepted lead into an error.
-      console.error("[tiktok events api]", err);
-    }
+    after(async () => {
+      try {
+        await sendTikTokLeadEvent(data, req, leadId);
+      } catch (err) {
+        // TikTok measurement must never turn an accepted lead into an error.
+        console.error("[tiktok events api]", err);
+      }
+    });
 
     return NextResponse.json({
       ok: true,

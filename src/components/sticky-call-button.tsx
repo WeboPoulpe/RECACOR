@@ -30,7 +30,14 @@ export function StickyCallButton() {
 
   useEffect(() => {
     const onScroll = () => {
-      setVisible(window.scrollY > 600);
+      // Ne jamais recouvrir un formulaire en cours de saisie.
+      const forms = document.querySelectorAll<HTMLElement>("form[data-recacor-form]");
+      const viewportHeight = window.innerHeight;
+      const formOnScreen = Array.from(forms).some((form) => {
+        const rect = form.getBoundingClientRect();
+        return rect.top < viewportHeight && rect.bottom > 0;
+      });
+      setVisible(window.scrollY > 600 && !formOnScreen);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
