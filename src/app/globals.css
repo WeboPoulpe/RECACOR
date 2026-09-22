@@ -241,9 +241,11 @@ body::before {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Le centrage est assuré par les classes Tailwind v4 -translate-x-1/2 -translate-y-1/2 (propriété `translate`).
+   L'animation ne doit donc pas re-translater via `transform`, sinon la boîte est décalée deux fois (bannière coupée sur mobile, corrigé le 22/09/2026). */
 @keyframes recacor-cookie-centered-in {
-  from { opacity: 0; transform: translate(-50%, -48%) scale(0.98); }
-  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes recacor-notice-in {
