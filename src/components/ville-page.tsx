@@ -534,7 +534,7 @@ function Variant3({ ville, seo, heroImage }: { ville: Ville; seo: ReturnType<typ
             {[
               { icon: Car, title: "Pneus VL", desc: "Été, hiver, 4 saisons. Toutes marques en stock." },
               { icon: Wrench, title: "Montage inclus", desc: "Démontage, montage, équilibrage, valves neuves." },
-              { icon: CheckCircle, title: "Parallélisme offert", desc: "Contrôle géométrie laser 3D offert avec chaque changement." },
+              { icon: CheckCircle, title: "Contrôle du parallélisme offert", desc: "Contrôle par géométrie laser 3D offert avec chaque changement de pneus." },
               { icon: Timer, title: "Sans rendez-vous", desc: "Lun–Ven 8h–12h · 14h–18h · Sam 8h–12h. Venez directement." },
             ].map((s, i) => (
               <motion.div key={s.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
