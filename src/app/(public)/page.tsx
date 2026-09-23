@@ -51,7 +51,7 @@ const serviceCards = [
   },
   {
     title: "Climatisation",
-    href: "/services/climatisation-auto-montpellier",
+    href: "/mecanique#clim",
     image: "/hero-generated/clim-master.webp",
     icon: Snowflake,
     description:
@@ -105,7 +105,7 @@ const priceCards = [
     price: "59€",
     detail: "à partir de",
     note: "Recharge selon gaz et catégorie véhicule.",
-    href: "/services/climatisation-auto-montpellier",
+    href: "/mecanique#clim",
   },
   {
     label: "Contrôle technique",
@@ -345,7 +345,7 @@ function ServicesSection() {
             <Link href="/mecanique#parallelisme" className="text-blue-700 hover:underline">
               Parallélisme et géométrie
             </Link>
-            <Link href="/services/climatisation-auto-montpellier" className="text-blue-700 hover:underline">
+            <Link href="/mecanique#clim" className="text-blue-700 hover:underline">
               Recharge clim auto
             </Link>
             <Link href="/services/recreusage" className="text-blue-700 hover:underline">
@@ -764,7 +764,7 @@ function VillesSeoSection() {
     { label: "Vidange voiture", href: "/mecanique#vidange" },
     { label: "Parallélisme Montpellier", href: "/mecanique#parallelisme" },
     { label: "Contrôle technique", href: "/services/prise-en-charge-controle-technique" },
-    { label: "Recharge clim auto", href: "/services/climatisation-auto-montpellier" },
+    { label: "Recharge clim auto", href: "/mecanique#clim" },
     { label: "Clim camion", href: "/services/clim-camion-poids-lourd-montpellier" },
     { label: "Pneus poids lourd", href: "/pneus-utilitaires-pl" },
     { label: "Recreusage", href: "/services/recreusage" },

@@ -163,7 +163,7 @@ export function NosCentresClient({ heroImage }: { heroImage?: string }) {
               <Link href="/mecanique#parallelisme" className="text-purple-bright hover:underline">
                 Parallélisme et géométrie
               </Link>
-              <Link href="/services/climatisation-auto-montpellier" className="text-purple-bright hover:underline">
+              <Link href="/mecanique#clim" className="text-purple-bright hover:underline">
                 Recharge clim auto
               </Link>
               <Link href="/services/recreusage" className="text-purple-bright hover:underline">

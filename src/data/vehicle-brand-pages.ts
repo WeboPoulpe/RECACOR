@@ -87,7 +87,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Controler le parallellisme" },
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
-      { href: "/services/climatisation-auto-montpellier", label: "Voir la recharge clim auto" },
+      { href: "/mecanique#clim", label: "Voir la recharge clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -171,7 +171,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Verifier la geometrie" },
       { href: "/mecanique#vidange", label: "Voir le service vidange" },
-      { href: "/services/climatisation-auto-montpellier", label: "Voir la clim auto" },
+      { href: "/mecanique#clim", label: "Voir la clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -255,7 +255,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Voir le parallellisme" },
       { href: "/mecanique#vidange", label: "Voir la vidange" },
-      { href: "/services/climatisation-auto-montpellier", label: "Voir la climatisation auto" },
+      { href: "/mecanique#clim", label: "Voir la climatisation auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -339,7 +339,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Verifier le parallellisme" },
       { href: "/mecanique#vidange", label: "Voir l'entretien courant" },
-      { href: "/services/climatisation-auto-montpellier", label: "Voir la clim auto" },
+      { href: "/mecanique#clim", label: "Voir la clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -425,7 +425,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Voir le service parallellisme" },
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
-      { href: "/services/climatisation-auto-montpellier", label: "Voir la clim auto" },
+      { href: "/mecanique#clim", label: "Voir la clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -509,7 +509,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Verifier la geometrie" },
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
-      { href: "/services/climatisation-auto-montpellier", label: "Voir la clim auto" },
+      { href: "/mecanique#clim", label: "Voir la clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -593,7 +593,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Voir le parallellisme" },
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
-      { href: "/services/climatisation-auto-montpellier", label: "Voir la clim auto" },
+      { href: "/mecanique#clim", label: "Voir la clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -677,7 +677,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Voir le parallellisme" },
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
-      { href: "/services/climatisation-auto-montpellier", label: "Voir la clim auto" },
+      { href: "/mecanique#clim", label: "Voir la clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -761,7 +761,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Voir le parallellisme" },
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
-      { href: "/services/climatisation-auto-montpellier", label: "Voir la clim auto" },
+      { href: "/mecanique#clim", label: "Voir la clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -845,7 +845,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Voir le parallellisme" },
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
-      { href: "/services/climatisation-auto-montpellier", label: "Voir la clim auto" },
+      { href: "/mecanique#clim", label: "Voir la clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -929,7 +929,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Voir le parallellisme" },
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
-      { href: "/services/climatisation-auto-montpellier", label: "Voir la clim auto" },
+      { href: "/mecanique#clim", label: "Voir la clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -1013,7 +1013,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Voir le parallellisme" },
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
-      { href: "/services/climatisation-auto-montpellier", label: "Voir la clim auto" },
+      { href: "/mecanique#clim", label: "Voir la clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },

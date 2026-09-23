@@ -32,7 +32,6 @@ const CONTENT_UPDATED: Record<string, string> = {
   "/pneus-utilitaires-pl/zone-sud-corse": "2026-07-18",
   "/pneus-utilitaires-pl/zone-nord-est-centre": "2026-07-22",
   "/pneus-utilitaires-pl/dordogne": "2026-09-18",
-  "/services/climatisation-auto-montpellier": "2026-07-24",
   "/services/clim-camion-poids-lourd-montpellier": "2026-07-18",
   "/services/recreusage": "2026-07-24",
   "/services/controle-atelier-40-points": "2026-09-12",

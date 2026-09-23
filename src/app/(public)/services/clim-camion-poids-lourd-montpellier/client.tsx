@@ -213,7 +213,7 @@ export function ClimCamionClient({ heroImage }: { heroImage?: string }) {
               </p>
               <p>
                 Pour une voiture ou un utilitaire léger, consulter la page{" "}
-                <Link href="/services/climatisation-auto-montpellier" className="font-bold text-purple-bright hover:underline">
+                <Link href="/mecanique#clim" className="font-bold text-purple-bright hover:underline">
                   climatisation auto au Crès
                 </Link>
                 .

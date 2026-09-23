@@ -18,12 +18,13 @@ const PL_ALIASES = new Set([
 ]);
 
 const SPANISH_PREFIX = "/es/";
-// Pages consolidées dans /mecanique le 2026-09-21 (sections ancrées).
+// Pages consolidées dans /mecanique le 2026-09-21 (sections ancrées), climatisation ajoutée le 2026-09-23.
 const PATH_REDIRECTS: Record<string, { pathname: string; hash?: string }> = {
   "/blog/vidange-voiture-montpellier": { pathname: "/mecanique", hash: "vidange" },
   "/blog/parallelisme-montpellier": { pathname: "/mecanique", hash: "parallelisme" },
   "/services/vidange": { pathname: "/mecanique", hash: "vidange" },
   "/services/parallelisme-geometrie": { pathname: "/mecanique", hash: "parallelisme" },
+  "/services/climatisation-auto-montpellier": { pathname: "/mecanique", hash: "clim" },
 };
 
 function applyBriefingHeaders(response: NextResponse) {
