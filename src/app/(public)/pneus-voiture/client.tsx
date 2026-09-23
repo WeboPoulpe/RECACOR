@@ -371,7 +371,6 @@ export function PneusVoitureClient({ heroImage }: { heroImage?: string }) {
           <div className="mt-8 flex flex-wrap gap-3 text-sm font-bold">
             <Link href="/mecanique#parallelisme" className="text-purple-bright hover:underline">Contrôler le parallélisme</Link>
             <Link href="/mecanique#vidange" className="text-purple-bright hover:underline">Voir le détail de la vidange voiture à Montpellier</Link>
-            <Link href="/mecanique#clim" className="text-purple-bright hover:underline">Recharge clim</Link>
           </div>
           <p className="mt-4 max-w-3xl text-sm text-muted-foreground leading-relaxed">
             Apres un changement de pneus, un controle de{" "}

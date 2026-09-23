@@ -10,7 +10,6 @@ import {
   MapPin,
   PackageCheck,
   ShieldCheck,
-  Snowflake,
   Star,
   Timer,
   Truck,
@@ -48,15 +47,6 @@ const serviceCards = [
     description:
       "Vidange, freinage, parallélisme et géométrie pour entretenir votre voiture sans perdre la journée.",
     points: ["Vidange dès 79€", "Parallélisme dès 65€", "Contrôle géométrie offert"],
-  },
-  {
-    title: "Climatisation",
-    href: "/mecanique#clim",
-    image: "/hero-generated/clim-master.webp",
-    icon: Snowflake,
-    description:
-      "Recharge clim auto, utilitaire, camping-car, camion et engins professionnels au garage du Crès.",
-    points: ["Gaz R134a et 1234yf", "VL, utilitaires, PL", "Formulaire dédié"],
   },
   {
     title: "Contrôle technique",
@@ -99,13 +89,6 @@ const priceCards = [
     detail: "à partir de",
     note: "Contrôle offert avant réglage si nécessaire.",
     href: "/mecanique#parallelisme",
-  },
-  {
-    label: "Clim auto",
-    price: "59€",
-    detail: "à partir de",
-    note: "Recharge selon gaz et catégorie véhicule.",
-    href: "/mecanique#clim",
   },
   {
     label: "Contrôle technique",
@@ -154,7 +137,7 @@ function HeroSection() {
           </h1>
 
           <p className="mt-6 max-w-xl text-base leading-7 text-white/74 sm:text-lg">
-            Pneus voiture, vidange, parallélisme, climatisation et solutions poids lourd au
+            Pneus voiture, vidange, parallélisme et solutions poids lourd au
             Crès, à quelques minutes de Castelnau-le-Lez, Vendargues et Jacou. Un atelier
             local, du stock réel, une équipe terrain et un devis rapide.
           </p>
@@ -284,7 +267,7 @@ function ServicesSection() {
             <h2 className="recacor-title mt-4">Un atelier, plusieurs besoins.</h2>
           </div>
           <p className="max-w-xl text-base leading-7 text-muted-foreground">
-            Pneus, mécanique et climatisation pour les particuliers, pneus poids lourd et
+            Pneus et mécanique pour les particuliers, pneus poids lourd et
             recreusage pour les flottes professionnelles — un seul garage, deux expertises.
           </p>
         </div>
@@ -335,7 +318,7 @@ function ServicesSection() {
           </p>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">
             Quand le besoin est déjà clair, le plus simple est d&apos;ouvrir directement la bonne
-            page avant d&apos;appeler ou de venir. Vous retrouvez ci-dessous les quatre prestations
+            page avant d&apos;appeler ou de venir. Vous retrouvez ci-dessous les trois prestations
             qui reviennent le plus souvent au garage.
           </p>
           <div className="mt-5 flex flex-wrap gap-3 text-sm font-bold">
@@ -344,9 +327,6 @@ function ServicesSection() {
             </Link>
             <Link href="/mecanique#parallelisme" className="text-blue-700 hover:underline">
               Parallélisme et géométrie
-            </Link>
-            <Link href="/mecanique#clim" className="text-blue-700 hover:underline">
-              Recharge clim auto
             </Link>
             <Link href="/services/recreusage" className="text-blue-700 hover:underline">
               Recreusage poids lourd
@@ -414,7 +394,6 @@ function ProsParticuliersSection() {
       points: [
         "Pneus été, hiver et 4 saisons",
         "Vidange, freinage, parallélisme",
-        "Recharge clim auto et camping-car",
       ],
     },
     {
@@ -426,7 +405,6 @@ function ProsParticuliersSection() {
       points: [
         "Pneus PL, utilitaires, agricoles et industriels",
         "Recreusage et suivi de parc",
-        "Clim camion et engins professionnels",
       ],
     },
   ];
@@ -574,8 +552,8 @@ function StorySection() {
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div className="relative min-h-[430px] overflow-hidden border border-border bg-slate-900">
             <Image
-              src="/refonte/clim-pl.jpg"
-              alt="Atelier Recacor et machine clim"
+              src={HERO_IMAGE}
+              alt="Façade du garage Recacor au Crès"
               fill
               sizes="(max-width: 1023px) 100vw, 45vw"
               className="object-cover"
@@ -688,27 +666,12 @@ function ZoneInterventionSection() {
                 Nos ateliers mobiles interviennent directement sur votre site, dépôt ou sur autoroute
                 pour les crevaisons et remplacements de pneumatiques poids lourd. Uniquement pneus.
               </p>
-              <div className="mb-6 rounded-2xl border border-white/15 bg-white/10 p-4">
-                <p className="text-xs font-bold uppercase tracking-wider text-purple-glow">Nouveau</p>
-                <p className="mt-2 text-sm font-semibold text-white">
-                  Clim camion et poids lourd dès 149€, au garage du Crès ou sur site.
-                </p>
-                <p className="mt-1 text-xs leading-relaxed text-white/65">
-                  Offre réservée aux poids lourds, engins TP et véhicules agricoles.
-                </p>
-              </div>
               <div className="mt-auto flex flex-col sm:flex-row gap-3">
                 <Link
                   href="/pneus-utilitaires-pl#assistance"
                   className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-white text-purple-deep font-bold text-sm hover:shadow-lg transition-shadow"
                 >
                   Devis pro <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  href="/services/clim-camion-poids-lourd-montpellier"
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-white/25 text-white text-sm font-semibold hover:bg-white/10 transition-colors"
-                >
-                  Voir l&apos;offre clim <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   href="/pneus-utilitaires-pl/zone-nord-est-centre"
@@ -764,8 +727,6 @@ function VillesSeoSection() {
     { label: "Vidange voiture", href: "/mecanique#vidange" },
     { label: "Parallélisme Montpellier", href: "/mecanique#parallelisme" },
     { label: "Contrôle technique", href: "/services/prise-en-charge-controle-technique" },
-    { label: "Recharge clim auto", href: "/mecanique#clim" },
-    { label: "Clim camion", href: "/services/clim-camion-poids-lourd-montpellier" },
     { label: "Pneus poids lourd", href: "/pneus-utilitaires-pl" },
     { label: "Recreusage", href: "/services/recreusage" },
     { label: "Nos centres", href: "/nos-centres" },

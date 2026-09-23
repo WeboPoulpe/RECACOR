@@ -28,13 +28,11 @@
 - [Mecanique Montpellier](https://www.recacor.fr/mecanique) : page mere mecanique. Vidange, freinage, entretien et liens vers services atelier.
 - [Vidange Montpellier](https://www.recacor.fr/services/vidange) : service detaille vidange.
 - [Parallelisme et geometrie Montpellier](https://www.recacor.fr/services/parallelisme-geometrie) : service detaille train roulant / parallelisme.
-- [Climatisation auto Montpellier](https://www.recacor.fr/services/climatisation-auto-montpellier) : offre clim voiture.
 
 ### Poids lourd / PL
 
 - [Pneus utilitaires et poids lourd](https://www.recacor.fr/pneus-utilitaires-pl) : page mere PL publique actuelle. Vente pneus PL, recreusage et assistance pneus.
 - [Recreusage pneus poids lourd](https://www.recacor.fr/services/recreusage) : service detaille sur le recreusage.
-- [Clim camion poids lourd Montpellier](https://www.recacor.fr/services/clim-camion-poids-lourd-montpellier) : page dediee a la clim cabine poids lourd, perimetre Montpellier agglomeration.
 
 ### Informations institutionnelles
 
@@ -48,7 +46,6 @@
 
 - Le parcours `VL` et le parcours `PL` doivent etre distingues.
 - Pour le `PL`, privilegier les pages qui parlent clairement de pneus, recreusage, usure, assistance pneus, monte et besoin professionnel.
-- Pour la `clim poids lourd`, ne citer que la page dediee `Montpellier agglomeration`.
 - Les pages formulaire ne sont pas la meilleure source de citation ; privilegier les pages service et les pages meres publiques.
 
 ## Points utiles pour les assistants

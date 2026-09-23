@@ -81,13 +81,11 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       "Controle d'usure reguliere apres changement de pneus",
       "Parallellisme sur 208, 308, 2008 ou 3008 si usure irreguliere",
       "Vidange ou entretien courant si le vehicule est deja sur place",
-      "Recharge climatisation auto pour les usages urbains et periurbains",
     ],
     tireBrands: ["Michelin", "Continental", "Bridgestone", "Goodyear", "Hankook"],
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Controler le parallellisme" },
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
-      { href: "/mecanique#clim", label: "Voir la recharge clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -165,13 +163,11 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       "Verification de l'usure pour eviter une nouvelle degradation rapide",
       "Controle du parallellisme sur Clio, Megane, Captur ou Kadjar",
       "Vidange et entretien courant si le vehicule est deja a l'atelier",
-      "Climatisation auto si le besoin remonte en meme temps que les pneus",
     ],
     tireBrands: ["Michelin", "Goodyear", "Continental", "Bridgestone", "Hankook"],
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Verifier la geometrie" },
       { href: "/mecanique#vidange", label: "Voir le service vidange" },
-      { href: "/mecanique#clim", label: "Voir la clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -249,13 +245,11 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       "Controle d'usure et de geometrie sur les usages familiaux",
       "Parallellisme apres pneus neufs si le vehicule tirait d'un cote",
       "Verification atelier simple si Berlingo ou Jumpy roule charge",
-      "Recharge clim sur vehicules familiaux qui roulent l'ete",
     ],
     tireBrands: ["Michelin", "Continental", "Goodyear", "Hankook", "Pirelli"],
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Voir le parallellisme" },
       { href: "/mecanique#vidange", label: "Voir la vidange" },
-      { href: "/mecanique#clim", label: "Voir la climatisation auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -333,13 +327,11 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       "Controle de geometrie si usure interieure ou exterieure visible",
       "Verification de la tenue de route sur Golf ou Tiguan",
       "Possibilite d'ajouter une vidange ou un entretien courant dans le meme passage",
-      "Controle clim possible si le besoin est signale pendant le passage atelier",
     ],
     tireBrands: ["Michelin", "Continental", "Bridgestone", "Goodyear", "Pirelli"],
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Verifier le parallellisme" },
       { href: "/mecanique#vidange", label: "Voir l'entretien courant" },
-      { href: "/mecanique#clim", label: "Voir la clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -419,13 +411,12 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       "Controle d'usure interieure ou exterieure avant remontage",
       "Geometrie utile si la voiture tire ou si le volant n'est plus centre",
       "Verification de la monte exacte selon finition et taille de jante",
-      "Possibilite d'ajouter une vidange ou un controle clim si la voiture est deja au garage",
+      "Possibilite d'ajouter une vidange si la voiture est deja au garage",
     ],
     tireBrands: ["Michelin", "Continental", "Goodyear", "Bridgestone", "Pirelli"],
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Voir le service parallellisme" },
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
-      { href: "/mecanique#clim", label: "Voir la clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -503,13 +494,12 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       "Verification de l'usure avant si le pneu a travaille d'un cote",
       "Controle de parallellisme si le volant est decale ou si la voiture tire",
       "Confirmation de la monte exacte, y compris en runflat si besoin",
-      "Possibilite d'ajouter un entretien courant ou un controle clim si la voiture est deja au garage",
+      "Possibilite d'ajouter un entretien courant si la voiture est deja au garage",
     ],
     tireBrands: ["Michelin", "Continental", "Goodyear", "Bridgestone", "Pirelli"],
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Verifier la geometrie" },
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
-      { href: "/mecanique#clim", label: "Voir la clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -587,13 +577,12 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       "Controle d'usure avant remplacement si le pneu a marque d'un cote",
       "Geometrie utile si le volant n'est plus centre ou si la voiture tire",
       "Verification de la dimension exacte selon finition et jante",
-      "Possibilite d'ajouter une vidange, un controle clim ou un entretien courant dans le meme passage",
+      "Possibilite d'ajouter une vidange ou un entretien courant dans le meme passage",
     ],
     tireBrands: ["Michelin", "Continental", "Goodyear", "Pirelli", "Bridgestone"],
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Voir le parallellisme" },
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
-      { href: "/mecanique#clim", label: "Voir la clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -671,13 +660,12 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       "Controle d'usure avant remplacement si le train a travaille d'un cote",
       "Controle du parallellisme si la voiture tire ou si le volant n'est plus droit",
       "Verification de la dimension exacte selon finition et jante",
-      "Possibilite d'ajouter une vidange ou un controle clim si la voiture est deja au garage",
+      "Possibilite d'ajouter une vidange si la voiture est deja au garage",
     ],
     tireBrands: ["Michelin", "Continental", "Goodyear", "Hankook", "Bridgestone"],
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Voir le parallellisme" },
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
-      { href: "/mecanique#clim", label: "Voir la clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -755,13 +743,12 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       "Controle d'usure reguliere avant de remonter un train neuf",
       "Parallellisme utile si l'ancien train s'est use de biais",
       "Verification de la dimension exacte selon finition et jante",
-      "Possibilite d'ajouter une vidange ou un controle clim si la voiture est deja au garage",
+      "Possibilite d'ajouter une vidange si la voiture est deja au garage",
     ],
     tireBrands: ["Michelin", "Continental", "Goodyear", "Bridgestone", "Hankook"],
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Voir le parallellisme" },
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
-      { href: "/mecanique#clim", label: "Voir la clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -839,13 +826,12 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       "Verification de l'usure avant remplacement pour eviter une nouvelle derive rapide",
       "Controle de parallellisme si le vehicule tire ou si le volant n'est plus centre",
       "Comparaison simple entre gamme budget, milieu et usage quotidien",
-      "Possibilite d'ajouter une vidange ou un controle clim si la voiture est deja au garage",
+      "Possibilite d'ajouter une vidange si la voiture est deja au garage",
     ],
     tireBrands: ["Michelin", "Goodyear", "Continental", "Hankook", "Firestone"],
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Voir le parallellisme" },
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
-      { href: "/mecanique#clim", label: "Voir la clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -923,13 +909,12 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       "Controle de l'usure avant remplacement si le pneu a travaille d'un cote",
       "Parallellisme utile si la direction n'est plus nette ou si le volant est decale",
       "Verification de la dimension exacte selon finition et jante",
-      "Possibilite d'ajouter une vidange ou un controle clim si la voiture est deja au garage",
+      "Possibilite d'ajouter une vidange si la voiture est deja au garage",
     ],
     tireBrands: ["Michelin", "Goodyear", "Continental", "Bridgestone", "Hankook"],
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Voir le parallellisme" },
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
-      { href: "/mecanique#clim", label: "Voir la clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },
@@ -1007,13 +992,12 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       "Verification de l'usure avant si le train a marque d'un cote",
       "Controle du parallellisme si la voiture tirait, flottait ou usait le train de facon irreguliere",
       "Controle de la dimension exacte selon finition, jante ou usage utilitaire leger",
-      "Possibilite d'ajouter une vidange ou un controle clim si la voiture est deja au garage",
+      "Possibilite d'ajouter une vidange si la voiture est deja au garage",
     ],
     tireBrands: ["Michelin", "Goodyear", "Continental", "Bridgestone", "Hankook"],
     serviceLinks: [
       { href: "/mecanique#parallelisme", label: "Voir le parallellisme" },
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
-      { href: "/mecanique#clim", label: "Voir la clim auto" },
     ],
     cityLinks: [
       { href: "/montpellier", label: "Pneus Montpellier" },

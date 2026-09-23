@@ -24,8 +24,6 @@ const servicesLinks = [
   { name: "Parallélisme & Géométrie", href: "/mecanique#parallelisme" },
   { name: "Contrôle atelier 40 points", href: "/services/controle-atelier-40-points" },
   { name: "Contrôle technique", href: "/services/prise-en-charge-controle-technique" },
-  { name: "Recharge clim", href: "/mecanique#clim" },
-  { name: "Clim camion & poids lourd", href: "/services/clim-camion-poids-lourd-montpellier" },
   { name: "Recreusage", href: "/services/recreusage" },
   { name: "Dépannage PL sur route", href: "/depannage-poids-lourd-urgence" },
 ];
@@ -329,7 +327,6 @@ export async function Footer() {
                 {[
                   { label: "Vidange au Crès", href: "/mecanique#vidange" },
                   { label: "Parallélisme au Crès", href: "/mecanique#parallelisme" },
-                  { label: "Clim auto Montpellier", href: "/mecanique#clim" },
                   { label: "Recreusage poids lourd", href: "/services/recreusage" },
                   { label: "Garage auto Le Crès", href: "/le-cres" },
                   { label: "Atelier mécanique", href: "/mecanique" },

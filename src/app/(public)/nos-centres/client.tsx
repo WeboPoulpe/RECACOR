@@ -153,7 +153,7 @@ export function NosCentresClient({ heroImage }: { heroImage?: string }) {
             </h2>
             <p className="mt-4 text-muted-foreground leading-relaxed">
               Le centre du Crès ne sert pas seulement au montage pneus. Les demandes reviennent
-              surtout autour de la vidange, du parallélisme, de la clim auto et du recreusage
+              surtout autour de la vidange, du parallélisme et du recreusage
               poids lourd. Les pages ci-dessous donnent le detail avant de venir ou d&apos;appeler.
             </p>
             <div className="mt-6 flex flex-wrap gap-3 text-sm font-bold">
@@ -162,9 +162,6 @@ export function NosCentresClient({ heroImage }: { heroImage?: string }) {
               </Link>
               <Link href="/mecanique#parallelisme" className="text-purple-bright hover:underline">
                 Parallélisme et géométrie
-              </Link>
-              <Link href="/mecanique#clim" className="text-purple-bright hover:underline">
-                Recharge clim auto
               </Link>
               <Link href="/services/recreusage" className="text-purple-bright hover:underline">
                 Recreusage poids lourd

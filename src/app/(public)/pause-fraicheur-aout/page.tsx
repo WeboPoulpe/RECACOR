@@ -71,8 +71,8 @@ export default function PauseFraicheurAoutPage() {
               meilleures conditions l&apos;après-midi.
             </p>
             <p className="mt-4 text-base leading-7 text-slate-700">
-              Si vous venez pour des pneus voiture, une vidange, un parallélisme ou
-              une recharge clim, le plus simple est de viser le matin ou après 14h.
+              Si vous venez pour des pneus voiture, une vidange ou un parallélisme,
+              le plus simple est de viser le matin ou après 14h.
               Pour un besoin pro ou poids lourd, un appel avant déplacement évite les
               mauvaises surprises.
             </p>

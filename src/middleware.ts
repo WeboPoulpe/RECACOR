@@ -18,13 +18,18 @@ const PL_ALIASES = new Set([
 ]);
 
 const SPANISH_PREFIX = "/es/";
-// Pages consolidées dans /mecanique le 2026-09-21 (sections ancrées), climatisation ajoutée le 2026-09-23.
+// Pages consolidées dans /mecanique le 2026-09-21 (sections ancrées).
+// Climatisation retirée du site le 2026-09-23 (attestation de capacité fluides frigorigènes manquante) :
+// anciennes URL redirigées ; restaurer la page et les formulaires par le commit inverse une fois l'attestation obtenue.
 const PATH_REDIRECTS: Record<string, { pathname: string; hash?: string }> = {
   "/blog/vidange-voiture-montpellier": { pathname: "/mecanique", hash: "vidange" },
   "/blog/parallelisme-montpellier": { pathname: "/mecanique", hash: "parallelisme" },
   "/services/vidange": { pathname: "/mecanique", hash: "vidange" },
   "/services/parallelisme-geometrie": { pathname: "/mecanique", hash: "parallelisme" },
-  "/services/climatisation-auto-montpellier": { pathname: "/mecanique", hash: "clim" },
+  "/services/climatisation-auto-montpellier": { pathname: "/mecanique" },
+  "/services/clim-camion-poids-lourd-montpellier": { pathname: "/pneus-utilitaires-pl" },
+  "/formulaire/clim": { pathname: "/formulaire/mecanique" },
+  "/formulaire/clim-camion": { pathname: "/pneus-utilitaires-pl" },
 };
 
 function applyBriefingHeaders(response: NextResponse) {

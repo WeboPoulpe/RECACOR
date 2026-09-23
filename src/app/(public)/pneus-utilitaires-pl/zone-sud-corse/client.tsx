@@ -271,8 +271,7 @@ export function PlZoneSudCorseClient({ heroImage }: { heroImage?: string }) {
                 </h2>
                 <p className="mt-4 text-sm leading-relaxed text-white/75">
                   Selon le besoin, vous pouvez aussi consulter le hub pneus PL, les entrées
-                  locales autour de Nîmes et Sète, le recreusage ou la page clim camion
-                  sur Montpellier agglomération.
+                  locales autour de Nîmes et Sète ou le recreusage.
                 </p>
               </div>
               <div className="space-y-3">
@@ -294,10 +293,6 @@ export function PlZoneSudCorseClient({ heroImage }: { heroImage?: string }) {
                 </Link>
                 <Link href="/services/recreusage" className="flex items-center justify-between rounded-2xl border border-white/15 bg-white/10 px-5 py-4 text-sm font-bold hover:bg-white/15">
                   <span>Recreusage poids lourd</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link href="/services/clim-camion-poids-lourd-montpellier" className="flex items-center justify-between rounded-2xl border border-white/15 bg-white/10 px-5 py-4 text-sm font-bold hover:bg-white/15">
-                  <span>Clim camion Montpellier agglo</span>
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>

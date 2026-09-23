@@ -14,7 +14,6 @@ const navigation = [
   { name: "Pneus voiture", href: "/pneus-voiture" },
   { name: "Mécanique", href: "/mecanique" },
   { name: "Contrôle technique", href: "/services/prise-en-charge-controle-technique" },
-  { name: "Clim", href: "/mecanique#clim" },
   { name: "Pneus PL", href: "/pneus-utilitaires-pl" },
   { name: "Dépannage PL", href: "/depannage-poids-lourd-urgence" },
   { name: "Blog", href: "/blog" },

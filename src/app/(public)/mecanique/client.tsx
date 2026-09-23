@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Wrench, Droplet, Disc, Gauge, Target, Snowflake, Filter } from "lucide-react";
+import { ArrowRight, Wrench, Droplet, Disc, Gauge, Target, Filter } from "lucide-react";
 import { PhoneLink } from "@/components/phone-link";
 import { DevisMecaniqueForm } from "@/components/forms/devis-mecanique";
 import { BgParticles } from "@/components/bg-particles";
@@ -18,7 +18,6 @@ const services = [
   { icon: Droplet, title: "Vidange", desc: "Vidange complète huile + filtre", price: "79€", href: "/mecanique#vidange", image: "/illustrations/mecanique#vidange-intro-20260716.webp" },
   { icon: Target, title: "Parallélisme & Géométrie", desc: "Réglage laser 3D", price: "65€", href: "/mecanique#parallelisme", image: "/illustrations/services/parallelisme-intro-20260716.webp" },
   { icon: Gauge, title: "Contrôle technique", desc: "Pré-contrôle offert + prise en charge atelier", price: "87,22€", href: "/services/prise-en-charge-controle-technique", image: "/illustrations/services/controle-technique-hero-20260723.png" },
-  { icon: Snowflake, title: "Climatisation auto", desc: "Recharge clim + contrôle avant intervention", price: "59€", href: "/mecanique#clim", image: FALLBACK_IMAGE, imagePending: true },
   { icon: Disc, title: "Freinage", desc: "Plaquettes, disques, liquide", price: "89€", href: "/mecanique#freinage", image: FALLBACK_IMAGE, imagePending: true },
   { icon: Gauge, title: "Amortisseurs", desc: "Train roulant, suspension", price: "Sur devis", href: "/mecanique#amortisseurs", image: FALLBACK_IMAGE, imagePending: true },
   { icon: Wrench, title: "Révision", desc: "Entretien complet constructeur", price: "Sur devis", href: "/mecanique#revision", image: FALLBACK_IMAGE, imagePending: true },
@@ -27,11 +26,11 @@ const services = [
 const faqs = [
   {
     q: "Faites-vous l'entretien auto sans rendez-vous ?",
-    a: "Oui, selon la charge atelier. Recacor accueille les automobilistes avec ou sans rendez-vous pour les prestations courantes comme l'entretien, le freinage, le parallélisme ou la climatisation auto.",
+    a: "Oui, selon la charge atelier. Recacor accueille les automobilistes avec ou sans rendez-vous pour les prestations courantes comme l'entretien, le freinage ou le parallélisme.",
   },
   {
     q: "Quels services atelier faites-vous au Crès ?",
-    a: "L'atelier Recacor prend en charge la vidange, le parallélisme, le freinage, les amortisseurs, la révision et la climatisation auto. Certaines prestations ont leur page dédiée pour retrouver le détail, le tarif et le formulaire adapté.",
+    a: "L'atelier Recacor prend en charge la vidange, le parallélisme, le freinage, les amortisseurs et la révision. Certaines prestations ont leur page dédiée pour retrouver le détail, le tarif et le formulaire adapté.",
   },
   {
     q: "Peut-on regrouper pneus et entretien le même jour ?",
@@ -40,22 +39,6 @@ const faqs = [
   {
     q: "Faites-vous le freinage toutes marques ?",
     a: "Oui, nous intervenons sur toutes marques et tous modèles. Plaquettes, disques, liquide de frein : nous utilisons des pièces de qualité adaptées à votre véhicule.",
-  },
-  {
-    q: "Ma clim souffle moins froid : vous contrôlez avant de recharger ?",
-    a: "Oui. Recacor vérifie d'abord le fonctionnement, les pressions et l'état général du circuit. Si une recharge est adaptée, elle est faite avec le bon gaz. Si le problème vient d'une fuite ou d'un autre élément, c'est expliqué avant l'intervention.",
-  },
-  {
-    q: "Vous travaillez sur le gaz R134a et le 1234yf ?",
-    a: "Oui, selon le véhicule. Le tarif dépend justement du gaz prévu et du type de voiture, ce qui explique qu'une recharge clim ne se traite pas exactement de la même manière d'un modèle à l'autre.",
-  },
-  {
-    q: "Quand faut-il faire contrôler sa clim voiture ?",
-    a: "Dès que l'air devient moins froid, que le désembuage est plus lent, qu'une odeur apparaît à la ventilation ou avant un départ d'été. Mieux vaut contrôler tôt que découvrir le problème pendant les fortes chaleurs.",
-  },
-  {
-    q: "Ma clim sent mauvais : une recharge suffit ?",
-    a: "Pas forcément. Une mauvaise odeur peut aussi venir d'un filtre d'habitacle encrassé ou d'un circuit à nettoyer. C'est justement l'intérêt de contrôler avant de recharger.",
   },
   {
     q: "Peut-on combiner mécanique et pneus le même jour ?",
@@ -128,8 +111,8 @@ export function MecaniqueClient({ heroImage }: { heroImage?: string }) {
             <span className="text-purple-glow">Garage Recacor près de Montpellier</span>
           </h1>
           <p className="mt-4 text-white/70 max-w-xl text-lg">
-            Un seul atelier pour l&apos;entretien courant, le freinage, le parallélisme,
-            la climatisation auto et les besoins du quotidien, au Crès près de Montpellier.
+            Un seul atelier pour l&apos;entretien courant, le freinage, le parallélisme
+            et les besoins du quotidien, au Crès près de Montpellier.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 max-w-xl">
             <PhoneLink
@@ -164,7 +147,7 @@ export function MecaniqueClient({ heroImage }: { heroImage?: string }) {
               </p>
               <p>
                 Recacor prend en charge la vidange, le parallélisme, le freinage,
-                les amortisseurs, la révision et la climatisation auto au garage du Crès.
+                les amortisseurs et la révision au garage du Crès.
                 Si le besoin concerne une prestation précise, Recacor renvoie ensuite vers le bon service avec plus
                 de détails, le tarif public quand il existe et le bon formulaire.
               </p>
@@ -247,12 +230,7 @@ export function MecaniqueClient({ heroImage }: { heroImage?: string }) {
               <Link href="/services/prise-en-charge-controle-technique" className="font-bold text-purple-bright hover:underline">
                 prise en charge contrôle technique
               </Link>
-              . Pour l&apos;été, la{" "}
-              <Link href="/mecanique#clim" className="font-bold text-purple-bright hover:underline">
-                recharge climatisation voiture
-              </Link>{" "}
-              est traitée comme une prestation atelier avec contrôle avant intervention. Si vous
-              gérez aussi un utilitaire ou un poids lourd, le{" "}
+              . Si vous gérez aussi un utilitaire ou un poids lourd, le{" "}
               <Link href="/services/recreusage" className="font-bold text-purple-bright hover:underline">
                 recreusage Recacor
               </Link>{" "}
@@ -267,9 +245,6 @@ export function MecaniqueClient({ heroImage }: { heroImage?: string }) {
               </Link>
               <Link href="/services/prise-en-charge-controle-technique" className="text-purple-bright hover:underline">
                 Voir l&apos;offre contrôle technique
-              </Link>
-              <Link href="/mecanique#clim" className="text-purple-bright hover:underline">
-                Voir le détail de la clim voiture
               </Link>
               <Link href="/services/recreusage" className="text-purple-bright hover:underline">
                 Voir le recreusage poids lourd
@@ -495,110 +470,6 @@ export function MecaniqueClient({ heroImage }: { heroImage?: string }) {
             </PhoneLink>
             <DevisCtaLink mobileHref="/formulaire/mecanique" className="flex-1 recacor-btn-secondary">
               Devis parallélisme <ArrowRight className="h-4 w-4" />
-            </DevisCtaLink>
-          </div>
-        </div>
-      </section>
-
-      {/* Climatisation auto — section détaillée (ex-page /services/climatisation-auto-montpellier) */}
-      <section id="clim" className="py-20 bg-muted scroll-mt-24">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-            <div>
-              <Badge className="bg-purple-bright/10 text-purple-bright border-purple-bright/20 mb-4">
-                <Snowflake className="h-3 w-3 mr-1" /> Climatisation
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-black tracking-tight">
-                Climatisation auto au Crès :{" "}
-                <span className="text-gradient-purple">contrôle avant recharge, dès 59€</span>
-              </h2>
-              <div className="mt-5 space-y-4 text-muted-foreground leading-relaxed">
-                <p>
-                  Si votre clim refroidit moins bien, mieux vaut vérifier le circuit avant de lancer une recharge.
-                  Cela permet de voir si le problème vient simplement du gaz, d&apos;un filtre d&apos;habitacle
-                  encrassé ou d&apos;un autre élément du système.
-                </p>
-                <p>
-                  Chez Recacor au Crès, le contrôle est fait <strong>avant</strong> toute recharge et la recharge
-                  démarre à <strong>59€</strong>, selon le gaz et le véhicule. Le but est simple : remettre du
-                  froid quand une recharge suffit, et le dire clairement quand ce n&apos;est pas le bon levier.
-                </p>
-              </div>
-              <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-                {[
-                  { icon: Gauge, title: "Contrôle du circuit", desc: "Froid, pressions et état général avant tout" },
-                  { icon: Snowflake, title: "Gaz selon véhicule", desc: "R134a ou 1234yf, adapté au modèle" },
-                  { icon: Wrench, title: "Atelier au Crès", desc: "Avec ou sans rendez-vous" },
-                ].map((item) => (
-                  <div key={item.title} className="rounded-[4px] border border-border bg-white px-4 py-3">
-                    <item.icon className="h-4 w-4 text-purple-bright" />
-                    <p className="mt-2 text-sm font-bold text-foreground">{item.title}</p>
-                    <p className="text-xs text-muted-foreground">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="overflow-hidden rounded-[4px] border border-border bg-white shadow-sm">
-              <Image
-                src="/hero-generated/clim-master.webp"
-                alt="Recharge de climatisation sur une voiture en atelier au Crès"
-                width={1200}
-                height={800}
-                sizes="(min-width: 1024px) 40vw, 100vw"
-                className="h-auto w-full"
-              />
-            </div>
-          </div>
-          <div className="mt-10 grid gap-8 md:grid-cols-2 text-muted-foreground leading-relaxed">
-            <div className="space-y-4">
-              <h3 className="text-xl font-black tracking-tight text-foreground">Les signes qui doivent alerter</h3>
-              <p>
-                Air tiède ou froid insuffisant, mauvaise odeur à la ventilation, désembuage plus lent, bruit
-                inhabituel quand la clim tourne, ou clim qui met longtemps à refroidir l&apos;habitacle : ce sont
-                les signaux les plus fréquents. Un contrôle avant un départ ou avant les fortes chaleurs évite de
-                découvrir le problème au pire moment.
-              </p>
-              <h3 className="text-xl font-black tracking-tight text-foreground">R134a ou 1234yf, la bonne recharge</h3>
-              <p>
-                Le gaz utilisé dépend du véhicule, pas d&apos;un standard unique. Nos techniciens vérifient le gaz
-                prévu par le constructeur avant d&apos;intervenir, ce qui explique qu&apos;une recharge clim ne se
-                traite pas exactement de la même manière d&apos;un modèle à l&apos;autre.
-              </p>
-            </div>
-            <div className="space-y-4">
-              <h3 className="text-xl font-black tracking-tight text-foreground">Ce qui est contrôlé avant la recharge</h3>
-              <p>
-                Le froid réel en sortie d&apos;aérateur, les pressions du circuit, le type de gaz prévu et l&apos;état
-                du filtre d&apos;habitacle. Une mauvaise odeur, par exemple, vient souvent d&apos;un filtre encrassé
-                plutôt que d&apos;un manque de gaz : une recharge seule ne réglerait rien.
-              </p>
-              <h3 className="text-xl font-black tracking-tight text-foreground">Voitures, SUV et utilitaires légers</h3>
-              <p>
-                Cette offre concerne les voitures, SUV et utilitaires légers. Pour un poids lourd, un camion, un
-                engin TP ou un véhicule agricole, le tarif et la prise en charge sont différents : voir la{" "}
-                <Link href="/services/clim-camion-poids-lourd-montpellier" className="font-bold text-purple-bright hover:underline">
-                  page clim camion et poids lourd
-                </Link>
-                .
-              </p>
-            </div>
-          </div>
-          <div className="mt-10 overflow-hidden rounded-[4px] border border-border bg-white shadow-sm">
-            <Image
-              src="/tarifs/tarif-clim-recacor-202606.webp"
-              alt="Grille tarifaire recharge climatisation Recacor : ancien gaz R134a et nouveau gaz 1234yf selon type de véhicule"
-              width={1600}
-              height={1131}
-              sizes="(min-width: 1024px) 1024px, 100vw"
-              className="h-auto w-full"
-            />
-          </div>
-          <div className="mt-8 flex flex-col sm:flex-row gap-3 max-w-xl">
-            <PhoneLink location="cta" serviceType="mecanique" className="flex-1 recacor-btn-primary whitespace-nowrap" showIcon>
-              Appeler : {PHONE_DISPLAY}
-            </PhoneLink>
-            <DevisCtaLink desktopHref="#devis" mobileHref="/formulaire/clim" className="flex-1 recacor-btn-secondary">
-              Devis clim <ArrowRight className="h-4 w-4" />
             </DevisCtaLink>
           </div>
         </div>

@@ -169,8 +169,8 @@ function ServicesBlock({ ville }: { ville: Ville }) {
           </h2>
           <p className="mt-4 text-muted-foreground leading-relaxed">
             {localCityPage
-              ? "Au garage du Crès, les demandes tournent souvent autour de la vidange, du parallélisme, de la clim auto et de l'entretien courant. Ces pages donnent le détail avant de venir."
-              : `Depuis ${ville.nom}, certains clients viennent aussi pour une vidange, un parallélisme ou une recharge clim au Crès. Ces pages donnent le détail avant de se déplacer.`}
+              ? "Au garage du Crès, les demandes tournent souvent autour de la vidange, du parallélisme et de l'entretien courant. Ces pages donnent le détail avant de venir."
+              : `Depuis ${ville.nom}, certains clients viennent aussi pour une vidange ou un parallélisme au Crès. Ces pages donnent le détail avant de se déplacer.`}
           </p>
           <div className="mt-6 flex flex-wrap gap-3 text-sm font-bold">
             <Link href="/mecanique#vidange" className="text-purple-bright hover:underline">
@@ -178,9 +178,6 @@ function ServicesBlock({ ville }: { ville: Ville }) {
             </Link>
             <Link href="/mecanique#parallelisme" className="text-purple-bright hover:underline">
               Parallélisme et géométrie
-            </Link>
-            <Link href="/mecanique#clim" className="text-purple-bright hover:underline">
-              Recharge clim auto
             </Link>
             <Link href="/mecanique" className="text-purple-bright hover:underline">
               Atelier mecanique

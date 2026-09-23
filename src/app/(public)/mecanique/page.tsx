@@ -9,12 +9,12 @@ export const revalidate = 86400;
 export const metadata: Metadata = {
   title: "Garage mécanique Montpellier — entretien auto sans RDV",
   description:
-    "Garage mécanique à Montpellier — Le Crès : vidange dès 79€, parallélisme dès 65€ avec contrôle offert, climatisation dès 59€, freinage et révision, avec ou sans rendez-vous. Devis gratuit.",
+    "Garage mécanique à Montpellier — Le Crès : vidange dès 79€, parallélisme dès 65€ avec contrôle offert, freinage et révision, avec ou sans rendez-vous. Devis gratuit.",
   alternates: { canonical: "/mecanique" },
   openGraph: {
     title: "Garage mécanique Montpellier — entretien auto sans RDV",
     description:
-      "Entretien auto sans rendez-vous à Montpellier — Le Crès : vidange, parallélisme, climatisation, freinage et révision chez Recacor.",
+      "Entretien auto sans rendez-vous à Montpellier — Le Crès : vidange, freinage, révision et parallélisme chez Recacor.",
     url: "https://www.recacor.fr/mecanique",
     siteName: "Recacor",
     locale: "fr_FR",
@@ -60,11 +60,6 @@ const serviceSchema = {
         "@type": "Offer",
         itemOffered: { "@type": "Service", name: "Parallélisme et géométrie" },
         priceSpecification: { "@type": "PriceSpecification", price: "65", priceCurrency: "EUR", minPrice: "65" },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: { "@type": "Service", name: "Climatisation auto (recharge)" },
-        priceSpecification: { "@type": "PriceSpecification", price: "59", priceCurrency: "EUR", minPrice: "59" },
       },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Freinage" } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Révision" } },

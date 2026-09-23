@@ -283,7 +283,6 @@ export function RecreusageClient() {
               </p>
               <div className="mt-5 flex flex-wrap gap-3 text-sm font-bold">
                 <Link href="/pneus-utilitaires-pl" className="text-purple-bright hover:underline">Solutions pneus PL</Link>
-                <Link href="/services/clim-camion-poids-lourd-montpellier" className="text-purple-bright hover:underline">Clim camion Montpellier agglo</Link>
                 <Link href="/contact" className="text-purple-bright hover:underline">Contacter Recacor</Link>
               </div>
             </div>
@@ -320,7 +319,6 @@ export function RecreusageClient() {
               <Link href="/pneus-utilitaires-pl" className="text-purple-bright hover:underline">Pneus poids lourd</Link>
               <Link href="/pneus-utilitaires-pl/zone-sud-corse" className="text-purple-bright hover:underline">Zone Sud &amp; Corse</Link>
               <Link href="/pneus-utilitaires-pl/zone-nord-est-centre" className="text-purple-bright hover:underline">Zone Nord-Est &amp; Centre</Link>
-              <Link href="/services/clim-camion-poids-lourd-montpellier" className="text-purple-bright hover:underline">Clim camion et poids lourd</Link>
               <Link href="/contact" className="text-purple-bright hover:underline">Contacter Recacor</Link>
             </div>
           </div>

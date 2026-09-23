@@ -463,7 +463,7 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
               <p>
                 L&apos;atelier du Crès prend en charge les camions, les remorques et les engins
                 de chantier. Parallélisme et géométrie, montage et démontage, réparation,
-                recreusage quand la carcasse le permet, recharge de climatisation.
+                recreusage quand la carcasse le permet.
               </p>
               <p>
                 Les pneus poids lourd sont disponibles au comptoir, avec devis donné sur place.
