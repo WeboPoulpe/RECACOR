@@ -14,7 +14,7 @@ export function ContactSimpleForm() {
   const [data, setData] = useState({ nom: "", telephone: "", email: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
   const [rgpd, setRgpd] = useState(false);
-  const [whatsappOptin, setWhatsappOptin] = useState(false);
+  const [contactPreference, setContactPreference] = useState<"phone" | "whatsapp">("phone");
   const [submitError, setSubmitError] = useState("");
 
   const [touched, setTouched] = useState({ telephone: false, email: false });
@@ -44,7 +44,7 @@ export function ContactSimpleForm() {
       ...getUtmData(),
       form_id: "contact-form",
       service_type: "contact",
-      whatsapp_optin: whatsappOptin,
+      whatsapp_optin: contactPreference === "whatsapp",
       submission_id: submissionId,
     };
 
@@ -124,18 +124,22 @@ export function ContactSimpleForm() {
         </span>
       </label>
 
-      <label className="flex items-start gap-3 cursor-pointer">
-        <input
-          type="checkbox"
-          checked={whatsappOptin}
-          onChange={(e) => setWhatsappOptin(e.target.checked)}
-          className="mt-1 w-4 h-4 rounded border-border accent-purple-bright cursor-pointer"
-        />
-        <span className="text-xs text-muted-foreground leading-relaxed">
-          {WHATSAPP_NOTICE_FR}
-          <span className="block mt-1">Facultatif</span>
-        </span>
-      </label>
+      <fieldset className="space-y-2 rounded-xl border border-border p-4">
+        <legend className="px-1 text-sm font-semibold">Comment préférez-vous être recontacté ?</legend>
+        <label className="flex items-center gap-2 text-sm cursor-pointer">
+          <input type="radio" name="contact-form-contact-preference" checked={contactPreference === "phone"}
+            onChange={() => setContactPreference("phone")} className="accent-purple-bright" />
+          Par téléphone
+        </label>
+        <label className="flex items-center gap-2 text-sm cursor-pointer">
+          <input type="radio" name="contact-form-contact-preference" checked={contactPreference === "whatsapp"}
+            onChange={() => setContactPreference("whatsapp")} className="accent-purple-bright" />
+          Sur WhatsApp
+        </label>
+        {contactPreference === "whatsapp" && (
+          <p className="text-xs text-muted-foreground leading-relaxed">{WHATSAPP_NOTICE_FR}</p>
+        )}
+      </fieldset>
 
       <button
         type="submit"

@@ -65,7 +65,7 @@ export function MultiStepForm({
   const [step, setStep] = useState(0);
   const [startPushed, setStartPushed] = useState(false);
   const [rgpd, setRgpd] = useState(false);
-  const [whatsappOptin, setWhatsappOptin] = useState(false);
+  const [contactPreference, setContactPreference] = useState<"phone" | "whatsapp">("phone");
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [attemptedStep, setAttemptedStep] = useState<number | null>(null);
@@ -132,7 +132,7 @@ export function MultiStepForm({
       ...data,
       ...getUtmData(),
       consent_status: hasConsent(),
-      whatsapp_optin: whatsappOptin,
+      whatsapp_optin: contactPreference === "whatsapp",
       ttp: getCookieValue("ttp"),
       form_id: id,
       service_type: serviceType,
@@ -260,18 +260,26 @@ export function MultiStepForm({
                 </span>
               </label>
 
-              <label className="flex items-start gap-3 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={whatsappOptin}
-                  onChange={(e) => setWhatsappOptin(e.target.checked)}
-                  className="mt-1 w-4 h-4 rounded border-border accent-purple-bright cursor-pointer"
-                />
-                <span className="text-xs text-muted-foreground leading-relaxed">
-                  {id === "devis-ct-form-es" ? WHATSAPP_NOTICE_ES : WHATSAPP_NOTICE_FR}
-                  <span className="block mt-1">{id === "devis-ct-form-es" ? "Opcional" : "Facultatif"}</span>
-                </span>
-              </label>
+              <fieldset className="space-y-2 rounded-[4px] border border-border p-4">
+                <legend className="px-1 text-sm font-semibold">
+                  {id === "devis-ct-form-es" ? "¿Cómo prefieres que te contactemos?" : "Comment préférez-vous être recontacté ?"}
+                </legend>
+                <label className="flex items-center gap-2 text-sm cursor-pointer">
+                  <input type="radio" name={`${id}-contact-preference`} checked={contactPreference === "phone"}
+                    onChange={() => setContactPreference("phone")} className="accent-purple-bright" />
+                  {id === "devis-ct-form-es" ? "Por teléfono" : "Par téléphone"}
+                </label>
+                <label className="flex items-center gap-2 text-sm cursor-pointer">
+                  <input type="radio" name={`${id}-contact-preference`} checked={contactPreference === "whatsapp"}
+                    onChange={() => setContactPreference("whatsapp")} className="accent-purple-bright" />
+                  {id === "devis-ct-form-es" ? "Por WhatsApp" : "Sur WhatsApp"}
+                </label>
+                {contactPreference === "whatsapp" && (
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {id === "devis-ct-form-es" ? WHATSAPP_NOTICE_ES : WHATSAPP_NOTICE_FR}
+                  </p>
+                )}
+              </fieldset>
 
               {extraMention && (
                 <p className="text-xs text-center text-blue-700 font-semibold">
