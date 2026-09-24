@@ -7,12 +7,14 @@ import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { pushFormSubmit, pushFormError, getUtmData } from "@/lib/tracking";
 import { isValidPhone, isValidOptionalEmail, PHONE_ERROR, EMAIL_ERROR, FormField } from "@/components/multi-step-form";
+import { WHATSAPP_NOTICE_FR } from "@/lib/whatsapp-consent";
 
 export function ContactSimpleForm() {
   const router = useRouter();
   const [data, setData] = useState({ nom: "", telephone: "", email: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
   const [rgpd, setRgpd] = useState(false);
+  const [whatsappOptin, setWhatsappOptin] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
   const [touched, setTouched] = useState({ telephone: false, email: false });
@@ -42,6 +44,7 @@ export function ContactSimpleForm() {
       ...getUtmData(),
       form_id: "contact-form",
       service_type: "contact",
+      whatsapp_optin: whatsappOptin,
       submission_id: submissionId,
     };
 
@@ -118,6 +121,19 @@ export function ContactSimpleForm() {
           <Link href="/confidentialite" className="text-purple-bright hover:underline">
             Politique de confidentialité
           </Link>
+        </span>
+      </label>
+
+      <label className="flex items-start gap-3 cursor-pointer">
+        <input
+          type="checkbox"
+          checked={whatsappOptin}
+          onChange={(e) => setWhatsappOptin(e.target.checked)}
+          className="mt-1 w-4 h-4 rounded border-border accent-purple-bright cursor-pointer"
+        />
+        <span className="text-xs text-muted-foreground leading-relaxed">
+          {WHATSAPP_NOTICE_FR}
+          <span className="block mt-1">Facultatif</span>
         </span>
       </label>
 

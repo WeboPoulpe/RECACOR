@@ -5,6 +5,7 @@ import { subscribeContact } from "@/lib/mailchimp";
 import { leadNotificationEmail, leadConfirmationEmail } from "@/lib/email-templates";
 import { sendEmail } from "@/lib/mailer";
 import { sendTikTokLeadEvent } from "@/lib/tiktok-events";
+import { WHATSAPP_NOTICE_REF } from "@/lib/whatsapp-consent";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -31,6 +32,9 @@ interface LeadPayload {
   referrer?: string;
   ttp?: string;
   consent_status?: "granted" | "denied" | null;
+  whatsapp_optin?: boolean;
+  whatsapp_notice_ref?: string | null;
+  whatsapp_decided_at?: string | null;
   submission_id?: string;
   [k: string]: unknown;
 }
@@ -43,7 +47,14 @@ type AdsFlowForwardResult = {
 
 export async function POST(req: Request) {
   try {
-    const data = normalizeLeadAttribution((await req.json()) as LeadPayload);
+    const submitted = (await req.json()) as LeadPayload;
+    const whatsappOptin = submitted.whatsapp_optin === true;
+    const data = normalizeLeadAttribution({
+      ...submitted,
+      whatsapp_optin: whatsappOptin,
+      whatsapp_notice_ref: whatsappOptin ? WHATSAPP_NOTICE_REF : null,
+      whatsapp_decided_at: whatsappOptin ? new Date().toISOString() : null,
+    });
 
     if (!data.form_id || !data.service_type) {
       return NextResponse.json({ error: "form_id et service_type requis" }, { status: 400 });
@@ -208,6 +219,9 @@ async function forwardLeadToAdsFlow(data: LeadPayload): Promise<AdsFlowForwardRe
     utm_content: data.utm_content || null,
     utm_term: data.utm_term || null,
     form_id: data.form_id,
+    whatsapp_optin: data.whatsapp_optin,
+    whatsapp_notice_ref: data.whatsapp_notice_ref,
+    whatsapp_decided_at: data.whatsapp_decided_at,
     service_type: data.service_type,
     message: data.message || null,
     payload: data,
