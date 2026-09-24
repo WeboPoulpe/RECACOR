@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { pushFormStart, pushFormSubmit, pushFormStep, pushFormError, getCookieValue, getUtmData, hasConsent } from "@/lib/tracking";
+import { WHATSAPP_NOTICE_FR, WHATSAPP_NOTICE_ES } from "@/lib/whatsapp-consent";
 
 type ServiceType = "vl" | "pl" | "mecanique";
 
@@ -64,6 +65,7 @@ export function MultiStepForm({
   const [step, setStep] = useState(0);
   const [startPushed, setStartPushed] = useState(false);
   const [rgpd, setRgpd] = useState(false);
+  const [whatsappOptin, setWhatsappOptin] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [attemptedStep, setAttemptedStep] = useState<number | null>(null);
@@ -130,6 +132,7 @@ export function MultiStepForm({
       ...data,
       ...getUtmData(),
       consent_status: hasConsent(),
+      whatsapp_optin: whatsappOptin,
       ttp: getCookieValue("ttp"),
       form_id: id,
       service_type: serviceType,
@@ -254,6 +257,19 @@ export function MultiStepForm({
                       </Link>
                     </>
                   )}
+                </span>
+              </label>
+
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={whatsappOptin}
+                  onChange={(e) => setWhatsappOptin(e.target.checked)}
+                  className="mt-1 w-4 h-4 rounded border-border accent-purple-bright cursor-pointer"
+                />
+                <span className="text-xs text-muted-foreground leading-relaxed">
+                  {id === "devis-ct-form-es" ? WHATSAPP_NOTICE_ES : WHATSAPP_NOTICE_FR}
+                  <span className="block mt-1">{id === "devis-ct-form-es" ? "Opcional" : "Facultatif"}</span>
                 </span>
               </label>
 
