@@ -129,37 +129,66 @@ export async function POST(request: Request) {
       message: escapeHtml((data.message || "").trim() || "Aucun message complémentaire"),
     };
 
-    const rows = [
-      ["Société", safe.company],
-      ["SIRET", safe.siret],
-      ["Contact", safe.contactName],
-      ["E-mail", safe.email],
-      ["Téléphone", safe.phone],
-      ["Adresse", [safe.address, safe.postalCode, safe.city].filter(Boolean).join(", ")],
-      ["Prestations", safe.services.join(", ")],
-      ["Tarifs / précisions", safe.prices.replace(/\n/g, "<br>")],
-      ["Message", safe.message.replace(/\n/g, "<br>")],
-    ];
+    const documentNames = [
+      kbis && "Justificatif d’immatriculation",
+      insurance && "Assurance RC professionnelle",
+    ].filter((name): name is string => Boolean(name));
+    const receivedAt = new Intl.DateTimeFormat("fr-FR", {
+      dateStyle: "long",
+      timeStyle: "short",
+      timeZone: "Europe/Paris",
+    }).format(new Date());
+    const telHref = data.phone.trim().replace(/[^\d+]/g, "");
+    const servicesHtml = safe.services
+      .map((service) => '<span style="display:inline-block;margin:0 6px 7px 0;padding:7px 10px;border-radius:4px;background:#eaf2fb;color:#173d68;font-size:13px;font-weight:700">' + service + "</span>")
+      .join("");
+    const documentsHtml = documentNames.length
+      ? documentNames.map((name) => '<li style="margin:0 0 6px">' + name + "</li>").join("")
+      : '<li style="margin:0">Aucun document joint pour le moment.</li>';
+    const pricesHtml = safe.prices.replace(/\n/g, "<br>");
+    const messageHtml = safe.message.replace(/\n/g, "<br>");
+    const cardStyle = "padding:20px 22px;border:1px solid #e2e8f0;border-radius:6px;background:#ffffff";
+    const labelStyle = "width:130px;padding:6px 12px 6px 0;color:#64748b;font-size:13px;vertical-align:top";
+    const valueStyle = "padding:6px 0;color:#172b45;font-size:14px;font-weight:600;vertical-align:top";
 
     const result = await sendEmail({
       to: "recacor.fr@gmail.com",
       replyTo: data.email.trim(),
       subject: "[Partenariat montage] " + data.company.trim() + " — " + data.city.trim(),
       html:
-        "<h1>Nouvelle demande de partenariat de montage</h1>" +
-        '<table cellpadding="8" cellspacing="0" border="1" style="border-collapse:collapse;border-color:#d9dce4">' +
-        rows.map(([label, value]) => "<tr><th align=\"left\">" + label + "</th><td>" + value + "</td></tr>").join("") +
-        "</table><p>Documents joints : " + [kbis && "justificatif d’immatriculation", insurance && "attestation d’assurance RC professionnelle"].filter(Boolean).join(" et ") + (kbis || insurance ? "." : "aucun document pour le moment.") + "</p>",
+        '<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>' +
+        '<body style="margin:0;padding:0;background:#f1f4f8;font-family:Arial,Helvetica,sans-serif;color:#172b45">' +
+        '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f1f4f8"><tr><td align="center" style="padding:28px 12px">' +
+        '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;border-collapse:separate;border-spacing:0">' +
+        '<tr><td height="5" style="height:5px;background:#f2b900;font-size:0;line-height:0">&nbsp;</td></tr>' +
+        '<tr><td style="padding:22px 26px;background:#101b2d;color:#ffffff"><div style="font-size:23px;font-weight:900;letter-spacing:3px">RECACOR</div><div style="margin-top:5px;color:#cbd5e1;font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase">Réseau partenaire · Montage en atelier</div></td></tr>' +
+        '<tr><td style="padding:30px 26px 24px;background:#ffffff"><div style="display:inline-block;padding:6px 9px;border-radius:3px;background:#fff4c2;color:#6b5100;font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase">Nouvelle candidature</div>' +
+        '<h1 style="margin:15px 0 8px;color:#101b2d;font-size:25px;line-height:1.25">Un atelier souhaite rejoindre le réseau</h1>' +
+        '<p style="margin:0;color:#64748b;font-size:14px;line-height:1.6">Demande reçue le ' + receivedAt + ' via le formulaire partenaire.</p></td></tr>' +
+        '<tr><td style="padding:0 26px 16px;background:#ffffff"><div style="' + cardStyle + '"><div style="color:#64748b;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase">Atelier</div><div style="margin-top:6px;color:#101b2d;font-size:20px;font-weight:800">' + safe.company + '</div><div style="margin-top:5px;color:#475569;font-size:14px">' + [safe.address, safe.postalCode, safe.city].filter(Boolean).join(" · ") + '</div><div style="margin-top:5px;color:#64748b;font-size:13px">SIRET : ' + safe.siret + '</div></div></td></tr>' +
+        '<tr><td style="padding:0 26px 16px;background:#ffffff"><div style="' + cardStyle + '"><h2 style="margin:0 0 12px;color:#173d68;font-size:15px">Contact du garage</h2><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse">' +
+        '<tr><td style="' + labelStyle + '">Contact</td><td style="' + valueStyle + '">' + safe.contactName + '</td></tr>' +
+        '<tr><td style="' + labelStyle + '">E-mail</td><td style="' + valueStyle + '"><a href="mailto:' + safe.email + '" style="color:#1558a6;text-decoration:underline">' + safe.email + '</a></td></tr>' +
+        '<tr><td style="' + labelStyle + '">Téléphone</td><td style="' + valueStyle + '"><a href="tel:' + telHref + '" style="color:#1558a6;text-decoration:underline">' + safe.phone + '</a></td></tr>' +
+        '</table><div style="margin-top:16px"><a href="mailto:' + safe.email + '?subject=' + encodeURIComponent("Votre demande de partenariat Recacor") + '" style="display:inline-block;padding:11px 16px;border-radius:4px;background:#1558a6;color:#ffffff;font-size:13px;font-weight:700;text-decoration:none">Répondre au candidat</a></div></div></td></tr>' +
+        '<tr><td style="padding:0 26px 16px;background:#ffffff"><div style="' + cardStyle + '"><h2 style="margin:0 0 12px;color:#173d68;font-size:15px">Prestations proposées</h2><div>' + servicesHtml + '</div><div style="margin-top:8px;color:#64748b;font-size:12px;font-weight:700">Tarifs et précisions communiqués</div><div style="margin-top:5px;color:#172b45;font-size:14px;line-height:1.6">' + pricesHtml + '</div></div></td></tr>' +
+        '<tr><td style="padding:0 26px 16px;background:#ffffff"><div style="' + cardStyle + '"><h2 style="margin:0 0 10px;color:#173d68;font-size:15px">Documents transmis</h2><ul style="margin:0;padding-left:18px;color:#475569;font-size:13px;line-height:1.55">' + documentsHtml + '</ul></div></td></tr>' +
+        (safe.message !== "Aucun message complémentaire" ? '<tr><td style="padding:0 26px 16px;background:#ffffff"><div style="' + cardStyle + '"><h2 style="margin:0 0 9px;color:#173d68;font-size:15px">Message du garage</h2><div style="color:#475569;font-size:14px;line-height:1.65">' + messageHtml + '</div></div></td></tr>' : "") +
+        '<tr><td style="padding:14px 26px 24px;background:#ffffff;color:#94a3b8;font-size:11px;line-height:1.5">Notification automatique · Formulaire « Devenir partenaire de montage » · Recacor</td></tr>' +
+        '<tr><td height="4" style="height:4px;background:#f2b900;font-size:0;line-height:0">&nbsp;</td></tr></table></td></tr></table></body></html>',
       text: [
-        "Nouvelle demande de partenariat de montage",
+        "NOUVELLE CANDIDATURE PARTENAIRE — RECACOR",
+        "Reçue le " + receivedAt,
+        "",
         "Société : " + data.company.trim(),
         "SIRET : " + (data.siret?.trim() || "Non renseigné"),
         "Contact : " + data.contactName.trim(),
         "E-mail : " + data.email.trim(),
         "Téléphone : " + data.phone.trim(),
         "Adresse : " + [data.address?.trim(), data.postalCode?.trim(), data.city.trim()].filter(Boolean).join(", "),
-        "Prestations : " + data.services.join(", "),
+        "Prestations proposées : " + data.services.join(", "),
         "Tarifs / précisions : " + (data.prices?.trim() || "Non renseigné"),
+        "Documents transmis : " + (documentNames.join(", ") || "Aucun document joint pour le moment"),
         "Message : " + (data.message?.trim() || "Aucun message complémentaire"),
       ].join("\n"),
       attachments: [kbis, insurance].filter((file): file is NonNullable<typeof file> => file !== null).map(({ filename, content }) => ({ filename, content })),
