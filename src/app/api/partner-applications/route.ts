@@ -138,9 +138,10 @@ export async function POST(request: Request) {
       timeStyle: "short",
       timeZone: "Europe/Paris",
     }).format(new Date());
+    const logoUrl = "https://www.recacor.fr/logo-recacor-email.png";
     const telHref = data.phone.trim().replace(/[^\d+]/g, "");
     const servicesHtml = safe.services
-      .map((service) => '<span style="display:inline-block;margin:0 6px 7px 0;padding:7px 10px;border-radius:4px;background:#eaf2fb;color:#173d68;font-size:13px;font-weight:700">' + service + "</span>")
+      .map((service) => '<span style="display:inline-block;margin:0 6px 7px 0;padding:7px 10px;border-radius:4px;background:#eef0ff;color:#2e2d8a;font-size:13px;font-weight:700">' + service + "</span>")
       .join("");
     const documentsHtml = documentNames.length
       ? documentNames.map((name) => '<li style="margin:0 0 6px">' + name + "</li>").join("")
@@ -157,25 +158,25 @@ export async function POST(request: Request) {
       subject: "[Partenariat montage] " + data.company.trim() + " — " + data.city.trim(),
       html:
         '<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>' +
-        '<body style="margin:0;padding:0;background:#f1f4f8;font-family:Arial,Helvetica,sans-serif;color:#172b45">' +
-        '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f1f4f8"><tr><td align="center" style="padding:28px 12px">' +
+        '<body style="margin:0;padding:0;background:#f4f6fb;font-family:Arial,Helvetica,sans-serif;color:#071b33">' +
+        '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f4f6fb"><tr><td align="center" style="padding:28px 12px">' +
         '<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;border-collapse:separate;border-spacing:0">' +
-        '<tr><td height="5" style="height:5px;background:#f2b900;font-size:0;line-height:0">&nbsp;</td></tr>' +
-        '<tr><td style="padding:22px 26px;background:#101b2d;color:#ffffff"><div style="font-size:23px;font-weight:900;letter-spacing:3px">RECACOR</div><div style="margin-top:5px;color:#cbd5e1;font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase">Réseau partenaire · Montage en atelier</div></td></tr>' +
+        '<tr><td height="6" style="height:6px;background:#ffc928;font-size:0;line-height:0">&nbsp;</td></tr>' +
+        '<tr><td style="padding:20px 26px;background:#ffffff;border-bottom:1px solid #e5e9f1"><a href="https://www.recacor.fr/" style="display:inline-block;text-decoration:none"><img src="' + logoUrl + '" width="180" height="38" alt="Recacor" style="display:block;width:180px;height:38px;border:0;object-fit:contain"></a><div style="margin-top:8px;color:#2e2d8a;font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase">Réseau partenaire · Montage en atelier</div></td></tr>' +
         '<tr><td style="padding:30px 26px 24px;background:#ffffff"><div style="display:inline-block;padding:6px 9px;border-radius:3px;background:#fff4c2;color:#6b5100;font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase">Nouvelle candidature</div>' +
-        '<h1 style="margin:15px 0 8px;color:#101b2d;font-size:25px;line-height:1.25">Un atelier souhaite rejoindre le réseau</h1>' +
+        '<h1 style="margin:15px 0 8px;color:#071b33;font-size:25px;line-height:1.25">Un atelier souhaite rejoindre le réseau</h1>' +
         '<p style="margin:0;color:#64748b;font-size:14px;line-height:1.6">Demande reçue le ' + receivedAt + ' via le formulaire partenaire.</p></td></tr>' +
-        '<tr><td style="padding:0 26px 16px;background:#ffffff"><div style="' + cardStyle + '"><div style="color:#64748b;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase">Atelier</div><div style="margin-top:6px;color:#101b2d;font-size:20px;font-weight:800">' + safe.company + '</div><div style="margin-top:5px;color:#475569;font-size:14px">' + [safe.address, safe.postalCode, safe.city].filter(Boolean).join(" · ") + '</div><div style="margin-top:5px;color:#64748b;font-size:13px">SIRET : ' + safe.siret + '</div></div></td></tr>' +
-        '<tr><td style="padding:0 26px 16px;background:#ffffff"><div style="' + cardStyle + '"><h2 style="margin:0 0 12px;color:#173d68;font-size:15px">Contact du garage</h2><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse">' +
+        '<tr><td style="padding:0 26px 16px;background:#ffffff"><div style="' + cardStyle + '"><div style="color:#64748b;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase">Atelier</div><div style="margin-top:6px;color:#071b33;font-size:20px;font-weight:800">' + safe.company + '</div><div style="margin-top:5px;color:#475569;font-size:14px">' + [safe.address, safe.postalCode, safe.city].filter(Boolean).join(" · ") + '</div><div style="margin-top:5px;color:#64748b;font-size:13px">SIRET : ' + safe.siret + '</div></div></td></tr>' +
+        '<tr><td style="padding:0 26px 16px;background:#ffffff"><div style="' + cardStyle + '"><h2 style="margin:0 0 12px;color:#2e2d8a;font-size:15px">Contact du garage</h2><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse">' +
         '<tr><td style="' + labelStyle + '">Contact</td><td style="' + valueStyle + '">' + safe.contactName + '</td></tr>' +
-        '<tr><td style="' + labelStyle + '">E-mail</td><td style="' + valueStyle + '"><a href="mailto:' + safe.email + '" style="color:#1558a6;text-decoration:underline">' + safe.email + '</a></td></tr>' +
-        '<tr><td style="' + labelStyle + '">Téléphone</td><td style="' + valueStyle + '"><a href="tel:' + telHref + '" style="color:#1558a6;text-decoration:underline">' + safe.phone + '</a></td></tr>' +
-        '</table><div style="margin-top:16px"><a href="mailto:' + safe.email + '?subject=' + encodeURIComponent("Votre demande de partenariat Recacor") + '" style="display:inline-block;padding:11px 16px;border-radius:4px;background:#1558a6;color:#ffffff;font-size:13px;font-weight:700;text-decoration:none">Répondre au candidat</a></div></div></td></tr>' +
-        '<tr><td style="padding:0 26px 16px;background:#ffffff"><div style="' + cardStyle + '"><h2 style="margin:0 0 12px;color:#173d68;font-size:15px">Prestations proposées</h2><div>' + servicesHtml + '</div><div style="margin-top:8px;color:#64748b;font-size:12px;font-weight:700">Tarifs et précisions communiqués</div><div style="margin-top:5px;color:#172b45;font-size:14px;line-height:1.6">' + pricesHtml + '</div></div></td></tr>' +
-        '<tr><td style="padding:0 26px 16px;background:#ffffff"><div style="' + cardStyle + '"><h2 style="margin:0 0 10px;color:#173d68;font-size:15px">Documents transmis</h2><ul style="margin:0;padding-left:18px;color:#475569;font-size:13px;line-height:1.55">' + documentsHtml + '</ul></div></td></tr>' +
-        (safe.message !== "Aucun message complémentaire" ? '<tr><td style="padding:0 26px 16px;background:#ffffff"><div style="' + cardStyle + '"><h2 style="margin:0 0 9px;color:#173d68;font-size:15px">Message du garage</h2><div style="color:#475569;font-size:14px;line-height:1.65">' + messageHtml + '</div></div></td></tr>' : "") +
-        '<tr><td style="padding:14px 26px 24px;background:#ffffff;color:#94a3b8;font-size:11px;line-height:1.5">Notification automatique · Formulaire « Devenir partenaire de montage » · Recacor</td></tr>' +
-        '<tr><td height="4" style="height:4px;background:#f2b900;font-size:0;line-height:0">&nbsp;</td></tr></table></td></tr></table></body></html>',
+        '<tr><td style="' + labelStyle + '">E-mail</td><td style="' + valueStyle + '"><a href="mailto:' + safe.email + '" style="color:#1b4fd8;text-decoration:underline">' + safe.email + '</a></td></tr>' +
+        '<tr><td style="' + labelStyle + '">Téléphone</td><td style="' + valueStyle + '"><a href="tel:' + telHref + '" style="color:#1b4fd8;text-decoration:underline">' + safe.phone + '</a></td></tr>' +
+        '</table><div style="margin-top:16px"><a href="mailto:' + safe.email + '?subject=' + encodeURIComponent("Votre demande de partenariat Recacor") + '" style="display:inline-block;padding:11px 16px;border-radius:4px;background:#1b4fd8;color:#ffffff;font-size:13px;font-weight:700;text-decoration:none">Répondre au candidat</a></div></div></td></tr>' +
+        '<tr><td style="padding:0 26px 16px;background:#ffffff"><div style="' + cardStyle + '"><h2 style="margin:0 0 12px;color:#2e2d8a;font-size:15px">Prestations proposées</h2><div>' + servicesHtml + '</div><div style="margin-top:8px;color:#64748b;font-size:12px;font-weight:700">Tarifs et précisions communiqués</div><div style="margin-top:5px;color:#071b33;font-size:14px;line-height:1.6">' + pricesHtml + '</div></div></td></tr>' +
+        '<tr><td style="padding:0 26px 16px;background:#ffffff"><div style="' + cardStyle + '"><h2 style="margin:0 0 10px;color:#2e2d8a;font-size:15px">Documents transmis</h2><ul style="margin:0;padding-left:18px;color:#475569;font-size:13px;line-height:1.55">' + documentsHtml + '</ul></div></td></tr>' +
+        (safe.message !== "Aucun message complémentaire" ? '<tr><td style="padding:0 26px 16px;background:#ffffff"><div style="' + cardStyle + '"><h2 style="margin:0 0 9px;color:#2e2d8a;font-size:15px">Message du garage</h2><div style="color:#475569;font-size:14px;line-height:1.65">' + messageHtml + '</div></div></td></tr>' : "") +
+        '<tr><td style="padding:16px 26px 24px;background:#071b33;color:#d9e2f2;font-size:11px;line-height:1.6">Notification automatique · Formulaire « Devenir partenaire de montage »<br><a href="https://www.recacor.fr/" style="color:#ffc928;text-decoration:none">www.recacor.fr</a></td></tr>' +
+        '<tr><td height="5" style="height:5px;background:#ffc928;font-size:0;line-height:0">&nbsp;</td></tr></table></td></tr></table></body></html>',
       text: [
         "NOUVELLE CANDIDATURE PARTENAIRE — RECACOR",
         "Reçue le " + receivedAt,
