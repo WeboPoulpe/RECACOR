@@ -6,6 +6,7 @@ interface SendOptions {
   html: string;
   text?: string;
   replyTo?: string;
+  attachments?: Array<{ filename: string; content: string }>;
 }
 
 export async function sendEmail(opts: SendOptions): Promise<{ ok: boolean; provider?: string; id?: string; error?: string }> {
@@ -37,6 +38,14 @@ async function sendViaBrevo(opts: SendOptions): Promise<{ ok: boolean; provider:
         subject: opts.subject,
         htmlContent: opts.html,
         textContent: opts.text,
+        ...(opts.attachments?.length
+          ? {
+              attachment: opts.attachments.map((item) => ({
+                name: item.filename,
+                content: item.content,
+              })),
+            }
+          : {}),
         ...(opts.replyTo ? { replyTo: { email: opts.replyTo } } : {}),
       }),
     });
@@ -63,6 +72,7 @@ async function sendViaResend(opts: SendOptions): Promise<{ ok: boolean; provider
         subject: opts.subject,
         html: opts.html,
         text: opts.text,
+        ...(opts.attachments?.length ? { attachments: opts.attachments } : {}),
         ...(opts.replyTo ? { reply_to: opts.replyTo } : {}),
       }),
     });
