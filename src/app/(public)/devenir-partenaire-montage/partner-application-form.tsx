@@ -115,6 +115,7 @@ export function PartnerApplicationForm() {
     setError("");
     const formData = new FormData();
     formData.set("application", JSON.stringify(data));
+    formData.set("consent", consent ? "1" : "");
     if (kbis) formData.set("kbis", kbis);
     if (insurance) formData.set("insurance", insurance);
     formData.set(

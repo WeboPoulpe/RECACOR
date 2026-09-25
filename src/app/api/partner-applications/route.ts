@@ -84,6 +84,13 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: true });
     }
 
+    if (form.get("consent") !== "1") {
+      return NextResponse.json(
+        { error: "Confirmez votre accord pour que Recacor étudie votre demande." },
+        { status: 400 },
+      );
+    }
+
     const serialized = form.get("application");
     if (typeof serialized !== "string" || serialized.length > 12_000) {
       return NextResponse.json({ error: "Le formulaire est incomplet. Vérifiez les champs et réessayez." }, { status: 400 });
