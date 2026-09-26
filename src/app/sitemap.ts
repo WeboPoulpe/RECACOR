@@ -34,6 +34,7 @@ const CONTENT_UPDATED: Record<string, string> = {
   "/pneus-utilitaires-pl/dordogne": "2026-09-18",
   "/services/recreusage": "2026-07-24",
   "/services/controle-atelier-40-points": "2026-09-12",
+  "/services/reparation-crevaison": "2026-09-26",
   "/depannage-poids-lourd-urgence": "2026-09-17",
   "/ro/depannage-poids-lourd-urgence": "2026-09-17",
   "/nos-centres": "2026-06-06",

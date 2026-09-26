@@ -379,6 +379,15 @@ export function PneusVoitureClient({ heroImage }: { heroImage?: string }) {
             </Link>{" "}
             peut eviter une usure irreguliere et affiner la tenue de route.
           </p>
+          <div className="mt-6 rounded-[4px] border border-border bg-white p-5">
+            <p className="text-sm font-black">Pneu crevé ?</p>
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+              Un clou ou une vis dans la bande de roulement peut parfois se réparer. Le pneu est démonté et contrôlé avant de décider : s&apos;il n&apos;est pas réparable, on le remplace.{" "}
+              <Link href="/services/reparation-crevaison" className="font-bold text-purple-bright hover:underline">
+                Voir la réparation de crevaison
+              </Link>
+            </p>
+          </div>
           <div className="mt-6 rounded-[4px] border border-border bg-muted/60 p-5">
             <p className="text-xs font-bold uppercase tracking-wider text-purple-bright">Guides pneus proches</p>
             <div className="mt-3 flex flex-wrap gap-3 text-sm font-bold">

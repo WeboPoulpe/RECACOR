@@ -23,6 +23,7 @@ const servicesLinks = [
   { name: "Vidange", href: "/mecanique#vidange" },
   { name: "Parallélisme & Géométrie", href: "/mecanique#parallelisme" },
   { name: "Contrôle atelier 40 points", href: "/services/controle-atelier-40-points" },
+  { name: "Réparation crevaison", href: "/services/reparation-crevaison" },
   { name: "Contrôle technique", href: "/services/prise-en-charge-controle-technique" },
   { name: "Recreusage", href: "/services/recreusage" },
   { name: "Dépannage PL sur route", href: "/depannage-poids-lourd-urgence" },
