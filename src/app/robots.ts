@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: ["/", "/api/asset/"],
-        disallow: ["/merci", "/api/", "/admin", "/admin/"],
+        disallow: ["/merci", "/api/", "/admin", "/admin/", "/wa/"],
       },
     ],
     sitemap: "https://www.recacor.fr/sitemap.xml",
