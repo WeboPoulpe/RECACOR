@@ -34,6 +34,7 @@ interface LeadPayload {
   consent_status?: "granted" | "denied" | null;
   whatsapp_optin?: boolean;
   contact_preference?: "phone" | "whatsapp" | "both";
+  contact_preference_touched?: boolean;
   whatsapp_notice_ref?: string | null;
   whatsapp_decided_at?: string | null;
   submission_id?: string;
@@ -55,6 +56,8 @@ export async function POST(req: Request) {
       whatsapp_optin: whatsappOptin,
       // « Les deux » = accord WhatsApp + rappel téléphonique accepté.
       contact_preference: !whatsappOptin ? "phone" : submitted.contact_preference === "both" ? "both" : "whatsapp",
+      // Faux = option laissée par défaut (« Les deux » pré-coché), vrai = choix actif du client.
+      contact_preference_touched: submitted.contact_preference_touched === true,
       whatsapp_notice_ref: whatsappOptin ? WHATSAPP_NOTICE_REF : null,
       whatsapp_decided_at: whatsappOptin ? new Date().toISOString() : null,
     });
@@ -224,6 +227,7 @@ async function forwardLeadToAdsFlow(data: LeadPayload): Promise<AdsFlowForwardRe
     form_id: data.form_id,
     whatsapp_optin: data.whatsapp_optin,
     contact_preference: data.contact_preference,
+    contact_preference_touched: data.contact_preference_touched,
     whatsapp_notice_ref: data.whatsapp_notice_ref,
     whatsapp_decided_at: data.whatsapp_decided_at,
     service_type: data.service_type,

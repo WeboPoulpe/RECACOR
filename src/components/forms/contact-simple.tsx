@@ -14,7 +14,12 @@ export function ContactSimpleForm() {
   const [data, setData] = useState({ nom: "", telephone: "", email: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
   const [rgpd, setRgpd] = useState(false);
-  const [contactPreference, setContactPreference] = useState<"phone" | "whatsapp" | "both">("phone");
+  const [contactPreference, setContactPreference] = useState<"phone" | "whatsapp" | "both">("both");
+  const [contactPreferenceTouched, setContactPreferenceTouched] = useState(false);
+  const pickContactPreference = (value: "phone" | "whatsapp" | "both") => {
+    setContactPreference(value);
+    setContactPreferenceTouched(true);
+  };
   const [submitError, setSubmitError] = useState("");
 
   const [touched, setTouched] = useState({ telephone: false, email: false });
@@ -46,6 +51,7 @@ export function ContactSimpleForm() {
       service_type: "contact",
       whatsapp_optin: contactPreference !== "phone",
       contact_preference: contactPreference,
+      contact_preference_touched: contactPreferenceTouched,
       submission_id: submissionId,
     };
 
@@ -128,19 +134,19 @@ export function ContactSimpleForm() {
       <fieldset className="space-y-2 rounded-xl border border-border p-4">
         <legend className="px-1 text-sm font-semibold">Comment préférez-vous être recontacté ?</legend>
         <label className="flex items-center gap-2 text-sm cursor-pointer">
-          <input type="radio" name="contact-form-contact-preference" checked={contactPreference === "phone"}
-            onChange={() => setContactPreference("phone")} className="accent-purple-bright" />
-          Par téléphone
+          <input type="radio" name="contact-form-contact-preference" checked={contactPreference === "both"}
+            onChange={() => pickContactPreference("both")} className="accent-purple-bright" />
+          Les deux
         </label>
         <label className="flex items-center gap-2 text-sm cursor-pointer">
           <input type="radio" name="contact-form-contact-preference" checked={contactPreference === "whatsapp"}
-            onChange={() => setContactPreference("whatsapp")} className="accent-purple-bright" />
+            onChange={() => pickContactPreference("whatsapp")} className="accent-purple-bright" />
           Sur WhatsApp
         </label>
         <label className="flex items-center gap-2 text-sm cursor-pointer">
-          <input type="radio" name="contact-form-contact-preference" checked={contactPreference === "both"}
-            onChange={() => setContactPreference("both")} className="accent-purple-bright" />
-          Les deux
+          <input type="radio" name="contact-form-contact-preference" checked={contactPreference === "phone"}
+            onChange={() => pickContactPreference("phone")} className="accent-purple-bright" />
+          Par téléphone
         </label>
         {contactPreference !== "phone" && (
           <p className="text-xs text-muted-foreground leading-relaxed">{WHATSAPP_NOTICE_FR}</p>
