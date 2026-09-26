@@ -22,7 +22,7 @@ const saisons = [
   {
     icon: Snowflake,
     title: "Pneus hiver",
-    desc: "Obligatoires dans les zones montagneuses. Adhérence garantie sous 7°C et sur neige.",
+    desc: "Pour rouler souvent en montagne l'hiver. Meilleure adhérence par temps froid, sur neige et sur verglas.",
     price: "À partir de 59€",
   },
   {
@@ -61,6 +61,14 @@ const faqs = [
   {
     q: "Combien coûte un pneu voiture chez Recacor ?",
     a: "Nos pneus VL démarrent à 45€ monté. Le prix varie selon la dimension, la marque et la saison. Demandez un devis gratuit.",
+  },
+  {
+    q: "Faut-il des pneus hiver à Montpellier ?",
+    a: "À Montpellier et sur le littoral, l'hiver reste doux : des pneus 4 saisons suffisent pour la plupart des usages. Si vous allez souvent en montagne, des pneus hiver ou des chaînes restent nécessaires selon la destination.",
+  },
+  {
+    q: "Les pneus 4 saisons sont-ils acceptés par la loi Montagne ?",
+    a: "Oui, s'ils portent le marquage 3PMSF (montagne à trois pics avec un flocon). Depuis le 1er novembre 2024, le seul marquage M+S ne suffit plus. L'atelier peut vérifier vos pneus avant un départ au ski.",
   },
   {
     q: "Pouvez-vous faire la géométrie après le changement de pneus ?",
@@ -206,6 +214,64 @@ export function PneusVoitureClient({ heroImage }: { heroImage?: string }) {
                 </div>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pneus hiver et 4 saisons */}
+      <section id="pneus-hiver-4-saisons" className="scroll-mt-24 bg-background pb-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-[4px] border border-border bg-white p-8 shadow-sm sm:p-10">
+            <p className="recacor-eyebrow">Avant l&apos;hiver</p>
+            <h2 className="mt-3 text-3xl font-black tracking-tight sm:text-4xl">
+              Pneus hiver et 4 saisons <span className="text-gradient-purple">au Crès</span>
+            </h2>
+            <div className="mt-5 grid grid-cols-1 gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+              <div className="space-y-4 leading-relaxed text-muted-foreground">
+                <p>
+                  Autour de Montpellier, l&apos;hiver est doux mais les matins froids et les routes mouillées
+                  arrivent vite. Pour la plupart des voitures, le pneu 4 saisons est le choix le plus simple :
+                  un seul jeu toute l&apos;année, plus à l&apos;aise qu&apos;un pneu été quand la température baisse.
+                </p>
+                <p>
+                  Si vous montez souvent en montagne, à la neige ou vers les stations, un vrai pneu hiver reste
+                  plus sûr. L&apos;atelier vous conseille selon vos trajets, vos kilomètres et la dimension de la voiture.
+                </p>
+                <ul className="space-y-2.5 pt-1">
+                  {[
+                    "4 saisons : un seul jeu, pas de changement au printemps",
+                    "Hiver : pour la montagne et les trajets réguliers par temps froid",
+                    "Été : si vous roulez surtout en ville et sur le littoral",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-sm font-semibold text-foreground">
+                      <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-purple-bright" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-[4px] border border-border border-l-4 border-l-yellow-400 bg-muted/40 p-6">
+                <h3 className="flex items-center gap-2 text-lg font-black">
+                  <Snowflake className="h-5 w-5 text-purple-bright" /> Loi Montagne : l&apos;essentiel
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  Du 1er novembre au 31 mars, dans les communes de montagne désignées par la préfecture, il faut
+                  des pneus hiver ou 4 saisons marqués 3PMSF, ou des chaînes ou chaussettes dans le coffre.
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  Depuis le 1er novembre 2024, le seul marquage M+S ne suffit plus. Avant un départ au ski,
+                  l&apos;atelier peut vérifier le marquage de vos pneus.
+                </p>
+              </div>
+            </div>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <DevisCtaLink className="recacor-btn-primary whitespace-nowrap">
+                Devis pneus 4 saisons ou hiver <ArrowRight className="h-4 w-4" />
+              </DevisCtaLink>
+              <PhoneLink location="cta" serviceType="vl" className="recacor-btn-secondary whitespace-nowrap" showIcon>
+                Appeler : {PHONE_DISPLAY}
+              </PhoneLink>
+            </div>
           </div>
         </div>
       </section>

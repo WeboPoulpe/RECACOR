@@ -8,7 +8,7 @@ import { getAllArticles } from "@/lib/blog";
 // à Google toute confiance dans ce signal (il l'ignore alors complètement).
 const CONTENT_UPDATED: Record<string, string> = {
   "": "2026-09-16",
-  "/pneus-voiture": "2026-07-24",
+  "/pneus-voiture": "2026-09-26",
   "/pneus-voiture/peugeot": "2026-07-24",
   "/pneus-voiture/renault": "2026-07-24",
   "/pneus-voiture/citroen": "2026-07-24",
@@ -22,7 +22,7 @@ const CONTENT_UPDATED: Record<string, string> = {
   "/pneus-voiture/nissan": "2026-07-24",
   "/pneus-voiture/ford": "2026-07-24",
   "/mecanique": "2026-09-21",
-  "/pneus-utilitaires-pl": "2026-09-16",
+  "/pneus-utilitaires-pl": "2026-09-26",
   "/pneus-utilitaires-pl/moselle": "2026-08-21",
   "/pneus-utilitaires-pl/ardennes": "2026-08-24",
   "/pneus-utilitaires-pl/haute-marne": "2026-08-24",

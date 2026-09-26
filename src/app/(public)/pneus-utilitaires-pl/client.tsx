@@ -35,6 +35,15 @@ const accompagnements = [
   },
 ];
 
+const dimensionsPl = [
+  { dim: "315/80 R22.5", usage: "Porteurs et tracteurs, essieu directeur ou moteur" },
+  { dim: "315/70 R22.5", usage: "Tracteurs routiers, essieu directeur ou moteur" },
+  { dim: "385/65 R22.5", usage: "Semi-remorques, et directeur de certains porteurs chantier" },
+  { dim: "385/55 R22.5", usage: "Remorques et semi-remorques" },
+  { dim: "295/80 R22.5", usage: "Porteurs de distribution et autocars" },
+  { dim: "13 R22.5", usage: "Porteurs chantier et TP" },
+];
+
 const zonesPl = [
   {
     title: "Zone Sud & Corse",
@@ -45,7 +54,7 @@ const zonesPl = [
   {
     title: "Zone Nord-Est & Centre",
     href: "/pneus-utilitaires-pl/zone-nord-est-centre",
-    desc: "Besoins orientés transport, remorque, Loiret très demandé et qualification serrée sur les flottes multi-sites.",
+    desc: "Transport, remorque et flottes réparties sur plusieurs sites, notamment dans le Loiret, avec un interlocuteur commercial dédié.",
     tags: ["Christophe", "Loiret (45)", "Parcs multi-sites"],
   },
 ];
@@ -240,6 +249,25 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
                 ))}
               </div>
             </div>
+            <div className="mt-6 rounded-[4px] border border-border bg-muted/30 p-5">
+              <h3 className="text-xl font-black tracking-tight">Dimensions poids lourd courantes</h3>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                Les dimensions de pneus camion les plus demandées sur les porteurs, tracteurs et remorques. D&apos;autres tailles
+                sont disponibles sur devis.
+              </p>
+              <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                {dimensionsPl.map((item) => (
+                  <div key={item.dim} className="rounded-[4px] border border-border bg-white px-4 py-3">
+                    <p className="text-sm font-black text-foreground">{item.dim}</p>
+                    <p className="mt-1 text-xs text-muted-foreground">{item.usage}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-4 text-sm font-semibold text-foreground">
+                Pour un devis rapide, indiquez la dimension, la position (directeur, moteur ou remorque) et le
+                nombre de pneus.
+              </p>
+            </div>
             <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2">
               <div className="rounded-[4px] border border-border bg-muted/40 p-4">
                 <p className="text-xs font-bold uppercase tracking-wider text-purple-bright">Selon votre usage</p>
@@ -295,15 +323,15 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
           <div className="mt-14 rounded-[4px] border border-border bg-white p-8 sm:p-10">
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
               <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-purple-bright">Couverture commerciale PL</p>
+                <p className="text-xs font-bold uppercase tracking-wider text-purple-bright">Hors Hérault</p>
                 <h2 className="mt-3 text-3xl sm:text-4xl font-black tracking-tight">
-                  Deux pages zone déjà en place pour{" "}
-                  <span className="text-gradient-purple">mieux orienter les demandes PL</span>
+                  Un interlocuteur pneus poids lourd{" "}
+                  <span className="text-gradient-purple">selon votre secteur</span>
                 </h2>
                 <p className="mt-4 text-muted-foreground leading-relaxed">
-                  Le hub PL reste l&apos;entrée générale, puis la lecture se resserre selon le
-                  secteur, le type de flotte et le besoin terrain. Ces pages permettent de relier
-                  plus clairement les zones suivies, les articles locaux et les services utiles au parc.
+                  Pour les flottes installées hors de l&apos;Hérault, un commercial Recacor suit chaque grande
+                  zone. Il reprend avec vous les dimensions, le nombre de véhicules et le type d&apos;usage
+                  avant de chiffrer.
                 </p>
               </div>
               <div className="grid grid-cols-1 gap-5 md:grid-cols-2">

@@ -32,6 +32,7 @@ export interface Article {
 export const REDIRECTED_ARTICLE_SLUGS = new Set([
   "vidange-voiture-montpellier",
   "parallelisme-montpellier",
+  "pneu-creve-montpellier",
 ]);
 
 const CATEGORY_LABELS: Record<Categorie, string> = {
