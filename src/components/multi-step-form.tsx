@@ -65,7 +65,7 @@ export function MultiStepForm({
   const [step, setStep] = useState(0);
   const [startPushed, setStartPushed] = useState(false);
   const [rgpd, setRgpd] = useState(false);
-  const [contactPreference, setContactPreference] = useState<"phone" | "whatsapp">("phone");
+  const [contactPreference, setContactPreference] = useState<"phone" | "whatsapp" | "both">("phone");
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [attemptedStep, setAttemptedStep] = useState<number | null>(null);
@@ -132,7 +132,8 @@ export function MultiStepForm({
       ...data,
       ...getUtmData(),
       consent_status: hasConsent(),
-      whatsapp_optin: contactPreference === "whatsapp",
+      whatsapp_optin: contactPreference !== "phone",
+      contact_preference: contactPreference,
       ttp: getCookieValue("ttp"),
       form_id: id,
       service_type: serviceType,
@@ -274,7 +275,12 @@ export function MultiStepForm({
                     onChange={() => setContactPreference("whatsapp")} className="accent-purple-bright" />
                   {id === "devis-ct-form-es" ? "Por WhatsApp" : "Sur WhatsApp"}
                 </label>
-                {contactPreference === "whatsapp" && (
+                <label className="flex items-center gap-2 text-sm cursor-pointer">
+                  <input type="radio" name={`${id}-contact-preference`} checked={contactPreference === "both"}
+                    onChange={() => setContactPreference("both")} className="accent-purple-bright" />
+                  {id === "devis-ct-form-es" ? "Ambos" : "Les deux"}
+                </label>
+                {contactPreference !== "phone" && (
                   <p className="text-xs text-muted-foreground leading-relaxed">
                     {id === "devis-ct-form-es" ? WHATSAPP_NOTICE_ES : WHATSAPP_NOTICE_FR}
                   </p>

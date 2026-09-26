@@ -14,7 +14,7 @@ export function ContactSimpleForm() {
   const [data, setData] = useState({ nom: "", telephone: "", email: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
   const [rgpd, setRgpd] = useState(false);
-  const [contactPreference, setContactPreference] = useState<"phone" | "whatsapp">("phone");
+  const [contactPreference, setContactPreference] = useState<"phone" | "whatsapp" | "both">("phone");
   const [submitError, setSubmitError] = useState("");
 
   const [touched, setTouched] = useState({ telephone: false, email: false });
@@ -44,7 +44,8 @@ export function ContactSimpleForm() {
       ...getUtmData(),
       form_id: "contact-form",
       service_type: "contact",
-      whatsapp_optin: contactPreference === "whatsapp",
+      whatsapp_optin: contactPreference !== "phone",
+      contact_preference: contactPreference,
       submission_id: submissionId,
     };
 
@@ -136,7 +137,12 @@ export function ContactSimpleForm() {
             onChange={() => setContactPreference("whatsapp")} className="accent-purple-bright" />
           Sur WhatsApp
         </label>
-        {contactPreference === "whatsapp" && (
+        <label className="flex items-center gap-2 text-sm cursor-pointer">
+          <input type="radio" name="contact-form-contact-preference" checked={contactPreference === "both"}
+            onChange={() => setContactPreference("both")} className="accent-purple-bright" />
+          Les deux
+        </label>
+        {contactPreference !== "phone" && (
           <p className="text-xs text-muted-foreground leading-relaxed">{WHATSAPP_NOTICE_FR}</p>
         )}
       </fieldset>
