@@ -20,6 +20,7 @@ jobs:
 
       - name: Ajuster le budget Search VL
         env:
+          ADSFLOW_ANALYTICS_API_KEY: ${{ secrets.ADSFLOW_ANALYTICS_API_KEY }}
           GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
           GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
           GOOGLE_OAUTH_REFRESH_TOKEN: ${{ secrets.GOOGLE_OAUTH_REFRESH_TOKEN }}

@@ -23,6 +23,7 @@ jobs:
 
       - name: Generate weekly report
         env:
+          ADSFLOW_ANALYTICS_API_KEY: ${{ secrets.ADSFLOW_ANALYTICS_API_KEY }}
           RAMON_REPORT_BASE_URL: https://www.recacor.fr/briefings/ramon-hebdo
         run: node scripts/weekly-ramon-report.mjs --write
 
