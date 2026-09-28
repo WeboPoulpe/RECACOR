@@ -27,8 +27,9 @@ export function Header() {
   const scrollThreshold = 132;
   const pathname = usePathname();
   const isAssistancePL = pathname?.includes("/depannage-poids-lourd-urgence");
-  const headerPhoneNumber = isAssistancePL ? PHONE_WHATSAPP_PL : undefined;
-  const headerPhoneDisplay = isAssistancePL ? PHONE_WHATSAPP_PL_DISPLAY : PHONE_DISPLAY;
+  const isFrenchAssistancePL = pathname === "/depannage-poids-lourd-urgence";
+  const headerPhoneNumber = isFrenchAssistancePL ? PHONE_WHATSAPP_PL : undefined;
+  const headerPhoneDisplay = isFrenchAssistancePL ? PHONE_WHATSAPP_PL_DISPLAY : PHONE_DISPLAY;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > scrollThreshold);

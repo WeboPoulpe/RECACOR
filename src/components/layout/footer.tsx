@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Script from "next/script";
-import { Phone, Mail, MapPin, Clock, Star } from "lucide-react";
-import { PhoneLink } from "@/components/phone-link";
+import { Mail, MapPin, Clock, Star } from "lucide-react";
+import { FooterPhoneLink } from "@/components/layout/footer-phone-link";
 import { CookieSettingsButton } from "@/components/cookie-settings-button";
-import { PHONE_DISPLAY, ADDRESS, BUSINESS_NAME } from "@/lib/tracking";
+import { ADDRESS, BUSINESS_NAME } from "@/lib/tracking";
 import { getSiteConfig } from "@/lib/site-config";
 
 const FacebookIcon = () => (
@@ -217,10 +217,7 @@ export async function Footer() {
                   {ADDRESS}
                 </a>
               </div>
-              <PhoneLink location="footer" className="flex items-center gap-2.5 text-sm text-white hover:text-purple-glow transition-colors font-semibold">
-                <Phone className="h-4 w-4 text-purple-glow shrink-0" />
-                {PHONE_DISPLAY}
-              </PhoneLink>
+              <FooterPhoneLink />
               <div className="flex items-start gap-2.5 text-sm text-white/60">
                 <Clock className="h-4 w-4 text-purple-glow shrink-0 mt-0.5" />
                 <div>
