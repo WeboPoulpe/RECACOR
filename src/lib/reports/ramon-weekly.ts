@@ -1,5 +1,4 @@
 const ANALYTICS_URL = "https://xohhxyzyupggvkjyouui.supabase.co/functions/v1/marketing-analytics";
-const DEFAULT_ANALYTICS_API_KEY = "recacor-analytics-2026";
 const DEFAULT_REPORT_ORIGIN = "https://www.recacor.fr";
 const DEFAULT_REPORT_PATH = "/briefings/ramon-hebdo";
 
@@ -360,10 +359,14 @@ function reportMetaWatch(campaign: { name: string; cpl: number } | null) {
 }
 
 export async function fetchMarketingAnalytics(start: string, end: string, apiKey?: string) {
+  const analyticsApiKey = apiKey || process.env.ADSFLOW_ANALYTICS_API_KEY || process.env.MARKETING_ANALYTICS_API_KEY;
+  if (!analyticsApiKey) {
+    throw new Error("ADSFLOW_ANALYTICS_API_KEY est manquant");
+  }
   const url = `${ANALYTICS_URL}?start=${start}&end=${end}`;
   const response = await fetch(url, {
     headers: {
-      "X-Api-Key": apiKey || process.env.MARKETING_ANALYTICS_API_KEY || DEFAULT_ANALYTICS_API_KEY,
+      "X-Api-Key": analyticsApiKey,
     },
     cache: "no-store",
   });

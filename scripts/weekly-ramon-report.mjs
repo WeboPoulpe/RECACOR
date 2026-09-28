@@ -11,7 +11,7 @@ const LATEST_HTML_PATH = resolve(REPORT_DIR, "latest.html");
 const LATEST_JSON_PATH = resolve(REPORT_DIR, "latest.json");
 
 const ANALYTICS_URL = "https://xohhxyzyupggvkjyouui.supabase.co/functions/v1/marketing-analytics";
-const ANALYTICS_API_KEY = process.env.MARKETING_ANALYTICS_API_KEY || "recacor-analytics-2026";
+const ANALYTICS_API_KEY = process.env.ADSFLOW_ANALYTICS_API_KEY || process.env.MARKETING_ANALYTICS_API_KEY;
 const REPORT_BASE_URL = process.env.RAMON_REPORT_BASE_URL || "https://www.recacor.fr/briefings/ramon-hebdo";
 const REPORT_LATEST_URL = `${REPORT_BASE_URL}/latest.html`;
 const BREVO_API_KEY = process.env.BREVO_API_KEY || "";
@@ -170,6 +170,9 @@ function buildInsights(data) {
 }
 
 async function fetchAnalytics(start, end) {
+  if (!ANALYTICS_API_KEY) {
+    throw new Error("ADSFLOW_ANALYTICS_API_KEY est manquant");
+  }
   const url = `${ANALYTICS_URL}?start=${start}&end=${end}`;
   const response = await fetch(url, {
     headers: {

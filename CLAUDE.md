@@ -13,7 +13,7 @@ Lire `/Users/redouanelmansouri/Desktop/PROJET_RECACOR/SUIVI_ACTIONS.md` et prés
 
 **Étape 2 — Snapshot analytics AdsFlow (7 derniers jours)**
 ```bash
-START=$(date -v-7d +%Y-%m-%d 2>/dev/null || date -d '7 days ago' +%Y-%m-%d) && END=$(date +%Y-%m-%d) && curl -s "https://xohhxyzyupggvkjyouui.supabase.co/functions/v1/marketing-analytics?start=$START&end=$END" -H "X-Api-Key: recacor-analytics-2026" | jq '{leads_crm:.crm_aggregate.total_leads, leads_meta:.meta_ads.leads, cpl_meta:.meta_ads.cpl, depense_meta:.meta_ads.spend, depense_gads:.google_ads.spend, conversions_gads:.google_ads.conversions, clics_seo:.search_console.clicks, sessions_ga4:.ga4.sessions}'
+START=$(date -v-7d +%Y-%m-%d 2>/dev/null || date -d '7 days ago' +%Y-%m-%d) && END=$(date +%Y-%m-%d) && . /Applications/PROJET_RECACOR/.env.audit && test -n "$MARKETING_ANALYTICS_API_KEY" && curl -s "https://xohhxyzyupggvkjyouui.supabase.co/functions/v1/marketing-analytics?start=$START&end=$END" -H "X-Api-Key: $MARKETING_ANALYTICS_API_KEY" | jq '{leads_crm:.crm_aggregate.total_leads, leads_meta:.meta_ads.leads, cpl_meta:.meta_ads.cpl, depense_meta:.meta_ads.spend, depense_gads:.google_ads.spend, conversions_gads:.google_ads.conversions, clics_seo:.search_console.clicks, sessions_ga4:.ga4.sessions}'
 ```
 Afficher le résultat sous forme de tableau et signaler toute anomalie.
 
@@ -88,5 +88,5 @@ montpellier, castelnau-le-lez, vendargues, mauguio, lattes, perols, jacou, saint
 ## API Analytics AdsFlow
 
 - **URL :** `https://xohhxyzyupggvkjyouui.supabase.co/functions/v1/marketing-analytics`
-- **Auth :** `X-Api-Key: recacor-analytics-2026`
+- **Auth :** `X-Api-Key: $MARKETING_ANALYTICS_API_KEY` (variable d'environnement locale, jamais dans Git)
 - **Params :** `start`, `end` (YYYY-MM-DD)

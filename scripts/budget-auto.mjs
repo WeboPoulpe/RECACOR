@@ -231,12 +231,14 @@ async function getCurrentBudget(token) {
 }
 
 async function getMetaCPL(days) {
+  const analyticsApiKey = process.env.ADSFLOW_ANALYTICS_API_KEY || process.env.MARKETING_ANALYTICS_API_KEY;
+  if (!analyticsApiKey) return null;
   const start = daysAgo(days);
   const end = today();
   try {
     const r = await fetch(
       `https://xohhxyzyupggvkjyouui.supabase.co/functions/v1/marketing-analytics?start=${start}&end=${end}`,
-      { headers: { "X-Api-Key": "recacor-analytics-2026" } }
+      { headers: { "X-Api-Key": analyticsApiKey } }
     );
     const d = await r.json();
     return Number(d?.meta_ads?.cpl || 0);
