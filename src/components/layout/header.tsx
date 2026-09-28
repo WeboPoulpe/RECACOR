@@ -7,7 +7,7 @@ import { Menu, X, Phone, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AugustVlNoticeHeaderLink } from "@/components/august-vl-notice";
 import { PhoneLink } from "@/components/phone-link";
-import { PHONE_DISPLAY } from "@/lib/tracking";
+import { PHONE_DISPLAY, PHONE_WHATSAPP_PL, PHONE_WHATSAPP_PL_DISPLAY } from "@/lib/tracking";
 import { useAssetUrl } from "@/components/dynamic-media";
 
 const navigation = [
@@ -27,6 +27,8 @@ export function Header() {
   const scrollThreshold = 132;
   const pathname = usePathname();
   const isAssistancePL = pathname?.includes("/depannage-poids-lourd-urgence");
+  const headerPhoneNumber = isAssistancePL ? PHONE_WHATSAPP_PL : undefined;
+  const headerPhoneDisplay = isAssistancePL ? PHONE_WHATSAPP_PL_DISPLAY : PHONE_DISPLAY;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > scrollThreshold);
@@ -59,8 +61,8 @@ export function Header() {
                 <span className="text-white/50">Lun–Ven 8h–12h · 14h–18h · Sam 8h–12h</span>
               )}
             </div>
-            <PhoneLink location="header" className="flex items-center gap-1.5 font-semibold hover:text-yellow-400 transition-colors">
-              <Phone className="h-3 w-3" /> {PHONE_DISPLAY}
+            <PhoneLink location="header" serviceType={isAssistancePL ? "pl" : "vl"} phoneNumber={headerPhoneNumber} className="flex items-center gap-1.5 font-semibold hover:text-yellow-400 transition-colors">
+              <Phone className="h-3 w-3" /> {headerPhoneDisplay}
             </PhoneLink>
           </div>
         </div>
@@ -113,6 +115,8 @@ export function Header() {
               />
               <PhoneLink
                 location="header"
+                serviceType={isAssistancePL ? "pl" : "vl"}
+                phoneNumber={headerPhoneNumber}
                 className="inline-flex items-center gap-2 rounded-[4px] bg-yellow-400 px-5 py-2.5 text-sm font-black uppercase text-slate-950 transition hover:bg-yellow-300 ml-2"
                 showIcon
               >
@@ -159,10 +163,12 @@ export function Header() {
               <div className="recacor-mobile-menu-item mt-8" style={{ animationDelay: `${navigation.length * 40}ms` }}>
                 <PhoneLink
                   location="header"
+                  serviceType={isAssistancePL ? "pl" : "vl"}
+                  phoneNumber={headerPhoneNumber}
                   className="inline-flex items-center gap-3 rounded-[4px] bg-yellow-400 px-8 py-4 text-lg font-black uppercase text-slate-950"
                   showIcon
                 >
-                  {PHONE_DISPLAY}
+                  {headerPhoneDisplay}
                 </PhoneLink>
               </div>
             </nav>
