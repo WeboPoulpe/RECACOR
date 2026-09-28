@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { DepannageClient } from "./client";
 
 export const metadata: Metadata = {
-  title: "Dépannage poids lourd urgence 24/7 - Perpignan Marseille Millau",
+  title: "Dépannage pneu poids lourd 24/7 - Perpignan Marseille Millau",
   description:
     "Assistance pneu poids lourd 24h/24 7j/7 entre Perpignan, Montpellier et Marseille. Appel ou WhatsApp, plusieurs langues parlées.",
   alternates: {
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Dépannage poids lourd urgence 24/7 - Recacor",
+    title: "Dépannage pneu poids lourd 24/7 - Recacor",
     description:
       "Assistance pneu poids lourd 24h/24 7j/7 sur route, axe Perpignan-Marseille-Millau. Appel ou WhatsApp.",
     url: "https://www.recacor.fr/depannage-poids-lourd-urgence",

@@ -86,7 +86,7 @@ export function DepannageClient() {
             <AlertTriangle className="h-3 w-3 mr-1" /> Assistance sur route
           </Badge>
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.15] sm:leading-[1.1] max-w-3xl">
-            Dépannage poids lourd{" "}
+            Dépannage pneu poids lourd{" "}
             <span className="text-purple-glow">24h/24, 7j/7</span>
           </h1>
           <p className="mt-3 sm:mt-4 text-white/90 max-w-xl text-base sm:text-lg drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
@@ -94,6 +94,9 @@ export function DepannageClient() {
             entre Perpignan, Marseille et Millau.
           </p>
           <div className="mt-5 flex flex-col sm:flex-row gap-2.5 sm:gap-3 max-w-2xl">
+            <PhoneLink location="hero" serviceType="pl" phoneNumber={PHONE_WHATSAPP_PL} className="flex-1 recacor-btn-primary whitespace-nowrap py-2.5 sm:py-3" showIcon>
+              Appeler maintenant
+            </PhoneLink>
             <a
               href={`https://wa.me/${PHONE_WHATSAPP_PL.replace("+", "")}`}
               target="_blank"
@@ -103,9 +106,6 @@ export function DepannageClient() {
               <MessageCircle className="h-4 w-4" />
               WhatsApp
             </a>
-            <PhoneLink location="hero" serviceType="pl" className="flex-1 recacor-btn-primary whitespace-nowrap py-2.5 sm:py-3" showIcon>
-              Appeler maintenant
-            </PhoneLink>
           </div>
           <p className="mt-2.5 text-xs sm:text-sm text-white/60">
             Ligne tenue par Patrick, joignable par appel ou WhatsApp.
