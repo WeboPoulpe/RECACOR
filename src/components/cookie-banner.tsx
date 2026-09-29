@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   grantConsent,
   denyConsent,
@@ -13,24 +14,20 @@ import {
   type CookieBannerVariant,
 } from "@/lib/tracking";
 
-function TireIcon() {
-  return (
-    <svg viewBox="0 0 40 40" className="h-9 w-9 shrink-0" aria-hidden="true">
-      <circle cx="20" cy="20" r="18" fill="var(--recacor-ink)" />
-      <circle cx="20" cy="20" r="18" fill="none" stroke="#334155" strokeWidth="1" />
-      <circle cx="20" cy="20" r="11" fill="none" stroke="#FFC928" strokeWidth="2.5" />
-      <circle cx="20" cy="20" r="4" fill="#FFC928" />
-    </svg>
-  );
-}
-
 export function CookieBanner() {
   const [visible, setVisible] = useState(false);
   const [details, setDetails] = useState(false);
   const [variant] = useState<CookieBannerVariant>(() => getOrCreateCookieBannerVariant());
   const impressionTrackedRef = useRef(false);
+  const previewRef = useRef(false);
 
   useEffect(() => {
+    if (process.env.NODE_ENV === "development" && new URLSearchParams(window.location.search).has("cookiePreview")) {
+      previewRef.current = true;
+      const previewTimer = window.setTimeout(() => setVisible(true), 0);
+      return () => window.clearTimeout(previewTimer);
+    }
+
     const consent = hasConsent();
     if (consent === "granted") {
       syncStoredConsentIntegrations();
@@ -46,7 +43,7 @@ export function CookieBanner() {
   }, []);
 
   useEffect(() => {
-    if (!visible || impressionTrackedRef.current) return;
+    if (!visible || impressionTrackedRef.current || previewRef.current) return;
     trackCookieBannerImpression(variant);
     impressionTrackedRef.current = true;
   }, [variant, visible]);
@@ -58,79 +55,79 @@ export function CookieBanner() {
     }
   };
 
-  const accept = () => { grantConsent(variant); closeBanner(); };
-  const deny = () => { denyConsent(variant); closeBanner(); };
+  const accept = () => { if (!previewRef.current) grantConsent(variant); closeBanner(); };
+  const deny = () => { if (!previewRef.current) denyConsent(variant); closeBanner(); };
   const isCentered = variant === "center";
 
   return (
     visible && (
-        <>
-          <div className="recacor-fade-in fixed inset-0 z-[109] bg-black/60" />
-          <div
-            className={
-              isCentered
-                ? "recacor-cookie-in recacor-cookie-centered fixed left-1/2 top-1/2 z-[110] w-[min(92vw,760px)] -translate-x-1/2 -translate-y-1/2 border-t-4 border-yellow-400 bg-[var(--recacor-night)] shadow-[0_20px_60px_rgba(0,0,0,0.45)]"
-                : "recacor-cookie-in recacor-cookie-bottom fixed inset-x-0 bottom-0 z-[110] border-t-4 border-yellow-400 bg-[var(--recacor-night)] shadow-[0_-12px_40px_rgba(0,0,0,0.35)]"
-            }
-          >
-          <div className={isCentered ? "flex flex-col gap-5 p-6 sm:p-8" : "recacor-shell flex flex-col gap-5 py-6 lg:flex-row lg:items-center lg:justify-between"}>
-            <div className="flex gap-4">
-              <TireIcon />
+      <>
+        <div className="recacor-fade-in fixed inset-0 z-[109] bg-black/45" />
+        <div
+          className={`recacor-cookie-pop ${isCentered ? "recacor-cookie-pop--center" : "recacor-cookie-pop--bottom"}`}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="recacor-cookie-title"
+        >
+          <div className="recacor-cookie-pop__card">
+            <div className="recacor-cookie-pop__head">
+              <span className="recacor-cookie-pop__wheel" aria-hidden="true">
+                <Image src="/images/cookie-tire-recacor.png" alt="" width={56} height={58} priority />
+              </span>
               <div>
-                <p className="font-heading text-xl font-black uppercase text-white">
+                <p className="recacor-cookie-pop__eyebrow recacor-cookie-pop__rise recacor-cookie-pop__rise--1">Cookies</p>
+                <h2 id="recacor-cookie-title" className="recacor-cookie-pop__rise recacor-cookie-pop__rise--2 font-heading text-lg font-black uppercase leading-tight text-white">
                   On prend soin de vous
-                </p>
-                <p className="mt-1 max-w-xl text-sm leading-6 text-white/65">
-                  Comme pour vos pneus, on s&apos;assure que tout roule. Ce site utilise des
-                  cookies essentiels, de mesure d&apos;audience et publicitaires.
-                </p>
-                {details && (
-                  <div className="mt-4 grid gap-2 border border-white/10 bg-white/5 p-4 sm:grid-cols-3">
-                    <p className="text-xs leading-relaxed text-white/70">
-                      <strong className="text-white">Essentiels</strong> — nécessaires au fonctionnement du site.
-                    </p>
-                    <p className="text-xs leading-relaxed text-white/70">
-                      <strong className="text-white">Analyse</strong> — Google Analytics pour mesurer l&apos;audience.
-                    </p>
-                    <p className="text-xs leading-relaxed text-white/70">
-                      <strong className="text-white">Marketing</strong> — Meta Pixel, TikTok, Snapchat pour des publicités pertinentes.
-                    </p>
-                    <Link href="/confidentialite" className="text-xs font-bold text-yellow-400 hover:underline sm:col-span-3">
-                      Politique de confidentialité →
-                    </Link>
-                  </div>
-                )}
+                </h2>
               </div>
             </div>
-
-            <div className={isCentered ? "flex flex-col gap-3 border-t border-white/10 pt-4 sm:flex-row sm:flex-wrap sm:items-center" : "flex shrink-0 flex-col gap-3 sm:flex-row sm:items-center"}>
-              <button
-                type="button"
-                onClick={() =>
-                  setDetails((current) => {
-                    const next = !current;
-                    if (next) trackCookieCustomizeOpen(variant);
-                    return next;
-                  })
-                }
-                className="text-xs font-bold uppercase text-white/50 underline-offset-2 hover:text-white hover:underline"
-              >
-                {details ? "Masquer les détails" : "Personnaliser"}
-              </button>
-              <button
-                type="button"
-                onClick={deny}
-                className="text-xs font-bold uppercase text-white/50 underline-offset-2 hover:text-white hover:underline"
-              >
-                Continuer sans accepter
-              </button>
-              <button type="button" onClick={accept} className="recacor-btn-primary whitespace-nowrap">
-                Accepter et continuer
-              </button>
+            <div>
+              <p className="recacor-cookie-pop__rise recacor-cookie-pop__rise--3 mt-3 text-sm leading-6 text-white/75">
+                Comme pour vos pneus, on s&apos;assure que tout roule. Ce site utilise des
+                cookies essentiels, de mesure d&apos;audience et publicitaires.
+              </p>
+              {details && (
+                <div className="recacor-cookie-pop__details recacor-cookie-pop__rise">
+                  <p className="text-xs leading-relaxed text-white/70">
+                    <strong className="text-white">Essentiels</strong> — nécessaires au fonctionnement du site.
+                  </p>
+                  <p className="text-xs leading-relaxed text-white/70">
+                    <strong className="text-white">Analyse</strong> — Google Analytics pour mesurer l&apos;audience.
+                  </p>
+                  <p className="text-xs leading-relaxed text-white/70">
+                    <strong className="text-white">Marketing</strong> — Meta Pixel, TikTok, Snapchat pour des publicités pertinentes.
+                  </p>
+                  <Link href="/confidentialite" className="text-xs font-bold text-yellow-400 hover:underline">
+                    Politique de confidentialité →
+                  </Link>
+                </div>
+              )}
+              <div className="recacor-cookie-pop__actions recacor-cookie-pop__rise recacor-cookie-pop__rise--4">
+                <button type="button" onClick={deny} className="recacor-cookie-pop__btn recacor-cookie-pop__btn--deny">
+                  Continuer sans accepter
+                </button>
+                <button type="button" onClick={accept} className="recacor-cookie-pop__btn recacor-cookie-pop__btn--accept">
+                  Accepter et continuer
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setDetails((current) => {
+                      const next = !current;
+                      if (next) trackCookieCustomizeOpen(variant);
+                      return next;
+                    })
+                  }
+                  className="recacor-cookie-pop__customize"
+                >
+                  {details ? "Masquer les détails" : "Personnaliser"}
+                </button>
+              </div>
             </div>
+            <span className="recacor-cookie-pop__tread" aria-hidden="true" />
           </div>
-          </div>
-        </>
+        </div>
+      </>
     )
   );
 }
