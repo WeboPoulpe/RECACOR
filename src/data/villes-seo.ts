@@ -8,6 +8,8 @@ export interface VilleSeo {
   hero_subtitle: string;
   description: string;
   angle_title: string;
+  /** Titre Google (balise title) : requête « Pneus + ville » en tête, accroche réelle derrière. Le texte visible reste angle_title. */
+  seo_title?: string;
   angle_text: string;
   faqs: { q: string; a: string }[];
   contenu?: Array<string | { h3: string; p: string }>;
@@ -25,6 +27,7 @@ export const VILLES_SEO: VilleSeo[] = [
     hero_subtitle: "Pneus voiture à prix discount, montage en 15 min sans rendez-vous. À 5 km du centre de Montpellier via la RN113.",
     description: "Depuis Montpellier centre, Recacor est à 10 minutes en voiture via la Route de Nîmes. Pas besoin de prendre rendez-vous : venez directement avec votre véhicule. Nos mécaniciens montent et équilibrent vos pneus en 15 minutes sur place, stock immédiat toutes dimensions.",
     angle_title: "Le garage pneus le plus accessible depuis Montpellier",
+    seo_title: "Depuis Montpellier : garage pneus à 10 min, au Crès",
     angle_text: "Situé au Crès, Recacor dessert quotidiennement les habitants de Montpellier qui veulent un service rapide et des prix discount, sans les embouteillages du centre-ville.",
     faqs: [
       { q: "Recacor est-il facilement accessible depuis Montpellier ?", a: "Oui, depuis Montpellier centre, Recacor au Crès est à 5 km via la RN113 (Route de Nîmes). Comptez 10 minutes en voiture, avec parking gratuit sur place." },
@@ -50,6 +53,7 @@ export const VILLES_SEO: VilleSeo[] = [
     hero_subtitle: "Le garage pneus voisin de Castelnau. 3 km, sans RDV, à partir de 45€ monté.",
     description: "Castelnau-le-Lez et Le Crès sont communes limitrophes. Recacor est littéralement à côté : 5 minutes depuis n'importe quel quartier de Castelnau. Montage, équilibrage, parallélisme — tout en une seule visite sans rendez-vous.",
     angle_title: "Votre voisin pneus à Castelnau-le-Lez",
+    seo_title: "Pneus Castelnau-le-Lez : votre voisin au Crès, sans RDV",
     angle_text: "Communes limitrophes, Castelnau-le-Lez et Le Crès ne sont séparées que par quelques centaines de mètres. Recacor est votre garage de proximité pour l'entretien de vos pneus.",
     faqs: [
       { q: "Où est situé Recacor par rapport à Castelnau-le-Lez ?", a: "Recacor est à 3 km de Castelnau-le-Lez, au 1240 Route de Nîmes, au Crès. C'est littéralement la commune voisine, à 5 minutes en voiture." },
@@ -75,6 +79,7 @@ export const VILLES_SEO: VilleSeo[] = [
     hero_subtitle: "Depuis Lattes, 8 km pour des pneus à 45€ montés. Équilibrage inclus, sans rendez-vous.",
     description: "Recacor est à 8 km de Lattes via la D986 ou l'A9. Que vous habitiez Lattes centre, Maurin ou Port Marianne, le trajet prend moins de 15 minutes. Venez sans rendez-vous — nos techniciens vous prennent en charge immédiatement.",
     angle_title: "Prix transparents pour les habitants de Lattes",
+    seo_title: "Pneus Lattes : prix transparents, montage au Crès",
     angle_text: "Pas de surprises : nos tarifs sont affichés. À partir de 45€ le pneu VL monté, équilibrage inclus, valves neuves offertes. Devis gratuit en 2 minutes sur cette page.",
     faqs: [
       { q: "Quel est le trajet depuis Lattes jusqu'à Recacor ?", a: "Depuis Lattes, prenez la D986 direction Montpellier puis la RN113 vers Le Crès. Environ 8 km, 12 minutes. GPS : 1240 Route de Nîmes, 34920 Le Crès." },
@@ -100,6 +105,7 @@ export const VILLES_SEO: VilleSeo[] = [
     hero_subtitle: "À 10 km de Mauguio, Recacor Le Crès — pneus VL sans RDV, toutes marques, à partir de 45€.",
     description: "Depuis Mauguio et Carnon Plage, Recacor est à 15 minutes via la N113. Idéal pour les habitants du Pays de l'Or qui cherchent un garage de confiance sans les prix du centre-ville. Devis gratuit en ligne, réponse sous 2h.",
     angle_title: "La confiance des habitants de Mauguio depuis des années",
+    seo_title: "Pneus Mauguio : la confiance des habitants depuis des années",
     angle_text: "Les avis Google parlent d'eux-mêmes : nos clients de Mauguio, Carnon et du Pays de l'Or nous font confiance pour l'entretien de leurs pneus. Note 5,0 sur 34 avis.",
     faqs: [
       { q: "Recacor est-il proche de Mauguio ?", a: "Oui, à 10 km via la RN113. Depuis le centre de Mauguio ou Carnon Plage, comptez 15 minutes en voiture. Adresse : 1240 Route de Nîmes, 34920 Le Crès." },
@@ -125,6 +131,7 @@ export const VILLES_SEO: VilleSeo[] = [
     hero_subtitle: "8 km de Vendargues, pneus en stock immédiat. Commande spéciale livrée en 24h.",
     description: "Depuis Vendargues, Recacor est à 8 km via la RN113. Ce qui nous différencie : un stock important sur place et la capacité à commander toute dimension introuvable sous 24 à 48h. Service professionnel, prix justes.",
     angle_title: "Stock immédiat ou livraison 24h depuis Vendargues",
+    seo_title: "Pneus Vendargues : stock immédiat ou livraison 24h",
     angle_text: "Votre dimension est absente de notre stock ? Pas de problème. Nous commandons et recevons la grande majorité des pneus VL en 24 à 48h. Appelez-nous pour vérifier.",
     faqs: [
       { q: "Ma dimension de pneu est rare — pouvez-vous la commander ?", a: "Oui. Recacor a accès à un large catalogue fournisseurs. La plupart des dimensions atypiques sont disponibles sous 24 à 48h ouvrés. Appelez-nous ou soumettez un devis pour vérifier." },
@@ -150,6 +157,7 @@ export const VILLES_SEO: VilleSeo[] = [
     hero_subtitle: "Jacou à 6 km de Recacor. Pneus montés à partir de 45€ + contrôle parallélisme offert.",
     description: "Depuis Jacou et Clapiers, Recacor est à 10 minutes via le contournement nord de Montpellier. Pour vos pneus, le contrôle du parallélisme est offert ; un réglage est proposé sur devis si nécessaire.",
     angle_title: "Pneus à Jacou et Clapiers : contrôle du parallélisme offert",
+    seo_title: "Pneus Jacou et Clapiers : contrôle du parallélisme offert",
     angle_text: "Chez Recacor, le contrôle du parallélisme est offert lors d'un changement de pneus. Si un réglage est utile, un devis est présenté avant l'intervention.",
     faqs: [
       { q: "Recacor est-il loin de Jacou ?", a: "Non, Jacou est à 6 km de Recacor au Crès. Via le contournement nord de Montpellier, comptez 10 minutes. Adresse : 1240 Route de Nîmes, 34920 Le Crès." },
@@ -175,6 +183,7 @@ export const VILLES_SEO: VilleSeo[] = [
     hero_subtitle: "22 km de Lunel. Pourquoi les habitants de Lunel viennent chez Recacor : prix, stock et confiance.",
     description: "Lunel est à 22 km de Recacor au Crès, soit 20-25 minutes via la N113. La distance est compensée par des prix parmi les plus bas du département 34, un stock immédiat et un service sans rendez-vous. Nos clients de Lunel et de l'est héraultais nous plébiscitent.",
     angle_title: "Pourquoi les Lunellois font 22 km pour leurs pneus",
+    seo_title: "Pneus Lunel : pourquoi les Lunellois viennent au Crès",
     angle_text: "Prix discount, stock immédiat, service honnête : c'est pour ça que des clients de Lunel, Vauvert et Aigues-Mortes font régulièrement le trajet. Les économies réalisées justifient largement les 22 km.",
     faqs: [
       { q: "Ça vaut le déplacement depuis Lunel ?", a: "Oui. Sur 4 pneus, nos clients de Lunel économisent régulièrement 50 à 150€ par rapport aux prix concessionnaires. L'aller-retour Lunel–Le Crès prend 45 minutes pour un service sans attente." },
@@ -200,6 +209,7 @@ export const VILLES_SEO: VilleSeo[] = [
     hero_subtitle: "Depuis Pérols et Palavas, Recacor est à 9 km via la N113. Pneus VL sans RDV, à partir de 45€.",
     description: "Les habitants de Pérols, Palavas-les-Flots et de l'Étang de l'Or viennent régulièrement chez Recacor pour leurs pneus. Un trajet de 10-15 minutes via la N113 pour un service rapide et des prix bien en-dessous des concessionnaires.",
     angle_title: "Pérols et la côte : Recacor à 9 km",
+    seo_title: "Pneus Pérols : garage à 9 km, au Crès",
     angle_text: "Zone côtière, route salée, usure des pneus accélérée : à Pérols et Palavas, nos clients savent que renouveler ses pneus régulièrement est essentiel. Venez sans RDV.",
     faqs: [
       { q: "Comment venir de Pérols chez Recacor ?", a: "Depuis Pérols, prenez la N113 direction Montpellier, puis continuez vers Le Crès. Environ 9 km, 12-15 minutes. Adresse : 1240 Route de Nîmes, 34920 Le Crès." },
@@ -225,6 +235,7 @@ export const VILLES_SEO: VilleSeo[] = [
     hero_subtitle: "12 km de Saint-Jean-de-Védas via la N113. Pneus VL montés à partir de 45€, sans RDV.",
     description: "Depuis Saint-Jean-de-Védas, la Route de Nîmes mène directement à Recacor au Crès en 15 minutes. Un trajet simple pour un service complet : pneus toutes marques, montage immédiat, parallélisme laser 3D sur place.",
     angle_title: "Saint-Jean-de-Védas : la route directe vers Recacor",
+    seo_title: "Pneus Saint-Jean-de-Védas : accès direct au garage du Crès",
     angle_text: "La RN113 relie directement Saint-Jean-de-Védas au Crès sans passer par le centre de Montpellier. Un accès rapide et sans embouteillage pour votre changement de pneus.",
     faqs: [
       { q: "Comment venir de Saint-Jean-de-Védas chez Recacor ?", a: "Prenez la RN113 direction Montpellier/Nîmes jusqu'au Crès. Environ 12 km, 15 minutes sans trafic. Adresse : 1240 Route de Nîmes, 34920 Le Crès." },
@@ -250,6 +261,7 @@ export const VILLES_SEO: VilleSeo[] = [
     hero_subtitle: "14 km de Palavas, 15 minutes via la N113. Pneus montés à partir de 45€, sans rendez-vous.",
     description: "Les habitants de Palavas-les-Flots et de la côte héraultaise trouvent chez Recacor un garage compétent et abordable, à 15 minutes de la plage. Stock immédiat, toutes marques, montage rapide sans attente.",
     angle_title: "Palavas à Recacor : 15 minutes pour des pneus neufs",
+    seo_title: "Pneus Palavas-les-Flots : pneus neufs à 15 min, au Crès",
     angle_text: "En été comme en hiver, les routes côtières sont exigeantes pour les pneus. Recacor vous propose des prix discount et un service rapide pour garder votre voiture en sécurité sur la route.",
     faqs: [
       { q: "Quel itinéraire depuis Palavas-les-Flots ?", a: "Depuis Palavas, prenez la direction de Montpellier via Lattes, puis la N113 vers Le Crès. Environ 14 km, 15-18 minutes. GPS : 1240 Route de Nîmes, 34920 Le Crès." },
@@ -300,6 +312,7 @@ export const VILLES_SEO: VilleSeo[] = [
     hero_subtitle: "38 km de Sète via la N113. Pneus VL à prix discount chez Recacor Le Crès.",
     description: "Depuis Sète, l'accès à Recacor se fait via la N113 en 35-40 minutes. Pour les habitants de Sète et du Bassin de Thau qui cherchent une alternative aux garages locaux, Recacor propose des tarifs compétitifs sur toutes les marques. Vérifiez notre stock avant le déplacement.",
     angle_title: "Sète — Recacor : 38 km pour les meilleurs prix pneus",
+    seo_title: "Pneus Sète : les meilleurs prix à 38 km, au Crès",
     angle_text: "Comme pour Nîmes, certains clients de Sète font le trajet car les économies sur 4 pneus compensent largement le coût de l'aller-retour. Appelez-nous pour confirmer votre dimension.",
     faqs: [
       { q: "Comment venir de Sète chez Recacor ?", a: "Depuis Sète, prenez la N113 direction Montpellier jusqu'au Crès. Environ 38 km, 35-40 minutes. Adresse GPS : 1240 Route de Nîmes, 34920 Le Crès." },
@@ -350,6 +363,7 @@ export const VILLES_SEO: VilleSeo[] = [
     hero_subtitle: "16 km de Juvignac via Montpellier. Pneus VL à partir de 45€ montés, sans rendez-vous.",
     description: "Depuis Juvignac et l'ouest de Montpellier, Recacor est à 20 minutes via le périphérique nord. Un trajet simple pour profiter de prix discount et d'un service professionnel sans attente. Stock immédiat toutes dimensions.",
     angle_title: "Juvignac : cap à l'est pour vos pneus",
+    seo_title: "Pneus Juvignac : garage au Crès, montage sans RDV",
     angle_text: "En traversant Montpellier ou en passant par le périphérique, Juvignac est bien connectée au Crès. Nos clients de l'ouest montpelliérain viennent régulièrement pour notre rapport qualité/prix.",
     faqs: [
       { q: "Quel itinéraire depuis Juvignac pour venir chez Recacor ?", a: "Depuis Juvignac, prenez le périphérique de Montpellier direction est, puis la N113 vers Le Crès. Environ 16 km, 20 minutes. Adresse : 1240 Route de Nîmes, 34920 Le Crès." },
@@ -375,6 +389,7 @@ export const VILLES_SEO: VilleSeo[] = [
     hero_subtitle: "12 km de Villeneuve-lès-Maguelone. Pneus voiture sans RDV à partir de 45€ chez Recacor.",
     description: "Depuis Villeneuve-lès-Maguelone, Recacor est à 15 minutes via Lattes et la N113. Un accès direct sans passer par le centre de Montpellier. Nos clients de la côte apprécient le service sans attente et les prix compétitifs.",
     angle_title: "Entre mer et Recacor : 15 minutes suffisent",
+    seo_title: "Pneus Villeneuve-lès-Maguelone : garage à 15 min",
     angle_text: "Villeneuve-lès-Maguelone est bien desservie par la N113. Pas besoin d'aller jusqu'à Montpellier pour changer vos pneus : Recacor au Crès est sur le chemin, plus accessible et moins cher.",
     faqs: [
       { q: "Comment venir de Villeneuve-lès-Maguelone chez Recacor ?", a: "Depuis Villeneuve, prenez la direction de Lattes puis la N113 vers Le Crès. Environ 12 km, 15 minutes. GPS : 1240 Route de Nîmes, 34920 Le Crès." },
@@ -400,6 +415,7 @@ export const VILLES_SEO: VilleSeo[] = [
     hero_subtitle: "28 km de Frontignan via la N113. Les clients du Bassin de Thau font le déplacement — voici pourquoi.",
     description: "Depuis Frontignan, Recacor est à 25-30 minutes via la N113. Une distance que nos clients du Bassin de Thau jugent rentable : sur 4 pneus, les économies dépassent souvent le coût du trajet. Appelez avant pour confirmer votre dimension en stock.",
     angle_title: "Frontignan — Le Crès : 30 min pour économiser sur vos pneus",
+    seo_title: "Pneus Frontignan : 30 min pour économiser, au Crès",
     angle_text: "Nos clients de Frontignan, Balaruc et Gigean viennent régulièrement. Sur un jeu de 4 pneus, la différence de prix avec les garages locaux peut dépasser 100€. Le trajet vaut l'économie.",
     faqs: [
       { q: "Ça vaut le déplacement depuis Frontignan ?", a: "Souvent oui. Sur 4 pneus montés, nos clients de Frontignan économisent régulièrement 60 à 120€ par rapport aux tarifs concessionnaires. Vérifiez notre disponibilité par téléphone avant de venir." },
@@ -425,6 +441,7 @@ export const VILLES_SEO: VilleSeo[] = [
     hero_subtitle: "25 km de Gigean via la N113. Pneus VL toutes marques, stock immédiat, à partir de 45€.",
     description: "Depuis Gigean et le secteur de Balaruc, Recacor est à 25 minutes via la N113. Un garage complet avec un large stock de pneus toutes marques et toutes dimensions. Venez sans rendez-vous ou demandez votre devis en ligne.",
     angle_title: "Gigean et Balaruc : Recacor à 25 km",
+    seo_title: "Pneus Gigean et Balaruc : Recacor à 25 km, au Crès",
     angle_text: "Le secteur Gigean-Balaruc-les-Bains est à 25 minutes du Crès. Pour les habitants du Bassin de Thau qui veulent des pneus discount sans aller jusqu'à Montpellier, Recacor est la meilleure option.",
     faqs: [
       { q: "Comment venir de Gigean chez Recacor ?", a: "Depuis Gigean, prenez la N113 direction Montpellier jusqu'au Crès. Environ 25 km, 25 minutes. GPS : 1240 Route de Nîmes, 34920 Le Crès." },
@@ -450,6 +467,7 @@ export const VILLES_SEO: VilleSeo[] = [
     hero_subtitle: "50 km de Pézenas via la N113. Pour les Piscénois qui veulent les meilleurs prix pneus de l'Hérault.",
     description: "Pézenas est à 50 km de Recacor, soit 45 minutes via la N113. Pour les habitants du Cœur d'Hérault, le déplacement est rentable sur des achats importants comme un jeu de 4 pneus. Vérifiez notre disponibilité avant de venir.",
     angle_title: "Pézenas à Recacor : 45 min pour des pneus au meilleur prix",
+    seo_title: "Pneus Pézenas : 45 min pour le meilleur prix, au Crès",
     angle_text: "Pour un jeu de 4 pneus premium, la différence de prix entre Recacor et un concessionnaire local peut dépasser 100€. Pour les Piscénois, le calcul est vite fait. Appelez-nous pour confirmer votre dimension.",
     faqs: [
       { q: "Le déplacement depuis Pézenas vaut-il vraiment le coup ?", a: "Pour un jeu de 4 pneus, souvent oui. Nos clients de Pézenas économisent 80 à 150€ par rapport aux tarifs locaux. Sur des pneus premium (Michelin, Continental), la différence est encore plus notable." },

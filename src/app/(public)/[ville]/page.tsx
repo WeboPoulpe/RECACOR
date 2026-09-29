@@ -84,12 +84,15 @@ export async function generateMetadata({
   }
   const seo = findVilleSeo(slug);
   const distance = seo?.distance || v.distance;
+  // Titre : seo_title (requête « Pneus + ville » en tête, décision 29/09) ; accroche angle_title en repli.
   // Chaque ville a un angle et une description déjà rédigés dans villes-seo.ts (distance réelle,
   // spécificités locales) : on les utilise pour le titre et la description au lieu d'un gabarit
   // identique ville par ville, qui ne donnait aucune raison de cliquer sur l'une plutôt qu'une autre.
-  const title = seo?.angle_title
-    ? `${seo.angle_title} | Recacor Le Crès`
-    : `Pneus ${v.nom} — Recacor Le Crès (${distance})`;
+  const title = seo?.seo_title
+    ? `${seo.seo_title} | Recacor`
+    : seo?.angle_title
+      ? `${seo.angle_title} | Recacor Le Crès`
+      : `Pneus ${v.nom} — Recacor Le Crès (${distance})`;
   const description =
     seo?.description ||
     `Pneus à ${v.nom} dès 45€ montés. Recacor Le Crès à ${distance} : stock immédiat, montage sans RDV et contrôle parallélisme offert.`;
