@@ -88,7 +88,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
     ],
     cityLinks: [
-      { href: "/montpellier", label: "Pneus Montpellier" },
+      { href: "/", label: "Pneus Montpellier" },
       { href: "/lattes", label: "Pneus Lattes" },
       { href: "/mauguio", label: "Pneus Mauguio" },
       { href: "/castelnau-le-lez", label: "Pneus Castelnau-le-Lez" },
@@ -170,7 +170,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       { href: "/mecanique#vidange", label: "Voir le service vidange" },
     ],
     cityLinks: [
-      { href: "/montpellier", label: "Pneus Montpellier" },
+      { href: "/", label: "Pneus Montpellier" },
       { href: "/jacou", label: "Pneus Jacou" },
       { href: "/vendargues", label: "Pneus Vendargues" },
       { href: "/lunel", label: "Pneus Lunel" },
@@ -252,7 +252,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       { href: "/mecanique#vidange", label: "Voir la vidange" },
     ],
     cityLinks: [
-      { href: "/montpellier", label: "Pneus Montpellier" },
+      { href: "/", label: "Pneus Montpellier" },
       { href: "/perols", label: "Pneus Perols" },
       { href: "/palavas-les-flots", label: "Pneus Palavas-les-Flots" },
       { href: "/saint-jean-de-vedas", label: "Pneus Saint-Jean-de-Vedas" },
@@ -334,7 +334,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       { href: "/mecanique#vidange", label: "Voir l'entretien courant" },
     ],
     cityLinks: [
-      { href: "/montpellier", label: "Pneus Montpellier" },
+      { href: "/", label: "Pneus Montpellier" },
       { href: "/mauguio", label: "Pneus Mauguio" },
       { href: "/juvignac", label: "Pneus Juvignac" },
       { href: "/vendargues", label: "Pneus Vendargues" },
@@ -419,7 +419,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
     ],
     cityLinks: [
-      { href: "/montpellier", label: "Pneus Montpellier" },
+      { href: "/", label: "Pneus Montpellier" },
       { href: "/castelnau-le-lez", label: "Pneus Castelnau-le-Lez" },
       { href: "/mauguio", label: "Pneus Mauguio" },
       { href: "/jacou", label: "Pneus Jacou" },
@@ -502,7 +502,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
     ],
     cityLinks: [
-      { href: "/montpellier", label: "Pneus Montpellier" },
+      { href: "/", label: "Pneus Montpellier" },
       { href: "/lattes", label: "Pneus Lattes" },
       { href: "/castelnau-le-lez", label: "Pneus Castelnau-le-Lez" },
       { href: "/vendargues", label: "Pneus Vendargues" },
@@ -585,7 +585,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
     ],
     cityLinks: [
-      { href: "/montpellier", label: "Pneus Montpellier" },
+      { href: "/", label: "Pneus Montpellier" },
       { href: "/castelnau-le-lez", label: "Pneus Castelnau-le-Lez" },
       { href: "/mauguio", label: "Pneus Mauguio" },
       { href: "/saint-jean-de-vedas", label: "Pneus Saint-Jean-de-Vedas" },
@@ -668,7 +668,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
     ],
     cityLinks: [
-      { href: "/montpellier", label: "Pneus Montpellier" },
+      { href: "/", label: "Pneus Montpellier" },
       { href: "/castelnau-le-lez", label: "Pneus Castelnau-le-Lez" },
       { href: "/jacou", label: "Pneus Jacou" },
       { href: "/vendargues", label: "Pneus Vendargues" },
@@ -751,7 +751,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
     ],
     cityLinks: [
-      { href: "/montpellier", label: "Pneus Montpellier" },
+      { href: "/", label: "Pneus Montpellier" },
       { href: "/mauguio", label: "Pneus Mauguio" },
       { href: "/perols", label: "Pneus Perols" },
       { href: "/saint-jean-de-vedas", label: "Pneus Saint-Jean-de-Vedas" },
@@ -834,7 +834,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
     ],
     cityLinks: [
-      { href: "/montpellier", label: "Pneus Montpellier" },
+      { href: "/", label: "Pneus Montpellier" },
       { href: "/lunel", label: "Pneus Lunel" },
       { href: "/vendargues", label: "Pneus Vendargues" },
       { href: "/mauguio", label: "Pneus Mauguio" },
@@ -917,7 +917,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
     ],
     cityLinks: [
-      { href: "/montpellier", label: "Pneus Montpellier" },
+      { href: "/", label: "Pneus Montpellier" },
       { href: "/castelnau-le-lez", label: "Pneus Castelnau-le-Lez" },
       { href: "/mauguio", label: "Pneus Mauguio" },
       { href: "/perols", label: "Pneus Perols" },
@@ -1000,7 +1000,7 @@ const BRAND_PAGES: VehicleBrandPageData[] = [
       { href: "/mecanique#vidange", label: "Voir la vidange voiture" },
     ],
     cityLinks: [
-      { href: "/montpellier", label: "Pneus Montpellier" },
+      { href: "/", label: "Pneus Montpellier" },
       { href: "/lattes", label: "Pneus Lattes" },
       { href: "/mauguio", label: "Pneus Mauguio" },
       { href: "/lunel", label: "Pneus Lunel" },

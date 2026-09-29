@@ -334,6 +334,9 @@ function ServicesSection() {
             <Link href="/mecanique" className="text-blue-700 hover:underline">
               Voir tout l&apos;atelier mécanique
             </Link>
+            <Link href="/le-cres" className="text-blue-700 hover:underline">
+              Garage auto au Crès
+            </Link>
           </div>
         </div>
         </div>

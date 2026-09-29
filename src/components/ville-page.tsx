@@ -140,6 +140,18 @@ function ContenuBlock({ contenu, ville, imageUrl }: { contenu?: ContenuItem[]; v
                 )
               )}
             </div>
+            {ville !== "Le Crès" ? (
+              <div className="mt-8 flex flex-wrap gap-3 text-sm font-bold">
+                <Link href="/le-cres" className="text-purple-bright hover:underline">
+                  Garage auto au Crès
+                </Link>
+                {ville === "Montpellier" ? (
+                  <Link href="/" className="text-purple-bright hover:underline">
+                    Pneus Montpellier au garage du Crès
+                  </Link>
+                ) : null}
+              </div>
+            ) : null}
           </div>
           <div className="lg:sticky lg:top-24">
             <img
