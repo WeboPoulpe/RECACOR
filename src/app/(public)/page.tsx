@@ -328,7 +328,7 @@ function ServicesSection() {
             <Link href="/mecanique#parallelisme" className="text-blue-700 hover:underline">
               Parallélisme et géométrie
             </Link>
-            <Link href="/services/recreusage" className="text-blue-700 hover:underline">
+            <Link href="/pneus-utilitaires-pl#recreusage" className="text-blue-700 hover:underline">
               Recreusage poids lourd
             </Link>
             <Link href="/mecanique" className="text-blue-700 hover:underline">
@@ -728,7 +728,7 @@ function VillesSeoSection() {
     { label: "Parallélisme Montpellier", href: "/mecanique#parallelisme" },
     { label: "Contrôle technique", href: "/services/prise-en-charge-controle-technique" },
     { label: "Pneus poids lourd", href: "/pneus-utilitaires-pl" },
-    { label: "Recreusage", href: "/services/recreusage" },
+    { label: "Recreusage", href: "/pneus-utilitaires-pl#recreusage" },
     { label: "Nos centres", href: "/nos-centres" },
   ];
 

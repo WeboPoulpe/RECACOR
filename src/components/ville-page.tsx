@@ -186,7 +186,7 @@ function ServicesBlock({ ville }: { ville: Ville }) {
               Controle technique
             </Link>
             {localCityPage ? (
-              <Link href="/services/recreusage" className="text-purple-bright hover:underline">
+              <Link href="/pneus-utilitaires-pl#recreusage" className="text-purple-bright hover:underline">
                 Recreusage poids lourd
               </Link>
             ) : null}

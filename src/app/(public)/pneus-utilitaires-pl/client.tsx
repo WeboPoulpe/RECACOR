@@ -119,6 +119,9 @@ const faqs = [
   { q: "Quelle zone couvrez-vous pour l'assistance pneus PL ?", a: "Tout l'Hérault (34) et les départements limitrophes. Intervention 24h/24 et 7j/7 sur crevaison et remplacement pneu. L'assistance pneus ne couvre pas la mécanique générale — pour une panne moteur, un dépanneur classique est nécessaire." },
   { q: "Proposez-vous des contrats de gestion de flotte ?", a: "Oui, avec un suivi adapté selon la taille du parc : interlocuteur dédié, tarifs négociés, priorité atelier. Contactez-nous pour cadrer le périmètre selon vos besoins et votre volume." },
   { q: "Quel est le délai pour un recreusage poids lourd ?", a: "Sous 24 à 48h en moyenne selon la charge atelier. Seules les enveloppes conformes au cadre réglementaire sont acceptées — un pneu recreusé hors norme constitue une non-conformité au contrôle technique. Les flottes sous contrat bénéficient d'une priorité de traitement." },
+  { q: "Tous les pneus poids lourd peuvent-ils être recreusés ?", a: "Non. Seuls les pneus prévus pour cette opération, avec le marquage REGROOVABLE et un état compatible, peuvent être recreusés. L'atelier vérifie la carcasse, l'usure, les réparations éventuelles et la profondeur restante avant de valider l'intervention." },
+  { q: "Le recreusage est-il sûr ?", a: "Oui, s'il est fait sur un pneu prévu pour et selon les recommandations du fabricant. Il ne se décide jamais automatiquement : un pneu non conforme ou trop abîmé est refusé." },
+  { q: "Combien coûte un recreusage ?", a: "Le prix dépend de la dimension, du type de pneu et du nombre de pneus à traiter. Envoyez les dimensions et les quantités pour recevoir un devis adapté à votre flotte." },
   { q: "Pourquoi surveiller la pression d'un pneu PL régulièrement ?", a: "Un sous-gonflage, même léger, augmente la chaleur interne, accélère l'usure et allonge la distance de freinage. Sur un parc qui roule beaucoup, un contrôle mensuel à froid est l'un des leviers les plus simples pour allonger la durée de vie des enveloppes et réduire le coût d'exploitation." },
   { q: "Recacor accompagne-t-il aussi le TP, l'agricole et les parcs industriels ?", a: "Oui. Au-delà du transport routier, Recacor accompagne les bennes, engins de chantier, parcs agricoles et environnements industriels — avec une recommandation adaptée à l'usage, la charge et le rythme d'exploitation." },
   { q: "Que faire après un choc important ou une crevaison sévère ?", a: "Faire contrôler le pneu par un professionnel avant toute remise en service. Certains dommages restent internes et ne sont pas visibles à l'œil nu — une enveloppe fragilisée peut provoquer un éclatement ultérieur dans des conditions normales d'usage." },
@@ -511,21 +514,95 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
         </div>
       </section>
 
-      <section className="bg-muted py-16">
+      {/* Recreusage — consolidé depuis /services/recreusage le 2026-09-29 */}
+      <section id="recreusage" className="bg-muted py-24 scroll-mt-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="rounded-[4px] border border-border bg-white p-8 sm:p-10">
             <div className="max-w-3xl">
               <div className="inline-flex items-center gap-2 text-sm font-bold text-purple-bright">
-                <Leaf className="h-4 w-4" /> Pneus poids lourd
+                <Leaf className="h-4 w-4" /> Recreusage
               </div>
-              <h2 className="mt-3 text-3xl font-black tracking-tight sm:text-4xl">Recreusage de pneus poids lourd</h2>
-              <p className="mt-4 leading-relaxed text-muted-foreground">
-                Certaines enveloppes adaptées peuvent être recreusées. L&apos;atelier contrôle d&apos;abord leur état,
-                puis indique si cette solution convient à votre flotte.
+              <h2 className="mt-3 text-3xl font-black tracking-tight sm:text-4xl">
+                Recreusage de pneus <span className="text-gradient-purple">poids lourd au Crès</span>
+              </h2>
+              <p className="mt-4 text-lg font-semibold text-foreground">
+                Contrôle de la carcasse, recreusage en atelier et devis flotte.
               </p>
-              <Link href="/services/recreusage" className="mt-6 inline-flex items-center gap-2 font-bold text-purple-bright hover:underline">
-                Voir le service recreusage <ArrowRight className="h-4 w-4" />
-              </Link>
+              <div className="mt-4 space-y-4 leading-relaxed text-muted-foreground">
+                <p>
+                  Le recreusage consiste à retirer une fine couche de gomme au fond des sculptures prévues
+                  par le fabricant. Le dessin retrouve de la profondeur sans toucher à la carcasse, et le pneu
+                  roule plus longtemps avant son remplacement ou son rechapage.
+                </p>
+                <p>
+                  Il concerne surtout les pneus de transport régional, de longue distance et de remorque,
+                  ainsi que certains usages chantier. La décision se prend pneu par pneu : dimension, marque,
+                  position sur le véhicule et état réel. Pour plusieurs véhicules, envoyez les dimensions et
+                  les quantités, l&apos;équipe revient vers vous avec un devis.
+                </p>
+              </div>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {["Pneu marqué REGROOVABLE", "Carcasse encore saine", "Usure lue assez tôt", "Pression et charge suivies"].map((item) => (
+                  <span key={item} className="rounded-[4px] border border-border bg-muted/30 px-3 py-1.5 text-sm font-semibold text-foreground">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="rounded-[4px] border border-border p-7">
+                <h3 className="text-lg font-black mb-3">Contrôle avant intervention</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Tous les pneus ne sont pas recreusables. L&apos;atelier vérifie le marquage REGROOVABLE,
+                  l&apos;état de la carcasse, l&apos;usure, les réparations éventuelles et la profondeur restante.
+                  Un pneu endommagé ou non prévu par le fabricant est refusé.
+                </p>
+              </div>
+              <div className="rounded-[4px] border border-border p-7">
+                <h3 className="text-lg font-black mb-3">Coupe adaptée au pneu</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  La largeur et la profondeur de coupe suivent les recommandations du fabricant. On ne creuse
+                  pas au maximum : il faut garder assez de gomme au-dessus des nappes de la carcasse.
+                </p>
+              </div>
+              <div className="rounded-[4px] border border-border p-7">
+                <h3 className="text-lg font-black mb-3">Au bon moment</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Le bon moment dépend de l&apos;essieu, du kilométrage, de l&apos;usage et de la route. Avec un
+                  suivi régulier, le recreusage se prévoit avant que la sculpture restante soit trop faible.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-10">
+              <div>
+                <h3 className="text-xl font-black tracking-tight mb-3">Ce qui fait perdre une carcasse</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Une pression instable fait chauffer le pneu et accélère l&apos;usure. La surcharge, un usage
+                  chantier sévère ou une permutation trop tardive fatiguent la carcasse. Après une crevaison,
+                  un choc ou une bordure, certains dégâts restent internes : un contrôle rapide évite de rouler
+                  trop longtemps sur une enveloppe déjà fragilisée et de perdre la possibilité de la recreuser.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-xl font-black tracking-tight mb-3">Recreusage ou rechapage</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Le recreusage prolonge la bande de roulement d&apos;origine en approfondissant les rainures
+                  prévues par le fabricant. Le rechapage vient plus tard : la bande usée est remplacée sur une
+                  carcasse contrôlée. Sur une flotte, on peut enchaîner pneu neuf, recreusage puis rechapage
+                  pour utiliser la carcasse sur plusieurs cycles.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-8 flex flex-col sm:flex-row gap-3 max-w-xl">
+              <PhoneLink location="cta" serviceType="pl" className="flex-1 recacor-btn-primary whitespace-nowrap" showIcon>
+                Appeler : {PHONE_DISPLAY}
+              </PhoneLink>
+              <a href="#devis" className="flex-1 recacor-btn-secondary whitespace-nowrap">
+                Devis recreusage <ArrowRight className="h-4 w-4" />
+              </a>
             </div>
           </div>
           <div className="mt-6 rounded-[4px] border border-border bg-white p-5">

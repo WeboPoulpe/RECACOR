@@ -231,7 +231,7 @@ export function MecaniqueClient({ heroImage }: { heroImage?: string }) {
                 prise en charge contrôle technique
               </Link>
               . Si vous gérez aussi un utilitaire ou un poids lourd, le{" "}
-              <Link href="/services/recreusage" className="font-bold text-purple-bright hover:underline">
+              <Link href="/pneus-utilitaires-pl#recreusage" className="font-bold text-purple-bright hover:underline">
                 recreusage Recacor
               </Link>{" "}
               renvoie vers la partie atelier dédiée.
@@ -246,7 +246,7 @@ export function MecaniqueClient({ heroImage }: { heroImage?: string }) {
               <Link href="/services/prise-en-charge-controle-technique" className="text-purple-bright hover:underline">
                 Voir l&apos;offre contrôle technique
               </Link>
-              <Link href="/services/recreusage" className="text-purple-bright hover:underline">
+              <Link href="/pneus-utilitaires-pl#recreusage" className="text-purple-bright hover:underline">
                 Voir le recreusage poids lourd
               </Link>
             </div>

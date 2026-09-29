@@ -25,7 +25,7 @@ Pour préparer la demande, indiquez la dimension du pneu, le type de véhicule, 
 
 ## Le recreusage : prolonger l'usage d'un pneu adapté
 
-Le [recreusage](/services/recreusage) consiste à refaire une sculpture sur un pneumatique prévu pour cette opération. Il ne s'applique pas à tous les pneus : leur état et les caractéristiques prévues par le fabricant doivent être vérifiés avant toute intervention.
+Le [recreusage](/pneus-utilitaires-pl#recreusage) consiste à refaire une sculpture sur un pneumatique prévu pour cette opération. Il ne s'applique pas à tous les pneus : leur état et les caractéristiques prévues par le fabricant doivent être vérifiés avant toute intervention.
 
 Cette solution peut compléter une gestion attentive des pneumatiques d'une flotte. Elle doit être étudiée au cas par cas avec un professionnel.
 

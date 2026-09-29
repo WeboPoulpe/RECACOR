@@ -163,7 +163,7 @@ export function NosCentresClient({ heroImage }: { heroImage?: string }) {
               <Link href="/mecanique#parallelisme" className="text-purple-bright hover:underline">
                 Parallélisme et géométrie
               </Link>
-              <Link href="/services/recreusage" className="text-purple-bright hover:underline">
+              <Link href="/pneus-utilitaires-pl#recreusage" className="text-purple-bright hover:underline">
                 Recreusage poids lourd
               </Link>
               <Link href="/mecanique" className="text-purple-bright hover:underline">

@@ -252,7 +252,7 @@ export function DepannageRoClient() {
                 următoarea trecere prin atelier. Recanelarea se decide
                 întotdeauna în atelier, niciodată pe marginea autostrăzii.
               </p>
-              <Link href="/services/recreusage" className="mt-4 inline-flex text-sm font-bold text-purple-bright hover:underline">
+              <Link href="/pneus-utilitaires-pl#recreusage" className="mt-4 inline-flex text-sm font-bold text-purple-bright hover:underline">
                 Vezi serviciul de recanelare
               </Link>
             </div>
@@ -260,7 +260,7 @@ export function DepannageRoClient() {
 
           <div className="mt-10 flex flex-wrap gap-3 text-sm font-bold">
             <Link href="/pneus-utilitaires-pl" className="text-purple-bright hover:underline">Cauciucuri camion</Link>
-            <Link href="/services/recreusage" className="text-purple-bright hover:underline">Recanelare</Link>
+            <Link href="/pneus-utilitaires-pl#recreusage" className="text-purple-bright hover:underline">Recanelare</Link>
             <Link href="/depannage-poids-lourd-urgence" className="text-purple-bright hover:underline">Page en français</Link>
             <Link href="/contact" className="text-purple-bright hover:underline">Contact Recacor</Link>
           </div>

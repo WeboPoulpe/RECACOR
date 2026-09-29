@@ -32,7 +32,7 @@
 ### Poids lourd / PL
 
 - [Pneus utilitaires et poids lourd](https://www.recacor.fr/pneus-utilitaires-pl) : page mere PL publique actuelle. Vente pneus PL, recreusage et assistance pneus.
-- [Recreusage pneus poids lourd](https://www.recacor.fr/services/recreusage) : service detaille sur le recreusage.
+- [Recreusage pneus poids lourd](https://www.recacor.fr/pneus-utilitaires-pl#recreusage) : section recreusage de la page PL (controle carcasse, REGROOVABLE, rechapage).
 
 ### Informations institutionnelles
 

@@ -25,7 +25,7 @@ const servicesLinks = [
   { name: "Contrôle atelier 40 points", href: "/services/controle-atelier-40-points" },
   { name: "Réparation crevaison", href: "/services/reparation-crevaison" },
   { name: "Contrôle technique", href: "/services/prise-en-charge-controle-technique" },
-  { name: "Recreusage", href: "/services/recreusage" },
+  { name: "Recreusage", href: "/pneus-utilitaires-pl#recreusage" },
   { name: "Dépannage PL sur route", href: "/depannage-poids-lourd-urgence" },
 ];
 
@@ -325,7 +325,7 @@ export async function Footer() {
                 {[
                   { label: "Vidange au Crès", href: "/mecanique#vidange" },
                   { label: "Parallélisme au Crès", href: "/mecanique#parallelisme" },
-                  { label: "Recreusage poids lourd", href: "/services/recreusage" },
+                  { label: "Recreusage poids lourd", href: "/pneus-utilitaires-pl#recreusage" },
                   { label: "Garage auto Le Crès", href: "/le-cres" },
                   { label: "Atelier mécanique", href: "/mecanique" },
                   { label: "Pneus Lunel", href: "/lunel" },

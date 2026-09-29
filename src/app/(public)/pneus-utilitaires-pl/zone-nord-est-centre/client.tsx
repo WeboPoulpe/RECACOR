@@ -232,8 +232,8 @@ export function PlZoneNordEstCentreClient({ heroImage }: { heroImage?: string })
                 <Link href="/pneus-utilitaires-pl" className="block text-purple-bright hover:underline">
                   Revenir au hub pneus PL
                 </Link>
-                <Link href="/services/recreusage" className="block text-purple-bright hover:underline">
-                  Voir le service recreusage
+                <Link href="/pneus-utilitaires-pl#recreusage" className="block text-purple-bright hover:underline">
+                  Voir le recreusage poids lourd
                 </Link>
                 <Link href="/blog/pneus-nimes" className="block text-purple-bright hover:underline">
                   Lire l&apos;article pneus poids lourd Nîmes

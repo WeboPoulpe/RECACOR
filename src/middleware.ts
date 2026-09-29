@@ -26,6 +26,8 @@ const PATH_REDIRECTS: Record<string, { pathname: string; hash?: string }> = {
   "/blog/parallelisme-montpellier": { pathname: "/mecanique", hash: "parallelisme" },
   "/services/vidange": { pathname: "/mecanique", hash: "vidange" },
   "/services/parallelisme-geometrie": { pathname: "/mecanique", hash: "parallelisme" },
+  // Recreusage consolidé le 2026-09-29 dans la section ancrée de la page PL (page non indexée depuis le 17/09).
+  "/services/recreusage": { pathname: "/pneus-utilitaires-pl", hash: "recreusage" },
   // Article crevaison remplacé le 2026-09-26 par la page service dédiée.
   "/blog/pneu-creve-montpellier": { pathname: "/services/reparation-crevaison" },
   "/services/climatisation-auto-montpellier": { pathname: "/mecanique" },

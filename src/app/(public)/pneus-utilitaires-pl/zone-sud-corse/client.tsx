@@ -291,7 +291,7 @@ export function PlZoneSudCorseClient({ heroImage }: { heroImage?: string }) {
                   <span>Pneus poids lourd à Sète</span>
                   <ArrowRight className="h-4 w-4" />
                 </Link>
-                <Link href="/services/recreusage" className="flex items-center justify-between rounded-2xl border border-white/15 bg-white/10 px-5 py-4 text-sm font-bold hover:bg-white/15">
+                <Link href="/pneus-utilitaires-pl#recreusage" className="flex items-center justify-between rounded-2xl border border-white/15 bg-white/10 px-5 py-4 text-sm font-bold hover:bg-white/15">
                   <span>Recreusage poids lourd</span>
                   <ArrowRight className="h-4 w-4" />
                 </Link>

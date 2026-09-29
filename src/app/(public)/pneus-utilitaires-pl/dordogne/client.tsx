@@ -157,8 +157,8 @@ export function PneusDordogneClient() {
                 fait en atelier avant toute décision, pour ne recreuser que ce qui est
                 réellement en état.
               </p>
-              <Link href="/services/recreusage" className="mt-4 inline-flex text-sm font-bold text-purple-bright hover:underline">
-                Voir le service recreusage
+              <Link href="/pneus-utilitaires-pl#recreusage" className="mt-4 inline-flex text-sm font-bold text-purple-bright hover:underline">
+                Voir le recreusage poids lourd
               </Link>
             </div>
           </div>

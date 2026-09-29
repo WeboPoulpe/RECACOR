@@ -250,15 +250,15 @@ export function DepannageClient() {
                 l&apos;atelier. Le recreusage se décide toujours en atelier, jamais sur
                 le bord de l&apos;autoroute.
               </p>
-              <Link href="/services/recreusage" className="mt-4 inline-flex text-sm font-bold text-purple-bright hover:underline">
-                Voir le service recreusage
+              <Link href="/pneus-utilitaires-pl#recreusage" className="mt-4 inline-flex text-sm font-bold text-purple-bright hover:underline">
+                Voir le recreusage poids lourd
               </Link>
             </div>
           </div>
 
           <div className="mt-10 flex flex-wrap gap-3 text-sm font-bold">
             <Link href="/pneus-utilitaires-pl" className="text-purple-bright hover:underline">Pneus poids lourd</Link>
-            <Link href="/services/recreusage" className="text-purple-bright hover:underline">Recreusage</Link>
+            <Link href="/pneus-utilitaires-pl#recreusage" className="text-purple-bright hover:underline">Recreusage</Link>
             <Link href="/ro/depannage-poids-lourd-urgence" className="text-purple-bright hover:underline">Pagină în română</Link>
             <Link href="/contact" className="text-purple-bright hover:underline">Contacter Recacor</Link>
           </div>
