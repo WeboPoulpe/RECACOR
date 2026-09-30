@@ -2,6 +2,8 @@
 
 interface SendOptions {
   to: string;
+  cc?: string[];
+  idempotencyKey?: string;
   subject: string;
   html: string;
   text?: string;
@@ -35,6 +37,8 @@ async function sendViaBrevo(opts: SendOptions): Promise<{ ok: boolean; provider:
       body: JSON.stringify({
         sender: { name: senderName, email: senderEmail },
         to: [{ email: opts.to }],
+        ...(opts.cc?.length ? { cc: opts.cc.map((email) => ({ email })) } : {}),
+        ...(opts.idempotencyKey ? { headers: { "Idempotency-Key": opts.idempotencyKey } } : {}),
         subject: opts.subject,
         htmlContent: opts.html,
         textContent: opts.text,
@@ -69,6 +73,7 @@ async function sendViaResend(opts: SendOptions): Promise<{ ok: boolean; provider
       body: JSON.stringify({
         from: process.env.RESEND_FROM || "Recacor <onboarding@resend.dev>",
         to: opts.to,
+        ...(opts.cc?.length ? { cc: opts.cc } : {}),
         subject: opts.subject,
         html: opts.html,
         text: opts.text,

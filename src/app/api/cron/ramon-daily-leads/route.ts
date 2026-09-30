@@ -82,26 +82,29 @@ export async function GET(req: Request) {
     return NextResponse.json({ ok: false, error: "RAMON_DAILY_LEADS_TO manquant" }, { status: 500 });
   }
 
-  const text = buildDailyLeadsEmailText(digest, options);
-  const deliveries = [];
-  for (const email of [...recipients, ...ccRecipients]) {
-    const result = await sendEmail({
-      to: email,
-      subject,
-      html,
-      text,
-      replyTo: process.env.RAMON_REPORT_REPLY_TO || "marketing@recacor.fr",
-    });
-    deliveries.push({ email, ...result });
+  if (recipients.length !== 1) {
+    return NextResponse.json({ ok: false, error: "Un seul destinataire principal est attendu" }, { status: 500 });
   }
 
-  const failed = deliveries.filter((item) => !item.ok);
+  const text = buildDailyLeadsEmailText(digest, options);
+  // Brevo dédoublonne une livraison répétée dans les 15 minutes avec cette clé.
+  const idempotencyKey = `ramon-leads-${parisDate(new Date())}`;
+  const result = await sendEmail({
+    to: recipients[0],
+    cc: ccRecipients,
+    idempotencyKey,
+    subject,
+    html,
+    text,
+    replyTo: process.env.RAMON_REPORT_REPLY_TO || "marketing@recacor.fr",
+  });
+
   return NextResponse.json({
-    ok: failed.length === 0,
-    sent: deliveries.length - failed.length,
-    failed: failed.length,
+    ok: result.ok,
+    sent: result.ok ? 1 + ccRecipients.length : 0,
+    failed: result.ok ? 0 : 1,
     window: digest.window,
-    deliveries,
+    delivery: { to: recipients[0], cc: ccRecipients, ...result },
   });
 }
 
