@@ -315,6 +315,21 @@ function getConsentPayload(status: ConsentStatus) {
   };
 }
 
+function trackClarityCookieEvent(eventName: ConsentEventName) {
+  if (typeof window === "undefined") return;
+  let attempts = 0;
+  const send = () => {
+    if (typeof window.clarity !== "function") return false;
+    window.clarity("event", eventName);
+    return true;
+  };
+  if (send()) return;
+  const timer = window.setInterval(() => {
+    attempts += 1;
+    if (send() || attempts >= 10) window.clearInterval(timer);
+  }, 500);
+}
+
 async function logConsentEvent(
   eventName: ConsentEventName,
   status: ConsentStatus,
@@ -329,6 +344,10 @@ async function logConsentEvent(
 
   pushDataLayerEvent(eventName, payload);
 
+  // Clarity reçoit aussi les impressions et refus, nécessaires au calcul du taux.
+  // L'acceptation est envoyée après le signal de consentement dans syncClarityConsent.
+  if (eventName !== "cookie_accept") trackClarityCookieEvent(eventName);
+
   if (eventName === "cookie_accept") {
     pushDataLayerEvent("consent_update", payload);
     await dispatchGtagEvent(eventName, payload);
@@ -340,7 +359,7 @@ async function logConsentEvent(
   // GA4 et Clarity sans réveiller Neon à chaque visite publique.
 }
 
-function syncClarityConsent(status: ConsentStatus) {
+function syncClarityConsent(status: ConsentStatus, recordNewAcceptance = false) {
   if (typeof window === "undefined") return;
 
   let attempts = 0;
@@ -351,7 +370,7 @@ function syncClarityConsent(status: ConsentStatus) {
 
     if (status === "granted") {
       window.clarity("consent");
-      window.clarity("event", "cookie_accept");
+      if (recordNewAcceptance) window.clarity("event", "cookie_accept");
     } else {
       window.clarity("consent", false);
     }
@@ -380,7 +399,7 @@ export function grantConsent(variant?: CookieBannerVariant) {
   if (typeof window === "undefined") return;
   document.cookie = "cookie_consent=granted; max-age=33696000; path=/; SameSite=Lax";
   updateConsent("granted");
-  syncClarityConsent("granted");
+  syncClarityConsent("granted", true);
   void logConsentEvent("cookie_accept", "granted", variant ? { banner_variant: variant } : {});
 }
 
