@@ -20,6 +20,7 @@ export function CookieBanner() {
   const [variant] = useState<CookieBannerVariant>(() => getOrCreateCookieBannerVariant());
   const impressionTrackedRef = useRef(false);
   const previewRef = useRef(false);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (process.env.NODE_ENV === "development" && new URLSearchParams(window.location.search).has("cookiePreview")) {
@@ -33,13 +34,13 @@ export function CookieBanner() {
       syncStoredConsentIntegrations();
     }
 
-    if (!consent) {
-      const t = setTimeout(() => setVisible(true), 900);
-      return () => clearTimeout(t);
-    }
+    const timer = !consent ? window.setTimeout(() => setVisible(true), 900) : null;
     const handler = () => setVisible(true);
     window.addEventListener("recacor:cookie", handler);
-    return () => window.removeEventListener("recacor:cookie", handler);
+    return () => {
+      if (timer !== null) window.clearTimeout(timer);
+      window.removeEventListener("recacor:cookie", handler);
+    };
   }, []);
 
   useEffect(() => {
@@ -48,8 +49,16 @@ export function CookieBanner() {
     impressionTrackedRef.current = true;
   }, [variant, visible]);
 
+  useEffect(() => {
+    if (visible && (document.activeElement === document.body || document.activeElement === document.documentElement)) {
+      dialogRef.current?.focus({ preventScroll: true });
+    }
+  }, [visible]);
+
   const closeBanner = () => {
     setVisible(false);
+    setDetails(false);
+    impressionTrackedRef.current = false;
     if (typeof window !== "undefined") {
       window.dispatchEvent(new Event("recacor:cookie:closed"));
     }
@@ -65,6 +74,8 @@ export function CookieBanner() {
         {/* Voile décoratif : il laisse passer les clics pour qu'un visiteur puisse appeler sans choisir d'abord. */}
         <div className="recacor-fade-in pointer-events-none fixed inset-0 z-[109] bg-black/45" aria-hidden="true" />
         <div
+          ref={dialogRef}
+          tabIndex={-1}
           className={`recacor-cookie-pop ${isCentered ? "recacor-cookie-pop--center" : "recacor-cookie-pop--bottom"}`}
           role="dialog"
           aria-modal="false"
