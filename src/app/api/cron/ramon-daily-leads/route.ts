@@ -56,16 +56,15 @@ export async function GET(req: Request) {
 
   const preview = url.searchParams.get("preview") === "1";
   const force = url.searchParams.get("force") === "1";
-  const testToRedouane = url.searchParams.get("test") === "redouane-20260930";
 
   // Envoi lundi et jeudi. Deux crons (5 h 30 et 6 h 30 UTC) : seul celui qui tombe à 7 h à Paris envoie, été comme hiver.
   const clock = parisClock(new Date());
-  if (!preview && !force && !testToRedouane && (clock.hour !== 7 || !["Mon", "Thu"].includes(clock.weekday))) {
+  if (!preview && !force && (clock.hour !== 7 || !["Mon", "Thu"].includes(clock.weekday))) {
     return NextResponse.json({ ok: true, skipped: "hors_creneau", paris: clock });
   }
 
   const digest = await fetchLeadsDigest(url.searchParams.get("at") || undefined);
-  const subject = `${testToRedouane ? "[TEST] " : ""}${buildDailyLeadsSubject(digest)}`;
+  const subject = buildDailyLeadsSubject(digest);
   const options = { intro: showIntro() || url.searchParams.get("intro") === "1" };
   const html = buildDailyLeadsEmailHtml(digest, options);
 
@@ -77,8 +76,8 @@ export async function GET(req: Request) {
     return NextResponse.json({ ok: true, skipped: "desactive", subject });
   }
 
-  const recipients = testToRedouane ? ["redouanelmansouri34@gmail.com"] : parseList(process.env.RAMON_DAILY_LEADS_TO || "");
-  const ccRecipients = testToRedouane ? [] : parseList(process.env.RAMON_DAILY_LEADS_CC || "");
+  const recipients = parseList(process.env.RAMON_DAILY_LEADS_TO || "");
+  const ccRecipients = parseList(process.env.RAMON_DAILY_LEADS_CC || "");
   if (!recipients.length) {
     return NextResponse.json({ ok: false, error: "RAMON_DAILY_LEADS_TO manquant" }, { status: 500 });
   }
@@ -89,7 +88,7 @@ export async function GET(req: Request) {
 
   const text = buildDailyLeadsEmailText(digest, options);
   // Brevo dédoublonne une livraison répétée dans les 15 minutes avec cette clé.
-  const idempotencyKey = testToRedouane ? "ramon-leads-test-2026-09-30" : `ramon-leads-${parisDate(new Date())}`;
+  const idempotencyKey = `ramon-leads-${parisDate(new Date())}`;
   const result = await sendEmail({
     to: recipients[0],
     cc: ccRecipients,
