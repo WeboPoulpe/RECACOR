@@ -27,6 +27,7 @@ const servicesLinks = [
   { name: "Contrôle technique", href: "/services/prise-en-charge-controle-technique" },
   { name: "Recreusage", href: "/pneus-utilitaires-pl#recreusage" },
   { name: "Dépannage PL sur route", href: "/depannage-poids-lourd-urgence" },
+  { name: "Garage poids lourd", href: "/garage-poids-lourd" },
 ];
 
 const navLinks = [

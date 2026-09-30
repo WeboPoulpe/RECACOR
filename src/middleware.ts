@@ -67,7 +67,7 @@ export async function middleware(req: NextRequest) {
   if (PL_ALIASES.has(normalizedPath) && normalizedPath !== PL_ALIAS_DESTINATION) {
     const url = req.nextUrl.clone();
     url.pathname = PL_ALIAS_DESTINATION;
-    url.search = "";
+    // La query string est conservée : gclid et UTM doivent survivre à la redirection.
     return NextResponse.redirect(url, { status: 301 });
   }
 
@@ -75,7 +75,6 @@ export async function middleware(req: NextRequest) {
   if (pathRedirectTarget) {
     const url = req.nextUrl.clone();
     url.pathname = pathRedirectTarget.pathname;
-    url.search = "";
     url.hash = pathRedirectTarget.hash ? `#${pathRedirectTarget.hash}` : "";
     return NextResponse.redirect(url, { status: 301 });
   }

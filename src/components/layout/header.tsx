@@ -7,7 +7,7 @@ import { Menu, X, Phone, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AugustVlNoticeHeaderLink } from "@/components/august-vl-notice";
 import { PhoneLink } from "@/components/phone-link";
-import { PHONE_DISPLAY, PHONE_WHATSAPP_PL, PHONE_WHATSAPP_PL_DISPLAY } from "@/lib/tracking";
+import { PHONE_DISPLAY, PHONE_WHATSAPP_PL, PHONE_WHATSAPP_PL_DISPLAY, isFrenchPlCallPage } from "@/lib/tracking";
 import { useAssetUrl } from "@/components/dynamic-media";
 
 const navigation = [
@@ -26,8 +26,8 @@ export function Header() {
   const logoUrl = useAssetUrl("site_logo", "/logo-recacor.webp");
   const scrollThreshold = 132;
   const pathname = usePathname();
-  const isAssistancePL = pathname?.includes("/depannage-poids-lourd-urgence");
-  const isFrenchAssistancePL = pathname === "/depannage-poids-lourd-urgence";
+  const isAssistancePL = pathname?.includes("/depannage-poids-lourd-urgence") || isFrenchPlCallPage(pathname);
+  const isFrenchAssistancePL = isFrenchPlCallPage(pathname);
   const headerPhoneNumber = isFrenchAssistancePL ? PHONE_WHATSAPP_PL : undefined;
   const headerPhoneDisplay = isFrenchAssistancePL ? PHONE_WHATSAPP_PL_DISPLAY : PHONE_DISPLAY;
 

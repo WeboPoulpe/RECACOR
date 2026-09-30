@@ -62,11 +62,12 @@ export function CookieBanner() {
   return (
     visible && (
       <>
-        <div className="recacor-fade-in fixed inset-0 z-[109] bg-black/45" />
+        {/* Voile décoratif : il laisse passer les clics pour qu'un visiteur puisse appeler sans choisir d'abord. */}
+        <div className="recacor-fade-in pointer-events-none fixed inset-0 z-[109] bg-black/45" aria-hidden="true" />
         <div
           className={`recacor-cookie-pop ${isCentered ? "recacor-cookie-pop--center" : "recacor-cookie-pop--bottom"}`}
           role="dialog"
-          aria-modal="true"
+          aria-modal="false"
           aria-labelledby="recacor-cookie-title"
         >
           <div className="recacor-cookie-pop__card">

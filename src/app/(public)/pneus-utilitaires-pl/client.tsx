@@ -9,7 +9,7 @@ import { DevisPlForm } from "@/components/forms/devis-pl";
 import { BgParticles } from "@/components/bg-particles";
 import { AvisSection } from "@/components/avis-section";
 import { BreadcrumbJsonLd, ServiceJsonLd, FaqJsonLd } from "@/components/schema-jsonld";
-import { PHONE_DISPLAY } from "@/lib/tracking";
+import { PHONE_WHATSAPP_PL, PHONE_WHATSAPP_PL_DISPLAY } from "@/lib/tracking";
 
 const activitesCles = [
   "Transporteurs",
@@ -116,7 +116,7 @@ const criteres = [
 ];
 
 const faqs = [
-  { q: "Quelle zone couvrez-vous pour l'assistance pneus PL ?", a: "Tout l'Hérault (34) et les départements limitrophes. Intervention 24h/24 et 7j/7 sur crevaison et remplacement pneu. L'assistance pneus ne couvre pas la mécanique générale — pour une panne moteur, un dépanneur classique est nécessaire." },
+  { q: "Quelle zone couvrez-vous pour l'assistance pneus PL ?", a: "Près des sorties de l'A9, de Perpignan à Avignon, et de l'A75 jusqu'à Millau, avec une dizaine de camions d'intervention équipés de pneus en stock. Intervention 24h/24 et 7j/7 sur crevaison et remplacement pneu. L'assistance pneus ne couvre pas la mécanique générale — pour une panne moteur, un dépanneur classique est nécessaire." },
   { q: "Proposez-vous des contrats de gestion de flotte ?", a: "Oui, avec un suivi adapté selon la taille du parc : interlocuteur dédié, tarifs négociés, priorité atelier. Contactez-nous pour cadrer le périmètre selon vos besoins et votre volume." },
   { q: "Quel est le délai pour un recreusage poids lourd ?", a: "Sous 24 à 48h en moyenne selon la charge atelier. Seules les enveloppes conformes au cadre réglementaire sont acceptées — un pneu recreusé hors norme constitue une non-conformité au contrôle technique. Les flottes sous contrat bénéficient d'une priorité de traitement." },
   { q: "Tous les pneus poids lourd peuvent-ils être recreusés ?", a: "Non. Seuls les pneus prévus pour cette opération, avec le marquage REGROOVABLE et un état compatible, peuvent être recreusés. L'atelier vérifie la carcasse, l'usure, les réparations éventuelles et la profondeur restante avant de valider l'intervention." },
@@ -170,8 +170,8 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
             ))}
           </div>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 max-w-xl">
-            <PhoneLink location="hero" serviceType="pl" className="flex-1 recacor-btn-primary whitespace-nowrap" showIcon>
-              Appeler : {PHONE_DISPLAY}
+            <PhoneLink location="hero" serviceType="pl" phoneNumber={PHONE_WHATSAPP_PL} className="flex-1 recacor-btn-primary whitespace-nowrap" showIcon>
+              Appeler : {PHONE_WHATSAPP_PL_DISPLAY}
             </PhoneLink>
             <a href="#devis" className="flex-1 recacor-btn-secondary">
               Devis professionnel <ArrowRight className="h-4 w-4" />
@@ -207,8 +207,8 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
               <a href="#devis" className="flex-1 recacor-btn-primary whitespace-nowrap">
                 Réserver mes dimensions <ArrowRight className="h-4 w-4" />
               </a>
-              <PhoneLink location="cta" serviceType="pl" className="flex-1 recacor-btn-secondary whitespace-nowrap" showIcon>
-                Appeler : {PHONE_DISPLAY}
+              <PhoneLink location="cta" serviceType="pl" phoneNumber={PHONE_WHATSAPP_PL} className="flex-1 recacor-btn-secondary whitespace-nowrap" showIcon>
+                Appeler : {PHONE_WHATSAPP_PL_DISPLAY}
               </PhoneLink>
             </div>
           </div>
@@ -501,10 +501,15 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
                 Pour un parallélisme, le plus simple est d&apos;appeler avant de venir : le temps
                 d&apos;immobilisation dépend de la configuration du véhicule.
               </p>
+              <p>
+                <Link href="/garage-poids-lourd" className="font-bold text-purple-bright hover:underline">
+                  Tout sur l&apos;atelier poids lourd du Crès
+                </Link>
+              </p>
             </div>
             <div className="mt-6 flex flex-col sm:flex-row gap-3 max-w-xl">
-              <PhoneLink location="cta" serviceType="pl" className="flex-1 recacor-btn-primary whitespace-nowrap" showIcon>
-                Appeler : {PHONE_DISPLAY}
+              <PhoneLink location="cta" serviceType="pl" phoneNumber={PHONE_WHATSAPP_PL} className="flex-1 recacor-btn-primary whitespace-nowrap" showIcon>
+                Appeler : {PHONE_WHATSAPP_PL_DISPLAY}
               </PhoneLink>
               <a href="#devis" className="flex-1 recacor-btn-secondary whitespace-nowrap">
                 Devis pneus PL <ArrowRight className="h-4 w-4" />
@@ -597,8 +602,8 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
             </div>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3 max-w-xl">
-              <PhoneLink location="cta" serviceType="pl" className="flex-1 recacor-btn-primary whitespace-nowrap" showIcon>
-                Appeler : {PHONE_DISPLAY}
+              <PhoneLink location="cta" serviceType="pl" phoneNumber={PHONE_WHATSAPP_PL} className="flex-1 recacor-btn-primary whitespace-nowrap" showIcon>
+                Appeler : {PHONE_WHATSAPP_PL_DISPLAY}
               </PhoneLink>
               <a href="#devis" className="flex-1 recacor-btn-secondary whitespace-nowrap">
                 Devis recreusage <ArrowRight className="h-4 w-4" />
@@ -627,16 +632,16 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
                 <AlertTriangle className="h-3.5 w-3.5" /> 24h/24 · 7j/7
               </div>
               <h2 className="text-3xl sm:text-4xl font-black tracking-tight mb-4">
-                Assistance pneus PL <span className="text-gradient-purple">sur site en Hérault</span>
+                Assistance pneus PL <span className="text-gradient-purple">près de l&apos;A9 et de l&apos;A75</span>
               </h2>
               <p className="text-muted-foreground mb-6">
                 Crevaison, éclatement, remplacement pneu — nos ateliers mobiles interviennent
-                directement sur votre site, sur l&apos;autoroute, en zone industrielle ou en
+                directement sur votre site, sur un parking poids lourds, en zone industrielle ou en
                 exploitation agricole.
               </p>
               <div className="space-y-3">
                 {[
-                  { icon: MapPin, label: "Zone d'intervention", value: "Hérault (34) et départements limitrophes" },
+                  { icon: MapPin, label: "Zone d'intervention", value: "Près des sorties de l'A9 (Perpignan à Avignon) et de l'A75 (jusqu'à Millau)" },
                   { icon: Clock, label: "Réactivité", value: "Prise en charge dès l'appel, 24h/24" },
                   { icon: AlertTriangle, label: "Service", value: "Uniquement interventions pneus (pas de mécanique)" },
                 ].map((item) => (
@@ -652,8 +657,8 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
                 ))}
               </div>
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                <PhoneLink location="cta" serviceType="pl" className="recacor-btn-primary whitespace-nowrap" showIcon>
-                  Assistance urgente : {PHONE_DISPLAY}
+                <PhoneLink location="cta" serviceType="pl" phoneNumber={PHONE_WHATSAPP_PL} className="recacor-btn-primary whitespace-nowrap" showIcon>
+                  Assistance urgente : {PHONE_WHATSAPP_PL_DISPLAY}
                 </PhoneLink>
                 <a
                   href="https://wa.me/33607621043"
@@ -671,14 +676,14 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
               <p className="text-white/60 uppercase tracking-widest text-sm mb-6">Disponibilité assistance PL</p>
               <div className="pt-6 border-t border-white/10">
                 <p className="text-xs text-white/40 uppercase tracking-wider mb-1">Assistance PL 24/7</p>
-                <p className="text-2xl font-black">{PHONE_DISPLAY}</p>
+                <p className="text-2xl font-black">{PHONE_WHATSAPP_PL_DISPLAY}</p>
               </div>
             </div>
           </div>
           <p className="mt-6 text-sm text-muted-foreground">
-            Besoin d&apos;une intervention plus loin, entre Perpignan et Marseille ?{" "}
+            Une dizaine de camions d&apos;intervention près des sorties de l&apos;A9 et de l&apos;A75.{" "}
             <Link href="/depannage-poids-lourd-urgence" className="font-bold text-purple-bright hover:underline">
-              Voir la couverture élargie sur route
+              Voir le dépannage pneu poids lourd
             </Link>
           </p>
         </div>

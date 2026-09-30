@@ -97,7 +97,7 @@ export type ServiceType = "vl" | "pl" | "mecanique" | "contact";
 
 export function inferServiceType(pathname?: string): ServiceType {
   const path = pathname || (typeof window !== "undefined" ? window.location.pathname : "");
-  if (path.includes("pneus-utilitaires-pl") || path.includes("recreusage")) return "pl";
+  if (path.includes("pneus-utilitaires-pl") || path.includes("recreusage") || path.includes("poids-lourd")) return "pl";
   if (path.includes("contact")) return "contact";
   if (
     path.includes("mecanique") ||
@@ -417,5 +417,12 @@ export const PHONE_WHATSAPP_PL = "+33607621043"; // WhatsApp PL France : Patrick
 export const PHONE_WHATSAPP_PL_DISPLAY = "06 07 62 10 43";
 export const PHONE_WHATSAPP_PL_ETRANGER = "+33689504543"; // WhatsApp PL chauffeurs étrangers (page roumaine) : Rubén
 export const PHONE_WHATSAPP_PL_ETRANGER_DISPLAY = "06 89 50 45 43";
+
+// Pages PL françaises où tous les appels vont à la ligne PL (Patrick), jamais au fixe de l'atelier
+// (décision Redouane du 30/09/2026).
+const FRENCH_PL_CALL_PAGES = new Set(["/depannage-poids-lourd-urgence", "/garage-poids-lourd", "/pneus-utilitaires-pl"]);
+export function isFrenchPlCallPage(pathname?: string | null): boolean {
+  return !!pathname && FRENCH_PL_CALL_PAGES.has(pathname);
+}
 export const ADDRESS = "1240 Route de Nîmes, 34920 Le Crès";
 export const BUSINESS_NAME = "Recacor Montpellier — Le Crès";

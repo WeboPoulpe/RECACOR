@@ -4,11 +4,22 @@ import { useEffect, useState } from "react";
 import { Phone, ClipboardList } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PHONE_NUMBER, pushPhoneClick } from "@/lib/tracking";
+import { PHONE_NUMBER, PHONE_WHATSAPP_PL, PHONE_WHATSAPP_PL_ETRANGER, isFrenchPlCallPage, pushPhoneClick } from "@/lib/tracking";
 
 export function StickyCallButton() {
   const [visible, setVisible] = useState(false);
   const pathname = usePathname();
+
+  // Pages PL (trafic Google Ads d'intervention, surtout mobile) : bouton affiché dès l'arrivée.
+  // Le bouton appelle la même ligne que le reste de la page : Patrick sur les pages PL françaises
+  // (jamais le fixe de l'atelier), Rubén sur la page roumaine.
+  const isRomanianPlPage = pathname === "/ro/depannage-poids-lourd-urgence";
+  const isPlPage = isRomanianPlPage || isFrenchPlCallPage(pathname) || pathname.startsWith("/pneus-utilitaires-pl");
+  const phoneNumber = isRomanianPlPage
+    ? PHONE_WHATSAPP_PL_ETRANGER
+    : isFrenchPlCallPage(pathname)
+      ? PHONE_WHATSAPP_PL
+      : PHONE_NUMBER;
 
   const isControleTechniquePage =
     pathname === "/services/prise-en-charge-controle-technique" ||
@@ -21,6 +32,8 @@ export function StickyCallButton() {
     ? "/es/servicios/control-tecnico-recacor#devis"
     : isControleTechniquePage
       ? "/formulaire/controle-technique"
+    : isPlPage
+      ? "#devis"
     : "/formulaire";
   const quoteLabel = isSpanishControlPage
     ? "Presupuesto CT"
@@ -37,19 +50,20 @@ export function StickyCallButton() {
         const rect = form.getBoundingClientRect();
         return rect.top < viewportHeight && rect.bottom > 0;
       });
-      setVisible(window.scrollY > 600 && !formOnScreen);
+      setVisible((isPlPage || window.scrollY > 600) && !formOnScreen);
     };
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isPlPage]);
 
   return (
     visible && (
         <div className="recacor-sticky-in lg:hidden fixed bottom-4 left-4 right-4 z-[100] flex gap-3">
           <a
             id="sticky-call-btn"
-            href={`tel:${PHONE_NUMBER}`}
-            onClick={() => pushPhoneClick("sticky")}
+            href={`tel:${phoneNumber}`}
+            onClick={() => pushPhoneClick("sticky", isPlPage ? "pl" : undefined)}
             className="phone-link flex-1 flex items-center justify-center gap-2 rounded-[4px] bg-[var(--recacor-night)] text-white font-black uppercase py-4 shadow-[0_8px_30px_rgba(7,27,51,0.24)]"
           >
             <Phone className="h-5 w-5" />

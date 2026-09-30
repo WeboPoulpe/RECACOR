@@ -31,12 +31,15 @@ export function ServiceJsonLd({
   price,
   url,
   serviceType,
+  areaServed,
 }: {
   name: string;
   description: string;
   price?: string;
   url?: string;
   serviceType?: string;
+  /** Zone desservie (noms de villes) ; par défaut Le Crès, Montpellier et l'Hérault. */
+  areaServed?: string[];
 }) {
   const data = {
     "@context": "https://schema.org",
@@ -59,11 +62,13 @@ export function ServiceJsonLd({
         addressCountry: "FR",
       },
     },
-    areaServed: [
-      { "@type": "City", name: "Le Cres" },
-      { "@type": "City", name: "Montpellier" },
-      { "@type": "AdministrativeArea", name: "Herault" },
-    ],
+    areaServed: areaServed
+      ? areaServed.map((ville) => ({ "@type": "City", name: ville }))
+      : [
+          { "@type": "City", name: "Le Cres" },
+          { "@type": "City", name: "Montpellier" },
+          { "@type": "AdministrativeArea", name: "Herault" },
+        ],
     ...(price && {
       offers: {
         "@type": "Offer",
