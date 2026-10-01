@@ -30,6 +30,11 @@ interface LeadEmailData {
   plaque?: string;
   prestation_complementaire?: string;
   service?: string;
+  // PL + tailles multiples (monte décalée VL, essieux PL)
+  dimension?: string;
+  vehicule?: string;
+  urgence?: string;
+  tailles_resume?: string;
 }
 
 const WHATSAPP_NUMBER_NON_PL = "33687601575"; // Yassine (VL / mécanique)
@@ -72,7 +77,17 @@ function row(label: string, value: string | undefined | null, link?: string): st
     </tr>`;
 }
 
+const PL_SERVICE_LABELS: Record<string, string> = {
+  pneus_pl: "Pneus PL",
+  pneus_agricoles: "Pneus agricoles",
+  pneus_industriels: "Pneus industriels",
+  recreusage: "Recreusage",
+  assistance_site: "Assistance sur site",
+};
+
 function buildDimension(d: LeadEmailData): string | undefined {
+  if (d.tailles_resume) return d.tailles_resume;
+  if (d.dimension) return d.dimension;
   if (!d.largeur && !d.hauteur && !d.diametre) return undefined;
   const lh = [d.largeur, d.hauteur].filter(Boolean).join("/");
   const r = d.diametre ? `R${d.diametre}` : "";
@@ -82,12 +97,13 @@ function buildDimension(d: LeadEmailData): string | undefined {
 function detailsSection(d: LeadEmailData): string {
   const dimension = buildDimension(d);
   const rows = [
-    row("Service", d.service),
-    row("Dimension", dimension),
+    row("Service", d.service && (PL_SERVICE_LABELS[d.service] || d.service)),
+    row(d.tailles_resume ? "Dimensions" : "Dimension", dimension),
     row("Type", d.type),
     row("Quantité", d.quantite),
     row("Marque souhaitée", d.marque_souhaitee),
-    row("Véhicule", d.modele),
+    row("Véhicule", d.modele || d.vehicule),
+    row("Urgence", d.urgence),
     row("Plaque", d.plaque),
     row("Prestation complémentaire", d.prestation_complementaire),
   ].join("");
@@ -295,12 +311,13 @@ export function leadNotificationEmail(data: LeadEmailData, leadId: number): { su
     `Email : ${data.email || "—"}`,
     data.entreprise ? `Entreprise : ${data.entreprise}` : "",
     data.cp ? `CP : ${data.cp}` : "",
-    data.service ? `Service : ${data.service}` : "",
-    dimension ? `Dimension : ${dimension}` : "",
+    data.service ? `Service : ${PL_SERVICE_LABELS[data.service] || data.service}` : "",
+    dimension ? `${data.tailles_resume ? "Dimensions" : "Dimension"} : ${dimension}` : "",
     data.type ? `Type pneu : ${data.type}` : "",
     data.quantite ? `Quantité : ${data.quantite}` : "",
     data.marque_souhaitee ? `Marque souhaitée : ${data.marque_souhaitee}` : "",
-    data.modele ? `Véhicule : ${data.modele}` : "",
+    data.modele || data.vehicule ? `Véhicule : ${data.modele || data.vehicule}` : "",
+    data.urgence ? `Urgence : ${data.urgence}` : "",
     data.plaque ? `Plaque : ${data.plaque}` : "",
     data.prestation_complementaire ? `Prestation : ${data.prestation_complementaire}` : "",
     data.message ? `\nMessage :\n${data.message}` : "",

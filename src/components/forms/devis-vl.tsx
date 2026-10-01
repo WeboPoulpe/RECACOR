@@ -3,10 +3,11 @@
 import { useState } from "react";
 import { MultiStepForm, FormField, isValidPhone, isValidOptionalEmail, PHONE_ERROR, EMAIL_ERROR } from "../multi-step-form";
 import { Input } from "@/components/ui/input";
+import { formatDimensionVl, formatTaillesResume, type TaillePneu } from "@/lib/tailles-pneus";
 
-const LARGEURS = ["145", "155", "165", "175", "185", "195", "205", "215", "225", "235", "245", "255", "265", "275"];
-const HAUTEURS = ["30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80"];
-const DIAMETRES = ["13", "14", "15", "16", "17", "18", "19", "20"];
+const LARGEURS = ["145", "155", "165", "175", "185", "195", "205", "215", "225", "235", "245", "255", "265", "275", "285", "295", "305", "315"];
+const HAUTEURS = ["25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80"];
+const DIAMETRES = ["13", "14", "15", "16", "17", "18", "19", "20", "21", "22"];
 const CHARGES = Array.from({ length: 61 }, (_, i) => String(60 + i));
 const VITESSES = ["H", "T", "V", "W", "Y"];
 const TYPES = ["Été", "Hiver", "4 saisons"];
@@ -25,6 +26,13 @@ type VlData = {
   vitesse: string;
   type: string;
   quantite: string;
+  tailles_differentes: boolean;
+  ar_largeur: string;
+  ar_hauteur: string;
+  ar_diametre: string;
+  ar_charge: string;
+  ar_vitesse: string;
+  ar_quantite: string;
   marque_souhaitee: string;
   modele: string;
   plaque: string;
@@ -45,6 +53,13 @@ const initial: VlData = {
   vitesse: "",
   type: "",
   quantite: "",
+  tailles_differentes: false,
+  ar_largeur: "",
+  ar_hauteur: "",
+  ar_diametre: "",
+  ar_charge: "",
+  ar_vitesse: "",
+  ar_quantite: "",
   marque_souhaitee: "",
   modele: "",
   plaque: "",
@@ -56,6 +71,52 @@ const initial: VlData = {
   cp: "",
   message: "",
 };
+
+type DimensionKeys = {
+  largeur: "largeur" | "ar_largeur";
+  hauteur: "hauteur" | "ar_hauteur";
+  diametre: "diametre" | "ar_diametre";
+  charge: "charge" | "ar_charge";
+  vitesse: "vitesse" | "ar_vitesse";
+};
+
+const AVANT: DimensionKeys = { largeur: "largeur", hauteur: "hauteur", diametre: "diametre", charge: "charge", vitesse: "vitesse" };
+const ARRIERE: DimensionKeys = { largeur: "ar_largeur", hauteur: "ar_hauteur", diametre: "ar_diametre", charge: "ar_charge", vitesse: "ar_vitesse" };
+
+function dimensionOf(data: VlData, k: DimensionKeys): string {
+  return formatDimensionVl({
+    largeur: data[k.largeur],
+    hauteur: data[k.hauteur],
+    diametre: data[k.diametre],
+    charge: data[k.charge],
+    vitesse: data[k.vitesse],
+  });
+}
+
+// Monte décalée : on envoie les deux tailles (format commun e-mail / AdsFlow)
+// et la quantité totale ; sinon les champs arrière ne partent pas.
+function buildPayload(data: VlData) {
+  const { ar_largeur, ar_hauteur, ar_diametre, ar_charge, ar_vitesse, ar_quantite, ...base } = data;
+  if (!data.tailles_differentes) return { ...base, tailles_differentes: false };
+
+  const tailles: TaillePneu[] = [
+    { position: "Avant", dimension: dimensionOf(data, AVANT), quantite: data.quantite },
+    { position: "Arrière", dimension: dimensionOf(data, ARRIERE), quantite: ar_quantite },
+  ];
+  const total = Number(data.quantite) + Number(ar_quantite);
+  return {
+    ...base,
+    ar_largeur,
+    ar_hauteur,
+    ar_diametre,
+    ar_charge,
+    ar_vitesse,
+    ar_quantite,
+    quantite: data.quantite && ar_quantite && total > 0 ? String(total) : data.quantite || ar_quantite,
+    tailles,
+    tailles_resume: formatTaillesResume(tailles),
+  };
+}
 
 export function DevisVlForm() {
   const [data, setData] = useState<VlData>(initial);
@@ -77,11 +138,52 @@ export function DevisVlForm() {
     return true;
   };
 
+  const dimensionFields = (k: DimensionKeys) => (
+    <>
+      <div className="grid grid-cols-3 gap-3">
+        <FormField label="Largeur">
+          <select value={data[k.largeur]} onChange={(e) => update(k.largeur, e.target.value)} className={select}>
+            <option value="">—</option>
+            {LARGEURS.map((v) => <option key={v}>{v}</option>)}
+          </select>
+        </FormField>
+        <FormField label="Hauteur">
+          <select value={data[k.hauteur]} onChange={(e) => update(k.hauteur, e.target.value)} className={select}>
+            <option value="">—</option>
+            {HAUTEURS.map((v) => <option key={v}>{v}</option>)}
+          </select>
+        </FormField>
+        <FormField label="Diamètre">
+          <select value={data[k.diametre]} onChange={(e) => update(k.diametre, e.target.value)} className={select}>
+            <option value="">—</option>
+            {DIAMETRES.map((v) => <option key={v}>{v}</option>)}
+          </select>
+        </FormField>
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        <FormField label="Indice de charge">
+          <select value={data[k.charge]} onChange={(e) => update(k.charge, e.target.value)} className={select}>
+            <option value="">—</option>
+            {CHARGES.map((v) => <option key={v}>{v}</option>)}
+          </select>
+        </FormField>
+        <FormField label="Indice de vitesse">
+          <select value={data[k.vitesse]} onChange={(e) => update(k.vitesse, e.target.value)} className={select}>
+            <option value="">—</option>
+            {VITESSES.map((v) => <option key={v}>{v}</option>)}
+          </select>
+        </FormField>
+      </div>
+    </>
+  );
+
+  const payload = buildPayload(data);
+
   return (
     <MultiStepForm
       id="devis-vl-form"
       serviceType="vl"
-      data={data}
+      data={payload}
       isValid={isValid}
       invalidStepMessage={() => (!isValidPhone(data.telephone) ? PHONE_ERROR : EMAIL_ERROR)}
       onInvalidAttempt={() => setTouched({ telephone: true, email: true })}
@@ -91,40 +193,26 @@ export function DevisVlForm() {
           subtitle: "Tous les champs sont facultatifs — indiquez ce que vous savez",
           content: (
             <div className="space-y-4">
-              <div className="grid grid-cols-3 gap-3">
-                <FormField label="Largeur">
-                  <select value={data.largeur} onChange={(e) => update("largeur", e.target.value)} className={select}>
-                    <option value="">—</option>
-                    {LARGEURS.map((v) => <option key={v}>{v}</option>)}
-                  </select>
-                </FormField>
-                <FormField label="Hauteur">
-                  <select value={data.hauteur} onChange={(e) => update("hauteur", e.target.value)} className={select}>
-                    <option value="">—</option>
-                    {HAUTEURS.map((v) => <option key={v}>{v}</option>)}
-                  </select>
-                </FormField>
-                <FormField label="Diamètre">
-                  <select value={data.diametre} onChange={(e) => update("diametre", e.target.value)} className={select}>
-                    <option value="">—</option>
-                    {DIAMETRES.map((v) => <option key={v}>{v}</option>)}
-                  </select>
-                </FormField>
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <FormField label="Indice de charge">
-                  <select value={data.charge} onChange={(e) => update("charge", e.target.value)} className={select}>
-                    <option value="">—</option>
-                    {CHARGES.map((v) => <option key={v}>{v}</option>)}
-                  </select>
-                </FormField>
-                <FormField label="Indice de vitesse">
-                  <select value={data.vitesse} onChange={(e) => update("vitesse", e.target.value)} className={select}>
-                    <option value="">—</option>
-                    {VITESSES.map((v) => <option key={v}>{v}</option>)}
-                  </select>
-                </FormField>
-              </div>
+              {data.tailles_differentes && <p className="text-sm font-semibold">Pneus avant</p>}
+              {dimensionFields(AVANT)}
+              <label className="flex items-start gap-2 text-xs text-muted-foreground cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={data.tailles_differentes}
+                  onChange={(e) => update("tailles_differentes", e.target.checked)}
+                  className="mt-0.5 h-4 w-4 accent-blue-700"
+                />
+                <span>Tailles différentes à l&apos;avant et à l&apos;arrière (fréquent sur les voitures électriques et sportives)</span>
+              </label>
+              {data.tailles_differentes && (
+                <div className="space-y-4 border-l-2 border-blue-700/30 pl-3">
+                  <p className="text-sm font-semibold">Pneus arrière</p>
+                  {dimensionFields(ARRIERE)}
+                  <FormField label="Nombre de pneus arrière">
+                    <Input type="number" min={1} max={8} placeholder="ex. 2" value={data.ar_quantite} onChange={(e) => update("ar_quantite", e.target.value)} className="h-11" />
+                  </FormField>
+                </div>
+              )}
               <div className="grid grid-cols-2 gap-3">
                 <FormField label="Type de pneu">
                   <select value={data.type} onChange={(e) => update("type", e.target.value)} className={select}>
@@ -132,7 +220,7 @@ export function DevisVlForm() {
                     {TYPES.map((v) => <option key={v}>{v}</option>)}
                   </select>
                 </FormField>
-                <FormField label="Nombre de pneus">
+                <FormField label={data.tailles_differentes ? "Nombre de pneus avant" : "Nombre de pneus"}>
                   <Input type="number" min={1} max={8} placeholder="ex. 2" value={data.quantite} onChange={(e) => update("quantite", e.target.value)} className="h-11" />
                 </FormField>
               </div>
@@ -197,14 +285,19 @@ export function DevisVlForm() {
       ]}
       summary={
         <dl className="space-y-1.5 text-sm">
-          {(data.largeur || data.hauteur || data.diametre) && (
+          {"tailles_resume" in payload && payload.tailles_resume ? (
+            <div className="flex justify-between gap-3">
+              <dt className="text-muted-foreground">Dimensions</dt>
+              <dd className="text-right font-semibold">{payload.tailles_resume}</dd>
+            </div>
+          ) : (data.largeur || data.hauteur || data.diametre) && (
             <div className="flex justify-between">
               <dt className="text-muted-foreground">Dimension</dt>
               <dd className="font-semibold">{data.largeur}/{data.hauteur} R{data.diametre}</dd>
             </div>
           )}
           {data.type && <div className="flex justify-between"><dt className="text-muted-foreground">Type</dt><dd className="font-semibold">{data.type}</dd></div>}
-          {data.quantite && <div className="flex justify-between"><dt className="text-muted-foreground">Quantité</dt><dd className="font-semibold">{data.quantite}</dd></div>}
+          {payload.quantite && <div className="flex justify-between"><dt className="text-muted-foreground">Quantité</dt><dd className="font-semibold">{payload.quantite}</dd></div>}
           {data.marque_souhaitee && <div className="flex justify-between"><dt className="text-muted-foreground">Marque</dt><dd className="font-semibold">{data.marque_souhaitee}</dd></div>}
           {data.modele && <div className="flex justify-between"><dt className="text-muted-foreground">Véhicule</dt><dd className="font-semibold">{data.modele}</dd></div>}
           {data.prestation_complementaire && <div className="flex justify-between"><dt className="text-muted-foreground">Prestation</dt><dd className="font-semibold">{data.prestation_complementaire}</dd></div>}

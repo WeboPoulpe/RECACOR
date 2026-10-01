@@ -4,7 +4,8 @@ import { useState } from "react";
 import { MultiStepForm, FormField, isValidPhone, isValidOptionalEmail, PHONE_ERROR, EMAIL_ERROR } from "../multi-step-form";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { Truck, Leaf, Shield, RefreshCw, Zap } from "lucide-react";
+import { Truck, Leaf, Shield, RefreshCw, Zap, Plus, X } from "lucide-react";
+import { formatTaillesResume, type TaillePneu } from "@/lib/tailles-pneus";
 
 const SERVICES = [
   { value: "pneus_pl", label: "Pneus PL", Icon: Truck },
@@ -16,11 +17,18 @@ const SERVICES = [
 
 const QUANTITES = ["1-5", "6-20", "20+"];
 const URGENCES = ["Dès que possible", "Sous 48h", "Pas urgent"];
+const POSITIONS = ["Directeur / avant", "Moteur / arrière", "Remorque", "Autre"];
+const MAX_DIMENSIONS = 4;
+
+type LigneDimension = { dimension: string; position: string; quantite: string };
 
 type PlData = {
   service: string;
   vehicule: string;
   dimension: string;
+  position: string;
+  quantite_dimension: string;
+  dimensions_sup: LigneDimension[];
   quantite: string;
   urgence: string;
   nom: string;
@@ -36,6 +44,9 @@ const initial: PlData = {
   service: "",
   vehicule: "",
   dimension: "",
+  position: "",
+  quantite_dimension: "",
+  dimensions_sup: [],
   quantite: "",
   urgence: "",
   nom: "",
@@ -46,6 +57,20 @@ const initial: PlData = {
   cp: "",
   message: "",
 };
+
+// Plusieurs dimensions : la première reste dans `dimension`, la liste complète
+// part dans `tailles` / `tailles_resume` (format commun e-mail / AdsFlow).
+function buildPayload(data: PlData) {
+  const { dimensions_sup, position, quantite_dimension, ...base } = data;
+  const extras = dimensions_sup.filter((l) => l.dimension.trim());
+  if (extras.length === 0) return base;
+
+  const tailles: TaillePneu[] = [
+    { position, dimension: data.dimension.trim(), quantite: quantite_dimension },
+    ...extras.map((l) => ({ position: l.position, dimension: l.dimension.trim(), quantite: l.quantite })),
+  ].filter((t) => t.dimension);
+  return { ...base, dimension: base.dimension || tailles[0]?.dimension || "", tailles, tailles_resume: formatTaillesResume(tailles) };
+}
 
 export function DevisPlForm() {
   const [data, setData] = useState<PlData>(initial);
@@ -60,6 +85,43 @@ export function DevisPlForm() {
   const select =
     "w-full h-11 rounded-xl border border-input bg-background px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-bright";
 
+  const multi = data.dimensions_sup.length > 0;
+  const updateLigne = (index: number, patch: Partial<LigneDimension>) =>
+    setData((d) => ({ ...d, dimensions_sup: d.dimensions_sup.map((l, i) => (i === index ? { ...l, ...patch } : l)) }));
+  const ajouterLigne = () =>
+    setData((d) => ({ ...d, dimensions_sup: [...d.dimensions_sup, { dimension: "", position: "", quantite: "" }] }));
+  const retirerLigne = (index: number) =>
+    setData((d) => ({ ...d, dimensions_sup: d.dimensions_sup.filter((_, i) => i !== index) }));
+
+  const ligneDimension = (
+    value: LigneDimension,
+    onChange: (patch: Partial<LigneDimension>) => void,
+    placeholder: string,
+    onRemove?: () => void,
+  ) => (
+    <div className="space-y-2">
+      <div className="flex gap-2">
+        <Input placeholder={placeholder} value={value.dimension} onChange={(e) => onChange({ dimension: e.target.value })} className="h-11" />
+        {onRemove && (
+          <button type="button" onClick={onRemove} aria-label="Retirer cette dimension" className="shrink-0 h-11 w-11 inline-flex items-center justify-center rounded-xl border border-input text-muted-foreground hover:text-foreground">
+            <X className="h-4 w-4" />
+          </button>
+        )}
+      </div>
+      {multi && (
+        <div className="grid grid-cols-[1fr_5.5rem] gap-2">
+          <select value={value.position} onChange={(e) => onChange({ position: e.target.value })} className={select} aria-label="Position">
+            <option value="">Position</option>
+            {POSITIONS.map((p) => <option key={p}>{p}</option>)}
+          </select>
+          <Input type="number" min={1} placeholder="Nb" aria-label="Nombre de pneus" value={value.quantite} onChange={(e) => onChange({ quantite: e.target.value })} className="h-11" />
+        </div>
+      )}
+    </div>
+  );
+
+  const payload = buildPayload(data);
+
   const isValid = (step: number) => {
     if (step === 0) return true;
     if (step === 1) return isValidPhone(data.telephone) && isValidOptionalEmail(data.email);
@@ -71,7 +133,7 @@ export function DevisPlForm() {
       id="devis-pl-form"
       successHref="/merci?segment=pl"
       serviceType="pl"
-      data={data}
+      data={payload}
       isValid={isValid}
       invalidStepMessage={() => (!isValidPhone(data.telephone) ? PHONE_ERROR : EMAIL_ERROR)}
       onInvalidAttempt={() => setTouched({ telephone: true, email: true })}
@@ -105,13 +167,31 @@ export function DevisPlForm() {
               <FormField label="Type de véhicule / engin">
                 <Input placeholder="ex. Semi-remorque, tracteur John Deere, chariot élévateur" value={data.vehicule} onChange={(e) => update("vehicule", e.target.value)} className="h-11" />
               </FormField>
-              <FormField label="Dimension / taille de pneu">
-                <Input
-                  placeholder="ex. 315/80 R22.5, 650/65 R38, 18.00-25"
-                  value={data.dimension}
-                  onChange={(e) => update("dimension", e.target.value)}
-                  className="h-11"
-                />
+              <FormField label={multi ? "Dimensions de pneu" : "Dimension / taille de pneu"}>
+                <div className="space-y-3">
+                  {ligneDimension(
+                    { dimension: data.dimension, position: data.position, quantite: data.quantite_dimension },
+                    (patch) =>
+                      setData((d) => ({
+                        ...d,
+                        ...(patch.dimension !== undefined && { dimension: patch.dimension }),
+                        ...(patch.position !== undefined && { position: patch.position }),
+                        ...(patch.quantite !== undefined && { quantite_dimension: patch.quantite }),
+                      })),
+                    "ex. 315/80 R22.5, 650/65 R38, 18.00-25",
+                  )}
+                  {data.dimensions_sup.map((ligne, i) => (
+                    <div key={i} className="border-t border-border pt-3">
+                      {ligneDimension(ligne, (patch) => updateLigne(i, patch), "ex. 385/65 R22.5", () => retirerLigne(i))}
+                    </div>
+                  ))}
+                  {data.dimensions_sup.length < MAX_DIMENSIONS - 1 && (
+                    <button type="button" onClick={ajouterLigne} className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-purple-bright underline-offset-2 hover:underline">
+                      <Plus className="h-3.5 w-3.5" />
+                      Ajouter une autre dimension
+                    </button>
+                  )}
+                </div>
               </FormField>
               <div className="grid grid-cols-2 gap-3">
                 <FormField label="Quantité estimée">
@@ -166,7 +246,9 @@ export function DevisPlForm() {
       summary={
         <dl className="space-y-1.5 text-sm">
           {data.service && <div className="flex justify-between"><dt className="text-muted-foreground">Service</dt><dd className="font-semibold">{SERVICES.find(s => s.value === data.service)?.label}</dd></div>}
-          {data.dimension && <div className="flex justify-between gap-3"><dt className="text-muted-foreground">Dimension</dt><dd className="text-right font-semibold">{data.dimension}</dd></div>}
+          {"tailles_resume" in payload && payload.tailles_resume ? (
+            <div className="flex justify-between gap-3"><dt className="text-muted-foreground">Dimensions</dt><dd className="text-right font-semibold">{payload.tailles_resume}</dd></div>
+          ) : data.dimension && <div className="flex justify-between gap-3"><dt className="text-muted-foreground">Dimension</dt><dd className="text-right font-semibold">{data.dimension}</dd></div>}
           {data.quantite && <div className="flex justify-between"><dt className="text-muted-foreground">Quantité</dt><dd className="font-semibold">{data.quantite}</dd></div>}
           {data.urgence && <div className="flex justify-between"><dt className="text-muted-foreground">Urgence</dt><dd className="font-semibold">{data.urgence}</dd></div>}
           {data.entreprise && <div className="flex justify-between"><dt className="text-muted-foreground">Entreprise</dt><dd className="font-semibold">{data.entreprise}</dd></div>}
