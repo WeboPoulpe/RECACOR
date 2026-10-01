@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { PneusVoitureClient } from "./client";
 import { RelatedArticles } from "@/components/related-articles";
 import { getAsset } from "@/lib/site-assets";
@@ -82,10 +81,10 @@ export default async function PneusVoiturePage() {
   const heroImage = await getAsset("vl_visual_image", "");
   return (
     <>
-      <Script
+      <script
         id="schema-pneus-voiture"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema).replace(/</g, "\\u003c") }}
       />
       <PneusVoitureClient heroImage={heroImage} />
       <RelatedArticles categorie="pneus-voiture" />

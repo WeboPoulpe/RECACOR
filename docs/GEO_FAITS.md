@@ -56,7 +56,7 @@ Faits généraux cités sur `/pneus-voiture-electrique`. Ce ne sont pas des enga
 | Homologations | AO (Audi), étoile (BMW), MO (Mercedes), N0, N1… (Porsche), T0 (Tesla) | Allopneus, guide exigences constructeurs ; greendrive-accessories (Tesla) |
 | Exemples de montes décalées | Porsche Taycan 225/55 R19 / 275/45 R19 ; Mercedes EQE 255/45 R19 / 285/40 R19 ; Tesla Model Y Performance 255/35 R21 / 275/35 R21 ; BMW i4 M50 245/40 R19 / 255/40 R19 (selon finition et jantes) | autotijd.be, reifen.com, mavis.com, goodyear.com |
 
-Position Recacor (Redouane, 01/10/2026) : Recacor ne fait pas la restitution des véhicules, n'est pas dans un réseau de loueur et n'a pas d'offre dédiée au leasing. La page informe et propose le montage au Crès, sur devis selon la dimension, sans tarif affiché pour ces dimensions.
+Position Recacor (Redouane, 01/10/2026) : Recacor ne fait pas la restitution des véhicules, n'est pas dans un réseau de loueur et n'a pas d'offre dédiée au leasing. Ces limites ne s'écrivent jamais sur le site : la page dit ce que Recacor fait (devis selon le contrat et la dimension, montage au Crès), sans tarif affiché pour ces dimensions.
 
 ## Prix
 

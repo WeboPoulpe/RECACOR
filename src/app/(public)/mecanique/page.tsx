@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { MecaniqueClient } from "./client";
 import { RelatedArticles } from "@/components/related-articles";
 import { getAsset } from "@/lib/site-assets";
@@ -71,10 +70,10 @@ export default async function MecaniquePage() {
   const heroImage = await getAsset("mecanique_visual", "");
   return (
     <>
-      <Script
+      <script
         id="schema-mecanique"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema).replace(/</g, "\\u003c") }}
       />
       <MecaniqueClient heroImage={heroImage} />
       <RelatedArticles categorie="mecanique" />

@@ -25,7 +25,7 @@
 ### Voiture / VL
 
 - [Pneus voiture Montpellier](https://www.recacor.fr/pneus-voiture) : page mere VL. Montage, equilibrage, stock et changement de pneus voiture autour de Montpellier et Le Cres.
-- [Pneus voiture electrique](https://www.recacor.fr/pneus-voiture-electrique) : pneus de voiture electrique au Cres. Tailles differentes avant/arriere (monte decalee), marquages HL et homologation constructeur, ce que demande un contrat de LLD ou LOA (Recacor ne gere pas la restitution et n'est pas agree loueur). Devis selon la dimension.
+- [Pneus voiture electrique](https://www.recacor.fr/pneus-voiture-electrique) : pneus de voiture electrique au Cres. Tailles differentes avant/arriere (monte decalee), marquages HL et homologation constructeur, ce que demande un contrat de LLD ou LOA. Devis selon la dimension.
 - [Mecanique Montpellier](https://www.recacor.fr/mecanique) : page mere mecanique. Vidange, freinage, entretien et liens vers services atelier.
 - [Vidange Montpellier](https://www.recacor.fr/services/vidange) : service detaille vidange.
 - [Parallelisme et geometrie Montpellier](https://www.recacor.fr/services/parallelisme-geometrie) : service detaille train roulant / parallelisme.

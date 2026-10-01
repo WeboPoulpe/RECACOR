@@ -1,4 +1,3 @@
-import Script from "next/script";
 
 interface BreadcrumbItem {
   name: string;
@@ -17,10 +16,10 @@ export function BreadcrumbJsonLd({ items }: { items: BreadcrumbItem[] }) {
     })),
   };
   return (
-    <Script
+    <script
       id={`breadcrumb-${items[items.length - 1].name.toLowerCase().replace(/\s/g, "-")}`}
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
     />
   );
 }
@@ -80,10 +79,10 @@ export function ServiceJsonLd({
     }),
   };
   return (
-    <Script
+    <script
       id={`service-${name.toLowerCase().replace(/\s/g, "-")}`}
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
     />
   );
 }
@@ -107,10 +106,10 @@ export function FaqJsonLd({ items, id = "faq" }: { items: FaqItem[]; id?: string
     })),
   };
   return (
-    <Script
+    <script
       id={`faq-${id}`}
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
     />
   );
 }
@@ -164,10 +163,10 @@ export function LocalBusinessJsonLd() {
     hasMap: "https://maps.google.com/?q=1240+Route+de+Nîmes+34920+Le+Crès",
   };
   return (
-    <Script
+    <script
       id="local-business"
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
     />
   );
 }

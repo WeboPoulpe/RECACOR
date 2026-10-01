@@ -11,8 +11,7 @@ import { PHONE_DISPLAY } from "@/lib/tracking";
 import Link from "next/link";
 
 // Faits repris de docs/GEO_FAITS.md (section « Pneus de voiture électrique ») :
-// ne rien ajouter ici qui n'y figure pas. Recacor ne fait pas la restitution
-// des véhicules et n'est pas dans un réseau de loueur.
+// ne rien ajouter ici qui n'y figure pas.
 const chiffresCles = [
   { icon: Gauge, value: "1,6 mm", label: "profondeur minimale légale" },
   { icon: FileText, value: "4 mm", label: "seuil de certains loueurs à la restitution" },
@@ -76,7 +75,7 @@ const faqs = [
   },
   {
     q: "Puis-je faire changer mes pneus chez Recacor si ma voiture est en leasing ?",
-    a: "Oui si les pneus sont à votre charge. Si votre contrat inclut un forfait pneus, appelez d'abord votre loueur : il impose souvent son réseau. Recacor n'est pas un garage agréé par un loueur et ne gère pas la restitution du véhicule.",
+    a: "Oui, quand les pneus sont à votre charge. Indiquez dans la demande de devis ce que demande votre contrat (marque, marquage, profondeur) : on vous propose les pneus qui y correspondent et on les monte à l'atelier du Crès. Si votre contrat inclut un forfait pneus, vérifiez auprès de votre loueur où le faire prendre en charge.",
   },
   {
     q: "Avez-vous des pneus pour Tesla, Mercedes EQ ou BMW i ?",
@@ -201,9 +200,9 @@ export function PneusElectriqueClient({ heroImage }: { heroImage?: string }) {
             Voiture en LLD ou LOA : <span className="text-gradient-purple">qui choisit les pneus ?</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mb-8">
-            Tout se joue dans votre contrat et dans le guide de restitution du loueur. Recacor
-            n&apos;est pas un garage agréé par un loueur et ne gère pas la restitution : on s&apos;occupe
-            des pneus, selon ce que votre contrat demande.
+            Tout se joue dans votre contrat et dans le guide de restitution du loueur. Dites-nous
+            ce qu&apos;il demande : on vous propose les pneus qui y correspondent, dans la dimension de
+            votre voiture, et on les monte à l&apos;atelier du Crès.
           </p>
           <div className="overflow-hidden rounded-[4px] border border-border bg-white">
             <table className="w-full text-left text-sm">

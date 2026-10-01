@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Script from "next/script";
 import { Mail, MapPin, Clock, Star } from "lucide-react";
 import { FooterPhoneLink } from "@/components/layout/footer-phone-link";
 import { CookieSettingsButton } from "@/components/cookie-settings-button";
@@ -192,10 +191,10 @@ export async function Footer() {
 
   return (
     <footer className="bg-purple-deep">
-      <Script
+      <script
         id="schema-local-business"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema).replace(/</g, "\\u003c") }}
       />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
