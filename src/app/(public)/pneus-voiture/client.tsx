@@ -391,6 +391,12 @@ export function PneusVoitureClient({ heroImage }: { heroImage?: string }) {
                 Demandez un devis gratuit →
               </DevisCtaLink>
             </p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Voiture électrique ou tailles différentes à l&apos;avant et à l&apos;arrière ?{" "}
+              <Link href="/pneus-voiture-electrique" className="text-purple-bright font-semibold hover:underline">
+                Pneus voiture électrique →
+              </Link>
+            </p>
           </div>
         </div>
       </section>

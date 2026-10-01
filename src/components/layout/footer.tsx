@@ -18,6 +18,7 @@ const TikTokIcon = () => (
 
 const servicesLinks = [
   { name: "Pneus voiture (VL)", href: "/pneus-voiture" },
+  { name: "Pneus voiture électrique", href: "/pneus-voiture-electrique" },
   { name: "Pneus poids lourd", href: "/pneus-utilitaires-pl" },
   { name: "Pneus agricoles", href: "/pneus-utilitaires-pl#agricoles" },
   { name: "Vidange", href: "/mecanique#vidange" },

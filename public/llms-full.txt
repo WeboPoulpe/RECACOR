@@ -20,6 +20,17 @@ Site : recacor.fr
 
 ---
 
+## Pneus voiture électrique
+URL: https://www.recacor.fr/pneus-voiture-electrique
+
+Montage de pneus pour voiture électrique à l'atelier du Crès, devis selon la dimension (pas de tarif affiché pour ces dimensions).
+- Tailles différentes à l'avant et à l'arrière (monte décalée) : le formulaire de devis permet d'indiquer les deux dimensions. Les pneus ne se permutent pas entre l'avant et l'arrière.
+- Usure : environ 10 000 km de moins qu'un pneu de voiture thermique (source : Hyundai France).
+- LLD / LOA : minimum légal 1,6 mm ; certains loueurs facturent les pneus sous 4 mm à la restitution (guides VWFS, Mazda Lease). La loi autorise une autre marque si dimension et indices sont conformes et si les pneus d'un même essieu sont identiques ; le contrat peut être plus strict.
+- Recacor ne gère pas la restitution des véhicules et n'est pas un garage agréé par un loueur.
+
+---
+
 ## Pneus voiture (VL)
 URL: https://www.recacor.fr/pneus-voiture
 
