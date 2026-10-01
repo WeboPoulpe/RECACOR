@@ -76,7 +76,7 @@ export function CookieBanner() {
         <div
           ref={dialogRef}
           tabIndex={-1}
-          className={`recacor-cookie-pop ${isCentered ? "recacor-cookie-pop--center" : "recacor-cookie-pop--bottom"}`}
+          className={`recacor-cookie-pop outline-none ${isCentered ? "recacor-cookie-pop--center" : "recacor-cookie-pop--bottom"}`}
           role="dialog"
           aria-modal="false"
           aria-labelledby="recacor-cookie-title"
