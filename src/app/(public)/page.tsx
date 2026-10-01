@@ -272,7 +272,7 @@ function ServicesSection() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {serviceCards.map((service) => (
             <Link key={service.title} href={service.href} className="group recacor-card flex min-h-full flex-col overflow-hidden">
               <div className="relative h-48 overflow-hidden bg-slate-900">
@@ -364,9 +364,9 @@ function TarifsSection() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {priceCards.map((item) => (
-            <Link key={item.label} href={item.href} className="group border border-white/14 bg-white/[0.06] p-5 transition hover:border-yellow-400/70 hover:bg-white/[0.09]">
+            <Link key={item.label} href={item.href} className="group border border-white/14 bg-white/[0.06] p-6 lg:p-7 transition hover:border-yellow-400/70 hover:bg-white/[0.09]">
               <p className="text-xs font-black uppercase text-yellow-400">{item.label}</p>
               <div className="mt-4 flex items-end gap-2">
                 <strong className="font-heading text-7xl font-black leading-none text-white">
