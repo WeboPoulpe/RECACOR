@@ -21,6 +21,6 @@ export const metadata: Metadata = {
 };
 
 export default async function PneusVoitureElectriquePage() {
-  const heroImage = await getAsset("vl_hero_image", "");
+  const heroImage = await getAsset("vl_electrique_hero_image", "");
   return <PneusElectriqueClient heroImage={heroImage} />;
 }

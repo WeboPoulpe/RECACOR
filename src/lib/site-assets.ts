@@ -65,6 +65,13 @@ export const SITE_ASSETS: PageAssets[] = [
         fallback: "/hero-generated/pneus-voiture-master.webp",
         alt: "Pneus voiture",
       },
+      {
+        key: "vl_electrique_hero_image",
+        label: "Image hero page pneus voiture électrique",
+        type: "image",
+        fallback: "/hero-generated/pneus-electrique-master.webp",
+        alt: "Voiture électrique sur pont dans l'atelier pneus",
+      },
     ],
   },
   {
