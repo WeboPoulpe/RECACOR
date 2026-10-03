@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
-export const revalidate = 86400; // 24h cache
+// API payante : jamais d'appel par visite. Avis gardés 48 h (Data Cache + CDN).
+export const revalidate = 172800; // 48h cache
 
 export interface GoogleReview {
   author_name: string;
@@ -26,7 +27,7 @@ async function findPlaceId(): Promise<string | null> {
   url.searchParams.set("fields", "place_id");
   url.searchParams.set("key", API_KEY!);
 
-  const res = await fetch(url.toString());
+  const res = await fetch(url.toString(), { next: { revalidate: 172800 } });
   const json = await res.json();
   return json.candidates?.[0]?.place_id ?? null;
 }
@@ -42,7 +43,7 @@ async function fetchReviews(placeId: string, sort: "most_relevant" | "newest") {
   // Data Cache Vercel (qui survit aux redéploiements) après suppression d'un avis.
   url.searchParams.set("cb", "20260827");
 
-  const res = await fetch(url.toString(), { next: { revalidate: 86400 } });
+  const res = await fetch(url.toString(), { next: { revalidate: 172800 } });
   const json = await res.json();
 
   if (json.status !== "OK") {
@@ -87,7 +88,7 @@ export async function GET() {
     };
 
     return NextResponse.json(data, {
-      headers: { "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=3600" },
+      headers: { "Cache-Control": "public, s-maxage=172800, stale-while-revalidate=3600" },
     });
   } catch (e) {
     console.error("[google-reviews]", e);
