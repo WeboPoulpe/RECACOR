@@ -20,7 +20,7 @@ export function CookieBanner() {
   const [variant] = useState<CookieBannerVariant>(() => getOrCreateCookieBannerVariant());
   const impressionTrackedRef = useRef(false);
   const previewRef = useRef(false);
-  const dialogRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     if (process.env.NODE_ENV === "development" && new URLSearchParams(window.location.search).has("cookiePreview")) {
@@ -34,7 +34,7 @@ export function CookieBanner() {
       syncStoredConsentIntegrations();
     }
 
-    const timer = !consent ? window.setTimeout(() => setVisible(true), 900) : null;
+    const timer = !consent ? window.setTimeout(() => setVisible(true), 0) : null;
     const handler = () => setVisible(true);
     window.addEventListener("recacor:cookie", handler);
     return () => {
@@ -50,9 +50,19 @@ export function CookieBanner() {
   }, [variant, visible]);
 
   useEffect(() => {
-    if (visible && (document.activeElement === document.body || document.activeElement === document.documentElement)) {
-      dialogRef.current?.focus({ preventScroll: true });
-    }
+    if (!visible) return;
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    // Le dialogue natif bloque aussi les interactions au clavier avec la page.
+    const previousOverflow = document.body.style.overflow;
+    dialog.showModal();
+    dialog.focus({ preventScroll: true });
+    document.body.style.overflow = "hidden";
+    return () => {
+      dialog.close();
+      document.body.style.overflow = previousOverflow;
+    };
   }, [visible]);
 
   const closeBanner = () => {
@@ -70,76 +80,70 @@ export function CookieBanner() {
 
   return (
     visible && (
-      <>
-        {/* Voile décoratif : il laisse passer les clics pour qu'un visiteur puisse appeler sans choisir d'abord. */}
-        <div className="recacor-fade-in pointer-events-none fixed inset-0 z-[109] bg-black/45" aria-hidden="true" />
-        <div
-          ref={dialogRef}
-          tabIndex={-1}
-          className={`recacor-cookie-pop outline-none ${isCentered ? "recacor-cookie-pop--center" : "recacor-cookie-pop--bottom"}`}
-          role="dialog"
-          aria-modal="false"
-          aria-labelledby="recacor-cookie-title"
-        >
-          <div className="recacor-cookie-pop__card">
-            <div className="recacor-cookie-pop__head">
-              <span className="recacor-cookie-pop__wheel" aria-hidden="true">
-                <Image src="/images/cookie-tire-recacor.png" alt="" width={56} height={58} priority />
-              </span>
-              <div>
-                <p className="recacor-cookie-pop__eyebrow recacor-cookie-pop__rise recacor-cookie-pop__rise--1">Cookies</p>
-                <h2 id="recacor-cookie-title" className="recacor-cookie-pop__rise recacor-cookie-pop__rise--2 font-heading text-lg font-black uppercase leading-tight text-white">
-                  On prend soin de vous
-                </h2>
-              </div>
-            </div>
+      <dialog
+        ref={dialogRef}
+        tabIndex={-1}
+        className={`recacor-cookie-pop outline-none ${isCentered ? "recacor-cookie-pop--center" : "recacor-cookie-pop--bottom"}`}
+        aria-modal="true"
+        aria-labelledby="recacor-cookie-title"
+        onCancel={(event) => event.preventDefault()}
+      >
+        <div className="recacor-cookie-pop__card">
+          <div className="recacor-cookie-pop__head">
+            <span className="recacor-cookie-pop__wheel" aria-hidden="true">
+              <Image src="/images/cookie-tire-recacor.png" alt="" width={56} height={58} priority />
+            </span>
             <div>
-              <p className="recacor-cookie-pop__rise recacor-cookie-pop__rise--3 mt-3 text-sm leading-6 text-white/75">
-                Comme pour vos pneus, on s&apos;assure que tout roule. Ce site utilise des
-                cookies essentiels, de mesure d&apos;audience et publicitaires.
-              </p>
-              {details && (
-                <div className="recacor-cookie-pop__details recacor-cookie-pop__rise">
-                  <p className="text-xs leading-relaxed text-white/70">
-                    <strong className="text-white">Essentiels</strong> — nécessaires au fonctionnement du site.
-                  </p>
-                  <p className="text-xs leading-relaxed text-white/70">
-                    <strong className="text-white">Analyse</strong> — Google Analytics pour mesurer l&apos;audience.
-                  </p>
-                  <p className="text-xs leading-relaxed text-white/70">
-                    <strong className="text-white">Marketing</strong> — Meta Pixel, TikTok, Snapchat pour des publicités pertinentes.
-                  </p>
-                  <Link href="/confidentialite" className="text-xs font-bold text-yellow-400 hover:underline">
-                    Politique de confidentialité →
-                  </Link>
-                </div>
-              )}
-              <div className="recacor-cookie-pop__actions recacor-cookie-pop__rise recacor-cookie-pop__rise--4">
-                <button type="button" onClick={deny} className="recacor-cookie-pop__btn recacor-cookie-pop__btn--deny">
-                  Continuer sans accepter
-                </button>
-                <button type="button" onClick={accept} className="recacor-cookie-pop__btn recacor-cookie-pop__btn--accept">
-                  Accepter et continuer
-                </button>
-                <button
-                  type="button"
-                  onClick={() =>
-                    setDetails((current) => {
-                      const next = !current;
-                      if (next) trackCookieCustomizeOpen(variant);
-                      return next;
-                    })
-                  }
-                  className="recacor-cookie-pop__customize"
-                >
-                  {details ? "Masquer les détails" : "Personnaliser"}
-                </button>
-              </div>
+              <p className="recacor-cookie-pop__eyebrow">Cookies</p>
+              <h2 id="recacor-cookie-title" className="font-heading text-lg font-black uppercase leading-tight text-white">
+                On prend soin de vous
+              </h2>
             </div>
-            <span className="recacor-cookie-pop__tread" aria-hidden="true" />
           </div>
+          <div>
+            <p className="mt-3 text-sm leading-6 text-white/75">
+              Comme pour vos pneus, on s&apos;assure que tout roule. Ce site utilise des
+              cookies essentiels, de mesure d&apos;audience et publicitaires.
+            </p>
+            {details && (
+              <div className="recacor-cookie-pop__details">
+                <p className="text-xs leading-relaxed text-white/70">
+                  <strong className="text-white">Essentiels</strong> — nécessaires au fonctionnement du site.
+                </p>
+                <p className="text-xs leading-relaxed text-white/70">
+                  <strong className="text-white">Analyse</strong> — Google Analytics pour mesurer l&apos;audience.
+                </p>
+                <p className="text-xs leading-relaxed text-white/70">
+                  <strong className="text-white">Marketing</strong> — Meta Pixel, TikTok, Snapchat pour des publicités pertinentes.
+                </p>
+                <Link href="/confidentialite" className="text-xs font-bold text-yellow-400 hover:underline">
+                  Politique de confidentialité →
+                </Link>
+              </div>
+            )}
+            <div className="recacor-cookie-pop__actions">
+              <button type="button" onClick={deny} className="recacor-cookie-pop__btn recacor-cookie-pop__btn--deny">
+                Continuer sans accepter
+              </button>
+              <button type="button" onClick={accept} className="recacor-cookie-pop__btn recacor-cookie-pop__btn--accept">
+                Accepter et continuer
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  const next = !details;
+                  if (next && !previewRef.current) trackCookieCustomizeOpen(variant);
+                  setDetails(next);
+                }}
+                className="recacor-cookie-pop__customize"
+              >
+                {details ? "Masquer les détails" : "Personnaliser"}
+              </button>
+            </div>
+          </div>
+          <span className="recacor-cookie-pop__tread" aria-hidden="true" />
         </div>
-      </>
+      </dialog>
     )
   );
 }

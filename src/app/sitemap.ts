@@ -58,6 +58,10 @@ const VILLE_CONTENT_UPDATED: Record<string, string> = {
 // Filet de sécurité pour un article sans date exploitable.
 const BLOG_FALLBACK_UPDATED = "2026-07-17";
 
+// Changement réel de l'interface publique commune : choix cookies obligatoire.
+// Date fixe de publication, jamais la date courante de chaque déploiement.
+const CONSENT_INTERFACE_UPDATED = new Date("2026-10-04");
+
 function toDate(value: string | undefined, fallback: string): Date {
   if (value) {
     const parsed = new Date(value);
@@ -91,5 +95,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
-  ];
+  ].map((entry) => ({
+    ...entry,
+    lastModified: entry.lastModified > CONSENT_INTERFACE_UPDATED
+      ? entry.lastModified
+      : CONSENT_INTERFACE_UPDATED,
+  }));
 }
