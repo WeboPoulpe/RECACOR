@@ -9,7 +9,7 @@ import { DevisPlForm } from "@/components/forms/devis-pl";
 import { BgParticles } from "@/components/bg-particles";
 import { AvisSection } from "@/components/avis-section";
 import { BreadcrumbJsonLd, ServiceJsonLd, FaqJsonLd } from "@/components/schema-jsonld";
-import { PHONE_WHATSAPP_PL, PHONE_WHATSAPP_PL_DISPLAY } from "@/lib/tracking";
+import { PHONE_PL_SUIVI, PHONE_PL_SUIVI_DISPLAY } from "@/lib/tracking";
 
 const activitesCles = [
   "Transporteurs",
@@ -170,8 +170,8 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
             ))}
           </div>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 max-w-xl">
-            <PhoneLink location="hero" serviceType="pl" phoneNumber={PHONE_WHATSAPP_PL} className="flex-1 recacor-btn-primary whitespace-nowrap" showIcon>
-              Appeler : {PHONE_WHATSAPP_PL_DISPLAY}
+            <PhoneLink location="hero" serviceType="pl" phoneNumber={PHONE_PL_SUIVI} className="flex-1 recacor-btn-primary whitespace-nowrap" showIcon>
+              Appeler : {PHONE_PL_SUIVI_DISPLAY}
             </PhoneLink>
             <a href="#devis" className="flex-1 recacor-btn-secondary">
               Devis professionnel <ArrowRight className="h-4 w-4" />
@@ -207,8 +207,8 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
               <a href="#devis" className="flex-1 recacor-btn-primary whitespace-nowrap">
                 Réserver mes dimensions <ArrowRight className="h-4 w-4" />
               </a>
-              <PhoneLink location="cta" serviceType="pl" phoneNumber={PHONE_WHATSAPP_PL} className="flex-1 recacor-btn-secondary whitespace-nowrap" showIcon>
-                Appeler : {PHONE_WHATSAPP_PL_DISPLAY}
+              <PhoneLink location="cta" serviceType="pl" phoneNumber={PHONE_PL_SUIVI} className="flex-1 recacor-btn-secondary whitespace-nowrap" showIcon>
+                Appeler : {PHONE_PL_SUIVI_DISPLAY}
               </PhoneLink>
             </div>
           </div>
@@ -508,8 +508,8 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
               </p>
             </div>
             <div className="mt-6 flex flex-col sm:flex-row gap-3 max-w-xl">
-              <PhoneLink location="cta" serviceType="pl" phoneNumber={PHONE_WHATSAPP_PL} className="flex-1 recacor-btn-primary whitespace-nowrap" showIcon>
-                Appeler : {PHONE_WHATSAPP_PL_DISPLAY}
+              <PhoneLink location="cta" serviceType="pl" phoneNumber={PHONE_PL_SUIVI} className="flex-1 recacor-btn-primary whitespace-nowrap" showIcon>
+                Appeler : {PHONE_PL_SUIVI_DISPLAY}
               </PhoneLink>
               <a href="#devis" className="flex-1 recacor-btn-secondary whitespace-nowrap">
                 Devis pneus PL <ArrowRight className="h-4 w-4" />
@@ -602,8 +602,8 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
             </div>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3 max-w-xl">
-              <PhoneLink location="cta" serviceType="pl" phoneNumber={PHONE_WHATSAPP_PL} className="flex-1 recacor-btn-primary whitespace-nowrap" showIcon>
-                Appeler : {PHONE_WHATSAPP_PL_DISPLAY}
+              <PhoneLink location="cta" serviceType="pl" phoneNumber={PHONE_PL_SUIVI} className="flex-1 recacor-btn-primary whitespace-nowrap" showIcon>
+                Appeler : {PHONE_PL_SUIVI_DISPLAY}
               </PhoneLink>
               <a href="#devis" className="flex-1 recacor-btn-secondary whitespace-nowrap">
                 Devis recreusage <ArrowRight className="h-4 w-4" />
@@ -657,8 +657,8 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
                 ))}
               </div>
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                <PhoneLink location="cta" serviceType="pl" phoneNumber={PHONE_WHATSAPP_PL} className="recacor-btn-primary whitespace-nowrap" showIcon>
-                  Assistance urgente : {PHONE_WHATSAPP_PL_DISPLAY}
+                <PhoneLink location="cta" serviceType="pl" phoneNumber={PHONE_PL_SUIVI} className="recacor-btn-primary whitespace-nowrap" showIcon>
+                  Assistance urgente : {PHONE_PL_SUIVI_DISPLAY}
                 </PhoneLink>
                 <a
                   href="https://wa.me/33607621043"
@@ -676,7 +676,7 @@ export function PlClient({ heroImage }: { heroImage?: string }) {
               <p className="text-white/60 uppercase tracking-widest text-sm mb-6">Disponibilité assistance PL</p>
               <div className="pt-6 border-t border-white/10">
                 <p className="text-xs text-white/40 uppercase tracking-wider mb-1">Assistance PL 24/7</p>
-                <p className="text-2xl font-black">{PHONE_WHATSAPP_PL_DISPLAY}</p>
+                <p className="text-2xl font-black">{PHONE_PL_SUIVI_DISPLAY}</p>
               </div>
             </div>
           </div>

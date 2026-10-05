@@ -7,7 +7,7 @@ import { DevisPlForm } from "@/components/forms/devis-pl";
 import { BgParticles } from "@/components/bg-particles";
 import { AvisSection } from "@/components/avis-section";
 import { BreadcrumbJsonLd, ServiceJsonLd, FaqJsonLd } from "@/components/schema-jsonld";
-import { PHONE_WHATSAPP_PL, PHONE_WHATSAPP_PL_DISPLAY } from "@/lib/tracking";
+import { PHONE_PL_SUIVI, PHONE_PL_SUIVI_DISPLAY } from "@/lib/tracking";
 import Link from "next/link";
 
 // Faits repris de docs/GEO_FAITS.md : ne rien ajouter ici qui n'y figure pas.
@@ -77,8 +77,8 @@ export function GaragePlClient({ heroImage }: { heroImage?: string }) {
             à l&apos;atelier Recacor près de Montpellier.
           </p>
           <div className="mt-5 flex flex-col sm:flex-row gap-2.5 sm:gap-3 max-w-2xl">
-            <PhoneLink location="hero" serviceType="pl" phoneNumber={PHONE_WHATSAPP_PL} className="flex-1 recacor-btn-primary whitespace-nowrap py-2.5 sm:py-3" showIcon>
-              Appeler : {PHONE_WHATSAPP_PL_DISPLAY}
+            <PhoneLink location="hero" serviceType="pl" phoneNumber={PHONE_PL_SUIVI} className="flex-1 recacor-btn-primary whitespace-nowrap py-2.5 sm:py-3" showIcon>
+              Appeler : {PHONE_PL_SUIVI_DISPLAY}
             </PhoneLink>
             <a href="#devis" className="flex-1 recacor-btn-secondary whitespace-nowrap py-2.5 sm:py-3">
               Demander un devis <ArrowRight className="h-4 w-4" />
@@ -86,7 +86,7 @@ export function GaragePlClient({ heroImage }: { heroImage?: string }) {
           </div>
           <p className="mt-2.5 text-xs sm:text-sm text-white/70">
             Crevaison en dehors des horaires ?{" "}
-            <PhoneLink location="hero" serviceType="pl" phoneNumber={PHONE_WHATSAPP_PL} className="font-bold text-white underline">
+            <PhoneLink location="hero" serviceType="pl" phoneNumber={PHONE_PL_SUIVI} className="font-bold text-white underline">
               Dépannage 24h/24
             </PhoneLink>
           </p>
@@ -202,7 +202,7 @@ export function GaragePlClient({ heroImage }: { heroImage?: string }) {
               24 h/24 et 7 j/7 près des sorties de l&apos;A9 de Perpignan à Avignon et de l&apos;A75 jusqu&apos;à Millau.
             </p>
             <div className="mt-6 flex flex-col sm:flex-row gap-3 max-w-xl">
-              <PhoneLink location="cta" serviceType="pl" phoneNumber={PHONE_WHATSAPP_PL} className="flex-1 recacor-btn-primary whitespace-nowrap" showIcon>
+              <PhoneLink location="cta" serviceType="pl" phoneNumber={PHONE_PL_SUIVI} className="flex-1 recacor-btn-primary whitespace-nowrap" showIcon>
                 Appeler le dépannage
               </PhoneLink>
               <Link href="/depannage-poids-lourd-urgence" className="flex-1 inline-flex items-center justify-center gap-2 rounded-[4px] border border-white/30 px-4 py-3 text-sm font-bold text-white hover:bg-white/10 whitespace-nowrap">
