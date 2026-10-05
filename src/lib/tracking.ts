@@ -428,8 +428,13 @@ export function hasConsent(): "granted" | "denied" | null {
   return match[1] === "granted" ? "granted" : "denied";
 }
 
-export const PHONE_NUMBER = "+33499533390";
-export const PHONE_DISPLAY = "04 99 53 33 90";
+// Numéro de suivi Dexem (redirigé vers le fixe du garage) : boutons, en-tête, pied de page, pages du site.
+// Le vrai fixe (PHONE_FIXE_*) reste dans les données structurées, les mentions légales, les e-mails
+// et les pages de coordonnées (À propos, Nos centres).
+export const PHONE_NUMBER = "+33482293237";
+export const PHONE_DISPLAY = "04 82 29 32 37";
+export const PHONE_FIXE_NUMBER = "+33499533390";
+export const PHONE_FIXE_DISPLAY = "04 99 53 33 90";
 export const PHONE_MOBILE = "+33687601575"; // WhatsApp VL / mécanique : Yassine (nouveau numéro pro depuis le 22/09/2026)
 export const PHONE_MOBILE_DISPLAY = "06 87 60 15 75";
 export const PHONE_WHATSAPP_PL = "+33607621043"; // WhatsApp PL France : Patrick
