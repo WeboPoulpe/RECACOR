@@ -9,7 +9,7 @@ import { AvisSection } from "@/components/avis-section";
 import { DevisPlForm } from "@/components/forms/devis-pl";
 import { PhoneLink } from "@/components/phone-link";
 import { BreadcrumbJsonLd, FaqJsonLd, ServiceJsonLd } from "@/components/schema-jsonld";
-import { PHONE_DISPLAY } from "@/lib/tracking";
+import { PHONE_PL_SUIVI, PHONE_PL_SUIVI_DISPLAY } from "@/lib/tracking";
 
 const zonesActivites = [
   "Transport régional",
@@ -124,8 +124,8 @@ export function PlZoneSudCorseClient({ heroImage }: { heroImage?: string }) {
             ))}
           </div>
           <div className="mt-8 flex max-w-xl flex-col gap-3 sm:flex-row">
-            <PhoneLink location="hero" serviceType="pl" className="flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-purple-bright px-8 py-4 font-bold text-white shadow-[0_8px_24px_rgba(0,0,0,0.22)]" showIcon>
-              Appeler : {PHONE_DISPLAY}
+            <PhoneLink location="hero" serviceType="pl" phoneNumber={PHONE_PL_SUIVI} className="flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-purple-bright px-8 py-4 font-bold text-white shadow-[0_8px_24px_rgba(0,0,0,0.22)]" showIcon>
+              Appeler : {PHONE_PL_SUIVI_DISPLAY}
             </PhoneLink>
             <a href="#devis" className="flex-1 inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/30 px-8 py-4 font-semibold text-white hover:bg-white/10">
               Devis de zone <ArrowRight className="h-4 w-4" />

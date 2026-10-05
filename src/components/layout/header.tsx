@@ -7,7 +7,7 @@ import { Menu, X, Phone, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AugustVlNoticeHeaderLink } from "@/components/august-vl-notice";
 import { PhoneLink } from "@/components/phone-link";
-import { PHONE_DISPLAY, PHONE_WHATSAPP_PL, PHONE_WHATSAPP_PL_DISPLAY, isFrenchPlCallPage } from "@/lib/tracking";
+import { PHONE_DISPLAY, PHONE_PL_SUIVI, PHONE_PL_SUIVI_DISPLAY, PHONE_WHATSAPP_PL, PHONE_WHATSAPP_PL_DISPLAY, isFrenchPlCallPage, isPlTrackingPage } from "@/lib/tracking";
 import { useAssetUrl } from "@/components/dynamic-media";
 
 const navigation = [
@@ -28,8 +28,9 @@ export function Header() {
   const pathname = usePathname();
   const isAssistancePL = pathname?.includes("/depannage-poids-lourd-urgence") || isFrenchPlCallPage(pathname);
   const isFrenchAssistancePL = isFrenchPlCallPage(pathname);
-  const headerPhoneNumber = isFrenchAssistancePL ? PHONE_WHATSAPP_PL : undefined;
-  const headerPhoneDisplay = isFrenchAssistancePL ? PHONE_WHATSAPP_PL_DISPLAY : PHONE_DISPLAY;
+  const isPlTracking = isPlTrackingPage(pathname);
+  const headerPhoneNumber = isPlTracking ? PHONE_PL_SUIVI : isFrenchAssistancePL ? PHONE_WHATSAPP_PL : undefined;
+  const headerPhoneDisplay = isPlTracking ? PHONE_PL_SUIVI_DISPLAY : isFrenchAssistancePL ? PHONE_WHATSAPP_PL_DISPLAY : PHONE_DISPLAY;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > scrollThreshold);

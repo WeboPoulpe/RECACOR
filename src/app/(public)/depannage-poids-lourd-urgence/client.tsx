@@ -7,7 +7,7 @@ import { DevisPlForm } from "@/components/forms/devis-pl";
 import { BgParticles } from "@/components/bg-particles";
 import { AvisSection } from "@/components/avis-section";
 import { BreadcrumbJsonLd, ServiceJsonLd, FaqJsonLd } from "@/components/schema-jsonld";
-import { PHONE_WHATSAPP_PL } from "@/lib/tracking";
+import { PHONE_PL_SUIVI, PHONE_WHATSAPP_PL } from "@/lib/tracking";
 import Link from "next/link";
 
 // Faits repris de docs/GEO_FAITS.md : ne rien ajouter ici qui n'y figure pas.
@@ -105,7 +105,7 @@ export function DepannageClient() {
             sur place, près des sorties de l&apos;A9 de Perpignan à Avignon et de l&apos;A75 jusqu&apos;à Millau.
           </p>
           <div className="mt-5 flex flex-col sm:flex-row gap-2.5 sm:gap-3 max-w-2xl">
-            <PhoneLink location="hero" serviceType="pl" phoneNumber={PHONE_WHATSAPP_PL} className="flex-1 recacor-btn-primary whitespace-nowrap py-2.5 sm:py-3" showIcon>
+            <PhoneLink location="hero" serviceType="pl" phoneNumber={PHONE_PL_SUIVI} className="flex-1 recacor-btn-primary whitespace-nowrap py-2.5 sm:py-3" showIcon>
               Appeler maintenant
             </PhoneLink>
             <a
@@ -203,7 +203,7 @@ export function DepannageClient() {
             ))}
           </ol>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 max-w-xl">
-            <PhoneLink location="cta" serviceType="pl" phoneNumber={PHONE_WHATSAPP_PL} className="flex-1 recacor-btn-primary whitespace-nowrap" showIcon>
+            <PhoneLink location="cta" serviceType="pl" phoneNumber={PHONE_PL_SUIVI} className="flex-1 recacor-btn-primary whitespace-nowrap" showIcon>
               Appeler l&apos;équipe dépannage
             </PhoneLink>
           </div>

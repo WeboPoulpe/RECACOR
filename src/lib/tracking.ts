@@ -445,6 +445,14 @@ export const PHONE_WHATSAPP_PL_ETRANGER_DISPLAY = "06 89 50 45 43";
 // Pages PL françaises où tous les appels vont à la ligne PL (Patrick), jamais au fixe de l'atelier
 // (décision Redouane du 30/09/2026).
 const FRENCH_PL_CALL_PAGES = new Set(["/depannage-poids-lourd-urgence", "/garage-poids-lourd", "/pneus-utilitaires-pl"]);
+// Numéro de suivi Dexem (redirigé vers Patrick) : assistance et zone Sud uniquement.
+// Les autres pages PL gardent le numéro direct de Patrick ; le bouton WhatsApp garde aussi le sien.
+export const PHONE_PL_SUIVI = "+33482293246";
+export const PHONE_PL_SUIVI_DISPLAY = "04 82 29 32 46";
+const PL_TRACKING_PAGES = new Set(["/depannage-poids-lourd-urgence", "/pneus-utilitaires-pl/zone-sud-corse"]);
+export function isPlTrackingPage(pathname?: string | null): boolean {
+  return !!pathname && PL_TRACKING_PAGES.has(pathname);
+}
 export function isFrenchPlCallPage(pathname?: string | null): boolean {
   return !!pathname && FRENCH_PL_CALL_PAGES.has(pathname);
 }

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Phone, ClipboardList } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PHONE_NUMBER, PHONE_WHATSAPP_PL, PHONE_WHATSAPP_PL_ETRANGER, isFrenchPlCallPage, pushPhoneClick } from "@/lib/tracking";
+import { PHONE_NUMBER, PHONE_PL_SUIVI, PHONE_WHATSAPP_PL, PHONE_WHATSAPP_PL_ETRANGER, isFrenchPlCallPage, isPlTrackingPage, pushPhoneClick } from "@/lib/tracking";
 
 export function StickyCallButton() {
   const [visible, setVisible] = useState(false);
@@ -17,9 +17,11 @@ export function StickyCallButton() {
   const isPlPage = isRomanianPlPage || isFrenchPlCallPage(pathname) || pathname.startsWith("/pneus-utilitaires-pl");
   const phoneNumber = isRomanianPlPage
     ? PHONE_WHATSAPP_PL_ETRANGER
-    : isFrenchPlCallPage(pathname)
-      ? PHONE_WHATSAPP_PL
-      : PHONE_NUMBER;
+    : isPlTrackingPage(pathname)
+      ? PHONE_PL_SUIVI
+      : isFrenchPlCallPage(pathname)
+        ? PHONE_WHATSAPP_PL
+        : PHONE_NUMBER;
 
   const isControleTechniquePage =
     pathname === "/services/prise-en-charge-controle-technique" ||
