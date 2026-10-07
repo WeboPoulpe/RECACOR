@@ -34,7 +34,7 @@ const faqs = [
   { q: "Un partenaire peut-il intervenir dans mon secteur ?", a: "Oui. Recacor travaille avec des partenaires dans le secteur de Jérôme. Indiquez votre commune, le véhicule et la prestation attendue : Jérôme confirme les possibilités d’intervention et les conditions avant tout engagement." },
   { q: "Quelles marques de pneus poids lourd proposez-vous ?", a: "Recacor propose notamment CTM, Hankook et des pneus Michelin rechapés. Précisez une marque si vous avez une préférence, ou indiquez votre usage et votre budget. Jérôme vérifie les références compatibles avec la dimension et l’essieu, puis leur disponibilité avant de préparer le devis." },
   { q: "Je ne connais pas la dimension : puis-je envoyer une photo ?", a: "Oui, envoyez une photo lisible du flanc du pneu sur le WhatsApp de Jérôme. Ajoutez le nombre de pneus souhaité, l'essieu concerné et votre commune. Si plusieurs dimensions équipent le camion ou la remorque, photographiez chaque monte." },
-  { q: "Les pneus sont-ils disponibles immédiatement ?", a: "La disponibilité dépend de la référence, de la dimension et de la quantité demandée. Jérôme confirme les pneus proposés et le délai avant commande. Le formulaire permet d'indiquer votre échéance ; elle ne constitue pas une promesse de livraison." },
+  { q: "Les pneus sont-ils disponibles immédiatement ?", a: "La disponibilité dépend de la référence, de la dimension et de la quantité. Si vous avez une date à respecter, indiquez-la dans votre demande pour que Jérôme vérifie les possibilités avant votre commande." },
 ];
 const service = {
   "@context": "https://schema.org", "@type": "Service",
@@ -85,18 +85,37 @@ export default function LyonRhoneAlpesPlPage() {
 
       <section className="bg-background py-12 sm:py-16">
         <div className="recacor-shell grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-          <div><p className="recacor-eyebrow">Votre camion, votre monte</p><h2 className="recacor-title mt-3">Ne commandez pas seulement une dimension.</h2><p className="mt-5 text-base leading-7 text-muted-foreground">Un pneu pour l’essieu moteur d’une benne ne se choisit pas comme un pneu de remorque routière. Indiquez où le pneu sera monté et comment travaille le véhicule.</p></div>
+          <div><p className="recacor-eyebrow">Choisir selon vos trajets</p><h2 className="recacor-title mt-3">Autoroute, livraison ou chantier ?</h2><p className="mt-5 text-base leading-7 text-muted-foreground">La dimension ne suffit pas. Le pneu doit aussi correspondre à l’essieu, à la charge et aux trajets du véhicule. Dites-nous ce qui compte pour vous : le budget, le kilométrage, la consommation ou la résistance sur chantier.</p></div>
           <div className="overflow-hidden rounded-[4px] border border-border bg-white">
-            <table className="w-full text-left text-sm"><caption className="sr-only">Les informations à transmettre pour préparer le devis de pneus poids lourd</caption><thead className="bg-[var(--recacor-night)] text-white"><tr><th scope="col" className="p-4">Votre besoin</th><th scope="col" className="p-4">À transmettre à Jérôme</th></tr></thead><tbody className="divide-y divide-border">
-              {[ ["Camion ou tracteur routier", "Dimension complète, essieu directeur ou moteur, quantité et trajets habituels."], ["Remorque ou semi-remorque", "Dimension de la monte, nombre de pneus à remplacer et usage routier ou mixte."], ["Benne ou camion de chantier", "Part de route et de chantier, essieu concerné et dimension lisible sur le flanc."], ["Plusieurs véhicules à équiper", "Une ligne par dimension et par essieu, avec le nombre de pneus pour chacune."] ].map(([need, info]) => <tr key={need}><th scope="row" className="w-2/5 p-4 align-top font-bold">{need}</th><td className="p-4 align-top leading-6 text-muted-foreground">{info}</td></tr>)}
+            <table className="w-full text-left text-sm"><caption className="sr-only">Les critères de choix d’un pneu poids lourd selon l’usage</caption><thead className="bg-[var(--recacor-night)] text-white"><tr><th scope="col" className="p-4">Vos trajets</th><th scope="col" className="p-4">Les critères à comparer</th></tr></thead><tbody className="divide-y divide-border">
+              {[
+                ["Longue distance et autoroute", "Résistance au roulement et longévité kilométrique. Précisez le kilométrage annuel, la charge et l’essieu à équiper."],
+                ["Transport régional et livraisons", "Polyvalence et usure sur votre tournée. Précisez la part de ville, de route et d’autoroute, les arrêts et les manœuvres."],
+                ["Benne, chantier et usage mixte", "Robustesse du profil et traction sur l’essieu moteur. Précisez la part de route et les terrains rencontrés : chantier, gravier ou carrière."],
+              ].map(([need, info]) => <tr key={need}><th scope="row" className="w-2/5 p-4 align-top font-bold">{need}</th><td className="p-4 align-top leading-6 text-muted-foreground">{info}</td></tr>)}
             </tbody></table>
           </div>
         </div>
       </section>
 
+      <section className="border-y border-border bg-white py-12 sm:py-16">
+        <div className="recacor-shell">
+          <div className="max-w-3xl"><p className="recacor-eyebrow">Plusieurs marques à comparer</p><h2 className="recacor-title mt-3">Des références pour votre monte.</h2><p className="mt-5 leading-7 text-muted-foreground">Vous avez une marque en tête ? Indiquez-la. Vous hésitez ? Jérôme prépare une proposition à partir de votre usage et de votre budget. Voici quelques exemples de notre offre PL.</p></div>
+          <div className="mt-8 grid gap-5 lg:grid-cols-3">
+            {[
+              { brand: "CTM", title: "Remorque et transport régional", text: "Remorque en 385/65 R22.5 160K. Pour le régional, profils GHA20 avant et GHD20 moteur en 315/80 R22.5. Indiquez votre essieu pour demander la référence correspondante." },
+              { brand: "Hankook", title: "Route et chantier", text: "SmartWork AM09 : toutes positions en usage mixte. SmartWork DM09 : essieu moteur et traction. Deux profils à étudier pour les bennes et les véhicules de chantier." },
+              { brand: "Michelin rechapé", title: "Une option à étudier au devis", text: "Exemple : Multi HDD en 315/80 R22.5. Précisez si vous souhaitez comparer une proposition en pneus neufs avec une proposition en rechapés." },
+            ].map((offer) => <article key={offer.brand} className="rounded-[4px] border border-border p-6"><p className="text-sm font-black text-blue-700">{offer.brand}</p><h3 className="mt-3 text-xl font-bold">{offer.title}</h3><p className="mt-3 text-sm leading-7 text-muted-foreground">{offer.text}</p></article>)}
+          </div>
+          <p className="mt-5 text-sm leading-6 text-muted-foreground">Ces exemples ne remplacent pas la vérification de votre monte. La référence, les indices et la disponibilité sont confirmés pour chaque demande.</p>
+          <a href="#devis" className="recacor-btn-dark mt-6">Demander une proposition <ArrowRight className="h-4 w-4" /></a>
+        </div>
+      </section>
+
       <section className="bg-[#eef2f7] py-12 sm:py-16">
         <div className="recacor-shell grid gap-8 lg:grid-cols-2 lg:gap-16">
-          <div><p className="recacor-eyebrow">Du premier message à la commande</p><h2 className="recacor-title mt-3">Un devis qui précise aussi la livraison.</h2><p className="mt-5 leading-7 text-muted-foreground">Recacor livre les pneus en France entière. Pour votre entreprise à Lyon ou dans les départements voisins, Jérôme vérifie les références et les quantités demandées avant de vous proposer le devis.</p><ul className="mt-6 space-y-3 text-sm">{["Pneus proposés et quantité pour chaque dimension.", "Disponibilité vérifiée pour votre demande.", "Frais et délai de livraison confirmés avant commande."].map((text) => <li key={text} className="flex gap-3"><Check className="h-5 w-5 shrink-0 text-blue-700" />{text}</li>)}</ul></div>
+          <div><p className="recacor-eyebrow">Du premier message à la commande</p><h2 className="recacor-title mt-3">Un devis qui précise aussi la livraison.</h2><p className="mt-5 leading-7 text-muted-foreground">Vous recevez une proposition pour les pneus demandés et leur livraison. Vous pouvez alors vérifier le coût de la commande et son organisation avant de donner votre accord.</p><ul className="mt-6 space-y-3 text-sm">{["Pneus proposés et quantité pour chaque dimension.", "Disponibilité vérifiée pour votre demande.", "Frais et délai de livraison confirmés avant commande."].map((text) => <li key={text} className="flex gap-3"><Check className="h-5 w-5 shrink-0 text-blue-700" />{text}</li>)}</ul></div>
           <aside className="rounded-[4px] border-l-4 border-yellow-400 bg-white p-6 sm:p-8"><p className="text-xs font-black uppercase tracking-widest text-blue-700">Un exemple de message</p><p className="mt-5 text-lg leading-8">« Bonjour Jérôme, il me faut 4 pneus en 315/80 R22.5 pour l’essieu moteur d’une benne, en usage route et chantier. Livraison à Vénissieux, 69200. Je vous envoie la photo du flanc. »</p><p className="mt-4 text-sm leading-6 text-muted-foreground">Ajoutez les indices de charge et de vitesse s’ils sont lisibles, ainsi que la date à laquelle vous souhaitez recevoir les pneus.</p><PlWhatsappButton className="mt-6" /></aside>
         </div>
       </section>
@@ -110,8 +129,8 @@ export default function LyonRhoneAlpesPlPage() {
 
       <section id="devis" className="scroll-mt-24 bg-[#eef2f7] py-12 sm:py-16">
         <div className="recacor-shell grid items-start gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-          <div><p className="recacor-eyebrow">Votre demande de pneus</p><h2 className="recacor-title mt-3">Préparons votre devis.</h2><p className="mt-5 leading-7 text-muted-foreground">Renseignez les dimensions connues, le nombre de pneus et votre commune. Votre téléphone permet de compléter la demande ; l’e-mail est facultatif.</p><p className="mt-4 leading-7 text-muted-foreground">Vous préférez envoyer des photos ? <a href={PL_JEROME_CONTACT.whatsappUrl} className="font-bold text-blue-700 underline underline-offset-4">Envoyez-les sur WhatsApp</a>.</p><div className="mt-7 rounded-[4px] border border-border bg-white p-5"><h3 className="font-bold">Besoin d’une intervention ?</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">Nous avons des partenaires dans le secteur de Jérôme. Précisez votre commune, le véhicule et la prestation souhaitée : Jérôme vérifie la prise en charge possible et vous confirme les conditions.</p></div></div>
-          <div className="recacor-card min-w-0 p-5 sm:p-8"><JeromePlForm /></div>
+          <div className="order-2 lg:order-1"><p className="recacor-eyebrow">Votre demande de pneus</p><h2 className="recacor-title mt-3">Préparons votre devis.</h2><p className="mt-5 leading-7 text-muted-foreground">Une dimension si vous la connaissez, une quantité, votre téléphone et la commune de livraison suffisent pour commencer. Vous pouvez ajouter les précisions utiles ; l’e-mail est facultatif.</p><p className="mt-4 leading-7 text-muted-foreground">Vous préférez envoyer des photos ? <a href={PL_JEROME_CONTACT.whatsappUrl} className="font-bold text-blue-700 underline underline-offset-4">Envoyez-les sur WhatsApp</a>.</p><div className="mt-7 rounded-[4px] border border-border bg-white p-5"><h3 className="font-bold">Besoin d’une intervention ?</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">Nous avons des partenaires dans le secteur de Jérôme. Précisez votre commune, le véhicule et la prestation souhaitée : Jérôme vérifie la prise en charge possible et vous confirme les conditions.</p></div></div>
+          <div className="recacor-card order-1 min-w-0 p-5 sm:p-8 lg:order-2 [&_form]:scroll-mt-24"><JeromePlForm /></div>
         </div>
       </section>
 
