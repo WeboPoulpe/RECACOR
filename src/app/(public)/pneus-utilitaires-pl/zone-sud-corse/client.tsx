@@ -132,7 +132,7 @@ export function PlZoneSudCorseClient({ heroImage }: { heroImage?: string }) {
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
             <PlWhatsappButton contact={PL_CLAIRE_CONTACT} className="px-6 py-4" />
-            <a href="#devis" className="inline-flex items-center justify-center gap-2 rounded-[4px] border-2 border-white/30 px-6 py-4 font-semibold text-white hover:bg-white/10">
+            <a href="#devis" className="inline-flex items-center justify-center gap-2 rounded-[4px] border border-yellow-500/30 bg-yellow-400 px-6 py-4 font-black text-slate-950 transition-colors hover:bg-yellow-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-400">
               Demander un devis <ArrowRight className="h-4 w-4" />
             </a>
             <PhoneLink location="hero" serviceType="pl" phoneNumber={PHONE_PL_SUIVI} className="inline-flex items-center justify-center gap-2 rounded-[4px] border border-red-300/60 bg-red-950/80 px-6 py-4 font-bold text-white hover:bg-red-950">
