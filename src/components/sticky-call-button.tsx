@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Phone, ClipboardList } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { PlWhatsappButton } from "@/components/pl-whatsapp-button";
 import { getPlCommercialContact } from "@/lib/pl-commercial-contact";
 import { PHONE_NUMBER, PHONE_PL_SUIVI, PHONE_WHATSAPP_PL, PHONE_WHATSAPP_PL_ETRANGER, isFrenchPlCallPage, isPlTrackingPage, pushPhoneClick } from "@/lib/tracking";
 
@@ -66,6 +67,7 @@ export function StickyCallButton() {
   return (
     visible && (
         <div className="recacor-sticky-in lg:hidden fixed bottom-4 left-4 right-4 z-[100] flex gap-3">
+          {commercialContact ? <PlWhatsappButton id="sticky-whatsapp-btn" className="flex-1 py-4 shadow-lg" /> : (
           <a
             id="sticky-call-btn"
             href={`tel:${phoneNumber}`}
@@ -75,6 +77,7 @@ export function StickyCallButton() {
             <Phone className="h-5 w-5" />
             Appeler
           </a>
+          )}
           <Link
             href={quoteHref}
             className="flex-1 flex items-center justify-center gap-2 rounded-[4px] bg-yellow-400 text-slate-950 font-black uppercase py-4 shadow-[0_4px_20px_rgba(0,0,0,0.12)] border border-yellow-500/30"

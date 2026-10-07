@@ -47,6 +47,8 @@ Mise à jour : 01/10/2026 (ajout : pneus de voiture électrique, page `/pneus-vo
 | Limite géographique | Ardèche (07) et Drôme (26) affectées à Claire ; ne pas les présenter comme secteur de Jérôme | `04_Ressources/commerciaux_zones_pl.md` |
 | Livraison | France entière ; disponibilité selon dimension et quantité, délai confirmé avant commande | `knowledge/business.md` (livraison), page `/preventes-hankook` (confirmation avant commande) |
 | Partenaires secteur Jérôme | des partenaires peuvent intervenir ; commune, besoin, disponibilité et conditions à confirmer avec Jérôme | Redouane, correction explicite dans cette conversation, 07/10/2026 |
+| Offre multimarque PL | CTM, Hankook et Michelin rechapé, références et disponibilité à confirmer au devis | `knowledge/business.md` (CTM, Michelin rechapé), page `/hankook-pro` ; demande multimarque Redouane du 07/10 |
+| Urgence sur la page de Jérôme | bouton appel vers Patrick via Dexem 04 82 29 32 46 ; prise en charge selon position, sans garantie de couverture de tout le secteur | demande explicite Redouane du 07/10 ; `PHONE_PL_SUIVI` dans `src/lib/tracking.ts` |
 | Hankook SmartWork AM09 | pneu mixte route/chantier, toutes positions | page `/hankook-pro`, profils déjà publiés |
 | Hankook SmartWork DM09 | pneu mixte route/chantier, essieux moteurs / traction | page `/hankook-pro`, profils déjà publiés |
 | Parcours commercial | dimension (ou photo du flanc), quantité, essieu, usage et commune pour préparer le devis | modèles Jérôme validés/préparés le 28/09, campagne du 07/10 |

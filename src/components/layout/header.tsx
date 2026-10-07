@@ -7,6 +7,7 @@ import { Menu, X, Phone, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AugustVlNoticeHeaderLink } from "@/components/august-vl-notice";
 import { PhoneLink } from "@/components/phone-link";
+import { PlWhatsappButton } from "@/components/pl-whatsapp-button";
 import { PHONE_DISPLAY, PHONE_PL_SUIVI, PHONE_PL_SUIVI_DISPLAY, PHONE_WHATSAPP_PL, PHONE_WHATSAPP_PL_DISPLAY, isFrenchPlCallPage, isPlTrackingPage } from "@/lib/tracking";
 import { useAssetUrl } from "@/components/dynamic-media";
 import { getPlCommercialContact } from "@/lib/pl-commercial-contact";
@@ -67,9 +68,11 @@ export function Header() {
                 <span className="text-white/50">Lun–Ven 8h–12h · 14h–18h · Sam 8h–12h</span>
               )}
             </div>
+            {commercialContact ? <span className="text-white/70">Devis pneus poids lourd</span> : (
             <PhoneLink location="header" serviceType={commercialContact || isAssistancePL ? "pl" : "vl"} phoneNumber={headerPhoneNumber} className="flex items-center gap-1.5 font-semibold hover:text-yellow-400 transition-colors">
               <Phone className="h-3 w-3" /> {headerPhoneDisplay}
             </PhoneLink>
+            )}
           </div>
         </div>
       </div>
@@ -119,6 +122,7 @@ export function Header() {
                   scrolled ? "" : "border-white/30 bg-white/10 text-white hover:border-white/50 hover:bg-white/15 hover:text-white",
                 )}
               />
+              {commercialContact ? <PlWhatsappButton className="ml-2 py-2.5" /> : (
               <PhoneLink
                 location="header"
                 serviceType={commercialContact || isAssistancePL ? "pl" : "vl"}
@@ -128,6 +132,7 @@ export function Header() {
               >
                 Appeler
               </PhoneLink>
+              )}
             </nav>
 
             <button
@@ -167,6 +172,7 @@ export function Header() {
                 <AugustVlNoticeHeaderLink className="border-white/20 bg-white/10 text-white hover:border-white/35 hover:bg-white/15 hover:text-white" />
               </div>
               <div className="recacor-mobile-menu-item mt-8" style={{ animationDelay: `${navigation.length * 40}ms` }}>
+                {commercialContact ? <PlWhatsappButton className="px-8 py-4 text-lg" /> : (
                 <PhoneLink
                   location="header"
                   serviceType={commercialContact || isAssistancePL ? "pl" : "vl"}
@@ -176,6 +182,7 @@ export function Header() {
                 >
                   {headerPhoneDisplay}
                 </PhoneLink>
+                )}
               </div>
             </nav>
           </div>
