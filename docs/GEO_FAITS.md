@@ -22,7 +22,7 @@ Mise à jour : 01/10/2026 (ajout : pneus de voiture électrique, page `/pneus-vo
 | Zone | le long de l'A9 de Perpignan à Avignon, et de l'A75 jusqu'à Millau | Redouane, 30/09/2026 |
 | Autoroute | pas d'intervention sur l'autoroute elle-même ; les PL sortent souvent à la prochaine sortie pour se faire dépanner, ce qui leur coûte moins cher qu'un dépannage sur autoroute. Argument à mettre en avant ; ne jamais mettre en avant l'agrément, la borne orange ou le 112 | Redouane, 30/09/2026 |
 | Disponibilité | 24 h/24, 7 j/7, astreinte midi, soir, nuit et week-end | page dépannage, `knowledge/tarifs.md` |
-| Ligne PL France | Patrick, 06 07 62 10 43 (appel et WhatsApp) : contact des pages PL françaises existantes de dépannage, garage et pneus PL ; exception commerciale Jérôme sur la nouvelle page Lyon / Rhône-Alpes (GO du 07/10/2026) | Redouane, 30/09/2026 ; `src/lib/tracking.ts` |
+| Ligne PL France | Patrick, 06 07 62 10 43 (appel et WhatsApp) : contact des pages PL françaises existantes de dépannage, garage et pneus PL ; exceptions commerciales Jérôme sur Lyon / Rhône-Alpes et Claire sur Sud & Corse (GO du 07/10/2026) | Redouane, 30/09/2026 ; `src/lib/tracking.ts` |
 | Ligne chauffeurs étrangers | Rubén, 06 89 50 45 43 (page roumaine) | `src/lib/tracking.ts` |
 | Langues au téléphone | anglais, italien, polonais, roumain, portugais | page dépannage en ligne |
 | Périmètre | pneus uniquement, pas de mécanique | page `/pneus-utilitaires-pl`, section assistance |
@@ -101,7 +101,7 @@ Aucun tarif poids lourd n'est affiché sur le site, atelier comme dépannage (d�
 - Dimensions Tesla Model 3 Performance « Highland » (forum seulement) : non publiées.
 
 
-## Claire — adaptation Sud & Corse préparée le 07/10/2026
+## Claire — adaptation Sud & Corse validée le 07/10/2026
 
 | Fait | Valeur vérifiée | Source |
 |---|---|---|
@@ -112,4 +112,4 @@ Aucun tarif poids lourd n'est affiché sur le site, atelier comme dépannage (d�
 | Preuve client affichée | Avis et photo Saïd Djae vérifiés dans GBP : témoignage Recacor, sans attribution à Claire | vérification du 07/10 documentée ci-dessus |
 | Avis récents | Endpoint partagé, cache 48 h conservé ; aucune clé ni requête Google propre à chaque visite | `/api/google-reviews`, composant `AvisRecacorPl` |
 
-Non repris faute de preuve retrouvée pour cette adaptation : quinze ans d’expérience, partenaires nommés et disponibilité 24 h/24, gains et délai chiffrés de recreusage, rappel garanti sous deux heures. Conditions de prise en charge à confirmer selon le besoin et le secteur. Cette section décrit la version locale préparée, pas une nouvelle publication.
+Non repris faute de preuve retrouvée pour cette adaptation : quinze ans d’expérience, partenaires nommés et disponibilité 24 h/24, gains et délai chiffrés de recreusage, rappel garanti sous deux heures. Conditions de prise en charge à confirmer selon le besoin et le secteur. Version validée pour publication par Redouane le 07/10/2026 ; contrôles de mise en ligne consignés dans le journal du projet.

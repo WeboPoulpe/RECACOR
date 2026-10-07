@@ -31,7 +31,7 @@ const CONTENT_UPDATED: Record<string, string> = {
   "/pneus-utilitaires-pl/meurthe-et-moselle": "2026-08-24",
   "/pneus-utilitaires-pl/meuse": "2026-08-24",
   "/pneus-utilitaires-pl/vosges": "2026-08-24",
-  "/pneus-utilitaires-pl/zone-sud-corse": "2026-07-18",
+  "/pneus-utilitaires-pl/zone-sud-corse": "2026-10-07",
   "/pneus-utilitaires-pl/zone-nord-est-centre": "2026-07-22",
   "/pneus-utilitaires-pl/dordogne": "2026-09-18",
   "/services/controle-atelier-40-points": "2026-09-12",
