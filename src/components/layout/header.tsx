@@ -9,6 +9,7 @@ import { AugustVlNoticeHeaderLink } from "@/components/august-vl-notice";
 import { PhoneLink } from "@/components/phone-link";
 import { PHONE_DISPLAY, PHONE_PL_SUIVI, PHONE_PL_SUIVI_DISPLAY, PHONE_WHATSAPP_PL, PHONE_WHATSAPP_PL_DISPLAY, isFrenchPlCallPage, isPlTrackingPage } from "@/lib/tracking";
 import { useAssetUrl } from "@/components/dynamic-media";
+import { getPlCommercialContact } from "@/lib/pl-commercial-contact";
 
 const navigation = [
   { name: "Pneus voiture", href: "/pneus-voiture" },
@@ -26,11 +27,12 @@ export function Header() {
   const logoUrl = useAssetUrl("site_logo", "/logo-recacor.webp");
   const scrollThreshold = 132;
   const pathname = usePathname();
+  const commercialContact = getPlCommercialContact(pathname);
   const isAssistancePL = pathname?.includes("/depannage-poids-lourd-urgence") || isFrenchPlCallPage(pathname);
   const isFrenchAssistancePL = isFrenchPlCallPage(pathname);
   const isPlTracking = isPlTrackingPage(pathname);
-  const headerPhoneNumber = isPlTracking ? PHONE_PL_SUIVI : isFrenchAssistancePL ? PHONE_WHATSAPP_PL : undefined;
-  const headerPhoneDisplay = isPlTracking ? PHONE_PL_SUIVI_DISPLAY : isFrenchAssistancePL ? PHONE_WHATSAPP_PL_DISPLAY : PHONE_DISPLAY;
+  const headerPhoneNumber = commercialContact?.phoneNumber ?? (isPlTracking ? PHONE_PL_SUIVI : isFrenchAssistancePL ? PHONE_WHATSAPP_PL : undefined);
+  const headerPhoneDisplay = commercialContact?.phoneDisplay ?? (isPlTracking ? PHONE_PL_SUIVI_DISPLAY : isFrenchAssistancePL ? PHONE_WHATSAPP_PL_DISPLAY : PHONE_DISPLAY);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > scrollThreshold);
@@ -56,14 +58,16 @@ export function Header() {
         <div className="bg-[var(--recacor-night)] text-white text-xs py-2">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between">
             <div className="flex items-center gap-5">
-              <span className="flex items-center gap-1.5"><MapPin className="h-3 w-3 text-yellow-400" /> 1240 Route de Nîmes, 34920 Le Crès</span>
-              {isAssistancePL ? (
+              <span className="flex items-center gap-1.5"><MapPin className="h-3 w-3 text-yellow-400" /> {commercialContact ? "Rhône · Ain · Isère · Loire · Savoie · Haute-Savoie" : "1240 Route de Nîmes, 34920 Le Crès"}</span>
+              {commercialContact ? (
+                <span className="text-yellow-400 font-semibold">Votre contact PL : Jérôme</span>
+              ) : isAssistancePL ? (
                 <span className="text-yellow-400 font-semibold">Astreinte PL 24h/24, 7j/7 · Atelier : Lun–Ven 8h–12h · 14h–18h · Sam 8h–12h</span>
               ) : (
                 <span className="text-white/50">Lun–Ven 8h–12h · 14h–18h · Sam 8h–12h</span>
               )}
             </div>
-            <PhoneLink location="header" serviceType={isAssistancePL ? "pl" : "vl"} phoneNumber={headerPhoneNumber} className="flex items-center gap-1.5 font-semibold hover:text-yellow-400 transition-colors">
+            <PhoneLink location="header" serviceType={commercialContact || isAssistancePL ? "pl" : "vl"} phoneNumber={headerPhoneNumber} className="flex items-center gap-1.5 font-semibold hover:text-yellow-400 transition-colors">
               <Phone className="h-3 w-3" /> {headerPhoneDisplay}
             </PhoneLink>
           </div>
@@ -117,7 +121,7 @@ export function Header() {
               />
               <PhoneLink
                 location="header"
-                serviceType={isAssistancePL ? "pl" : "vl"}
+                serviceType={commercialContact || isAssistancePL ? "pl" : "vl"}
                 phoneNumber={headerPhoneNumber}
                 className="inline-flex items-center gap-2 rounded-[4px] bg-yellow-400 px-5 py-2.5 text-sm font-black uppercase text-slate-950 transition hover:bg-yellow-300 ml-2"
                 showIcon
@@ -165,7 +169,7 @@ export function Header() {
               <div className="recacor-mobile-menu-item mt-8" style={{ animationDelay: `${navigation.length * 40}ms` }}>
                 <PhoneLink
                   location="header"
-                  serviceType={isAssistancePL ? "pl" : "vl"}
+                  serviceType={commercialContact || isAssistancePL ? "pl" : "vl"}
                   phoneNumber={headerPhoneNumber}
                   className="inline-flex items-center gap-3 rounded-[4px] bg-yellow-400 px-8 py-4 text-lg font-black uppercase text-slate-950"
                   showIcon

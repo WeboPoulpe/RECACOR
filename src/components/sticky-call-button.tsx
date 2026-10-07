@@ -4,24 +4,26 @@ import { useEffect, useState } from "react";
 import { Phone, ClipboardList } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { getPlCommercialContact } from "@/lib/pl-commercial-contact";
 import { PHONE_NUMBER, PHONE_PL_SUIVI, PHONE_WHATSAPP_PL, PHONE_WHATSAPP_PL_ETRANGER, isFrenchPlCallPage, isPlTrackingPage, pushPhoneClick } from "@/lib/tracking";
 
 export function StickyCallButton() {
   const [visible, setVisible] = useState(false);
   const pathname = usePathname();
+  const commercialContact = getPlCommercialContact(pathname);
 
   // Pages PL (trafic Google Ads d'intervention, surtout mobile) : bouton affiché dès l'arrivée.
-  // Le bouton appelle la même ligne que le reste de la page : Patrick sur les pages PL françaises
-  // (jamais le fixe de l'atelier), Rubén sur la page roumaine.
+  // Le bouton suit le contact de la page : Jérôme sur sa page commerciale,
+  // Patrick sur les pages PL françaises concernées, Rubén sur la page roumaine.
   const isRomanianPlPage = pathname === "/ro/depannage-poids-lourd-urgence";
   const isPlPage = isRomanianPlPage || isFrenchPlCallPage(pathname) || pathname.startsWith("/pneus-utilitaires-pl");
-  const phoneNumber = isRomanianPlPage
+  const phoneNumber = commercialContact?.phoneNumber ?? (isRomanianPlPage
     ? PHONE_WHATSAPP_PL_ETRANGER
     : isPlTrackingPage(pathname)
       ? PHONE_PL_SUIVI
       : isFrenchPlCallPage(pathname)
         ? PHONE_WHATSAPP_PL
-        : PHONE_NUMBER;
+        : PHONE_NUMBER);
 
   const isControleTechniquePage =
     pathname === "/services/prise-en-charge-controle-technique" ||
@@ -30,7 +32,9 @@ export function StickyCallButton() {
 
   const isSpanishControlPage = pathname === "/es/servicios/control-tecnico-recacor";
 
-  const quoteHref = isSpanishControlPage
+  const quoteHref = commercialContact
+    ? `${commercialContact.pagePath}#devis`
+    : isSpanishControlPage
     ? "/es/servicios/control-tecnico-recacor#devis"
     : isControleTechniquePage
       ? "/formulaire/controle-technique"

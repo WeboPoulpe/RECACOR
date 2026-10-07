@@ -1,5 +1,6 @@
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { FooterRouting } from "@/components/layout/footer-routing";
 import { AugustVlNoticePopover } from "@/components/august-vl-notice";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { StickyCallButton } from "@/components/sticky-call-button";
@@ -19,7 +20,7 @@ export default function PublicLayout({
       <Header />
       <div className="pt-16 lg:pt-24" />
       <main className="flex-1">{children}</main>
-      <Footer />
+      <FooterRouting><Footer /></FooterRouting>
       <StickyCallButton />
       <AugustVlNoticePopover />
       <CookieBanner />

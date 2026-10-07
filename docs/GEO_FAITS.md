@@ -22,7 +22,7 @@ Mise à jour : 01/10/2026 (ajout : pneus de voiture électrique, page `/pneus-vo
 | Zone | le long de l'A9 de Perpignan à Avignon, et de l'A75 jusqu'à Millau | Redouane, 30/09/2026 |
 | Autoroute | pas d'intervention sur l'autoroute elle-même ; les PL sortent souvent à la prochaine sortie pour se faire dépanner, ce qui leur coûte moins cher qu'un dépannage sur autoroute. Argument à mettre en avant ; ne jamais mettre en avant l'agrément, la borne orange ou le 112 | Redouane, 30/09/2026 |
 | Disponibilité | 24 h/24, 7 j/7, astreinte midi, soir, nuit et week-end | page dépannage, `knowledge/tarifs.md` |
-| Ligne PL France | Patrick, 06 07 62 10 43 (appel et WhatsApp) : **seul numéro des pages PL françaises (dépannage, garage, pneus PL), jamais le fixe de l'atelier** | Redouane, 30/09/2026 ; `src/lib/tracking.ts` |
+| Ligne PL France | Patrick, 06 07 62 10 43 (appel et WhatsApp) : contact des pages PL françaises existantes de dépannage, garage et pneus PL ; exception commerciale Jérôme sur la nouvelle page Lyon / Rhône-Alpes (GO du 07/10/2026) | Redouane, 30/09/2026 ; `src/lib/tracking.ts` |
 | Ligne chauffeurs étrangers | Rubén, 06 89 50 45 43 (page roumaine) | `src/lib/tracking.ts` |
 | Langues au téléphone | anglais, italien, polonais, roumain, portugais | page dépannage en ligne |
 | Périmètre | pneus uniquement, pas de mécanique | page `/pneus-utilitaires-pl`, section assistance |
@@ -37,6 +37,22 @@ Mise à jour : 01/10/2026 (ajout : pneus de voiture électrique, page `/pneus-vo
 | Freinage | disques et plaquettes de frein pour camions | Redouane, 30/09/2026 |
 | Comptoir | pneus poids lourd disponibles au comptoir, devis sur place | page `/pneus-utilitaires-pl#atelier` |
 | Mécanique moteur | non (pneus, géométrie et freinage seulement) | section assistance de `/pneus-utilitaires-pl`, Redouane 30/09/2026 |
+
+## Vente de pneus PL — Lyon / secteur Rhône-Alpes (07/10/2026)
+
+| Fait | Valeur | Source |
+|---|---|---|
+| Contact commercial | Jérôme Mesnard, appel et WhatsApp 06 87 52 84 06 | `knowledge/business.md`, `04_Ressources/commerciaux_zones_pl.md`, raccord AdsFlow/Meta consigné le 07/10 |
+| Zone de cette page | Rhône (69), Ain (01), Isère (38), Loire (42), Savoie (73), Haute-Savoie (74) | répartition commerciale validée, pilote du 07/10 dans `SUIVI_JOURNAL.md` |
+| Limite géographique | Ardèche (07) et Drôme (26) affectées à Claire ; ne pas les présenter comme secteur de Jérôme | `04_Ressources/commerciaux_zones_pl.md` |
+| Livraison | France entière ; disponibilité selon dimension et quantité, délai confirmé avant commande | `knowledge/business.md` (livraison), page `/preventes-hankook` (confirmation avant commande) |
+| Partenaires secteur Jérôme | des partenaires peuvent intervenir ; commune, besoin, disponibilité et conditions à confirmer avec Jérôme | Redouane, correction explicite dans cette conversation, 07/10/2026 |
+| Hankook SmartWork AM09 | pneu mixte route/chantier, toutes positions | page `/hankook-pro`, profils déjà publiés |
+| Hankook SmartWork DM09 | pneu mixte route/chantier, essieux moteurs / traction | page `/hankook-pro`, profils déjà publiés |
+| Parcours commercial | dimension (ou photo du flanc), quantité, essieu, usage et commune pour préparer le devis | modèles Jérôme validés/préparés le 28/09, campagne du 07/10 |
+| Autorisation page | création d'une nouvelle page Lyon / Rhône-Alpes avec Jérôme comme contact, sans bascule des pages existantes | Redouane, conversation Codex du 07/10/2026 |
+
+Ne pas parler du Crès sur ce parcours commercial (correction explicite Redouane, 07/10). Ne pas inventer de nom de partenaire, prestation précise, disponibilité 24/7, délai d’intervention ou tarif. Les interventions des partenaires sont étudiées selon la commune et le besoin. Aucun stock garanti ni délai de livraison chiffré. Les profils chantier ne sont pas présentés comme une gamme universelle de pneus routiers.
 
 ## Pneus de voiture électrique (faits externes sourcés, recherche du 01/10/2026)
 
