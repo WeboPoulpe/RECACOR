@@ -67,7 +67,7 @@ export function StickyCallButton() {
   return (
     visible && (
         <div className="recacor-sticky-in lg:hidden fixed bottom-4 left-4 right-4 z-[100] flex gap-3">
-          {commercialContact ? <PlWhatsappButton id="sticky-whatsapp-btn" className="flex-1 py-4 shadow-lg" /> : (
+          {commercialContact ? <PlWhatsappButton contact={commercialContact} id="sticky-whatsapp-btn" className="flex-1 py-4 shadow-lg" /> : (
           <a
             id="sticky-call-btn"
             href={`tel:${phoneNumber}`}

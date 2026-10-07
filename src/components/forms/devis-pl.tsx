@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { MultiStepForm, FormField, isValidPhone, isValidOptionalEmail, PHONE_ERROR, EMAIL_ERROR } from "../multi-step-form";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -72,7 +73,13 @@ function buildPayload(data: PlData) {
   return { ...base, dimension: base.dimension || tailles[0]?.dimension || "", tailles, tailles_resume: formatTaillesResume(tailles) };
 }
 
-export function DevisPlForm() {
+type PlFormContact = {
+  name: string;
+  successHref: string;
+  postalCodePattern: RegExp;
+};
+
+export function DevisPlForm({ contact }: { contact?: PlFormContact } = {}) {
   const [data, setData] = useState<PlData>(initial);
   const update = <K extends keyof PlData>(key: K, value: PlData[K]) =>
     setData((d) => ({ ...d, [key]: value }));
@@ -80,6 +87,8 @@ export function DevisPlForm() {
   const [touched, setTouched] = useState<{ telephone: boolean; email: boolean }>({ telephone: false, email: false });
   const markTouched = (field: "telephone" | "email") => setTouched((t) => ({ ...t, [field]: true }));
   const phoneError = touched.telephone && !isValidPhone(data.telephone) ? PHONE_ERROR : undefined;
+  const postalCodeValid = !contact || contact.postalCodePattern.test(data.cp.trim());
+  const postalCodeError = contact && touched.telephone && !postalCodeValid ? "Indiquez un code postal de la zone Sud & Corse." : undefined;
   const emailError = touched.email && !isValidOptionalEmail(data.email) ? EMAIL_ERROR : undefined;
 
   const select =
@@ -124,21 +133,21 @@ export function DevisPlForm() {
 
   const isValid = (step: number) => {
     if (step === 0) return true;
-    if (step === 1) return isValidPhone(data.telephone) && isValidOptionalEmail(data.email);
+    if (step === 1) return isValidPhone(data.telephone) && isValidOptionalEmail(data.email) && postalCodeValid;
     return true;
   };
 
   return (
     <MultiStepForm
       id="devis-pl-form"
-      successHref="/merci?segment=pl"
+      successHref={contact?.successHref ?? "/merci?segment=pl"}
       serviceType="pl"
       data={payload}
       isValid={isValid}
-      invalidStepMessage={() => (!isValidPhone(data.telephone) ? PHONE_ERROR : EMAIL_ERROR)}
+      invalidStepMessage={() => (!isValidPhone(data.telephone) ? PHONE_ERROR : !isValidOptionalEmail(data.email) ? EMAIL_ERROR : "Indiquez un code postal de la zone Sud & Corse. Pour un autre secteur, utilisez le formulaire national.")}
       onInvalidAttempt={() => setTouched({ telephone: true, email: true })}
       submitLabel="Envoyer ma demande professionnelle"
-      extraMention="Un expert Recacor vous rappelle sous 2h en jours ouvrés."
+      extraMention={contact ? `${contact.name} étudie votre demande et vous confirme le prix, la disponibilité et les modalités de prise en charge.` : "Un expert Recacor vous rappelle sous 2h en jours ouvrés."}
       steps={[
         {
           title: "Votre besoin professionnel",
@@ -212,7 +221,7 @@ export function DevisPlForm() {
         },
         {
           title: "Vos coordonnées professionnelles",
-          subtitle: "Un numéro de téléphone suffit pour vous rappeler, l'e-mail est facultatif",
+          subtitle: contact ? "Votre téléphone et votre code postal permettent de vous recontacter et d’orienter la demande. L’e-mail est facultatif." : "Un numéro de téléphone suffit pour vous rappeler, l'e-mail est facultatif",
           content: (
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
@@ -232,9 +241,10 @@ export function DevisPlForm() {
               <FormField label="Email (facultatif)" error={emailError}>
                 <Input type="email" inputMode="email" autoComplete="email" placeholder="vous@entreprise.fr" value={data.email} onChange={(e) => update("email", e.target.value)} onBlur={() => markTouched("email")} aria-invalid={emailError ? true : undefined} className={emailError ? "h-11 border-red-500 focus-visible:ring-red-500" : "h-11"} />
               </FormField>
-              <FormField label="Code postal">
-                <Input placeholder="34920" maxLength={5} value={data.cp} onChange={(e) => update("cp", e.target.value)} className="h-11" />
+              <FormField label="Code postal" required={!!contact} error={postalCodeError}>
+                <Input aria-label="Code postal" inputMode="numeric" autoComplete="postal-code" placeholder={contact ? "Ex. 34000" : "34920"} maxLength={5} value={data.cp} onChange={(e) => update("cp", contact ? e.target.value.replace(/\D/g, "") : e.target.value)} aria-invalid={postalCodeError ? true : undefined} className="h-11" />
               </FormField>
+              {contact && <p className="text-xs leading-6 text-muted-foreground">Hors zone Sud &amp; Corse, <Link href="/pneus-utilitaires-pl#devis" className="font-semibold text-blue-700 underline">utilisez le formulaire national</Link>.</p>}
               <FormField label="Détail du besoin (optionnel)">
                 <textarea rows={4} maxLength={1000} value={data.message} onChange={(e) => update("message", e.target.value)} className="w-full rounded-xl border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-bright resize-none" />
               </FormField>
@@ -252,6 +262,7 @@ export function DevisPlForm() {
           {data.quantite && <div className="flex justify-between"><dt className="text-muted-foreground">Quantité</dt><dd className="font-semibold">{data.quantite}</dd></div>}
           {data.urgence && <div className="flex justify-between"><dt className="text-muted-foreground">Urgence</dt><dd className="font-semibold">{data.urgence}</dd></div>}
           {data.entreprise && <div className="flex justify-between"><dt className="text-muted-foreground">Entreprise</dt><dd className="font-semibold">{data.entreprise}</dd></div>}
+          {contact && data.cp && <div className="flex justify-between"><dt className="text-muted-foreground">Code postal</dt><dd className="font-semibold">{data.cp}</dd></div>}
           <div className="flex justify-between"><dt className="text-muted-foreground">Contact</dt><dd className="font-semibold">{data.telephone}</dd></div>
         </dl>
       }

@@ -5,11 +5,13 @@ import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, CheckCircle, MapPin, Phone, Shield, Truck, Wrench } from "lucide-react";
 import { BgParticles } from "@/components/bg-particles";
-import { AvisSection } from "@/components/avis-section";
+import { AvisRecacorPl } from "@/components/avis-recacor-pl";
+import { PlWhatsappButton } from "@/components/pl-whatsapp-button";
+import { PL_CLAIRE_CONTACT } from "@/lib/pl-commercial-contact";
 import { DevisPlForm } from "@/components/forms/devis-pl";
 import { PhoneLink } from "@/components/phone-link";
 import { BreadcrumbJsonLd, FaqJsonLd, ServiceJsonLd } from "@/components/schema-jsonld";
-import { PHONE_PL_SUIVI, PHONE_PL_SUIVI_DISPLAY } from "@/lib/tracking";
+import { PHONE_PL_SUIVI } from "@/lib/tracking";
 
 const zonesActivites = [
   "Transport régional",
@@ -51,17 +53,23 @@ const segments = [
 ];
 
 const pointsAppui = [
-  "Le Crès — ancrage atelier Recacor",
-  "31 — Garage Guilhot / Pneus Occitanie et Service 31 (24/24)",
-  "82 — Pneus Occitanie et Service 82",
-  "13 — BN Pneus (24/24)",
-  "26 / 84 — partenaires relais selon secteur et disponibilité",
+  "Occitanie : 09, 11, 12, 30, 31, 32, 34, 46, 48, 65, 66, 81, 82",
+  "Provence-Alpes-Côte d’Azur : 04, 05, 06, 13, 83, 84",
+  "Ardèche et Drôme : 07, 26",
+  "Pyrénées-Atlantiques : 64",
+  "Corse : 2A, 2B",
 ];
+
+const claireFormContact = {
+  name: PL_CLAIRE_CONTACT.name,
+  successHref: `${PL_CLAIRE_CONTACT.pagePath}/merci`,
+  postalCodePattern: /^(04|05|06|07|09|11|12|13|20|26|30|31|32|34|46|48|64|65|66|81|82|83|84)\d{3}$/,
+};
 
 const faqs = [
   {
     q: "Qui est Claire, l'interlocutrice de la zone ?",
-    a: "Claire est la commerciale terrain qui suit la zone Sud & Corse. Quinze ans dans le pneu poids lourd, des quais de chargement aux pistes de chantier : elle sait lire une usure, chiffrer une monte et déclencher le bon point d'appui sans faire perdre de temps.",
+    a: "Claire est votre interlocutrice commerciale pour les pneus poids lourd dans le Sud et en Corse. Envoyez-lui votre dimension, la quantité et votre code postal sur WhatsApp, ou remplissez le formulaire.",
   },
   {
     q: "Je travaille dans le transport ou la remorque : pouvez-vous traiter ma demande ?",
@@ -69,15 +77,15 @@ const faqs = [
   },
   {
     q: "Comment se passe la prise en charge concrètement ?",
-    a: "Un appel ou le formulaire. Claire qualifie la demande (dimension, quantité, poste, secteur, urgence), vérifie la disponibilité, puis active l'atelier du Crès, un dépannage ou le partenaire relais du secteur. Vous gardez un seul interlocuteur du devis à la pose.",
+    a: "Pour un devis, contactez Claire sur WhatsApp ou utilisez le formulaire. Elle étudie la dimension, la quantité, l’essieu et le secteur, puis confirme les conditions de prise en charge. Pour une urgence dépannage, le bouton dédié vous met en relation avec Patrick.",
   },
   {
     q: "Intervenez-vous partout de la même façon dans le Sud ?",
-    a: "Non, et Claire vous le dit d'entrée. Selon le secteur, la réponse passe par l'atelier du Crès, Garage Guilhot ou Pneus Occitanie côté 31/82, BN Pneus en 24/24 sur le 13, ou un relais 26/84 selon disponibilité. Ce qui est annoncé correspond à ce qui peut être tenu.",
+    a: "La prise en charge dépend de votre commune, du véhicule, de la prestation et des disponibilités. Claire vérifie les possibilités avec l’atelier ou un partenaire avant de vous confirmer les modalités.",
   },
   {
     q: "Pouvez-vous aussi parler recreusage si le parc s'y prête ?",
-    a: "Oui. Sur carcasse éligible, le recreusage ajoute environ 25% de durée de vie pour 40% de moins qu'un pneu neuf, sous 24 à 48h. Sur un parc suivi, c'est souvent la première économie à activer.",
+    a: "Oui, si le pneu et sa carcasse le permettent. Le recreusage se réalise en atelier, après contrôle. Claire vous renseigne sur la faisabilité, le prix et le délai pour vos pneus.",
   },
 ];
 
@@ -111,10 +119,9 @@ export function PlZoneSudCorseClient({ heroImage }: { heroImage?: string }) {
             en transport, remorque et chantier
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-white/75">
-            Claire, commerciale poids lourd avec quinze ans de terrain, suit cette zone :
-            transport, remorque, bennes et chantier. Elle s&apos;appuie sur l&apos;atelier
-            du Crès et des partenaires relais selon votre secteur — un seul interlocuteur,
-            du devis à la pose.
+            Pour vos pneus de tracteur routier, porteur, remorque ou benne, contactez Claire sur WhatsApp.
+            Envoyez la dimension, la quantité et votre code postal ; elle vérifie les possibilités
+            et vous confirme les conditions de livraison ou d’intervention.
           </p>
           <div className="mt-5 flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wider text-white/80">
             {["Claire", "Transport / remorque", "TP / BTP", "Dépannage", "Recreusage"].map((item) => (
@@ -123,13 +130,14 @@ export function PlZoneSudCorseClient({ heroImage }: { heroImage?: string }) {
               </span>
             ))}
           </div>
-          <div className="mt-8 flex max-w-xl flex-col gap-3 sm:flex-row">
-            <PhoneLink location="hero" serviceType="pl" phoneNumber={PHONE_PL_SUIVI} className="flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-purple-bright px-8 py-4 font-bold text-white shadow-[0_8px_24px_rgba(0,0,0,0.22)]" showIcon>
-              Appeler : {PHONE_PL_SUIVI_DISPLAY}
-            </PhoneLink>
-            <a href="#devis" className="flex-1 inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/30 px-8 py-4 font-semibold text-white hover:bg-white/10">
-              Devis de zone <ArrowRight className="h-4 w-4" />
+          <div className="mt-8 flex flex-wrap gap-3">
+            <PlWhatsappButton contact={PL_CLAIRE_CONTACT} className="px-6 py-4" />
+            <a href="#devis" className="inline-flex items-center justify-center gap-2 rounded-[4px] border-2 border-white/30 px-6 py-4 font-semibold text-white hover:bg-white/10">
+              Demander un devis <ArrowRight className="h-4 w-4" />
             </a>
+            <PhoneLink location="hero" serviceType="pl" phoneNumber={PHONE_PL_SUIVI} className="inline-flex items-center justify-center gap-2 rounded-[4px] border border-red-300/60 bg-red-950/80 px-6 py-4 font-bold text-white hover:bg-red-950">
+              <Phone aria-hidden="true" className="h-4 w-4" /> Urgence dépannage
+            </PhoneLink>
           </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
@@ -144,17 +152,14 @@ export function PlZoneSudCorseClient({ heroImage }: { heroImage?: string }) {
             </h2>
             <div className="mt-5 space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                Quinze ans dans le pneu poids lourd, des quais de chargement aux pistes de
-                chantier : Claire connaît les contraintes d&apos;un parc qui doit rouler.
-                Elle qualifie chaque demande — dimension, quantité, poste, urgence — puis
-                active l&apos;atelier du Crès, un dépannage ou le partenaire relais de
-                votre secteur.
+                Claire étudie votre demande à partir du véhicule, de la dimension complète,
+                de l’essieu, de la quantité et du lieu de livraison ou d’intervention.
+                Une photo du flanc du pneu peut aider à identifier la monte et ses indices.
               </p>
               <p>
-                Transport, remorque, porteurs, bennes ou besoins chantier : vous gardez un
-                seul interlocuteur du premier appel à la pose. Et quand le parc s&apos;y
-                prête, elle oriente aussi vers le recreusage pour faire baisser le coût
-                au kilomètre.
+                Transport, remorque, porteurs, bennes ou besoins chantier : Claire vous
+                confirme la disponibilité et les modalités avant commande. Pour un recreusage,
+                un contrôle du pneu en atelier permet d’étudier la faisabilité.
               </p>
             </div>
             <div className="mt-6 rounded-2xl border border-border bg-muted/30 p-5">
@@ -214,9 +219,9 @@ export function PlZoneSudCorseClient({ heroImage }: { heroImage?: string }) {
                 <span className="text-gradient-purple">selon vos besoins</span>
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-                La prise en charge s&apos;organise selon le secteur, le besoin et la
-                disponibilité réelle, avec l&apos;atelier du Crès et des partenaires relais
-                mobilisés selon la zone.
+                Claire suit 24 départements dans le Sud et en Corse. Indiquez votre commune
+                pour vérifier les possibilités de livraison, de montage ou d’intervention
+                selon le besoin et les disponibilités.
               </p>
               <div className="mt-8 space-y-3">
                 {pointsAppui.map((point) => (
@@ -247,8 +252,8 @@ export function PlZoneSudCorseClient({ heroImage }: { heroImage?: string }) {
                 <div>
                   <h3 className="text-base font-black">Votre secteur</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    Le Crès, partenaire relais, dépannage ou solution de proximité :
-                    la prise en charge dépend du secteur réellement concerné.
+                    Précisez le code postal et la commune de livraison ou d’intervention.
+                    Claire vérifie la solution possible dans votre secteur.
                   </p>
                 </div>
               </div>
@@ -270,8 +275,8 @@ export function PlZoneSudCorseClient({ heroImage }: { heroImage?: string }) {
                   D&apos;autres sujets utiles selon votre besoin
                 </h2>
                 <p className="mt-4 text-sm leading-relaxed text-white/75">
-                  Selon le besoin, vous pouvez aussi consulter le hub pneus PL, les entrées
-                  locales autour de Nîmes et Sète ou le recreusage.
+                  Retrouvez les services pneus poids lourd, les informations pour Nîmes et Sète,
+                  le dépannage sur route et le recreusage.
                 </p>
               </div>
               <div className="space-y-3">
@@ -310,17 +315,17 @@ export function PlZoneSudCorseClient({ heroImage }: { heroImage?: string }) {
               <span className="text-gradient-purple">Zone Sud &amp; Corse</span>
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Claire vous rappelle avec un prix et un délai — donnez la dimension complète,
-              la quantité, le poste et votre secteur.
+              Indiquez la dimension si vous la connaissez, la quantité, l’essieu et votre code postal.
+              Vous pouvez aussi envoyer une photo du pneu à Claire sur WhatsApp.
             </p>
           </div>
           <div className="rounded-3xl border border-border bg-white p-6 shadow-xl sm:p-8">
-            <DevisPlForm />
+            <DevisPlForm contact={claireFormContact} />
           </div>
         </div>
       </section>
 
-      <AvisSection />
+      <AvisRecacorPl />
 
       <section className="py-24 bg-background">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">

@@ -99,3 +99,17 @@ Aucun tarif poids lourd n'est affiché sur le site, atelier comme dépannage (d�
 - Pneus de VE : marques et indices HL en stock, délai de commande en 19–22 pouces (rien de publié tant que ce n'est pas confirmé).
 - Chiffres d'usure « 20 % » (Michelin) et « 30 à 50 % » (Syndicat du pneu) : non lus à la source, non publiés.
 - Dimensions Tesla Model 3 Performance « Highland » (forum seulement) : non publiées.
+
+
+## Claire — adaptation Sud & Corse préparée le 07/10/2026
+
+| Fait | Valeur vérifiée | Source |
+|---|---|---|
+| Page existante | `/pneus-utilitaires-pl/zone-sud-corse` ; URL et metadata conservées dans l’adaptation | page en ligne, Search Console, code |
+| Contact commercial | Claire Perea, WhatsApp 06 82 49 69 92 | profil et canal AdsFlow production connecté, lecture du 07/10 ; confirmation Redouane |
+| Urgence dépannage | Patrick via Dexem 04 82 29 32 46, bouton distinct du WhatsApp commercial | consigne Redouane du 07/10, `PHONE_PL_SUIVI` |
+| Secteur | 04, 05, 06, 07, 09, 11, 12, 13, 26, 2A, 2B, 30, 31, 32, 34, 46, 48, 64, 65, 66, 81, 82, 83, 84 | `departements_commerciaux` actifs de Claire, lecture du 07/10 ; registre commercial validé |
+| Preuve client affichée | Avis et photo Saïd Djae vérifiés dans GBP : témoignage Recacor, sans attribution à Claire | vérification du 07/10 documentée ci-dessus |
+| Avis récents | Endpoint partagé, cache 48 h conservé ; aucune clé ni requête Google propre à chaque visite | `/api/google-reviews`, composant `AvisRecacorPl` |
+
+Non repris faute de preuve retrouvée pour cette adaptation : quinze ans d’expérience, partenaires nommés et disponibilité 24 h/24, gains et délai chiffrés de recreusage, rappel garanti sous deux heures. Conditions de prise en charge à confirmer selon le besoin et le secteur. Cette section décrit la version locale préparée, pas une nouvelle publication.

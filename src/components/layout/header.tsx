@@ -59,9 +59,9 @@ export function Header() {
         <div className="bg-[var(--recacor-night)] text-white text-xs py-2">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between">
             <div className="flex items-center gap-5">
-              <span className="flex items-center gap-1.5"><MapPin className="h-3 w-3 text-yellow-400" /> {commercialContact ? "Rhône · Ain · Isère · Loire · Savoie · Haute-Savoie" : "1240 Route de Nîmes, 34920 Le Crès"}</span>
+              <span className="flex items-center gap-1.5"><MapPin className="h-3 w-3 text-yellow-400" /> {commercialContact ? commercialContact.sectorSummary : "1240 Route de Nîmes, 34920 Le Crès"}</span>
               {commercialContact ? (
-                <span className="text-yellow-400 font-semibold">Votre contact PL : Jérôme</span>
+                <span className="text-yellow-400 font-semibold">Votre contact PL : {commercialContact.name}</span>
               ) : isAssistancePL ? (
                 <span className="text-yellow-400 font-semibold">Astreinte PL 24h/24, 7j/7 · Atelier : Lun–Ven 8h–12h · 14h–18h · Sam 8h–12h</span>
               ) : (
@@ -122,7 +122,7 @@ export function Header() {
                   scrolled ? "" : "border-white/30 bg-white/10 text-white hover:border-white/50 hover:bg-white/15 hover:text-white",
                 )}
               />
-              {commercialContact ? <PlWhatsappButton className="ml-2 py-2.5" /> : (
+              {commercialContact ? <PlWhatsappButton contact={commercialContact} className="ml-2 py-2.5" /> : (
               <PhoneLink
                 location="header"
                 serviceType={commercialContact || isAssistancePL ? "pl" : "vl"}
@@ -172,7 +172,7 @@ export function Header() {
                 <AugustVlNoticeHeaderLink className="border-white/20 bg-white/10 text-white hover:border-white/35 hover:bg-white/15 hover:text-white" />
               </div>
               <div className="recacor-mobile-menu-item mt-8" style={{ animationDelay: `${navigation.length * 40}ms` }}>
-                {commercialContact ? <PlWhatsappButton className="px-8 py-4 text-lg" /> : (
+                {commercialContact ? <PlWhatsappButton contact={commercialContact} className="px-8 py-4 text-lg" /> : (
                 <PhoneLink
                   location="header"
                   serviceType={commercialContact || isAssistancePL ? "pl" : "vl"}
