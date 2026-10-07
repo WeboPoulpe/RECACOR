@@ -8,6 +8,7 @@ import { PhoneLink } from "@/components/phone-link";
 import { PHONE_PL_SUIVI } from "@/lib/tracking";
 import { PL_JEROME_CONTACT } from "@/lib/pl-commercial-contact";
 import { JeromePlForm } from "./devis-form";
+import { AvisRecacorPl } from "@/components/avis-recacor-pl";
 
 export const revalidate = 86400;
 const path = "/pneus-utilitaires-pl/lyon-rhone-alpes";
@@ -133,6 +134,8 @@ export default function LyonRhoneAlpesPlPage() {
           <div className="recacor-card order-1 min-w-0 p-5 sm:p-8 lg:order-2 [&_form]:scroll-mt-24"><JeromePlForm /></div>
         </div>
       </section>
+
+      <AvisRecacorPl />
 
       <section className="bg-background py-12 sm:py-16"><div className="recacor-shell max-w-4xl"><h2 className="recacor-title">Avant de commander vos pneus PL</h2><div className="mt-8 divide-y divide-border border-y border-border">{faqs.map((faq) => <details key={faq.q} className="group py-5"><summary className="cursor-pointer pr-4 font-bold leading-6">{faq.q}</summary><p className="mt-3 max-w-3xl text-sm leading-7 text-muted-foreground">{faq.a}</p></details>)}</div><div className="mt-8 flex flex-col gap-3 sm:flex-row"><PlWhatsappButton /><a href="#devis" className="recacor-btn-dark">Demander un devis <ArrowRight className="h-4 w-4" /></a></div></div></section>
     </>

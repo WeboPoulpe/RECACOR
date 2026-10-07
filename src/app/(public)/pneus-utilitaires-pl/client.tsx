@@ -46,6 +46,12 @@ const dimensionsPl = [
 
 const zonesPl = [
   {
+    title: "Lyon & Rhône-Alpes",
+    href: "/pneus-utilitaires-pl/lyon-rhone-alpes",
+    desc: "Pneus poids lourd, livraison et partenaires d’intervention dans le Rhône, l’Ain, l’Isère, la Loire, la Savoie et la Haute-Savoie.",
+    tags: ["Jérôme", "69 · 01 · 38 · 42 · 73 · 74"],
+  },
+  {
     title: "Zone Sud & Corse",
     href: "/pneus-utilitaires-pl/zone-sud-corse",
     desc: "Transport régional, remorque, chantier et relais terrain selon le secteur, avec un interlocuteur commercial dédié.",
