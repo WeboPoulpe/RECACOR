@@ -5,8 +5,8 @@ import Link from "next/link";
 import { submitCse } from "./actions";
 import { cseFields, type CseFormState } from "./fields";
 
-const inputClass = "mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none focus:border-indigo-700 focus:ring-2 focus:ring-indigo-200";
-const buttonClass = "rounded-lg bg-[#2E2D8A] px-6 py-3 font-semibold text-white transition hover:bg-[#1B4FD8] disabled:opacity-60 disabled:cursor-wait";
+const inputClass = "mt-2 block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none focus:border-[var(--recacor-blue)] focus:ring-2 focus:ring-[var(--recacor-blue)]/20";
+const buttonClass = "rounded-[4px] bg-[var(--recacor-yellow)] px-6 py-3 font-bold text-[var(--recacor-ink)] transition hover:bg-yellow-300 disabled:opacity-60 disabled:cursor-wait";
 
 export function PartnershipForm() {
   const [state, action, pending] = useActionState<CseFormState, FormData>(submitCse, {});
@@ -27,7 +27,7 @@ export function PartnershipForm() {
       { id: "contact", title: "Le référent du partenariat", detail: "Notre interlocuteur pour préparer et suivre le partenariat. Il peut s’agir du représentant du CSE." },
     ].map((section, index) => <fieldset key={section.id} className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
       <legend className="sr-only">{section.title}</legend>
-      <div className="mb-6 flex items-start gap-4"><span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-indigo-50 text-sm font-bold text-indigo-800">{index + 1}</span><div><h2 className="font-heading text-3xl font-bold">{section.title}</h2><p className="mt-1 text-sm leading-6 text-slate-500">{section.detail}</p></div></div>
+      <div className="mb-6 flex items-start gap-4"><span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[var(--recacor-night)] text-sm font-bold text-[var(--recacor-yellow)]">{index + 1}</span><div><h2 className="font-heading text-3xl font-bold">{section.title}</h2><p className="mt-1 text-sm leading-6 text-slate-500">{section.detail}</p></div></div>
       <div className="grid gap-5 sm:grid-cols-2">{cseFields.filter((field) => field.section === section.id).map((field) => <label key={field.name} htmlFor={field.name} className={`block text-sm font-semibold ${["address", "establishment", "proof"].includes(field.name) ? "sm:col-span-2" : ""}`}>
         {field.label}{"required" in field && field.required ? " *" : ""}
         <input className={inputClass} id={field.name} name={field.name} value={values[field.name] || ""} onChange={(event) => setValues((previous) => ({ ...previous, [field.name]: event.target.value }))} type={"type" in field ? field.type : "text"} required={"required" in field && field.required} maxLength={field.max} pattern={"pattern" in field ? field.pattern : undefined} inputMode={field.name === "postalCode" || field.name === "siret" ? "numeric" : undefined} autoComplete={"autoComplete" in field ? field.autoComplete : undefined} placeholder={"placeholder" in field ? field.placeholder : undefined} />
@@ -36,7 +36,7 @@ export function PartnershipForm() {
     <section className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
       <label htmlFor="message" className="block text-sm font-semibold">Un complément à nous transmettre ? (facultatif)<textarea id="message" name="message" value={message} onChange={(event) => setMessage(event.target.value)} rows={4} maxLength={2000} className={inputClass} placeholder="Vos questions ou précisions concernant le partenariat…" /></label>
       <p className="mt-5 text-sm leading-6 text-slate-500">Les informations sont transmises à Recacor pour préparer et suivre le partenariat. Ne transmettez pas de liste d’adhérents ni de données personnelles les concernant.</p>
-      <label className="mt-5 flex items-start gap-3 text-sm leading-6"><input className="mt-1 size-4 shrink-0 accent-indigo-800" type="checkbox" name="consent" value="yes" checked={consent} onChange={(event) => setConsent(event.target.checked)} required /><span>J’autorise Recacor à utiliser les coordonnées renseignées pour préparer la convention et me contacter au sujet du partenariat. *</span></label>
+      <label className="mt-5 flex items-start gap-3 text-sm leading-6"><input className="mt-1 size-4 shrink-0 accent-[var(--recacor-blue)]" type="checkbox" name="consent" value="yes" checked={consent} onChange={(event) => setConsent(event.target.checked)} required /><span>J’autorise Recacor à utiliser les coordonnées renseignées pour préparer la convention et me contacter au sujet du partenariat. *</span></label>
       <p className="mt-3 text-sm leading-6 text-slate-500">Pour toute question concernant vos données, consultez notre <Link href="/confidentialite" className="underline">politique de confidentialité</Link>.</p>
       {state.error && <p role="alert" className="mt-5 rounded-lg bg-red-50 p-4 text-sm text-red-800">{state.error}</p>}
       <button className={`${buttonClass} mt-6 w-full sm:w-auto`} disabled={pending}>{pending ? "Envoi en cours…" : "Transmettre les informations à Recacor"}</button>
