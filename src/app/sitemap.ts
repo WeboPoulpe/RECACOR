@@ -42,6 +42,7 @@ const CONTENT_UPDATED: Record<string, string> = {
   "/nos-centres": "2026-06-06",
   "/blog": "2026-06-17",
   "/contact": "2026-06-15",
+  "/espace-cse": "2026-10-08",
   "/a-propos": "2026-07-14",
   "/guide-local": "2026-07-14",
   "/mentions-legales": "2026-05-28",
