@@ -70,7 +70,14 @@ const plZoneLinks = [
   { name: "Dordogne & Gironde", href: "/pneus-utilitaires-pl/dordogne" },
 ];
 
-export async function Footer() {
+interface FooterProps {
+  includeStructuredData?: boolean;
+  showStaticRating?: boolean;
+  phoneNumber?: string;
+  phoneDisplay?: string;
+}
+
+export async function Footer({ includeStructuredData = true, showStaticRating = true, phoneNumber, phoneDisplay }: FooterProps = {}) {
   const config = await getSiteConfig();
 
   const localBusinessSchema = {
@@ -191,11 +198,11 @@ export async function Footer() {
 
   return (
     <footer className="bg-purple-deep">
-      <script
+      {includeStructuredData && <script
         id="schema-local-business"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema).replace(/</g, "\\u003c") }}
-      />
+      />}
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
@@ -218,7 +225,7 @@ export async function Footer() {
                   {ADDRESS}
                 </a>
               </div>
-              <FooterPhoneLink />
+              <FooterPhoneLink phoneNumber={phoneNumber} phoneDisplay={phoneDisplay} />
               <div className="flex items-start gap-2.5 text-sm text-white/60">
                 <Clock className="h-4 w-4 text-purple-glow shrink-0 mt-0.5" />
                 <div>
@@ -352,10 +359,10 @@ export async function Footer() {
             <span>&copy; {new Date().getFullYear()} RECACOR. Tous droits réservés.</span>
             <span className="hidden sm:inline text-white/20">·</span>
             <CookieSettingsButton />
-            <span className="hidden sm:inline-flex items-center gap-1">
+            {showStaticRating && <span className="hidden sm:inline-flex items-center gap-1">
               <Star className="w-3 h-3 fill-purple-glow text-purple-glow" />
               <span className="font-semibold text-white/60">5,0</span>
-            </span>
+            </span>}
           </div>
           <p className="text-xs text-white/30">
             Site web fait par{" "}

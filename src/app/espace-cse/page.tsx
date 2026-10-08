@@ -6,6 +6,10 @@ import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/schema-jsonld";
 import { PhoneLink } from "@/components/phone-link";
 import { PHONE_MOBILE, PHONE_MOBILE_DISPLAY } from "@/lib/tracking";
 import { PartnershipForm } from "./forms";
+import { CseGoogleReviews } from "./reviews";
+import { Footer } from "@/components/layout/footer";
+import { CookieBanner } from "@/components/cookie-banner";
+import { UtmCapture } from "@/components/gtm";
 import { partnershipBenefits, partnershipFaq } from "./content";
 
 const base = "https://www.recacor.fr";
@@ -25,7 +29,7 @@ export const metadata: Metadata = {
 const serviceSchema = {
   "@context": "https://schema.org",
   "@graph": [
-    { "@type": "AutoRepair", "@id": `${base}/#organization`, name: "Recacor", url: base, telephone: "+33499533390", image: `${base}/refonte/facade-recacor-clean-20260719-optimized.webp`, address: { "@type": "PostalAddress", streetAddress: "1240 RN 113", addressLocality: "Le Crès", postalCode: "34920", addressCountry: "FR" } },
+    { "@type": "AutoRepair", "@id": `${base}/#organization`, name: "Recacor", url: base, telephone: "+33499533390", image: `${base}/refonte/facade-recacor-clean-20260719-optimized.webp`, address: { "@type": "PostalAddress", streetAddress: "1240 Route de Nîmes", addressLocality: "Le Crès", postalCode: "34920", addressCountry: "FR" } },
     { "@type": "Service", "@id": `${pageUrl}#partenariat`, name: "Partenariat CSE Recacor à Montpellier", serviceType: "Partenariat CSE pour les pneus et l’entretien automobile", description: "Convention de partenariat entre Recacor et les CSE : avantages pour les adhérents sur les pneus, les révisions, la vidange et la mécanique au garage du Crès.", url: pageUrl, provider: { "@id": `${base}/#organization` }, areaServed: [{ "@type": "City", name: "Montpellier" }, { "@type": "City", name: "Le Crès" }] },
   ],
 };
@@ -37,7 +41,9 @@ const steps = [
 ];
 
 export default function CsePage() {
-  return <main className="min-h-screen overflow-x-clip bg-[var(--recacor-paper)] text-[var(--recacor-ink)]">
+  return <>
+    <UtmCapture />
+    <main className="min-h-screen overflow-x-clip bg-[var(--recacor-paper)] text-[var(--recacor-ink)]">
     <BreadcrumbJsonLd items={[{ name: "Accueil", url: base }, { name: "Partenariat CSE", url: pageUrl }]} />
     <FaqJsonLd items={[...partnershipFaq]} id="partenariat-cse" />
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema).replace(/</g, "\\u003c") }} />
@@ -74,7 +80,7 @@ export default function CsePage() {
             <Image src="/refonte/facade-recacor-clean-20260719-optimized.webp" alt="Façade et atelier du garage Recacor au Crès, près de Montpellier" fill sizes="(min-width: 1024px) 45vw, 100vw" priority className="object-cover" />
           </div>
           <div className="relative mx-4 -mt-12 rounded-xl border border-white/15 bg-[var(--recacor-night)] p-5 text-white shadow-lg sm:mx-6 sm:p-6">
-            <div className="flex items-start gap-3"><MapPin className="mt-1 size-5 shrink-0 text-[var(--recacor-yellow)]" aria-hidden="true" /><div><p className="font-heading text-2xl font-semibold">Votre garage au Crès</p><p className="mt-1 text-sm leading-6 text-slate-300">1240 RN 113, 34920 Le Crès<br />Près de Montpellier, Castelnau-le-Lez et Vendargues.</p></div></div>
+            <div className="flex items-start gap-3"><MapPin className="mt-1 size-5 shrink-0 text-[var(--recacor-yellow)]" aria-hidden="true" /><div><p className="font-heading text-2xl font-semibold">Votre garage au Crès</p><p className="mt-1 text-sm leading-6 text-slate-300">1240 Route de Nîmes, 34920 Le Crès<br />Près de Montpellier, Castelnau-le-Lez et Vendargues.</p></div></div>
           </div>
         </div>
       </div>
@@ -110,6 +116,16 @@ export default function CsePage() {
 
     <section aria-labelledby="faq-title" className="bg-white px-5 py-14 sm:px-8 sm:py-20"><div className="mx-auto grid max-w-7xl items-start gap-9 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14"><div><p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--recacor-blue)]">Vos questions</p><h2 id="faq-title" className="mt-3 font-heading text-4xl font-bold sm:text-5xl">Le partenariat, en pratique.</h2><p className="mt-5 text-sm leading-7 text-slate-600">Les réponses pour préparer votre demande et expliquer le fonctionnement à vos adhérents.</p></div><div className="divide-y divide-slate-200 border-y border-slate-200">{partnershipFaq.map((item) => <details key={item.q} className="group py-5"><summary className="flex cursor-pointer list-none items-start justify-between gap-5 text-base font-semibold [&::-webkit-details-marker]:hidden">{item.q}<span aria-hidden="true" className="text-xl font-normal text-[var(--recacor-blue)] group-open:rotate-45">+</span></summary><p className="mt-4 pr-6 text-sm leading-7 text-slate-600">{item.a}</p></details>)}</div></div></section>
 
-    <footer className="bg-[var(--recacor-night)] px-5 py-9 text-white sm:px-8"><div className="mx-auto flex max-w-7xl flex-col justify-between gap-6 sm:flex-row sm:items-center"><div><p className="font-heading text-2xl font-bold">Recacor · Le Crès</p><p className="mt-1 text-sm text-slate-300">1240 RN 113, 34920 Le Crès · Partenariats CE / CSE</p></div><div className="flex flex-wrap gap-x-6 gap-y-3 text-xs text-slate-300"><Link href="/pneus-voiture" className="hover:text-white">Pneus voiture</Link><Link href="/mecanique" className="hover:text-white">Entretien et mécanique</Link><Link href="/mentions-legales" className="hover:text-white">Mentions légales</Link><Link href="/confidentialite" className="hover:text-white">Confidentialité</Link></div></div></footer>
-  </main>;
+    <CseGoogleReviews />
+
+    <section aria-labelledby="acces-title" className="border-t border-slate-200 bg-[var(--recacor-paper)] px-5 py-14 sm:px-8 sm:py-20">
+      <div className="mx-auto grid max-w-7xl items-center gap-9 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14">
+        <div><p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--recacor-blue)]">Retrouvez-nous au garage</p><h2 id="acces-title" className="mt-3 font-heading text-4xl font-bold leading-tight sm:text-5xl">Votre atelier au Crès, près de Montpellier.</h2><p className="mt-5 text-sm leading-7 text-slate-600">Les adhérents de votre CSE sont accueillis sur place pour leurs pneus et l’entretien de leur voiture. Présentez le justificatif prévu dans votre convention lors de votre passage.</p><address className="mt-6 flex items-start gap-3 text-sm font-semibold not-italic"><MapPin className="mt-0.5 size-5 shrink-0 text-[var(--recacor-blue)]" aria-hidden="true" /><span>1240 Route de Nîmes<br />34920 Le Crès</span></address><div className="mt-6 flex flex-wrap gap-3"><a href="https://maps.google.com/?q=1240+Route+de+Nîmes+34920+Le+Crès" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-[4px] bg-[var(--recacor-yellow)] px-5 py-3 text-sm font-bold text-[var(--recacor-ink)] hover:bg-yellow-300"><MapPin className="size-4" aria-hidden="true" />Itinéraire</a><PhoneLink location="page" phoneNumber={PHONE_MOBILE} className="inline-flex min-h-11 items-center gap-2 rounded-[4px] border border-slate-300 px-5 py-3 text-sm font-semibold text-[var(--recacor-ink)] hover:border-[var(--recacor-blue)]"><Phone className="size-4" aria-hidden="true" />{PHONE_MOBILE_DISPLAY}</PhoneLink></div></div>
+        <div className="overflow-hidden rounded-xl border border-slate-200 bg-white"><iframe src="https://maps.google.com/maps?q=Recacor+1240+Route+de+Nimes+34920+Le+Cres&output=embed&z=17" title="Carte du garage Recacor au Crès, près de Montpellier" className="h-[360px] w-full sm:h-[440px]" loading="lazy" allowFullScreen referrerPolicy="no-referrer-when-downgrade" /></div>
+      </div>
+    </section>
+    </main>
+    <Footer includeStructuredData={false} showStaticRating={false} phoneNumber={PHONE_MOBILE} phoneDisplay={PHONE_MOBILE_DISPLAY} />
+    <CookieBanner />
+  </>;
 }

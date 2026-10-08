@@ -454,6 +454,10 @@ function ProsParticuliersSection() {
             </Link>
           ))}
         </div>
+        <Link href="/espace-cse" className="mt-5 flex flex-col justify-between gap-4 border border-border border-l-4 border-l-yellow-400 bg-white p-6 text-[var(--recacor-ink)] transition hover:border-blue-700 sm:flex-row sm:items-center">
+          <span><span className="block font-heading text-2xl font-black">Un partenariat auto pour votre CE / CSE</span><span className="mt-1 block text-sm text-slate-600">Découvrez les avantages pour les pneus et l’entretien automobile de vos salariés.</span></span>
+          <span className="inline-flex shrink-0 items-center gap-2 text-sm font-bold text-blue-700">Découvrir le partenariat CSE <ArrowRight className="size-4" aria-hidden="true" /></span>
+        </Link>
       </div>
     </section>
   );
