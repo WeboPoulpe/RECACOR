@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, CarFront, Check, CircleDot, ClipboardCheck, FilePenLine, MapPin, Phone, ShieldCheck, Users, Wrench } from "lucide-react";
 import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/schema-jsonld";
+import { PhoneLink } from "@/components/phone-link";
+import { PHONE_MOBILE, PHONE_MOBILE_DISPLAY } from "@/lib/tracking";
 import { PartnershipForm } from "./forms";
 import { partnershipBenefits, partnershipFaq } from "./content";
 
@@ -40,14 +42,17 @@ export default function CsePage() {
     <FaqJsonLd items={[...partnershipFaq]} id="partenariat-cse" />
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema).replace(/</g, "\\u003c") }} />
 
-    <header className="border-b border-slate-200/70 bg-white">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-5 sm:px-8">
+    <header className="sticky top-0 z-40 border-b border-slate-200/70 bg-white shadow-sm">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-5 py-4 sm:px-8">
         <Link href="/" aria-label="Recacor — accueil"><Image src="/logo-recacor-email.png" alt="Recacor" width={166} height={35} priority className="h-auto w-32 sm:w-40" /></Link>
-        <nav aria-label="Navigation du partenariat" className="flex items-center gap-7 text-sm font-semibold">
-          <a href="#avantages" className="hidden text-slate-600 hover:text-indigo-800 md:block">Les avantages</a>
-          <a href="#fonctionnement" className="hidden text-slate-600 hover:text-indigo-800 md:block">Comment ça marche</a>
-          <a href="#formulaire-cse" className="rounded-lg bg-[#2E2D8A] px-4 py-2.5 text-white hover:bg-[#1B4FD8]">Présenter mon CSE <ArrowRight aria-hidden="true" className="ml-2 hidden size-4 sm:inline" /></a>
+        <nav aria-label="Navigation du partenariat" className="ml-auto hidden items-center gap-6 pr-5 text-sm font-semibold xl:flex">
+          <a href="#avantages" className="text-slate-600 hover:text-indigo-800">Les avantages</a>
+          <a href="#fonctionnement" className="text-slate-600 hover:text-indigo-800">Comment ça marche</a>
         </nav>
+        <div className="flex w-full gap-2 sm:w-auto sm:gap-3">
+          <a href="#formulaire-cse" className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-lg bg-[#2E2D8A] px-4 py-2.5 text-sm font-bold whitespace-nowrap text-white hover:bg-[#1B4FD8]">Faire une demande <ArrowRight aria-hidden="true" className="size-4" /></a>
+          <PhoneLink location="header" phoneNumber={PHONE_MOBILE} className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-lg border border-[#2E2D8A] px-4 py-2.5 text-sm font-bold text-[#2E2D8A] hover:bg-indigo-50"><Phone aria-hidden="true" className="size-4" />Appeler</PhoneLink>
+        </div>
       </div>
     </header>
 
@@ -59,8 +64,8 @@ export default function CsePage() {
           <h1 className="mt-4 max-w-xl font-heading text-[2.75rem] font-bold leading-[1.04] sm:text-6xl lg:text-[4.25rem]">Un partenariat auto pour votre CSE <span className="text-[#2E2D8A]">à Montpellier</span></h1>
           <p className="mt-6 max-w-lg text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">Des avantages sur les pneus et l’entretien automobile pour vos salariés, dans notre garage du Crès. Une convention avec votre CSE fixe les conditions pour vos adhérents.</p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <a href="#formulaire-cse" className="inline-flex items-center justify-center gap-3 rounded-lg bg-[#2E2D8A] px-6 py-3.5 text-sm font-bold text-white hover:bg-[#1B4FD8]">Préparer notre partenariat <ArrowRight className="size-4" aria-hidden="true" /></a>
-            <a href="tel:+33499533390" className="phone-link inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 px-5 py-3.5 text-sm font-semibold hover:bg-white"><Phone className="size-4" aria-hidden="true" />04 99 53 33 90</a>
+            <a href="#formulaire-cse" className="inline-flex items-center justify-center gap-3 rounded-lg bg-[#2E2D8A] px-6 py-3.5 text-sm font-bold text-white hover:bg-[#1B4FD8]">Faire une demande <ArrowRight className="size-4" aria-hidden="true" /></a>
+            <PhoneLink location="hero" phoneNumber={PHONE_MOBILE} className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 px-5 py-3.5 text-sm font-semibold hover:bg-white"><Phone className="size-4" aria-hidden="true" />{PHONE_MOBILE_DISPLAY}</PhoneLink>
           </div>
           <p className="mt-4 flex items-center gap-2 text-xs text-slate-500"><ShieldCheck className="size-4 text-[#2E2D8A]" aria-hidden="true" />Formulaire de préparation · Signature séparée de la convention</p>
         </div>
@@ -75,7 +80,7 @@ export default function CsePage() {
       </div>
     </section>
 
-    <section id="avantages" aria-labelledby="avantages-title" className="scroll-mt-8 bg-white px-5 py-14 sm:px-8 sm:py-20">
+    <section id="avantages" aria-labelledby="avantages-title" className="scroll-mt-40 bg-white px-5 py-14 sm:scroll-mt-28 sm:px-8 sm:py-20">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><p className="text-xs font-bold uppercase tracking-[0.16em] text-[#2E2D8A]">Les avantages du partenariat</p><h2 id="avantages-title" className="mt-3 max-w-xl font-heading text-4xl font-bold leading-tight sm:text-5xl">Un avantage concret pour l’auto de vos salariés.</h2></div><p className="max-w-md text-sm leading-7 text-slate-600">Du changement de pneus à l’entretien courant, vos adhérents bénéficient des conditions prévues dans votre convention CSE.</p></div>
         <div className="mt-9 grid gap-5 md:grid-cols-3">{partnershipBenefits.map((benefit) => {
@@ -86,18 +91,18 @@ export default function CsePage() {
       </div>
     </section>
 
-    <section id="fonctionnement" aria-labelledby="fonctionnement-title" className="scroll-mt-8 px-5 py-14 sm:px-8 sm:py-20">
+    <section id="fonctionnement" aria-labelledby="fonctionnement-title" className="scroll-mt-40 px-5 py-14 sm:scroll-mt-28 sm:px-8 sm:py-20">
       <div className="mx-auto max-w-7xl"><div className="max-w-2xl"><p className="text-xs font-bold uppercase tracking-[0.16em] text-[#2E2D8A]">De la demande au passage au garage</p><h2 id="fonctionnement-title" className="mt-3 font-heading text-4xl font-bold leading-tight sm:text-5xl">Trois étapes, un référent de chaque côté.</h2></div>
         <ol className="mt-10 grid gap-8 md:grid-cols-3">{steps.map((step, index) => <li key={step.title} className="relative border-t border-slate-300 pt-6"><div className="mb-5 flex items-center justify-between"><span className="font-heading text-5xl font-semibold text-[#2E2D8A]">0{index + 1}</span><step.icon className="size-6 text-[#2E2D8A]" aria-hidden="true" /></div><h3 className="font-heading text-2xl font-bold">{step.title}</h3><p className="mt-3 text-sm leading-7 text-slate-600">{step.description}</p></li>)}</ol>
         <div className="mt-10 grid gap-6 rounded-xl bg-[#071B33] p-6 text-white sm:p-8 md:grid-cols-2"><div><h3 className="font-heading text-2xl font-semibold">Côté Recacor</h3><p className="mt-2 text-sm leading-7 text-slate-300">Un devis détaillé et gratuit avant toute intervention, et l’application des conditions prévues dans votre convention.</p></div><div><h3 className="font-heading text-2xl font-semibold">Côté CSE</h3><p className="mt-2 text-sm leading-7 text-slate-300">Un référent désigné, des adhérents informés du partenariat et un justificatif pour les identifier au garage.</p></div></div>
       </div>
     </section>
 
-    <section id="formulaire-cse" aria-labelledby="formulaire-title" className="scroll-mt-8 border-y border-slate-200 bg-[#EAECE8] px-5 py-14 sm:px-8 sm:py-20">
+    <section id="formulaire-cse" aria-labelledby="formulaire-title" className="scroll-mt-40 border-y border-slate-200 bg-[#EAECE8] px-5 py-14 sm:scroll-mt-28 sm:px-8 sm:py-20">
       <div className="mx-auto grid max-w-7xl items-start gap-9 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14">
-        <div className="lg:sticky lg:top-8"><p className="text-xs font-bold uppercase tracking-[0.16em] text-[#2E2D8A]">Préparer la convention</p><h2 id="formulaire-title" className="mt-3 font-heading text-4xl font-bold leading-tight sm:text-5xl">Parlons de votre CSE.</h2><p className="mt-5 text-sm leading-7 text-slate-600">Ce formulaire nous permet de préparer la convention à partir des coordonnées de votre établissement et de vos interlocuteurs. Notre équipe prendra ensuite contact avec votre référent.</p>
+        <div className="lg:sticky lg:top-28"><p className="text-xs font-bold uppercase tracking-[0.16em] text-[#2E2D8A]">Préparer la convention</p><h2 id="formulaire-title" className="mt-3 font-heading text-4xl font-bold leading-tight sm:text-5xl">Parlons de votre CSE.</h2><p className="mt-5 text-sm leading-7 text-slate-600">Ce formulaire nous permet de préparer la convention à partir des coordonnées de votre établissement et de vos interlocuteurs. Notre équipe prendra ensuite contact avec votre référent.</p>
           <div className="mt-7 rounded-xl border border-white/80 bg-white/60 p-5"><h3 className="font-semibold">Les informations à avoir sous la main</h3><ul className="mt-4 space-y-3 text-sm text-slate-600">{["Nom et adresse de votre établissement", "Nom et fonction du représentant du CSE", "Coordonnées du référent du partenariat"].map((item) => <li key={item} className="flex items-start gap-2.5"><Check className="mt-0.5 size-4 shrink-0 text-[#2E2D8A]" aria-hidden="true" />{item}</li>)}</ul></div>
-          <p className="mt-5 flex items-start gap-2 text-xs leading-6 text-slate-500"><ShieldCheck className="mt-1 size-4 shrink-0" aria-hidden="true" />La convention sera signée séparément. Aucune liste de salariés ne vous est demandée.</p><a href="tel:+33499533390" className="phone-link mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#2E2D8A]"><Phone className="size-4" aria-hidden="true" />Une question ? 04 99 53 33 90</a>
+          <p className="mt-5 flex items-start gap-2 text-xs leading-6 text-slate-500"><ShieldCheck className="mt-1 size-4 shrink-0" aria-hidden="true" />La convention sera signée séparément. Aucune liste de salariés ne vous est demandée.</p><PhoneLink location="formulaire" phoneNumber={PHONE_MOBILE} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#2E2D8A]"><Phone className="size-4" aria-hidden="true" />Une question ? {PHONE_MOBILE_DISPLAY}</PhoneLink>
         </div>
         <div><p className="mb-4 text-xs text-slate-600">Les champs marqués d’un astérisque (*) sont obligatoires.</p><PartnershipForm /></div>
       </div>
