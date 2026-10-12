@@ -16,14 +16,6 @@
     {
       "path": "/api/cron/publish-articles",
       "schedule": "0 5 * * *"
-    },
-    {
-      "path": "/api/cron/ramon-daily-leads?slot=ete",
-      "schedule": "30 5 * * 1,4"
-    },
-    {
-      "path": "/api/cron/ramon-daily-leads?slot=hiver",
-      "schedule": "30 6 * * 1,4"
     }
   ]
 }
